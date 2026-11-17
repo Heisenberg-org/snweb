@@ -1,2 +1,0 @@
-# SmartNav
-TP SmartNav app
