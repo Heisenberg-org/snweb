@@ -1,0 +1,5139 @@
+﻿<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>SmartNav â€” Lentes HÃ¡pticos de AnticipaciÃ³n Sensorial</title>
+  <meta name="description" content="Lentes inteligentes con sensores ultrasÃ³nicos y retroalimentaciÃ³n hÃ¡ptica para personas con discapacidad visual.">
+
+  <!-- Favicon SVG (Caviar & Cream) -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'><rect width='32' height='32' rx='8' fill='%23181818'/><path d='M21 11c-1-1.5-2.5-2-5-2-3 0-5 1.5-5 3.8 0 2.4 2 3.2 4.8 3.8 3.2.7 5.2 1.6 5.2 4.4 0 2.8-2.3 4.5-5.5 4.5-3.2 0-5.2-1.2-6.5-3.2l2.4-2c.9 1.4 2.2 2.2 4.1 2.2 2 0 3.3-.9 3.3-2.2 0-1.8-1.7-2.4-4.4-3C11.5 15.6 9 14.5 9 11.8 9 9 11.2 7 15.6 7c2.8 0 4.8 1 6.2 2.6L21 11z' fill='%23F5F2EA'/></svg>">
+
+  <!-- Google Fonts: Plus Jakarta Sans & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&family=Plus+Jakarta+Sans:wght@600;700;800&family=JetBrains+Mono:wght@500;700&display=swap" rel="stylesheet">
+
+  <style>
+/* ==========================================================================
+   SMARTNAV // STYLES.CSS
+   Editorial Boutique / High-Impact Sensory Wearable Experience (Awwwards Grade)
+   Navy Blue & Warm Beige Luxury Color Palette
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   1. Design Tokens & Navy Blue & Beige Luxury Palette
+   -------------------------------------------------------------------------- */
+:root {
+  /* Exact Navy Blue & Beige Luxury Swatches (Sampled from Reference Image) */
+  --color-navy: #212842;            /* Navy Blue: Tono maestro profundo y sofisticado */
+  --color-navy-deep: #161C2E;       /* Deep Navy: Profundidad pura para pupilas y contrastes */
+  --color-navy-soft: #2D375B;       /* Soft Navy: Acentos y capas intermedias */
+  --color-navy-light: #3D4A73;      /* Light Navy: Micro-bordes y detalles */
+  --color-navy-glow: rgba(33, 40, 66, 0.28);
+
+  --color-beige: #E6D7C4;           /* Beige: Marfil cÃ¡lido pergamino del swatche */
+  --color-beige-light: #F4ECE1;     /* Light Beige: Superficies luminosas y tarjetas */
+  --color-beige-dark: #D5C4AD;      /* Dark Beige: Bordes tÃ¡ctiles y lÃ­neas divisorias */
+  --color-beige-muted: #B8A690;     /* Muted Beige: Textos tÃ©cnicos y etiquetas */
+  --color-stone: #7A8194;           /* Stone Slate: Equilibrio neutro complementario */
+
+  /* Semantic Color Application */
+  --bg-main: #FAF7F2;               /* Fondo Crema Editorial (#FAF7F2) Exacto */
+  --bg-cream: #FAF7F2;              /* Crema Base Luminosa */
+  --bg-surface: #F5EFEB;            /* TransiciÃ³n suave entre crema y beige */
+  --bg-card: #FFFFFF;               /* Tarjetas en blanco editorial puro y luminoso */
+  --bg-card-hover: #FFFFFF;
+  --bg-card-subtle: #FAF6F0;
+  --bg-card-contrast: #212842;      /* Tarjeta de alto contraste en Navy Blue */
+  --bg-nav: rgba(250, 247, 242, 0.94); /* Crema translÃºcido con blur */
+
+  /* Borders & Dividers */
+  --border-card: #D5C4AD;           /* Beige oscuro */
+  --border-subtle: rgba(213, 196, 173, 0.75);
+  --border-dark: #212842;           /* Navy Blue */
+  --border-navy: #212842;
+  --border-stone: #7A8194;
+
+  /* Typography Colors */
+  --text-primary: #212842;          /* Navy Blue: MÃ¡xima legibilidad y contraste */
+  --text-secondary: #2D375B;        /* Soft Navy: Lectura fluida profunda */
+  --text-muted: #7A8194;            /* Slate Muted: Detalles tÃ©cnicos */
+  --text-on-accent: #FAF7F2;        /* Crema: Texto sobre fondos oscuros */
+  --text-on-dark: #FAF7F2;
+
+  /* Backward Compatibility Aliases for Existing Components */
+  --color-caviar: #212842;
+  --color-charcoal: #2D375B;
+  --color-cream: #FAF7F2;
+  --color-soft-beige: #D5C4AD;
+  --caviar-black: #212842;
+  --soft-beige: #D5C4AD;
+  --cream: #FAF7F2;
+  --charcoal: #2D375B;
+
+  /* Acentos Vivos Refinados: Terracota BrickTech y Verde Sustentable */
+  --accent-terracotta: #D9531E;      /* Naranja Terracota del logo BrickTech */
+  --accent-terracotta-hover: #BF4414;
+  --accent-terracotta-soft: rgba(217, 83, 30, 0.12);
+  --accent-terracotta-glow: rgba(217, 83, 30, 0.35);
+
+  --accent-sage: #2E7D47;            /* Verde Industrial y EcolÃ³gico de la carpeta */
+  --accent-sage-hover: #236838;
+  --accent-sage-soft: rgba(46, 125, 71, 0.14);
+  --accent-sage-glow: rgba(46, 125, 71, 0.3);
+
+  /* Luxury Accents */
+  --accent-caviar: #212842;
+  --accent-charcoal: #2D375B;
+  --accent-beige: #D5C4AD;
+  --accent-stone: #7A8194;
+
+  /* Semantic UI Bindings */
+  --accent-coral: #D9531E;          /* Terracota BrickTech para acentos primarios */
+  --accent-coral-hover: #BF4414;    /* Terracota hover */
+  --accent-coral-glow: rgba(217, 83, 30, 0.35);
+  --accent-coral-soft: rgba(217, 83, 30, 0.12);
+
+  --accent-yellow: #D5C4AD;
+  --accent-yellow-glow: rgba(213, 196, 173, 0.6);
+
+  /* Fonts */
+  --font-display: 'Plus Jakarta Sans', system-ui, -apple-system, sans-serif;
+  --font-body: 'Inter', system-ui, -apple-system, sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, monospace;
+
+  /* Geometry & Radii */
+  --radius-xs: 8px;
+  --radius-sm: 12px;
+  --radius-md: 20px;
+  --radius-lg: 28px;
+  --radius-xl: 40px;
+  --radius-pill: 9999px;
+
+  /* Shadows (Navy Blue & Beige) */
+  --shadow-navbar: 0 16px 36px -6px rgba(33, 40, 66, 0.12), 0 0 0 1px rgba(213, 196, 173, 0.85);
+  --shadow-card: 0 14px 34px -8px rgba(33, 40, 66, 0.08), 0 2px 8px rgba(33, 40, 66, 0.03);
+  --shadow-card-hover: 0 22px 48px -10px rgba(33, 40, 66, 0.18), 0 4px 12px rgba(213, 196, 173, 0.5);
+  --shadow-coral: 0 12px 28px -4px rgba(200, 90, 50, 0.35);
+
+  /* Curves */
+  --ease-expo: cubic-bezier(0.16, 1, 0.3, 1);
+  --ease-cinematic: cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+/* --------------------------------------------------------------------------
+   2. Reset & Viewport Base
+   -------------------------------------------------------------------------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+  overflow: hidden; /* scenes scroll individually via .slide-scene overflow-y:auto */
+  background-color: var(--bg-main);
+  color: var(--text-primary);
+  font-family: var(--font-body);
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  position: relative;
+}
+
+/* Grano editorial sutil y cÃ¡lido */
+.editorial-grain {
+  position: fixed;
+  inset: 0;
+  background-image: radial-gradient(rgba(33, 40, 66, 0.03) 1px, transparent 1px);
+  background-size: 24px 24px;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.5;
+}
+
+/* --------------------------------------------------------------------------
+   3. Floating Top Header: BrickTech Brand & Team Badge
+   -------------------------------------------------------------------------- */
+.smart-header {
+  display: none !important;
+}
+
+.bricktech-top-header {
+  position: fixed;
+  top: 22px;
+  right: 32px;
+  z-index: 180;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  pointer-events: auto;
+}
+
+.header-left-pill {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  border-radius: var(--radius-pill);
+  background: rgba(250, 247, 242, 0.94);
+  border: 1px solid var(--border-card);
+  backdrop-filter: blur(16px);
+  box-shadow: 0 4px 16px rgba(29, 61, 111, 0.08);
+}
+
+.header-project-tag {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--color-navy);
+  letter-spacing: 0.06em;
+}
+
+.header-logo-container {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 6px 16px 6px 18px;
+  border-radius: var(--radius-pill);
+  background: rgba(255, 255, 255, 0.94);
+  border: 1.5px solid var(--border-card);
+  backdrop-filter: blur(20px);
+  box-shadow: 0 10px 28px -6px rgba(29, 61, 111, 0.14), 0 0 0 1px rgba(255, 255, 255, 0.8) inset;
+  transition: all 0.3s var(--ease-expo);
+}
+
+.header-logo-container:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent-terracotta);
+  box-shadow: 0 14px 34px -6px rgba(217, 83, 30, 0.25);
+}
+
+.header-org-info {
+  display: flex;
+  flex-direction: column;
+  text-align: right;
+}
+
+.header-company-name {
+  font-family: var(--font-display);
+  font-size: 0.82rem;
+  font-weight: 800;
+  color: var(--color-navy);
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+}
+
+.header-sub-tag {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--accent-terracotta);
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.header-logo-badge {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.header-logo-img {
+  height: 36px;
+  width: auto;
+  object-fit: contain;
+  filter: drop-shadow(0 2px 6px rgba(217, 83, 30, 0.25));
+}
+
+@media (max-width: 860px) {
+  .bricktech-top-header {
+    top: 14px;
+    right: 14px;
+    gap: 8px;
+  }
+  .header-left-pill {
+    display: none;
+  }
+  .header-logo-container {
+    padding: 4px 12px;
+  }
+  .header-logo-img {
+    height: 28px;
+  }
+}
+
+/* --------------------------------------------------------------------------
+   4. Lateral Eye Indicator (GuÃ­a Lateral de Ojos Ampliada y de Alta Visibilidad)
+   -------------------------------------------------------------------------- */
+.lateral-capsule {
+  position: fixed;
+  left: 30px;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 150;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 20px 12px;
+  border-radius: 40px;
+  background: rgba(250, 247, 242, 0.92);
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  border: 1.5px solid var(--border-card);
+  box-shadow: 0 20px 48px -10px rgba(33, 40, 66, 0.16), 0 0 0 1px rgba(255, 255, 255, 0.7) inset;
+}
+
+.nav-eye-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.nav-eye-btn {
+  width: 72px;
+  height: 50px;
+  border-radius: 16px;
+  border: 1.5px solid rgba(213, 196, 173, 0.5);
+  background: rgba(255, 255, 255, 0.75);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 4px;
+  outline: none;
+  transition: all 0.35s var(--ease-expo);
+  position: relative;
+  overflow: visible;
+}
+
+.nav-eye-svg,
+.nav-brick-svg {
+  width: 58px;
+  height: 38px;
+  overflow: visible;
+  transition: transform 0.35s var(--ease-expo);
+}
+
+/* Ladrillo e indicador en reposo cerrado / salida */
+.nav-eye-btn .eye-closed-group,
+.nav-brick-btn .brick-idle-group {
+  transition: opacity 0.3s ease, transform 0.35s var(--ease-expo);
+  transform-origin: 27px 18px;
+  opacity: 1;
+  transform: scale(1);
+}
+
+.nav-eye-btn .eye-closed-slit {
+  stroke: var(--color-navy);
+  stroke-width: 2.8;
+}
+
+/* Ladrillo e indicador activo / entrada */
+.nav-eye-btn .eye-open-group,
+.nav-brick-btn .brick-active-group {
+  transition: opacity 0.35s ease, transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transform-origin: 27px 18px;
+  opacity: 0;
+  transform: scaleY(0.7) scaleX(0.7) translateY(4px);
+}
+
+.nav-eye-btn .eye-sclera {
+  fill: #FFFFFF;
+  stroke: var(--color-navy);
+  stroke-width: 2.2;
+}
+
+.nav-eye-btn .eye-iris {
+  fill: var(--color-navy);
+  transition: transform 0.3s ease;
+  transform-origin: 27px 18px;
+}
+
+.nav-eye-btn .eye-iris-ring {
+  stroke: var(--accent-terracotta, #C85A32);
+  stroke-width: 1.4;
+}
+
+.nav-eye-btn .eye-pupil {
+  fill: var(--color-navy-deep);
+}
+
+.nav-eye-btn .eye-num-text,
+.nav-brick-btn .brick-num-text {
+  font-family: var(--font-mono);
+  font-size: 10px;
+  font-weight: 800;
+  fill: #FAF7F2;
+  pointer-events: none;
+  user-select: none;
+  letter-spacing: -0.02em;
+}
+
+/* ==========================================================================
+   ANIMACIONES CINEMÃTICAS DE ENTRADA Y SALIDA DEL LADRILLO EN EL SELECTOR
+   ========================================================================== */
+@keyframes brickPopEntrance {
+  0% {
+    transform: translateY(-14px) scale(0.65) rotate(-4deg);
+    opacity: 0;
+    filter: drop-shadow(0 0 0 rgba(200, 90, 50, 0));
+  }
+  65% {
+    transform: translateY(2px) scale(1.15) rotate(1deg);
+    opacity: 1;
+    filter: drop-shadow(0 6px 14px rgba(200, 90, 50, 0.45));
+  }
+  100% {
+    transform: translateY(0) scale(1.08) rotate(0deg);
+    opacity: 1;
+    filter: drop-shadow(0 4px 10px rgba(200, 90, 50, 0.3));
+  }
+}
+
+@keyframes brickPopExit {
+  0% {
+    transform: translateY(0) scale(1.08) rotate(0deg);
+    opacity: 1;
+  }
+  30% {
+    transform: translateY(-4px) scale(1.02);
+  }
+  100% {
+    transform: translateY(12px) scale(0.7) rotate(3deg);
+    opacity: 0;
+  }
+}
+
+/* Clases dinÃ¡micas aplicadas durante la navegaciÃ³n */
+.nav-brick-item.anim-entrance .brick-active-group,
+.nav-eye-item.anim-entrance .eye-open-group {
+  animation: brickPopEntrance 0.52s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+.nav-brick-item.anim-exit .brick-active-group,
+.nav-eye-item.anim-exit .eye-open-group {
+  animation: brickPopExit 0.38s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* HOVER Y ACTIVO: APERTURA Y ENTRADA DEL LADRILLO */
+.nav-eye-btn:hover,
+.nav-eye-item.active .nav-eye-btn,
+.nav-brick-btn:hover,
+.nav-brick-item.active .nav-brick-btn {
+  background: #FFFFFF;
+  border-color: var(--color-navy);
+  box-shadow: 0 8px 24px rgba(33, 40, 66, 0.16);
+  transform: translateX(6px);
+}
+
+.nav-eye-btn:hover .nav-eye-svg,
+.nav-eye-item.active .nav-eye-svg,
+.nav-brick-btn:hover .nav-brick-svg,
+.nav-brick-item.active .nav-brick-svg {
+  transform: scale(1.08);
+}
+
+.nav-eye-btn:hover .eye-closed-group,
+.nav-eye-item.active .eye-closed-group,
+.nav-brick-btn:hover .brick-idle-group,
+.nav-brick-item.active .brick-idle-group {
+  opacity: 0;
+  transform: scale(0.65) translateY(-6px);
+}
+
+.nav-eye-btn:hover .eye-open-group,
+.nav-eye-item.active .eye-open-group,
+.nav-brick-btn:hover .brick-active-group,
+.nav-brick-item.active .brick-active-group {
+  opacity: 1;
+  transform: scale(1.08) translateY(0);
+}
+
+/* Resaltado del ladrillo activo */
+.nav-eye-item.active .nav-eye-btn,
+.nav-brick-item.active .nav-brick-btn {
+  border-color: var(--color-navy);
+  box-shadow: 0 10px 28px rgba(33, 40, 66, 0.22), 0 0 0 2px var(--color-navy);
+  transform: translateX(10px) scale(1.06);
+}
+
+.nav-eye-item.active::before,
+.nav-brick-item.active::before {
+  content: '';
+  position: absolute;
+  left: -8px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 5px;
+  height: 28px;
+  border-radius: 4px;
+  background: var(--accent-terracotta, #C85A32);
+  box-shadow: 0 0 12px rgba(200, 90, 50, 0.7);
+}
+
+.nav-eye-item.active .nav-eye-btn .eye-iris {
+  filter: drop-shadow(0 0 4px rgba(33, 40, 66, 0.35));
+}
+
+.nav-eye-item.active .nav-eye-btn .eye-num-text,
+.nav-brick-item.active .nav-brick-btn .brick-num-text {
+  fill: #FFFFFF;
+  font-size: 10.5px;
+  font-weight: 800;
+}
+
+/* Etiqueta tooltip lateral */
+.nav-eye-label,
+.nav-brick-label {
+  position: absolute;
+  left: 88px;
+  padding: 8px 18px;
+  background: var(--color-navy);
+  color: #FAF7F2;
+  border-radius: 12px;
+  font-family: var(--font-display);
+  font-size: 0.82rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateX(-10px);
+  transition: all 0.28s var(--ease-expo);
+  box-shadow: 0 10px 25px rgba(33, 40, 66, 0.25);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+}
+
+.nav-eye-item:hover .nav-eye-label,
+.nav-brick-item:hover .nav-brick-label {
+  opacity: 1;
+  transform: translateX(0);
+}
+}
+
+/* --------------------------------------------------------------------------
+   5. INTRO CINEMATOGRÃFICA EN PANTALLA COMPLETA (A24 / Content Architecture)
+   -------------------------------------------------------------------------- */
+.intro-eye-curtain {
+  position: fixed;
+  inset: 0;
+  z-index: 99999;
+  background-color: var(--color-navy);
+  color: var(--color-beige);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  transition: opacity 0.8s var(--ease-cinematic);
+}
+
+.intro-grain {
+  position: absolute;
+  inset: 0;
+  background-image: radial-gradient(rgba(244, 236, 225, 0.06) 1.2px, transparent 1.2px);
+  background-size: 20px 20px;
+  pointer-events: none;
+  opacity: 0.8;
+}
+
+/* CÃ­rculo Zoom Iris en color exacto Crema #FAF7F2 */
+.intro-iris-zoom-circle {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background-color: #FAF7F2;
+  transform: translate(-50%, -50%) scale(0);
+  z-index: 10;
+  pointer-events: none;
+  box-shadow: 0 0 50px 20px rgba(250, 247, 242, 0.5);
+  will-change: transform;
+}
+
+.intro-container {
+  position: relative;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  max-width: 720px;
+  padding: 24px;
+}
+
+.intro-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 16px;
+  border-radius: var(--radius-pill);
+  background: rgba(244, 236, 225, 0.1);
+  border: 1px solid rgba(244, 236, 225, 0.2);
+  color: var(--color-beige);
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  margin-bottom: 24px;
+}
+
+.intro-eye-stage {
+  width: 100%;
+  max-width: 520px;
+  height: auto;
+  position: relative;
+  margin: 0 auto;
+}
+
+.intro-grand-eye-svg,
+.intro-grand-brick-svg {
+  width: 100%;
+  height: auto;
+  overflow: visible;
+  filter: drop-shadow(0 24px 48px rgba(0, 0, 0, 0.55));
+}
+
+#intro-brick-group {
+  transform-origin: 270px 180px;
+  will-change: transform, opacity;
+}
+
+.intro-lash-flyer {
+  transition: stroke 0.3s ease;
+}
+
+.intro-caption {
+  margin-top: 28px;
+}
+
+.intro-headline {
+  font-family: var(--font-display);
+  font-size: clamp(1.4rem, 3.2vw, 2.2rem);
+  font-weight: 800;
+  color: var(--color-beige-light);
+  letter-spacing: -0.03em;
+  line-height: 1.15;
+  margin-bottom: 8px;
+}
+
+.intro-sub {
+  font-family: var(--font-mono);
+  font-size: 0.82rem;
+  color: var(--color-beige-muted);
+  letter-spacing: 0.05em;
+}
+
+.intro-actions {
+  margin-top: 28px;
+}
+
+.intro-skip-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 22px;
+  border-radius: var(--radius-pill);
+  background: var(--color-beige);
+  color: var(--color-navy);
+  border: none;
+  font-family: var(--font-display);
+  font-size: 0.78rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  cursor: pointer;
+  box-shadow: 0 4px 18px rgba(0, 0, 0, 0.25);
+  transition: all 0.3s var(--ease-expo);
+}
+
+.intro-skip-btn svg {
+  width: 16px;
+  height: 16px;
+  stroke: currentColor;
+  stroke-width: 2.2;
+  fill: none;
+  transition: transform 0.25s ease;
+}
+
+.intro-skip-btn:hover {
+  background: #FFFFFF;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(244, 236, 225, 0.3);
+}
+
+.intro-skip-btn:hover svg {
+  transform: translateX(4px);
+}
+
+/* --------------------------------------------------------------------------
+   5b. DOCK DE REDES SOCIALES EN LA ÃšLTIMA DIAPOSITIVA (ESCENA 5)
+   -------------------------------------------------------------------------- */
+.scene-social-dock {
+  margin-top: 32px;
+  padding-top: 20px;
+  border-top: 1px solid var(--border-card);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  width: 100%;
+}
+
+.social-dock-label {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: var(--text-muted);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.social-dock-links {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.social-dock-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 20px;
+  border-radius: var(--radius-pill);
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  color: var(--text-primary);
+  text-decoration: none;
+  font-family: var(--font-display);
+  font-size: 0.82rem;
+  font-weight: 700;
+  box-shadow: var(--shadow-card);
+  transition: all 0.3s var(--ease-expo);
+}
+
+.social-dock-item svg {
+  width: 18px;
+  height: 18px;
+  stroke: currentColor;
+  stroke-width: 2;
+  fill: none;
+  transition: transform 0.3s var(--ease-expo);
+}
+
+.social-dock-item .dock-handle {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.social-dock-item:hover {
+  background: var(--color-navy);
+  color: var(--color-beige-light);
+  border-color: var(--color-navy);
+  transform: translateY(-3px);
+  box-shadow: 0 10px 26px rgba(33, 40, 66, 0.22);
+}
+
+.social-dock-item:hover svg {
+  transform: scale(1.15);
+}
+
+.social-dock-item:hover .dock-handle {
+  color: var(--color-beige);
+}
+
+/* --------------------------------------------------------------------------
+   6. CONTEXTUAL TRANSITIONS CONTAINERS (ÃšNICAS POR DIAPOSITIVA)
+   -------------------------------------------------------------------------- */
+/* TransiciÃ³n 1 -> 2: Onda de Radar Expansiva (Caviar & Cream) */
+#trans-radar-scan {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.trans-radar-disc {
+  position: absolute;
+  width: 130vmax;
+  height: 130vmax;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(24, 24, 24, 0.95) 0%, rgba(51, 51, 51, 0.88) 35%, rgba(220, 207, 194, 0.94) 65%, rgba(245, 242, 234, 0.98) 85%);
+  transform: scale(0);
+  box-shadow: 0 0 100px rgba(24, 24, 24, 0.6) inset;
+}
+
+.trans-radar-wave-ring {
+  position: absolute;
+  width: 110vmax;
+  height: 110vmax;
+  border-radius: 50%;
+  border: 4px solid var(--soft-beige);
+  opacity: 0.85;
+  transform: scale(0);
+}
+
+/* TransiciÃ³n 2 -> 3: Haz de Luz / Cortina Slit Horizontal */
+#trans-beam-shutter {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  pointer-events: none;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.trans-slit-curtain-left, .trans-slit-curtain-right {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 50vw;
+  background: var(--bg-surface);
+  border-left: 2px solid var(--soft-beige);
+  border-right: 2px solid var(--soft-beige);
+  box-shadow: 0 0 40px rgba(220, 207, 194, 0.45);
+}
+
+.trans-slit-curtain-left { left: 0; transform: translateX(0); }
+.trans-slit-curtain-right { right: 0; transform: translateX(0); }
+
+.trans-light-beam {
+  position: absolute;
+  width: 4px;
+  height: 100vh;
+  background: #FFFFFF;
+  box-shadow: 0 0 35px 12px rgba(220, 207, 194, 0.95), 0 0 80px 25px rgba(24, 24, 24, 0.35);
+  opacity: 0;
+  transform: scaleY(0);
+}
+
+/* TransiciÃ³n 3 -> 4: DispersiÃ³n de PartÃ­culas del ObstÃ¡culo */
+#trans-particle-burst {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  pointer-events: none;
+  overflow: hidden;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.burst-particle {
+  position: absolute;
+  border-radius: 50%;
+  pointer-events: none;
+}
+
+/* TransiciÃ³n 4 -> 5: Cortina de Luz Lujosa Ascendente */
+#trans-sage-curtain {
+  position: fixed;
+  inset: 0;
+  z-index: 999;
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.sage-curtain-sheet {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(220, 207, 194, 0.96) 0%, rgba(164, 160, 154, 0.9) 40%, rgba(245, 242, 234, 0.98) 100%);
+  transform: translateY(100%);
+  box-shadow: 0 -20px 60px rgba(24, 24, 24, 0.15);
+}
+
+/* --------------------------------------------------------------------------
+   7. VIEWPORT DECK & SLIDE SCENES
+   -------------------------------------------------------------------------- */
+.viewport-deck {
+  width: 100vw;
+  height: 100vh;
+  position: relative;
+  overflow: hidden;
+}
+
+.slide-scene {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 40px 70px 40px 140px;
+  visibility: hidden;
+  opacity: 0;
+  transform: scale(0.96) translateY(24px);
+  will-change: transform, opacity, filter;
+  overflow-y: auto;
+  overflow-x: hidden;
+  /* Custom scrollbar subtle */
+  scrollbar-width: thin;
+  scrollbar-color: rgba(217, 83, 30, 0.25) transparent;
+}
+
+.slide-scene::-webkit-scrollbar {
+  width: 4px;
+}
+.slide-scene::-webkit-scrollbar-track {
+  background: transparent;
+}
+.slide-scene::-webkit-scrollbar-thumb {
+  background: rgba(217, 83, 30, 0.3);
+  border-radius: 4px;
+}
+
+.slide-scene.active {
+  visibility: visible;
+  opacity: 1;
+  transform: scale(1) translateY(0);
+  z-index: 10;
+}
+
+.scene-inner {
+  width: 100%;
+  max-width: 1360px;
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  position: relative;
+  padding-top: 20px;
+  padding-bottom: 20px;
+}
+
+/* --------------------------------------------------------------------------
+   8. Typography & Editorial Components
+   -------------------------------------------------------------------------- */
+.kicker-pill {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 16px;
+  background: var(--accent-coral-soft);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-pill);
+  font-family: var(--font-display);
+  font-size: 0.74rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  width: fit-content;
+  margin-bottom: 22px;
+  box-shadow: 0 2px 8px rgba(24, 24, 24, 0.04);
+}
+
+.kicker-coral {
+  background: rgba(220, 207, 194, 0.45);
+  border-color: var(--soft-beige);
+  color: var(--caviar-black);
+}
+
+.heading-display {
+  font-family: var(--font-display);
+  font-size: clamp(2.6rem, 5.2vw, 4.8rem);
+  font-weight: 800;
+  line-height: 1.04;
+  letter-spacing: -0.04em;
+  color: var(--text-primary);
+  margin-bottom: 24px;
+}
+
+.heading-display .text-vibrant {
+  color: var(--charcoal);
+  position: relative;
+  display: inline-block;
+}
+
+.heading-section {
+  font-family: var(--font-display);
+  font-size: clamp(2rem, 3.4vw, 3rem);
+  font-weight: 800;
+  line-height: 1.12;
+  letter-spacing: -0.035em;
+  color: var(--text-primary);
+  margin-bottom: 18px;
+}
+
+.lead-editorial {
+  font-size: clamp(1.05rem, 1.4vw, 1.24rem);
+  font-weight: 400;
+  line-height: 1.75;
+  color: var(--text-secondary);
+  max-width: 660px;
+  margin-bottom: 38px;
+}
+
+/* --------------------------------------------------------------------------
+   9. Scene 1: Hero CinematogrÃ¡fico
+   -------------------------------------------------------------------------- */
+.hero-content {
+  max-width: 880px;
+  position: relative;
+  z-index: 5;
+}
+
+.hero-actions {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  flex-wrap: wrap;
+}
+
+.btn-primary {
+  padding: 17px 36px;
+  border-radius: var(--radius-pill);
+  background: var(--caviar-black);
+  color: var(--cream);
+  font-family: var(--font-display);
+  font-size: 0.98rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  border: 1px solid var(--caviar-black);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  box-shadow: 0 12px 28px -4px rgba(24, 24, 24, 0.28);
+  transition: all 0.3s var(--ease-expo);
+  cursor: pointer;
+}
+
+.btn-primary:hover {
+  background: var(--charcoal);
+  border-color: var(--charcoal);
+  transform: translateY(-3px) scale(1.02);
+  box-shadow: 0 16px 36px -6px rgba(24, 24, 24, 0.38);
+}
+
+.btn-primary svg {
+  width: 19px;
+  height: 19px;
+  stroke: currentColor;
+  stroke-width: 2.2;
+  fill: none;
+  transition: transform 0.3s var(--ease-expo);
+}
+
+.btn-primary:hover svg {
+  transform: translateX(5px);
+}
+
+.btn-secondary {
+  padding: 17px 32px;
+  border-radius: var(--radius-pill);
+  background: var(--bg-card);
+  color: var(--text-primary);
+  font-family: var(--font-display);
+  font-size: 0.98rem;
+  font-weight: 700;
+  border: 1px solid var(--border-card);
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  box-shadow: var(--shadow-card);
+  transition: all 0.3s var(--ease-expo);
+  cursor: pointer;
+}
+
+.btn-secondary:hover {
+  background: var(--caviar-black);
+  color: var(--cream);
+  border-color: var(--caviar-black);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(24, 24, 24, 0.15);
+}
+
+.hero-stats-band {
+  display: flex;
+  gap: 46px;
+  margin-top: 52px;
+  padding-top: 36px;
+  border-top: 1px solid var(--border-subtle);
+}
+
+.stat-item {
+  display: flex;
+  flex-direction: column;
+}
+
+.stat-value {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  font-weight: 800;
+  letter-spacing: -0.04em;
+  color: var(--text-primary);
+  line-height: 1.05;
+}
+
+.stat-value .stat-accent {
+  color: var(--charcoal);
+}
+
+.stat-caption {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-top: 4px;
+}
+
+.hero-ambient-radar {
+  position: absolute;
+  right: -40px;
+  top: 50%;
+  transform: translateY(-50%);
+  width: 620px;
+  height: 620px;
+  pointer-events: none;
+  opacity: 0.45;
+}
+
+.radar-circle {
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 1.5px dashed var(--soft-beige);
+  animation: rotateRadar 65s linear infinite;
+}
+
+.radar-circle:nth-child(2) {
+  inset: 70px;
+  border-style: solid;
+  border-color: rgba(164, 160, 154, 0.5);
+  animation-duration: 45s;
+  animation-direction: reverse;
+}
+
+.radar-circle:nth-child(3) {
+  inset: 150px;
+  border-style: dashed;
+  border-color: rgba(24, 24, 24, 0.25);
+}
+
+@keyframes rotateRadar {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* --------------------------------------------------------------------------
+   9. Hero Layout Grid & Live System Telemetry Widget (OptimizaciÃ³n de Espacio)
+   -------------------------------------------------------------------------- */
+.hero-layout-grid {
+  display: grid;
+  grid-template-columns: 1.05fr 0.95fr;
+  gap: 48px;
+  align-items: center;
+  width: 100%;
+  position: relative;
+  z-index: 5;
+}
+
+.hero-content {
+  max-width: 660px;
+  position: relative;
+  z-index: 2;
+}
+
+.hero-telemetry-col {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: relative;
+  z-index: 5;
+}
+
+.hero-telemetry-widget {
+  width: 100%;
+  max-width: 500px;
+  background: rgba(255, 255, 255, 0.78);
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(28px);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-xl);
+  padding: 26px 28px;
+  box-shadow: 0 24px 60px -15px rgba(33, 40, 66, 0.12), 0 0 0 1px rgba(255, 255, 255, 0.9) inset;
+  position: relative;
+  overflow: hidden;
+  animation: floatTelemetry 7s ease-in-out infinite;
+}
+
+@keyframes floatTelemetry {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+.telemetry-widget-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 16px;
+  padding-bottom: 12px;
+  border-bottom: 1px solid rgba(213, 196, 173, 0.5);
+}
+
+.telemetry-chip-live {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.telemetry-live-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: var(--accent-sage, #5B7566);
+  box-shadow: 0 0 8px rgba(91, 117, 102, 0.6);
+  animation: pulseBio 2s infinite ease-out;
+}
+
+.telemetry-chip-title {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--color-navy);
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+.telemetry-status-badge {
+  padding: 4px 10px;
+  border-radius: var(--radius-pill);
+  background: rgba(91, 117, 102, 0.12);
+  color: var(--accent-sage, #5B7566);
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+}
+
+/* Radar Sonar Stage */
+.telemetry-radar-stage {
+  position: relative;
+  height: 120px;
+  width: 100%;
+  background: radial-gradient(circle at 50% 100%, rgba(200, 90, 50, 0.08) 0%, rgba(33, 40, 66, 0.03) 60%, transparent 80%);
+  border-radius: var(--radius-md);
+  border: 1px dashed rgba(213, 196, 173, 0.7);
+  overflow: hidden;
+  margin-bottom: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.radar-ping-ring {
+  position: absolute;
+  bottom: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 50%;
+  border: 1px solid rgba(33, 40, 66, 0.18);
+  pointer-events: none;
+}
+.radar-ping-ring.ring-1 { width: 100px; height: 100px; }
+.radar-ping-ring.ring-2 { width: 180px; height: 180px; }
+.radar-ping-ring.ring-3 { width: 260px; height: 260px; }
+
+.radar-sweep-needle {
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  width: 120px;
+  height: 2px;
+  background: linear-gradient(90deg, rgba(200, 90, 50, 0.8), transparent);
+  transform-origin: 0% 50%;
+  animation: radarSweep 4s linear infinite;
+}
+
+@keyframes radarSweep {
+  0% { transform: rotate(-60deg); }
+  50% { transform: rotate(60deg); }
+  100% { transform: rotate(-60deg); }
+}
+
+.radar-echo-blip {
+  position: absolute;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent-terracotta, #C85A32);
+  box-shadow: 0 0 10px rgba(200, 90, 50, 0.8);
+  animation: blipGlow 1.8s infinite ease-in-out;
+}
+.radar-echo-blip.blip-1 { top: 32px; left: 34%; }
+.radar-echo-blip.blip-2 { top: 48px; right: 28%; animation-delay: 0.9s; }
+
+@keyframes blipGlow {
+  0%, 100% { transform: scale(0.9); opacity: 0.6; }
+  50% { transform: scale(1.3); opacity: 1; }
+}
+
+.radar-specs-overlay {
+  position: absolute;
+  bottom: 8px;
+  left: 12px;
+  right: 12px;
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: var(--color-stone);
+}
+
+.radar-range-pill, .radar-fov-pill {
+  padding: 2px 8px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.7);
+}
+
+/* Row of mini cards */
+.telemetry-cards-row {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-bottom: 14px;
+}
+
+.telemetry-mini-card {
+  background: #FAF7F2;
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+}
+
+.tcard-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.tcard-title {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: var(--color-navy);
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+}
+
+.tcard-pill-sage {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: var(--accent-sage, #5B7566);
+}
+
+.tcard-pill-terracotta {
+  font-family: var(--font-mono);
+  font-size: 0.75rem;
+  font-weight: 800;
+  color: var(--accent-terracotta, #C85A32);
+}
+
+.tcard-progress-track {
+  width: 100%;
+  height: 6px;
+  border-radius: 4px;
+  background: rgba(33, 40, 66, 0.08);
+  overflow: hidden;
+  margin-bottom: 8px;
+}
+
+.tcard-progress-bar {
+  height: 100%;
+  border-radius: 4px;
+  background: linear-gradient(90deg, var(--accent-sage, #5B7566), #7ea38c);
+  transition: width 0.5s ease;
+}
+
+.tcard-sparkline {
+  display: flex;
+  align-items: flex-end;
+  gap: 4px;
+  height: 22px;
+  margin-bottom: 6px;
+}
+
+.spark-bar {
+  flex: 1;
+  background: rgba(200, 90, 50, 0.35);
+  border-radius: 2px;
+  transition: height 0.4s ease;
+}
+
+.spark-bar.active {
+  background: var(--accent-terracotta, #C85A32);
+}
+
+.tcard-meta-line {
+  display: flex;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 0.64rem;
+  color: var(--color-stone);
+}
+
+.tcard-highlight {
+  color: var(--color-navy);
+  font-weight: 700;
+}
+
+.tcard-green {
+  color: var(--accent-sage, #5B7566);
+  font-weight: 700;
+}
+
+/* Sensor Panel */
+.telemetry-sensors-panel {
+  background: #FAF7F2;
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-sm);
+  padding: 12px 14px;
+  margin-bottom: 14px;
+}
+
+.tcard-online-pill {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  font-weight: 700;
+  padding: 2px 6px;
+  border-radius: 4px;
+  background: rgba(91, 117, 102, 0.15);
+  color: var(--accent-sage, #5B7566);
+}
+
+.telemetry-sensors-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.sensor-pill-status {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 6px 10px;
+  background: #FFFFFF;
+  border: 1px solid rgba(213, 196, 173, 0.5);
+  border-radius: 8px;
+}
+
+.sensor-indicator-dot {
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background-color: var(--accent-sage, #5B7566);
+  flex-shrink: 0;
+  box-shadow: 0 0 6px rgba(91, 117, 102, 0.5);
+}
+
+.sensor-pill-info {
+  display: flex;
+  flex-direction: column;
+}
+
+.sensor-pill-name {
+  font-family: var(--font-display);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--color-navy);
+  line-height: 1.2;
+}
+
+.sensor-pill-desc {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  color: var(--color-stone);
+  line-height: 1.2;
+}
+
+/* Footer */
+.telemetry-widget-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  color: var(--color-stone);
+  padding-top: 10px;
+  border-top: 1px solid rgba(213, 196, 173, 0.4);
+}
+
+.telemetry-dock-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.telemetry-dock-code {
+  font-weight: 700;
+  color: var(--color-navy);
+}
+
+/* --------------------------------------------------------------------------
+   10. Scene 2: IngenierÃ­a 3D Interactiva
+   -------------------------------------------------------------------------- */
+.split-view-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.18fr;
+  gap: 50px;
+  align-items: center;
+  height: 100%;
+}
+
+.tech-spec-panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.spec-list {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  margin: 26px 0;
+}
+
+.spec-card {
+  padding: 18px 22px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: flex-start;
+  gap: 18px;
+  transition: all 0.35s var(--ease-expo);
+  cursor: pointer;
+  box-shadow: var(--shadow-card);
+}
+
+.spec-card:hover, .spec-card.active {
+  background: var(--bg-card);
+  border-color: var(--caviar-black);
+  transform: translateX(6px);
+  box-shadow: var(--shadow-card-hover);
+}
+
+.spec-icon-box {
+  width: 42px;
+  height: 42px;
+  border-radius: var(--radius-sm);
+  background: rgba(220, 207, 194, 0.4);
+  color: var(--caviar-black);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.3s ease;
+}
+
+.spec-card.active .spec-icon-box {
+  background: var(--caviar-black);
+  color: var(--cream);
+}
+
+.spec-icon-box svg {
+  width: 22px;
+  height: 22px;
+  stroke: currentColor;
+  stroke-width: 2;
+  fill: none;
+}
+
+.spec-body h4 {
+  font-family: var(--font-display);
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 3px;
+}
+
+.spec-body p {
+  font-size: 0.86rem;
+  color: var(--text-secondary);
+  line-height: 1.55;
+}
+
+.viewer-3d-stage {
+  width: 100%;
+  height: 520px;
+  background: radial-gradient(circle at 50% 50%, #FFFFFF 0%, #EDE7DD 100%);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-lg);
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+}
+
+#canvas-3d-glasses {
+  width: 100%;
+  height: 100%;
+  display: block;
+  cursor: grab;
+}
+
+#canvas-3d-glasses:active {
+  cursor: grabbing;
+}
+
+.stage-overlay-hud {
+  position: absolute;
+  bottom: 22px;
+  left: 22px;
+  right: 22px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  pointer-events: none;
+}
+
+.hud-pill {
+  padding: 8px 16px;
+  background: var(--bg-nav);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-pill);
+  font-family: var(--font-mono);
+  font-size: 0.74rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  backdrop-filter: blur(12px);
+  box-shadow: 0 4px 14px rgba(24, 24, 24, 0.06);
+}
+
+.hud-controls {
+  display: flex;
+  gap: 10px;
+  pointer-events: auto;
+}
+
+.hud-btn {
+  padding: 8px 16px;
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-pill);
+  font-family: var(--font-display);
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  cursor: pointer;
+  backdrop-filter: blur(8px);
+  box-shadow: var(--shadow-card);
+  transition: all 0.25s ease;
+}
+
+.hud-btn:hover {
+  background: var(--caviar-black);
+  color: var(--cream);
+  border-color: var(--caviar-black);
+  transform: translateY(-2px);
+}
+
+#btn-3d-dwg {
+  background: rgba(200, 90, 50, 0.14);
+  border-color: rgba(200, 90, 50, 0.45);
+  color: var(--accent-terracotta, #C85A32);
+}
+
+#btn-3d-dwg:hover {
+  background: var(--accent-terracotta, #C85A32);
+  color: #FAF7F2;
+  border-color: var(--accent-terracotta, #C85A32);
+  transform: translateY(-2px);
+}
+
+/* Hotspots Flotantes Interactivos en el Modelo 3D (Aprovechamiento Espacial) */
+.hotspots-floating-container {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 20;
+}
+
+.model-hotspot {
+  position: absolute;
+  pointer-events: auto;
+  z-index: 25;
+}
+
+.hotspot-bridge {
+  top: 18%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.hotspot-temple-left {
+  top: 44%;
+  left: 8%;
+}
+
+.hotspot-temple-right {
+  top: 44%;
+  right: 8%;
+}
+
+.hotspot-frame {
+  bottom: 22%;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
+.hotspot-trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 12px;
+  background: rgba(250, 247, 242, 0.94);
+  backdrop-filter: blur(12px);
+  border: 1.5px solid var(--color-navy);
+  border-radius: var(--radius-pill);
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(33, 40, 66, 0.15);
+  transition: all 0.3s var(--ease-expo);
+  outline: none;
+  position: relative;
+}
+
+.hotspot-trigger:hover,
+.model-hotspot.active .hotspot-trigger {
+  background: var(--color-navy);
+  color: #FFFFFF;
+  transform: scale(1.08);
+  box-shadow: 0 12px 30px rgba(33, 40, 66, 0.28);
+}
+
+.hotspot-pulse {
+  position: absolute;
+  left: 10px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent-terracotta, #C85A32);
+  animation: hotspotPing 2.2s infinite cubic-bezier(0, 0, 0.2, 1);
+}
+
+@keyframes hotspotPing {
+  75%, 100% {
+    transform: scale(3.5);
+    opacity: 0;
+  }
+}
+
+.hotspot-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent-terracotta, #C85A32);
+  display: inline-block;
+  flex-shrink: 0;
+}
+
+.hotspot-num {
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 800;
+  color: var(--color-navy);
+}
+
+.hotspot-trigger:hover .hotspot-num,
+.model-hotspot.active .hotspot-trigger .hotspot-num {
+  color: #FFFFFF;
+}
+
+.hotspot-card {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%) translateY(-10px) scale(0.92);
+  opacity: 0;
+  visibility: hidden;
+  width: 250px;
+  background: #FFFFFF;
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-md);
+  padding: 16px 18px;
+  box-shadow: 0 16px 40px rgba(33, 40, 66, 0.18);
+  pointer-events: none;
+  transition: all 0.3s var(--ease-expo);
+  z-index: 30;
+}
+
+.model-hotspot.hotspot-temple-left .hotspot-card {
+  left: 0;
+  transform: translateY(-10px) scale(0.92);
+}
+
+.model-hotspot.hotspot-temple-right .hotspot-card {
+  left: auto;
+  right: 0;
+  transform: translateY(-10px) scale(0.92);
+}
+
+.model-hotspot:hover .hotspot-card,
+.model-hotspot.active .hotspot-card {
+  opacity: 1;
+  visibility: visible;
+  transform: translateX(-50%) translateY(-16px) scale(1);
+}
+
+.model-hotspot.hotspot-temple-left:hover .hotspot-card,
+.model-hotspot.hotspot-temple-left.active .hotspot-card {
+  transform: translateY(-16px) scale(1);
+}
+
+.model-hotspot.hotspot-temple-right:hover .hotspot-card,
+.model-hotspot.hotspot-temple-right.active .hotspot-card {
+  transform: translateY(-16px) scale(1);
+}
+
+.hotspot-card-badge {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 700;
+  color: var(--accent-terracotta, #C85A32);
+  letter-spacing: 0.08em;
+  margin-bottom: 4px;
+}
+
+.hotspot-card-title {
+  font-family: var(--font-display);
+  font-size: 0.9rem;
+  font-weight: 700;
+  color: var(--color-navy);
+  margin-bottom: 6px;
+}
+
+.hotspot-card-desc {
+  font-size: 0.76rem;
+  color: var(--text-secondary);
+  line-height: 1.45;
+}
+
+/* --------------------------------------------------------------------------
+   11. Scene 3: Simulador "Tocar vs. Anticipar"
+   -------------------------------------------------------------------------- */
+.simulator-layout {
+  display: grid;
+  grid-template-columns: 360px 1fr;
+  gap: 36px;
+  align-items: stretch;
+  height: 520px;
+}
+
+.sim-control-panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-lg);
+  padding: 30px;
+  box-shadow: var(--shadow-card);
+}
+
+.sim-mode-toggle {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-pill);
+  padding: 4px;
+  margin-top: 14px;
+}
+
+.mode-btn {
+  padding: 9px 12px;
+  border-radius: var(--radius-pill);
+  border: none;
+  background: transparent;
+  font-family: var(--font-display);
+  font-size: 0.82rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: all 0.25s var(--ease-expo);
+}
+
+.mode-btn.active {
+  background: var(--caviar-black);
+  color: var(--cream);
+  box-shadow: 0 4px 12px rgba(24, 24, 24, 0.18);
+}
+
+.sim-metrics-box {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 20px 0;
+}
+
+.sim-metric-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-sm);
+}
+
+.sim-metric-label {
+  font-size: 0.78rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.sim-metric-val {
+  font-family: var(--font-mono);
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.sim-canvas-container {
+  background: radial-gradient(circle at 50% 50%, #FFFFFF 0%, #EDE7DD 100%);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-lg);
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+  display: flex;
+  flex-direction: column;
+}
+
+#canvas-sim-2d {
+  width: 100%;
+  height: 100%;
+  display: block;
+  cursor: crosshair;
+}
+
+.canvas-hint-pill {
+  position: absolute;
+  top: 18px;
+  right: 18px;
+  padding: 8px 16px;
+  background: var(--bg-nav);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-pill);
+  font-family: var(--font-display);
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  backdrop-filter: blur(10px);
+  pointer-events: none;
+  box-shadow: 0 4px 14px rgba(24, 24, 24, 0.06);
+}
+
+/* --------------------------------------------------------------------------
+   12. Scene 4: Arquitectura & Bento Grid
+   -------------------------------------------------------------------------- */
+.bento-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  margin-top: 24px;
+}
+
+.bento-card {
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-lg);
+  padding: 34px 28px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+  transition: all 0.4s var(--ease-expo);
+  min-height: 320px;
+}
+
+.bento-card:hover {
+  transform: translateY(-8px);
+  border-color: var(--caviar-black);
+  box-shadow: var(--shadow-card-hover);
+}
+
+.bento-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.bento-icon-box {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-sm);
+  background: rgba(220, 207, 194, 0.45);
+  color: var(--caviar-black);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.bento-card:nth-child(2) .bento-icon-box {
+  background: rgba(164, 160, 154, 0.3);
+  color: var(--caviar-black);
+}
+
+.bento-card:nth-child(3) .bento-icon-box {
+  background: rgba(24, 24, 24, 0.07);
+  color: var(--caviar-black);
+}
+
+.bento-card:nth-child(4) .bento-icon-box {
+  background: rgba(220, 207, 194, 0.55);
+  color: var(--charcoal);
+}
+
+.bento-icon-box svg {
+  width: 24px;
+  height: 24px;
+  stroke: currentColor;
+  stroke-width: 2;
+  fill: none;
+}
+
+.bento-stat-num {
+  font-family: var(--font-display);
+  font-size: 3.4rem;
+  font-weight: 800;
+  letter-spacing: -0.05em;
+  line-height: 0.95;
+  color: var(--text-primary);
+  margin: 18px 0 8px;
+}
+
+.bento-unit {
+  font-size: 1.8rem;
+  font-weight: 700;
+  color: var(--charcoal);
+}
+
+.bento-title {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin-bottom: 6px;
+}
+
+.bento-desc {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.55;
+}
+
+/* --------------------------------------------------------------------------
+   13. Scene 5: VisiÃ³n 2.0 (Prototipo Futuro & Ecosistema)
+   -------------------------------------------------------------------------- */
+.vision-shell {
+  display: grid;
+  grid-template-columns: 440px 1fr;
+  gap: 36px;
+  align-items: stretch;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-xl);
+  padding: 34px;
+  box-shadow: var(--shadow-card);
+}
+
+.vision-modules-panel {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.modules-panel-header {
+  margin-bottom: 2px;
+}
+
+.panel-kicker-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  font-family: var(--font-mono);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--color-navy);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.panel-heading {
+  font-family: var(--font-display);
+  font-size: 1.35rem;
+  font-weight: 800;
+  color: var(--color-navy);
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin-bottom: 4px;
+}
+
+.panel-sub {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  line-height: 1.45;
+}
+
+.vision-tabs-nav {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.tab-btn {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 18px 20px;
+  background: var(--bg-card);
+  border: 1.5px solid var(--border-card);
+  border-radius: var(--radius-md);
+  color: var(--text-primary);
+  cursor: pointer;
+  text-align: left;
+  transition: all 0.3s var(--ease-expo);
+  outline: none;
+  box-shadow: 0 4px 14px rgba(33, 40, 66, 0.04);
+  position: relative;
+  overflow: hidden;
+}
+
+.tab-card-indicator {
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 4px;
+  background: transparent;
+  transition: background 0.3s ease;
+}
+
+.tab-icon-wrap {
+  width: 46px;
+  height: 46px;
+  border-radius: var(--radius-sm);
+  background: #FFFFFF;
+  border: 1px solid var(--border-card);
+  color: var(--color-navy);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  transition: all 0.3s ease;
+}
+
+.tab-icon-wrap svg {
+  width: 22px;
+  height: 22px;
+  stroke: currentColor;
+  stroke-width: 2;
+  fill: none;
+}
+
+.tab-card-content {
+  flex: 1;
+  min-width: 0;
+}
+
+.tab-card-meta {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.tab-mod-code {
+  font-family: var(--font-mono);
+  font-size: 0.65rem;
+  font-weight: 800;
+  color: var(--color-stone);
+  letter-spacing: 0.08em;
+}
+
+.tab-status-chip {
+  font-family: var(--font-mono);
+  font-size: 0.6rem;
+  font-weight: 700;
+  padding: 2px 7px;
+  border-radius: var(--radius-pill);
+  text-transform: uppercase;
+}
+
+.chip-sage {
+  background: rgba(91, 117, 102, 0.14);
+  color: var(--accent-sage, #5B7566);
+}
+
+.chip-terracotta {
+  background: rgba(200, 90, 50, 0.14);
+  color: var(--accent-terracotta, #C85A32);
+}
+
+.chip-navy {
+  background: rgba(33, 40, 66, 0.12);
+  color: var(--color-navy);
+}
+
+.tab-btn-title {
+  font-family: var(--font-display);
+  font-size: 1.02rem;
+  font-weight: 800;
+  color: var(--color-navy);
+  line-height: 1.2;
+  margin-bottom: 3px;
+}
+
+.tab-btn-subtitle {
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  line-height: 1.35;
+  margin-bottom: 6px;
+}
+
+.tab-micro-chips {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+}
+
+.tab-micro-chips span {
+  font-family: var(--font-mono);
+  font-size: 0.62rem;
+  padding: 2px 7px;
+  background: rgba(255, 255, 255, 0.6);
+  border: 1px solid rgba(213, 196, 173, 0.5);
+  border-radius: 4px;
+  color: var(--color-navy);
+}
+
+.tab-card-arrow {
+  color: var(--color-stone);
+  transition: transform 0.3s var(--ease-expo), color 0.3s ease;
+  flex-shrink: 0;
+}
+
+.tab-card-arrow svg {
+  width: 18px;
+  height: 18px;
+  stroke: currentColor;
+  stroke-width: 2.2;
+  fill: none;
+}
+
+/* Hover and Active states */
+.tab-btn:hover {
+  border-color: var(--color-navy);
+  transform: translateX(4px);
+  background: #FFFFFF;
+}
+
+.tab-btn:hover .tab-card-arrow {
+  transform: translateX(3px);
+  color: var(--color-navy);
+}
+
+.tab-btn.active {
+  background: #FFFFFF;
+  border-color: var(--color-navy);
+  box-shadow: 0 10px 28px rgba(33, 40, 66, 0.12), 0 0 0 1.5px var(--color-navy);
+  transform: translateX(8px);
+}
+
+.tab-btn.active .tab-card-indicator {
+  background: var(--accent-terracotta, #C85A32);
+}
+
+.tab-btn.active .tab-icon-wrap {
+  background: var(--color-navy);
+  color: #FAF7F2;
+  border-color: var(--color-navy);
+}
+
+.tab-btn.active .tab-card-arrow {
+  color: var(--accent-terracotta, #C85A32);
+  transform: translateX(4px);
+}
+
+.modules-panel-dock {
+  background: #FAF7F2;
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-md);
+  padding: 12px 16px;
+  margin-top: 2px;
+}
+
+.dock-badge-row {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 4px;
+}
+
+.dock-title {
+  font-family: var(--font-mono);
+  font-size: 0.68rem;
+  font-weight: 700;
+  color: var(--color-navy);
+  letter-spacing: 0.06em;
+}
+
+.dock-note {
+  font-size: 0.74rem;
+  color: var(--color-stone);
+  line-height: 1.4;
+}
+
+.vision-display-area {
+  background: var(--bg-card);
+  border: 1px solid var(--border-card);
+  border-radius: var(--radius-lg);
+  padding: 38px 42px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--shadow-card);
+}
+
+.tab-pane {
+  display: none;
+  animation: fadeInPane 0.4s var(--ease-expo) forwards;
+}
+
+.tab-pane.active {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: space-between;
+}
+
+@keyframes fadeInPane {
+  from { opacity: 0; transform: translateY(12px); filter: blur(4px); }
+  to { opacity: 1; transform: translateY(0); filter: blur(0); }
+}
+
+.pane-kicker {
+  font-family: var(--font-mono);
+  font-size: 0.76rem;
+  font-weight: 700;
+  color: var(--charcoal);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  margin-bottom: 8px;
+}
+
+.pane-headline {
+  font-family: var(--font-display);
+  font-size: 1.7rem;
+  font-weight: 800;
+  color: var(--text-primary);
+  margin-bottom: 14px;
+}
+
+.pane-text {
+  font-size: 0.98rem;
+  color: var(--text-secondary);
+  line-height: 1.7;
+  margin-bottom: 26px;
+}
+
+.pane-feature-list {
+  list-style: none;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+  margin-bottom: 26px;
+}
+
+.pane-feature-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.88rem;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.pane-check-dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: var(--caviar-black);
+}
+
+.vision-cta-strip {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 22px;
+  border-top: 1px solid var(--border-subtle);
+  margin-top: auto;
+}
+
+.beta-disclaimer {
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--text-muted);
+}
+
+/* --------------------------------------------------------------------------
+   14. Responsive Layout Adaptations
+   -------------------------------------------------------------------------- */
+@media (max-width: 1200px) {
+  .hero-layout-grid { grid-template-columns: 1fr; gap: 36px; }
+  .hero-telemetry-widget { max-width: 100%; }
+  .bento-grid { grid-template-columns: repeat(2, 1fr); }
+  .split-view-grid { grid-template-columns: 1fr; gap: 32px; }
+  .viewer-3d-stage { height: 420px; }
+  .simulator-layout { grid-template-columns: 1fr; height: auto; }
+  .sim-canvas-container { height: 340px; }
+  .vision-shell { grid-template-columns: 1fr; }
+}
+
+@media (max-width: 860px) {
+  html, body {
+    overflow-y: auto;
+  }
+
+  .slide-scene {
+    position: relative;
+    inset: auto;
+    width: 100%;
+    height: auto;
+    min-height: 100vh;
+    padding: 50px 24px 60px 24px;
+    visibility: visible !important;
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  .viewport-deck {
+    width: 100%;
+    height: auto;
+    overflow-y: auto;
+  }
+
+  .lateral-capsule {
+    display: none;
+  }
+
+  .scene-social-dock {
+    margin-top: 24px;
+    padding-bottom: 24px;
+  }
+
+  .bento-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .pane-feature-list {
+    grid-template-columns: 1fr;
+  }
+}
+
+</style>
+</head>
+<body>
+  <!-- Editorial Paper Grain Texture -->
+  <div class="editorial-grain" aria-hidden="true"></div>
+
+  <!-- ======================================================================
+       INTRO CINEMATOGRÃFICA EN PANTALLA COMPLETA: LADRILLO ISOMÃ‰TRICO (#FAF7F2)
+       Inspirado en la MÃ¡quina Compactadora de Ladrillos y DiseÃ±o Editorial
+       ====================================================================== -->
+  <div id="intro-eye-curtain" class="intro-eye-curtain" aria-label="Intro Proyecto MÃ¡quina de Ladrillos">
+    <div class="intro-grain" aria-hidden="true"></div>
+    <!-- CÃ­rculo de Zoom Iris en Color Crema #FAF7F2 -->
+    <div class="intro-iris-zoom-circle" id="intro-iris-zoom-circle" aria-hidden="true"></div>
+    <div class="intro-container">
+      <div class="intro-badge">
+        <span class="status-dot-pulse"></span>
+        <span>PROYECTO 5Â° AÃ‘O Â· MÃQUINA COMPACTADORA DE LADRILLOS</span>
+      </div>
+
+      <div class="intro-eye-stage intro-brick-stage" id="intro-eye-stage">
+        <!-- SVG Ladrillo IsomÃ©trico de PrecisiÃ³n con DiseÃ±o Editorial -->
+        <svg class="intro-grand-eye-svg intro-grand-brick-svg" viewBox="0 0 540 340" fill="none">
+          <defs>
+            <!-- Gradientes de Terracota Realista (Inspirado en la imagen de referencia y paleta web) -->
+            <linearGradient id="brickTopGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#EE7E48"/>
+              <stop offset="50%" stop-color="#E26D34"/>
+              <stop offset="100%" stop-color="#D15B24"/>
+            </linearGradient>
+
+            <linearGradient id="brickFrontGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+              <stop offset="0%" stop-color="#C7511E"/>
+              <stop offset="60%" stop-color="#B84414"/>
+              <stop offset="100%" stop-color="#9C350B"/>
+            </linearGradient>
+
+            <linearGradient id="brickSideGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+              <stop offset="0%" stop-color="#9E3A10"/>
+              <stop offset="100%" stop-color="#7A2805"/>
+            </linearGradient>
+
+            <radialGradient id="brickCompactionGlow" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#FAF7F2" stop-opacity="0.95"/>
+              <stop offset="40%" stop-color="#E6D7C4" stop-opacity="0.6"/>
+              <stop offset="80%" stop-color="#C85A32" stop-opacity="0.25"/>
+              <stop offset="100%" stop-color="#212842" stop-opacity="0"/>
+            </radialGradient>
+
+            <clipPath id="eyeContourClip">
+              <!-- Contorno isomÃ©trico envolvente para compatibilidad -->
+              <polygon id="intro-contour-path" points="270,45 475,130 475,225 270,305 65,225 65,130"/>
+            </clipPath>
+          </defs>
+
+          <!-- Rayos y GuÃ­as de ProyecciÃ³n IsomÃ©trica TÃ©cnica -->
+          <g class="intro-lashes-group" id="intro-lashes-group">
+            <line id="intro-lash-0" class="intro-lash-flyer" x1="120" y1="105" x2="60" y2="40" stroke="var(--color-beige)" stroke-width="3" stroke-linecap="round" stroke-dasharray="4 4"/>
+            <line id="intro-lash-1" class="intro-lash-flyer" x1="200" y1="75" x2="180" y2="10" stroke="var(--color-beige)" stroke-width="3" stroke-linecap="round" stroke-dasharray="4 4"/>
+            <line id="intro-lash-2" class="intro-lash-flyer" x1="270" y1="45" x2="270" y2="-15" stroke="var(--color-beige)" stroke-width="3.5" stroke-linecap="round"/>
+            <line id="intro-lash-3" class="intro-lash-flyer" x1="340" y1="75" x2="360" y2="10" stroke="var(--color-beige)" stroke-width="3" stroke-linecap="round" stroke-dasharray="4 4"/>
+            <line id="intro-lash-4" class="intro-lash-flyer" x1="420" y1="105" x2="480" y2="40" stroke="var(--color-beige)" stroke-width="3" stroke-linecap="round" stroke-dasharray="4 4"/>
+
+            <!-- LÃ­neas de acotaciÃ³n milimÃ©trica industrial -->
+            <line class="intro-sublash" x1="65" y1="240" x2="270" y2="320" stroke="var(--color-beige-dark)" stroke-width="1.8" stroke-dasharray="3 3"/>
+            <line class="intro-sublash" x1="270" y1="320" x2="475" y2="240" stroke="var(--color-beige-dark)" stroke-width="1.8" stroke-dasharray="3 3"/>
+            <line class="intro-sublash" x1="65" y1="230" x2="65" y2="250" stroke="var(--color-beige-dark)" stroke-width="2"/>
+            <line class="intro-sublash" x1="270" y1="310" x2="270" y2="330" stroke="var(--color-beige-dark)" stroke-width="2"/>
+            <line class="intro-sublash" x1="475" y1="230" x2="475" y2="250" stroke="var(--color-beige-dark)" stroke-width="2"/>
+          </g>
+
+          <!-- Bloque IsomÃ©trico del Ladrillo con Textura y Biseles -->
+          <g id="intro-brick-group">
+            <!-- Sombra de Apoyo en Base -->
+            <polygon points="270,312 478,230 460,250 270,325 80,250 62,230" fill="rgba(22, 28, 46, 0.45)" filter="blur(6px)"/>
+
+            <!-- CARA FRONTAL LARGA (Izquierda en perspectiva isomÃ©trica) -->
+            <polygon id="intro-brick-front" points="65,130 270,205 270,295 65,220" fill="url(#brickFrontGrad)" stroke="var(--color-navy)" stroke-width="4.5" stroke-linejoin="round"/>
+            <!-- Textura de arcilla y grietas sutiles cara frontal -->
+            <path d="M 90 155 Q 115 168 150 162 Q 175 178 220 185" stroke="#9C350B" stroke-width="1.6" fill="none" opacity="0.6"/>
+            <path d="M 85 190 Q 130 200 180 196" stroke="#D15B24" stroke-width="1.2" fill="none" opacity="0.45"/>
+            <path d="M 195 240 Q 230 252 255 248" stroke="#7A2805" stroke-width="1.5" fill="none" opacity="0.55"/>
+
+            <!-- CARA LATERAL CORTA (Derecha en perspectiva isomÃ©trica) -->
+            <polygon id="intro-brick-side" points="270,205 475,130 475,220 270,295" fill="url(#brickSideGrad)" stroke="var(--color-navy)" stroke-width="4.5" stroke-linejoin="round"/>
+            <!-- Textura y sombras cara lateral -->
+            <path d="M 310 195 Q 360 175 420 162" stroke="#682103" stroke-width="1.6" fill="none" opacity="0.65"/>
+            <path d="M 330 240 Q 380 220 440 208" stroke="#8A2E08" stroke-width="1.4" fill="none" opacity="0.5"/>
+
+            <!-- CARA SUPERIOR (IsomÃ©trica Top) con acabado biselado y textura de arcilla de la imagen -->
+            <polygon id="intro-brick-top" points="270,55 475,130 270,205 65,130" fill="url(#brickTopGrad)" stroke="var(--color-navy)" stroke-width="4.5" stroke-linejoin="round"/>
+            <!-- LÃ­neas de bisel y fisuras naturales de arcilla inspiradas en la imagen -->
+            <path d="M 75 130 C 130 110 210 75 265 60" stroke="#F49566" stroke-width="2.5" fill="none" opacity="0.8"/>
+            <path d="M 275 60 C 335 80 415 110 465 130" stroke="#F49566" stroke-width="2" fill="none" opacity="0.7"/>
+            <path d="M 75 130 C 135 152 215 182 265 200" stroke="#C7511E" stroke-width="2" fill="none" opacity="0.75"/>
+            <path d="M 275 200 C 335 180 415 150 465 130" stroke="#9E3A10" stroke-width="2.2" fill="none" opacity="0.8"/>
+            <!-- Grietas orgÃ¡nicas de la imagen de referencia -->
+            <path d="M 140 120 Q 200 135 270 125 Q 350 142 410 118" stroke="#B84414" stroke-width="2" fill="none" opacity="0.65"/>
+            <path d="M 220 95 Q 260 115 310 100" stroke="#9C350B" stroke-width="1.8" fill="none" opacity="0.6"/>
+            <path d="M 180 150 Q 240 168 320 152" stroke="#FAF7F2" stroke-width="1.4" fill="none" opacity="0.55"/>
+
+            <!-- Sellos tÃ©cnicos de compresiÃ³n de ladrillo -->
+            <text x="270" y="138" text-anchor="middle" font-family="var(--font-mono)" font-size="12" font-weight="700" fill="#FAF7F2" opacity="0.85" letter-spacing="3">240 Ã— 115 Ã— 65 mm</text>
+            <text x="270" y="156" text-anchor="middle" font-family="var(--font-mono)" font-size="10" font-weight="600" fill="#FAF7F2" opacity="0.65" letter-spacing="2">COMPACTACIÃ“N HIDRÃULICA 10 Tn</text>
+
+            <!-- Elementos interactivos / animables requeridos para la cinemÃ¡tica -->
+            <g id="intro-iris-group">
+              <circle id="intro-iris" cx="270" cy="135" r="32" fill="url(#brickCompactionGlow)" opacity="0"/>
+              <circle id="intro-pupil" cx="270" cy="135" r="18" fill="#161C2E" opacity="0"/>
+              <circle id="intro-pupil-center" cx="270" cy="135" r="8" fill="#FAF7F2" opacity="0"/>
+            </g>
+
+            <!-- Placas de Prensado y CompactaciÃ³n Animables (Sustituyen pÃ¡rpados para efecto prensa) -->
+            <path id="intro-upper-lid" d="M 50 130 Q 270 50 490 130 L 490 0 L 50 0 Z" fill="var(--color-navy)" opacity="0"/>
+            <path id="intro-lower-lid" d="M 50 220 Q 270 300 490 220 L 490 340 L 50 340 Z" fill="var(--color-navy)" opacity="0"/>
+          </g>
+
+          <!-- Borde de Contorno IsomÃ©trico de PrecisiÃ³n -->
+          <polygon id="intro-contour-stroke" points="270,55 475,130 475,220 270,295 65,220 65,130" fill="none" stroke="var(--color-beige)" stroke-width="3" stroke-linejoin="round" opacity="0.4"/>
+        </svg>
+      </div>
+
+      <div class="intro-caption">
+        <h2 class="intro-headline">IngenierÃ­a de CompactaciÃ³n de Ladrillos.</h2>
+        <p class="intro-sub">Moldeando resistencia, eficiencia y sustentabilidad bloque a bloque...</p>
+      </div>
+
+      <div class="intro-actions">
+        <button class="intro-skip-btn" id="intro-skip-btn" aria-label="Entrar al proyecto">
+          <span>ENTRAR AL PROYECTO</span>
+          <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- ======================================================================
+       OVERLAYS PARA TRANSICIONES CONTEXTUALES ÃšNICAS POR DIAPOSITIVA
+       ====================================================================== -->
+  <!-- TransiciÃ³n 1 -> 2: Onda de Radar Expansiva (Hero a 3D) -->
+  <div id="trans-radar-scan" aria-hidden="true">
+    <div class="trans-radar-disc"></div>
+    <div class="trans-radar-wave-ring"></div>
+  </div>
+
+  <!-- TransiciÃ³n 2 -> 3: CompresiÃ³n en Haz de Luz y Cortina (3D a Simulador) -->
+  <div id="trans-beam-shutter" aria-hidden="true">
+    <div class="trans-slit-curtain-left"></div>
+    <div class="trans-slit-curtain-right"></div>
+    <div class="trans-light-beam"></div>
+  </div>
+
+  <!-- TransiciÃ³n 3 -> 4: Estallido de PartÃ­culas de ObstÃ¡culo (Simulador a Bento) -->
+  <div id="trans-particle-burst" aria-hidden="true"></div>
+
+  <!-- TransiciÃ³n 4 -> 5: Cortina de Luz Verde Salvia Ascendente (Bento a VisiÃ³n 2.0) -->
+  <div id="trans-sage-curtain" aria-hidden="true">
+    <div class="sage-curtain-sheet"></div>
+  </div>
+
+  <!-- 1. FLOATING LATERAL BRICK INDICATOR (Selector Lateral de Ladrillos con AnimaciÃ³n de Salida y Entrada) -->
+  <nav class="lateral-capsule lateral-brick-capsule" aria-label="NavegaciÃ³n de escenas por ladrillos">
+    <div class="nav-eye-item nav-brick-item active" data-index="0">
+      <button class="nav-eye-btn nav-brick-btn" aria-label="Escena 1: Inicio">
+        <svg class="nav-eye-svg nav-brick-svg" viewBox="0 0 54 36" fill="none">
+          <!-- Estado Reposo / Salida (Ladrillo ArquitectÃ³nico) -->
+          <g class="eye-closed-group brick-idle-group">
+            <polygon class="brick-idle-top" points="27,7 46,14.5 27,21.5 8,14.5" fill="#E6D7C4" stroke="var(--color-navy)" stroke-width="1.8" stroke-linejoin="round"/>
+            <polygon class="brick-idle-front" points="8,14.5 27,21.5 27,29.5 8,22.5" fill="#FAF7F2" stroke="var(--color-navy)" stroke-width="1.8" stroke-linejoin="round"/>
+            <polygon class="brick-idle-side" points="27,21.5 46,14.5 46,22.5 27,29.5" fill="#D5C4AD" stroke="var(--color-navy)" stroke-width="1.8" stroke-linejoin="round"/>
+            <path class="eye-closed-slit" d="M 12 18 C 18 20 36 20 42 18" stroke="transparent" stroke-width="0.1"/>
+          </g>
+          <!-- Estado Activo / Entrada (Ladrillo IsomÃ©trico Terracota Vibrante con Agujeros y AnimaciÃ³n) -->
+          <g class="eye-open-group brick-active-group">
+            <polygon class="brick-act-top" points="27,6 47,13.8 27,21.2 7,13.8" fill="#E27237" stroke="var(--color-navy)" stroke-width="2.2" stroke-linejoin="round"/>
+            <polygon class="brick-act-front" points="7,13.8 27,21.2 27,29.8 7,22.4" fill="#C45120" stroke="var(--color-navy)" stroke-width="2.2" stroke-linejoin="round"/>
+            <polygon class="brick-act-side" points="27,21.2 47,13.8 47,22.4 27,29.8" fill="#993B12" stroke="var(--color-navy)" stroke-width="2.2" stroke-linejoin="round"/>
+            <!-- Cavidades del Ladrillo EcolÃ³gico -->
+            <ellipse cx="20" cy="13.8" rx="3.2" ry="1.6" fill="#A83F15" stroke="var(--color-navy)" stroke-width="1.2"/>
+            <ellipse cx="34" cy="13.8" rx="3.2" ry="1.6" fill="#A83F15" stroke="var(--color-navy)" stroke-width="1.2"/>
+            <circle class="eye-iris" cx="27" cy="18" r="0.1" fill="none"/>
+            <circle class="eye-pupil" cx="27" cy="18" r="0.1" fill="none"/>
+            <text class="eye-num-text brick-num-text" x="27" y="27.5" text-anchor="middle">01</text>
+          </g>
+        </svg>
+      </button>
+      <span class="nav-eye-label nav-brick-label">01 Inicio</span>
+    </div>
+
+    <div class="nav-eye-item nav-brick-item" data-index="1">
+      <button class="nav-eye-btn nav-brick-btn" aria-label="Escena 2: MÃ¡quina 3D">
+        <svg class="nav-eye-svg nav-brick-svg" viewBox="0 0 54 36" fill="none">
+          <g class="eye-closed-group brick-idle-group">
+            <polygon class="brick-idle-top" points="27,7 46,14.5 27,21.5 8,14.5" fill="#E6D7C4" stroke="var(--color-navy)" stroke-width="1.8" stroke-linejoin="round"/>
+            <polygon class="brick-idle-front" points="8,14.5 27,21.5 27,29.5 8,22.5" fill="#FAF7F2" stroke="var(--color-navy)" stroke-width="1.8" stroke-linejoin="round"/>
+            <polygon class="brick-idle-side" points="27,21.5 46,14.5 46,22.5 27,29.5" fill="#D5C4AD" stroke="var(--color-navy)" stroke-width="1.8" stroke-linejoin="round"/>
+            <path class="eye-closed-slit" d="M 12 18 C 18 20 36 20 42 18" stroke="transparent" stroke-width="0.1"/>
+          </g>
+          <g class="eye-open-group brick-active-group">
+            <polygon class="brick-act-top" points="27,6 47,13.8 27,21.2 7,13.8" fill="#E27237" stroke="var(--color-navy)" stroke-width="2.2" stroke-linejoin="round"/>
+            <polygon class="brick-act-front" points="7,13.8 27,21.2 27,29.8 7,22.4" fill="#C45120" stroke="var(--color-navy)" stroke-width="2.2" stroke-linejoin="round"/>
+            <polygon class="brick-act-side" points="27,21.2 47,13.8 47,22.4 27,29.8" fill="#993B12" stroke="var(--color-navy)" stroke-width="2.2" stroke-linejoin="round"/>
+            <ellipse cx="20" cy="13.8" rx="3.2" ry="1.6" fill="#A83F15" stroke="var(--color-navy)" stroke-width="1.2"/>
+            <ellipse cx="34" cy="13.8" rx="3.2" ry="1.6" fill="#A83F15" stroke="var(--color-navy)" stroke-width="1.2"/>
+            <circle class="eye-iris" cx="27" cy="18" r="0.1" fill="none"/>
+            <circle class="eye-pupil" cx="27" cy="18" r="0.1" fill="none"/>
+            <text class="eye-num-text brick-num-text" x="27" y="27.5" text-anchor="middle">02</text>
+          </g>
+        </svg>
+      </button>
+      <span class="nav-eye-label nav-brick-label">02 MÃ¡quina 3D</span>
+    </div>
+
+    <div class="nav-eye-item nav-brick-item" data-index="2">
+      <button class="nav-eye-btn nav-brick-btn" aria-label="Escena 3: Prensado">
+        <svg class="nav-eye-svg nav-brick-svg" viewBox="0 0 54 36" fill="none">
+          <g class="eye-closed-group brick-idle-group">
+            <polygon class="brick-idle-top" points="27,7 46,14.5 27,21.5 8,14.5" fill="#E6D7C4" stroke="var(--color-navy)" stroke-width="1.8" stroke-linejoin="round"/>
+            <polygon class="brick-idle-front" points="8,14.5 27,21.5 27,29.5 8,22.5" fill="#FAF7F2" stroke="var(--color-navy)" stroke-width="1.8" stroke-linejoin="round"/>
+            <polygon class="brick-idle-side" points="27,21.5 46,14.5 46,22.5 27,29.5" fill="#D5C4AD" stroke="var(--color-navy)" stroke-width="1.8" stroke-linejoin="round"/>
+            <path class="eye-closed-slit" d="M 12 18 C 18 20 36 20 42 18" stroke="transparent" stroke-width="0.1"/>
+          </g>
+          <g class="eye-open-group brick-active-group">
+            <polygon class="brick-act-top" points="27,6 47,13.8 27,21.2 7,13.8" fill="#E27237" stroke="var(--color-navy)" stroke-width="2.2" stroke-linejoin="round"/>
+            <polygon class="brick-act-front" points="7,13.8 27,21.2 27,29.8 7,22.4" fill="#C45120" stroke="var(--color-navy)" stroke-width="2.2" stroke-linejoin="round"/>
+            <polygon class="brick-act-side" points="27,21.2 47,13.8 47,22.4 27,29.8" fill="#993B12" stroke="var(--color-navy)" stroke-width="2.2" stroke-linejoin="round"/>
+            <ellipse cx="20" cy="13.8" rx="3.2" ry="1.6" fill="#A83F15" stroke="var(--color-navy)" stroke-width="1.2"/>
+            <ellipse cx="34" cy="13.8" rx="3.2" ry="1.6" fill="#A83F15" stroke="var(--color-navy)" stroke-width="1.2"/>
+            <circle class="eye-iris" cx="27" cy="18" r="0.1" fill="none"/>
+            <circle class="eye-pupil" cx="27" cy="18" r="0.1" fill="none"/>
+            <text class="eye-num-text brick-num-text" x="27" y="27.5" text-anchor="middle">03</text>
+          </g>
+        </svg>
+      </button>
+      <span class="nav-eye-label nav-brick-label">03 Prensado</span>
+    </div>
+
+    <div class="nav-eye-item nav-brick-item" data-index="3">
+      <button class="nav-eye-btn nav-brick-btn" aria-label="Escena 4: Estructura">
+        <svg class="nav-eye-svg nav-brick-svg" viewBox="0 0 54 36" fill="none">
+          <g class="eye-closed-group brick-idle-group">
+            <polygon class="brick-idle-top" points="27,7 46,14.5 27,21.5 8,14.5" fill="#E6D7C4" stroke="var(--color-navy)" stroke-width="1.8" stroke-linejoin="round"/>
+            <polygon class="brick-idle-front" points="8,14.5 27,21.5 27,29.5 8,22.5" fill="#FAF7F2" stroke="var(--color-navy)" stroke-width="1.8" stroke-linejoin="round"/>
+            <polygon class="brick-idle-side" points="27,21.5 46,14.5 46,22.5 27,29.5" fill="#D5C4AD" stroke="var(--color-navy)" stroke-width="1.8" stroke-linejoin="round"/>
+            <path class="eye-closed-slit" d="M 12 18 C 18 20 36 20 42 18" stroke="transparent" stroke-width="0.1"/>
+          </g>
+          <g class="eye-open-group brick-active-group">
+            <polygon class="brick-act-top" points="27,6 47,13.8 27,21.2 7,13.8" fill="#E27237" stroke="var(--color-navy)" stroke-width="2.2" stroke-linejoin="round"/>
+            <polygon class="brick-act-front" points="7,13.8 27,21.2 27,29.8 7,22.4" fill="#C45120" stroke="var(--color-navy)" stroke-width="2.2" stroke-linejoin="round"/>
+            <polygon class="brick-act-side" points="27,21.2 47,13.8 47,22.4 27,29.8" fill="#993B12" stroke="var(--color-navy)" stroke-width="2.2" stroke-linejoin="round"/>
+            <ellipse cx="20" cy="13.8" rx="3.2" ry="1.6" fill="#A83F15" stroke="var(--color-navy)" stroke-width="1.2"/>
+            <ellipse cx="34" cy="13.8" rx="3.2" ry="1.6" fill="#A83F15" stroke="var(--color-navy)" stroke-width="1.2"/>
+            <circle class="eye-iris" cx="27" cy="18" r="0.1" fill="none"/>
+            <circle class="eye-pupil" cx="27" cy="18" r="0.1" fill="none"/>
+            <text class="eye-num-text brick-num-text" x="27" y="27.5" text-anchor="middle">04</text>
+          </g>
+        </svg>
+      </button>
+      <span class="nav-eye-label nav-brick-label">04 Estructura</span>
+    </div>
+
+    <div class="nav-eye-item nav-brick-item" data-index="4">
+      <button class="nav-eye-btn nav-brick-btn" aria-label="Escena 5: VisiÃ³n 2.0">
+        <svg class="nav-eye-svg nav-brick-svg" viewBox="0 0 54 36" fill="none">
+          <g class="eye-closed-group brick-idle-group">
+            <polygon class="brick-idle-top" points="27,7 46,14.5 27,21.5 8,14.5" fill="#E6D7C4" stroke="var(--color-navy)" stroke-width="1.8" stroke-linejoin="round"/>
+            <polygon class="brick-idle-front" points="8,14.5 27,21.5 27,29.5 8,22.5" fill="#FAF7F2" stroke="var(--color-navy)" stroke-width="1.8" stroke-linejoin="round"/>
+            <polygon class="brick-idle-side" points="27,21.5 46,14.5 46,22.5 27,29.5" fill="#D5C4AD" stroke="var(--color-navy)" stroke-width="1.8" stroke-linejoin="round"/>
+            <path class="eye-closed-slit" d="M 12 18 C 18 20 36 20 42 18" stroke="transparent" stroke-width="0.1"/>
+          </g>
+          <g class="eye-open-group brick-active-group">
+            <polygon class="brick-act-top" points="27,6 47,13.8 27,21.2 7,13.8" fill="#E27237" stroke="var(--color-navy)" stroke-width="2.2" stroke-linejoin="round"/>
+            <polygon class="brick-act-front" points="7,13.8 27,21.2 27,29.8 7,22.4" fill="#C45120" stroke="var(--color-navy)" stroke-width="2.2" stroke-linejoin="round"/>
+            <polygon class="brick-act-side" points="27,21.2 47,13.8 47,22.4 27,29.8" fill="#993B12" stroke="var(--color-navy)" stroke-width="2.2" stroke-linejoin="round"/>
+            <ellipse cx="20" cy="13.8" rx="3.2" ry="1.6" fill="#A83F15" stroke="var(--color-navy)" stroke-width="1.2"/>
+            <ellipse cx="34" cy="13.8" rx="3.2" ry="1.6" fill="#A83F15" stroke="var(--color-navy)" stroke-width="1.2"/>
+            <circle class="eye-iris" cx="27" cy="18" r="0.1" fill="none"/>
+            <circle class="eye-pupil" cx="27" cy="18" r="0.1" fill="none"/>
+            <text class="eye-num-text brick-num-text" x="27" y="27.5" text-anchor="middle">05</text>
+          </g>
+        </svg>
+      </button>
+      <span class="nav-eye-label nav-brick-label">05 VisiÃ³n 2.0</span>
+    </div>
+  </nav>
+
+  <!-- Top Right Header: BrickTech Brand & Team Information -->
+  <header class="bricktech-top-header" aria-label="Cabecera BrickTech">
+    <div class="header-left-pill">
+      <span class="status-dot-pulse"></span>
+      <span class="header-project-tag">ESCUELA MERÃN Â· EXPO 2026</span>
+    </div>
+    <div class="header-logo-container">
+      <div class="header-org-info">
+        <span class="header-company-name">AutoBrick Technologies</span>
+        <span class="header-sub-tag">Parque Industrial San Rafael</span>
+      </div>
+      <div class="header-logo-badge">
+        <img src="assets/logo_bricktech.png" alt="Logo BrickTech" class="header-logo-img">
+      </div>
+    </div>
+  </header>
+
+  <!-- 4. VIEWPORT DECK WITH STACKED CINEMATIC SLIDES -->
+  <main class="viewport-deck" id="viewport-deck">
+    
+    <!-- ======================================================================
+         SCENE 1: HERO CINEMATOGRÃFICO â€” AUTOBRICK TECHNOLOGIES
+         ====================================================================== -->
+    <section class="slide-scene active" id="scene-hero">
+      <div class="scene-inner">
+        <div class="hero-layout-grid">
+          <!-- Left Column: Editorial & CTA -->
+          <div class="hero-content">
+            <div class="kicker-pill">
+              <span class="status-dot-pulse"></span>
+              <span>AUTOBRICK TECHNOLOGIES Â· PRÃCTICAS PROFESIONALIZANTES 5Â° 1Â°</span>
+            </div>
+
+            <h1 class="heading-display">
+              TecnologÃ­a de FabricaciÃ³n de Ladrillos <span class="text-vibrant">Accesible para Todos.</span>
+            </h1>
+
+            <p class="lead-editorial">
+              Desarrollamos compactadoras de ladrillos automatizadas que optimizan el proceso de fabricaciÃ³n, aumentan la productividad y reducen la necesidad de intervenciÃ³n manual. ProducciÃ³n limpia y eficiente de bloques de tierra comprimida (BTC) desde el Parque Industrial de San Rafael.
+            </p>
+
+            <div class="hero-actions">
+              <a href="#scene-engineering" class="btn-primary">
+                <span>Explorar MÃ¡quina 3D</span>
+                <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+              </a>
+              <a href="#scene-simulator" class="btn-secondary">
+                <span>Ver Proceso & PLC</span>
+              </a>
+            </div>
+
+            <div class="hero-stats-band">
+              <div class="stat-item">
+                <span class="stat-value">10<span class="stat-accent">Tn</span></span>
+                <span class="stat-caption">Fuerza HidrÃ¡ulica</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-value">5<span class="stat-accent">Pasos</span></span>
+                <span class="stat-caption">Proceso Integrado</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-value">S7<span class="stat-accent">200</span></span>
+                <span class="stat-caption">AutomatizaciÃ³n PLC</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-value">100<span class="stat-accent">%</span></span>
+                <span class="stat-caption">Curado EcolÃ³gico</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right Column: Live System Telemetry Widget (Relleno y OptimizaciÃ³n de Espacio) -->
+          <div class="hero-telemetry-col">
+            <div class="hero-telemetry-widget" id="hero-telemetry-widget">
+              <!-- Telemetry Header -->
+              <div class="telemetry-widget-header">
+                <div class="telemetry-chip-live">
+                  <span class="telemetry-live-dot"></span>
+                  <span class="telemetry-chip-title">COMPACTADORA BRICKTECH Â· ESTADO EN VIVO</span>
+                </div>
+                <div class="telemetry-status-badge">
+                  <span>SISTEMA HIDRÃULICO ACTIVO</span>
+                </div>
+              </div>
+
+              <!-- Micro Radar Sonar Stage -->
+              <div class="telemetry-radar-stage">
+                <div class="radar-ping-ring ring-1"></div>
+                <div class="radar-ping-ring ring-2"></div>
+                <div class="radar-ping-ring ring-3"></div>
+                <div class="radar-sweep-needle"></div>
+                <div class="radar-echo-blip blip-1" title="Sensor fin de carrera activo"></div>
+                <div class="radar-echo-blip blip-2" title="PresiÃ³n de prensado nominal"></div>
+                <div class="radar-specs-overlay">
+                  <span class="radar-range-pill">PRESIÃ“N MÃX 180 BAR</span>
+                  <span class="radar-fov-pill">CICLO 8.4s</span>
+                </div>
+              </div>
+
+              <!-- Telemetry Metrics Grid -->
+              <div class="telemetry-cards-row">
+                <!-- Hydraulic Pressure Card -->
+                <div class="telemetry-mini-card">
+                  <div class="tcard-head">
+                    <span class="tcard-title">PRENSA HIDRÃULICA</span>
+                    <span class="tcard-pill-sage" id="telemetry-bat-pct">10 Tn</span>
+                  </div>
+                  <div class="tcard-progress-track">
+                    <div class="tcard-progress-bar" id="telemetry-bat-bar" style="width: 92%;"></div>
+                  </div>
+                  <div class="tcard-meta-line">
+                    <span>180 bar regulado</span>
+                    <span class="tcard-highlight">PistÃ³n: Activo Â· Matriz: Cerrada</span>
+                  </div>
+                </div>
+
+                <!-- Cycle Time Card -->
+                <div class="telemetry-mini-card">
+                  <div class="tcard-head">
+                    <span class="tcard-title">DOSIFICACIÃ“N SINFÃN</span>
+                    <span class="tcard-pill-terracotta" id="telemetry-lat-val">3.2 s</span>
+                  </div>
+                  <div class="tcard-sparkline" id="telemetry-sparkline">
+                    <span class="spark-bar" style="height: 60%;"></span>
+                    <span class="spark-bar" style="height: 85%;"></span>
+                    <span class="spark-bar" style="height: 55%;"></span>
+                    <span class="spark-bar" style="height: 95%;"></span>
+                    <span class="spark-bar active" style="height: 70%;"></span>
+                    <span class="spark-bar" style="height: 80%;"></span>
+                  </div>
+                  <div class="tcard-meta-line">
+                    <span>PLC Siemens S7-200</span>
+                    <span class="tcard-green">Salida Q1 / Q4 Sincronizada</span>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Sensor Submodules Strip -->
+              <div class="telemetry-sensors-panel">
+                <div class="tcard-head" style="margin-bottom: 8px;">
+                  <span class="tcard-title">SISTEMAS ELECTROMECÃNICOS & ACTUADORES</span>
+                  <span class="tcard-online-pill">SINCRONIZADO</span>
+                </div>
+                <div class="telemetry-sensors-grid">
+                  <div class="sensor-pill-status active">
+                    <span class="sensor-indicator-dot"></span>
+                    <div class="sensor-pill-info">
+                      <span class="sensor-pill-name">Motor ElÃ©ctrico & SinfÃ­n Mezclador</span>
+                      <span class="sensor-pill-desc">12V 100 RPM Â· HomogenizaciÃ³n continua de suelo y cemento</span>
+                    </div>
+                  </div>
+                  <div class="sensor-pill-status active">
+                    <span class="sensor-indicator-dot"></span>
+                    <div class="sensor-pill-info">
+                      <span class="sensor-pill-name">Cilindro HidrÃ¡ulico & Bandeja de ExpulsiÃ³n</span>
+                      <span class="sensor-pill-desc">ElectrovÃ¡lvulas 5/2 Â· Prensado uniforme y desmolde inmediato</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <!-- Widget Footer -->
+              <div class="telemetry-widget-footer">
+                <span class="telemetry-dock-tag">
+                  <span class="status-dot-pulse"></span>
+                  <span>PARQUE INDUSTRIAL SAN RAFAEL Â· CUADRO NACIONAL</span>
+                </span>
+                <span class="telemetry-dock-code">EXPO 2026</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Ambient Rotating Radar -->
+        <div class="hero-ambient-radar" aria-hidden="true">
+          <div class="radar-circle"></div>
+          <div class="radar-circle"></div>
+          <div class="radar-circle"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         SCENE 2: INGENIERÃA 3D INTERACTIVA â€” MÃQUINA COMPACTADORA DE LADRILLOS
+         ====================================================================== -->
+    <section class="slide-scene" id="scene-engineering">
+      <div class="scene-inner">
+        <div class="split-view-grid">
+          <!-- Left: Spec Details -->
+          <div class="tech-spec-panel">
+            <div class="kicker-pill kicker-coral">
+              <span>EXPLORACIÃ“N ISOMÃ‰TRICA CAD</span>
+            </div>
+
+            <h2 class="heading-section">
+              MÃ¡quina Compactadora de Ladrillos EcolÃ³gicos.
+            </h2>
+
+            <p class="lead-editorial" style="margin-bottom: 20px;">
+              DiseÃ±o electromecÃ¡nico e isomÃ©trico de alta precisiÃ³n para fabricar bloques de suelo-cemento de encastre modular, garantizando densidad homogÃ©nea y compresiÃ³n certificada.
+            </p>
+
+            <div class="spec-list">
+              <div class="spec-card active">
+                <div class="spec-icon-box">
+                  <svg viewBox="0 0 24 24"><path d="M12 2v20M2 12h20M4.93 4.93l14.14 14.14M4.93 19.07l14.14-14.14"/></svg>
+                </div>
+                <div class="spec-body">
+                  <h4>Tolva de AlimentaciÃ³n & DosificaciÃ³n</h4>
+                  <p>Tolva superior troncocÃ³nica con Ã¡ngulo de deslizamiento optimizado para mezclas homogÃ©neas de suelo arcilloso, arena y estabilizador ecolÃ³gico.</p>
+                </div>
+              </div>
+
+              <div class="spec-card">
+                <div class="spec-icon-box">
+                  <svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                </div>
+                <div class="spec-body">
+                  <h4>PistÃ³n HidrÃ¡ulico de Prensado (10 Toneladas)</h4>
+                  <p>Cilindro de compresiÃ³n vertical con vÃ¡stago de acero rectificado que compacta la masa a presiones superiores a 4.5 MPa, eliminando porosidades.</p>
+                </div>
+              </div>
+
+              <div class="spec-card">
+                <div class="spec-icon-box">
+                  <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+                </div>
+                <div class="spec-body">
+                  <h4>Matriz Intercambiable para Bloques Modulares</h4>
+                  <p>Caja de moldeo de acero templado antidesgaste con doble macho para ladrillos con orificios tÃ©cnicos y conductos de instalaciÃ³n sin roturas.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Right: Interactive 3D Canvas with Dynamic Floating Hotspots -->
+          <div class="viewer-3d-stage">
+            <div id="canvas-3d-glasses"></div>
+
+            <!-- Dynamic Interactive Floating Hotspots (Aprovechamiento Espacial) -->
+            <div class="hotspots-floating-container" id="hotspots-floating-container">
+              <!-- Hotspot 1: Tolva de Carga -->
+              <div class="model-hotspot hotspot-bridge" data-component="tolva">
+                <button class="hotspot-trigger" aria-label="Ver Tolva de Carga">
+                  <span class="hotspot-pulse"></span>
+                  <span class="hotspot-dot"></span>
+                  <span class="hotspot-num">01</span>
+                </button>
+                <div class="hotspot-card">
+                  <div class="hotspot-card-badge">TOLVA DE ALIMENTACIÃ“N</div>
+                  <h5 class="hotspot-card-title">Carga de Mezcla</h5>
+                  <p class="hotspot-card-desc">RecepciÃ³n superior para dosificaciÃ³n precisa de Ã¡ridos y arcilla seleccionada hacia la cÃ¡mara de prensado.</p>
+                </div>
+              </div>
+
+              <!-- Hotspot 2: Cilindro HidrÃ¡ulico -->
+              <div class="model-hotspot hotspot-temple-left" data-component="cilindro">
+                <button class="hotspot-trigger" aria-label="Ver Cilindro de Prensado">
+                  <span class="hotspot-pulse"></span>
+                  <span class="hotspot-dot"></span>
+                  <span class="hotspot-num">02</span>
+                </button>
+                <div class="hotspot-card">
+                  <div class="hotspot-card-badge">PRENSA HIDRÃULICA 10 Tn</div>
+                  <h5 class="hotspot-card-title">PistÃ³n de Alta Densidad</h5>
+                  <p class="hotspot-card-desc">VÃ¡stago templado y plato estampador que compacta la masa garantizando alta resistencia mecÃ¡nica.</p>
+                </div>
+              </div>
+
+              <!-- Hotspot 3: Matriz de Moldeo -->
+              <div class="model-hotspot hotspot-temple-right" data-component="matriz">
+                <button class="hotspot-trigger" aria-label="Ver Matriz de Moldeo">
+                  <span class="hotspot-pulse"></span>
+                  <span class="hotspot-dot"></span>
+                  <span class="hotspot-num">03</span>
+                </button>
+                <div class="hotspot-card">
+                  <div class="hotspot-card-badge">CÃMARA DE MOLDEO</div>
+                  <h5 class="hotspot-card-title">Matriz Modular con Machos</h5>
+                  <p class="hotspot-card-desc">CÃ¡mara de 240Ã—115Ã—65 mm con nÃºcleos dobles para encastre machihembrado de mÃ¡xima precisiÃ³n.</p>
+                </div>
+              </div>
+
+              <!-- Hotspot 4: Ladrillo EcolÃ³gico & Desmolde -->
+              <div class="model-hotspot hotspot-frame" data-component="ladrillo">
+                <button class="hotspot-trigger" aria-label="Ver Ladrillo Compactado">
+                  <span class="hotspot-pulse"></span>
+                  <span class="hotspot-dot"></span>
+                  <span class="hotspot-num">04</span>
+                </button>
+                <div class="hotspot-card">
+                  <div class="hotspot-card-badge">LADRILLO ECOLÃ“GICO</div>
+                  <h5 class="hotspot-card-title">Bandeja de Desmolde</h5>
+                  <p class="hotspot-card-desc">Sistema de expulsiÃ³n vertical que entrega el bloque terminado sin cocciÃ³n ni deformaciones superficiales.</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="stage-overlay-hud">
+              <span class="hud-pill">MOTOR 3D // CAD ISOMÃ‰TRICO THREE.JS</span>
+              <div class="hud-controls">
+                <button class="hud-btn" id="btn-3d-reset">Rotar 360Â°</button>
+                <button class="hud-btn" id="btn-3d-echo">Ciclo de Prensado</button>
+                <button class="hud-btn" id="btn-3d-temples">Vista IsomÃ©trica</button>
+                <a class="hud-btn" id="btn-3d-dwg" href="assets/maquina_ladrillos_isometrico.dwg" download="maquina_ladrillos_isometrico.dwg" style="text-decoration:none; display:inline-flex; align-items:center; gap:6px;">
+                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+                  <span>Plano DWG</span>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         SCENE 3: SIMULADOR DE AUTOMATIZACIÃ“N & CONTROL PLC
+         ====================================================================== -->
+    <section class="slide-scene" id="scene-simulator">
+      <div class="scene-inner">
+        <div style="margin-bottom: 24px;">
+          <div class="kicker-pill">
+            <span>SISTEMA DE CONTROL & AUTOMATIZACIÃ“N</span>
+          </div>
+          <h2 class="heading-section">
+            Simulador de ciclo de prensado & salidas PLC.
+          </h2>
+          <p class="lead-editorial" style="margin-bottom: 0;">
+            Controlador LÃ³gico Programable Siemens S7-200 (CPU 224) coordinando en tiempo real las 6 salidas electromecÃ¡nicas de la mÃ¡quina compactadora.
+          </p>
+        </div>
+
+        <div class="simulator-layout">
+          <!-- Control & Telemetry Panel -->
+          <div class="sim-control-panel">
+            <div>
+              <span style="font-family: var(--font-display); font-size: 0.84rem; font-weight: 800; color: var(--accent-coral); text-transform: uppercase;">
+                Modo de OperaciÃ³n
+              </span>
+              <div class="sim-mode-toggle">
+                <button class="mode-btn" id="mode-cane-btn">Modo Manual</button>
+                <button class="mode-btn active" id="mode-smartnav-btn">Modo AutomÃ¡tico PLC</button>
+              </div>
+
+              <div class="sim-metrics-box">
+                <div class="sim-metric-row">
+                  <span class="sim-metric-label">Salida Activa</span>
+                  <span class="sim-metric-val" id="sim-dist-val">Q2: Compactadora</span>
+                </div>
+                <div class="sim-metric-row">
+                  <span class="sim-metric-label">PresiÃ³n HidrÃ¡ulica</span>
+                  <span class="sim-metric-val" id="sim-haptic-val">180 Bar (10 Tn)</span>
+                </div>
+                <div class="sim-metric-row">
+                  <span class="sim-metric-label">Tiempo de Ciclo</span>
+                  <span class="sim-metric-val" id="sim-reaction-val">8.4s Continuo</span>
+                </div>
+              </div>
+            </div>
+
+            <!-- Listado de Salidas PLC (Q) -->
+            <div style="padding-top: 14px; border-top: 1px solid var(--border-subtle); font-size: 0.8rem; color: var(--text-secondary); line-height: 1.6;">
+              <strong style="color: var(--color-navy); display:block; margin-bottom: 6px;">AsignaciÃ³n de Salidas PLC S7-200:</strong>
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 6px; font-family: var(--font-mono); font-size: 0.74rem;">
+                <span style="background: rgba(46, 125, 71, 0.12); color: var(--accent-sage); padding: 2px 6px; border-radius: 4px;">Q1: SinfÃ­n Mezclador</span>
+                <span style="background: rgba(217, 83, 30, 0.12); color: var(--accent-terracotta); padding: 2px 6px; border-radius: 4px;">Q2: PistÃ³n Prensa</span>
+                <span style="background: rgba(29, 61, 111, 0.08); color: var(--color-navy); padding: 2px 6px; border-radius: 4px;">Q4: Compuerta Dosif.</span>
+                <span style="background: rgba(29, 61, 111, 0.08); color: var(--color-navy); padding: 2px 6px; border-radius: 4px;">Q5: Cinta Transp.</span>
+                <span style="background: rgba(217, 83, 30, 0.12); color: var(--accent-terracotta); padding: 2px 6px; border-radius: 4px; grid-column: span 2;">Q6: Ojo de Buey / Fin de Carrera</span>
+              </div>
+            </div>
+          </div>
+
+          <!-- Canvas 2D Radar Simulation -->
+          <div class="sim-canvas-container">
+            <span class="canvas-hint-pill">Ciclo de fabricaciÃ³n y compresiÃ³n de mezcla en tiempo real</span>
+            <canvas id="canvas-sim-2d"></canvas>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         SCENE 4: ARQUITECTURA & BENTO GRID
+         ====================================================================== -->
+    <section class="slide-scene" id="scene-architecture">
+      <div class="scene-inner">
+        <div>
+          <div class="kicker-pill kicker-coral">
+            <span>PROCESO SIMPLE, EFICAZ Y ACCESIBLE</span>
+          </div>
+          <h2 class="heading-section">
+            PlanificaciÃ³n tecnolÃ³gica & manufactura sustentable.
+          </h2>
+          <p class="lead-editorial" style="margin-bottom: 0;">
+            IngenierÃ­a de fabricaciÃ³n de bloques ecolÃ³gicos de tierra comprimida (BTC): del acopio y mezclado al curado natural sin cocciÃ³n ni emisiones contaminantes.
+          </p>
+        </div>
+
+        <div class="bento-grid">
+          <!-- Card 1: 5 Fases del Proceso -->
+          <div class="bento-card">
+            <div class="bento-top">
+              <div class="bento-icon-box">
+                <svg viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
+              </div>
+              <span class="action-pill" style="font-size: 0.72rem;">PROCESO INTEGRAL</span>
+            </div>
+            <div>
+              <div class="bento-stat-num">5<span class="bento-unit">Fases</span></div>
+              <h3 class="bento-title">FabricaciÃ³n en 5 Etapas</h3>
+              <p class="bento-desc">1. Mezcla homogÃ©nea de suelo y estabilizante Â· 2. Llenado por tolva Â· 3. CompactaciÃ³n hidrÃ¡ulica 10 Tn Â· 4. Desmolde vertical suave Â· 5. Curado al aire libre sin hornos.</p>
+            </div>
+          </div>
+
+          <!-- Card 2: Presupuesto Total -->
+          <div class="bento-card">
+            <div class="bento-top">
+              <div class="bento-icon-box">
+                <svg viewBox="0 0 24 24"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>
+              </div>
+              <span class="action-pill" style="font-size: 0.72rem;">PRESUPUESTO</span>
+            </div>
+            <div>
+              <div class="bento-stat-num">$2.02<span class="bento-unit">M</span></div>
+              <h3 class="bento-title">InversiÃ³n Total de Insumos</h3>
+              <p class="bento-desc">Costo total $2.023.600: PLC Siemens S7-200 ($380k), cilindro y central hidrÃ¡ulica ($520k), motorreductor 100 RPM ($290k), chasis IPN y sinfÃ­n SAE 1045.</p>
+            </div>
+          </div>
+
+          <!-- Card 3: Cronograma Gantt -->
+          <div class="bento-card">
+            <div class="bento-top">
+              <div class="bento-icon-box">
+                <svg viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
+              </div>
+              <span class="action-pill" style="font-size: 0.72rem;">GANTT EXPO 2026</span>
+            </div>
+            <div>
+              <div class="bento-stat-num">11<span class="bento-unit">Hitos</span></div>
+              <h3 class="bento-title">PlanificaciÃ³n TÃ©cnica</h3>
+              <p class="bento-desc">11 etapas estructuradas: desde la delimitaciÃ³n del problema y cÃ¡lculos estructurales, modelado 3D CAD, cableado PLC, hasta validaciÃ³n funcional final.</p>
+            </div>
+          </div>
+
+          <!-- Card 4: Bloques BTC Encastrables -->
+          <div class="bento-card">
+            <div class="bento-top">
+              <div class="bento-icon-box">
+                <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
+              </div>
+              <span class="action-pill" style="font-size: 0.72rem;">PRODUCTO BTC</span>
+            </div>
+            <div>
+              <div class="bento-stat-num">100<span class="bento-unit">%</span></div>
+              <h3 class="bento-title">EcolÃ³gico & Encastrable</h3>
+              <p class="bento-desc">Bloques modulares con orificios para ductos tÃ©cnicos y encastre machihembrado que reduce hasta 30% el consumo de mortero y acelera el montaje en obra.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ======================================================================
+         SCENE 5: VISIÃ“N 2.0 (QUIÃ‰NES SOMOS & ESTRUCTURA ORGANIZATIVA)
+         ====================================================================== -->
+    <section class="slide-scene" id="scene-vision">
+      <div class="scene-inner">
+        <div>
+          <div class="kicker-pill">
+            <span>QUIÃ‰NES SOMOS & ESTRUCTURA</span>
+          </div>
+          <h2 class="heading-section">
+            AutoBrick Technologies Â· BrickTech.
+          </h2>
+          <p class="lead-editorial" style="margin-bottom: 24px;">
+            Proyecto integral de PrÃ¡cticas Profesionalizantes del Curso 5Â° 1Â° â€” Escuela MerÃ­n (San Rafael, Mendoza). TecnologÃ­a limpia, eficiente y accesible para la construcciÃ³n sustentable.
+          </p>
+        </div>
+
+        <div class="vision-shell">
+          <!-- Left Column: RediseÃ±ado con alta presencia visual y equilibrio -->
+          <div class="vision-modules-panel">
+            <div class="modules-panel-header">
+              <div class="panel-kicker-tag">
+                <span class="status-dot-pulse"></span>
+                <span>DOSSIER INSTITUCIONAL</span>
+              </div>
+              <h3 class="panel-heading">Estructura & Trayectoria</h3>
+              <p class="panel-sub">Selecciona un apartado para conocer la historia, ubicaciÃ³n estratÃ©gica en San Rafael y el equipo de trabajo de 5Â° 1Â°.</p>
+            </div>
+
+            <!-- Tab Navigation con tarjetas robustas y de alto impacto visual -->
+            <div class="vision-tabs-nav" role="tablist" aria-label="Selector de informaciÃ³n institucional">
+              <button class="tab-btn active" data-tab="tab-historia" role="tab" aria-selected="true">
+                <div class="tab-card-indicator"></div>
+                <div class="tab-icon-wrap">
+                  <svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                </div>
+                <div class="tab-card-content">
+                  <div class="tab-card-meta">
+                    <span class="tab-mod-code">APARTADO 01</span>
+                    <span class="tab-status-chip chip-sage">ORÃGENES</span>
+                  </div>
+                  <div class="tab-btn-title">Historia del Proyecto</div>
+                  <div class="tab-btn-subtitle">De las ideas iniciales a la compactadora de ladrillos</div>
+                  <div class="tab-micro-chips">
+                    <span>Descarte de Cuna</span>
+                    <span>Foco Productivo</span>
+                  </div>
+                </div>
+                <div class="tab-card-arrow">
+                  <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+                </div>
+              </button>
+
+              <button class="tab-btn" data-tab="tab-ubicacion" role="tab" aria-selected="false">
+                <div class="tab-card-indicator"></div>
+                <div class="tab-icon-wrap">
+                  <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                </div>
+                <div class="tab-card-content">
+                  <div class="tab-card-meta">
+                    <span class="tab-mod-code">APARTADO 02</span>
+                    <span class="tab-status-chip chip-terracotta">SAN RAFAEL</span>
+                  </div>
+                  <div class="tab-btn-title">Parque Industrial</div>
+                  <div class="tab-btn-subtitle">UbicaciÃ³n estratÃ©gica en Cuadro Nacional, Mendoza</div>
+                  <div class="tab-micro-chips">
+                    <span>Polo Productivo</span>
+                    <span>LogÃ­stica Cuyo</span>
+                  </div>
+                </div>
+                <div class="tab-card-arrow">
+                  <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+                </div>
+              </button>
+
+              <button class="tab-btn" data-tab="tab-equipo" role="tab" aria-selected="false">
+                <div class="tab-card-indicator"></div>
+                <div class="tab-icon-wrap">
+                  <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                </div>
+                <div class="tab-card-content">
+                  <div class="tab-card-meta">
+                    <span class="tab-mod-code">APARTADO 03</span>
+                    <span class="tab-status-chip chip-navy">6 ÃREAS</span>
+                  </div>
+                  <div class="tab-btn-title">Organigrama & Equipo</div>
+                  <div class="tab-btn-subtitle">Estructura departamental y alumnos de 5Â° 1Â°</div>
+                  <div class="tab-micro-chips">
+                    <span>Escuela MerÃ­n</span>
+                    <span>Expo 2026</span>
+                  </div>
+                </div>
+                <div class="tab-card-arrow">
+                  <svg viewBox="0 0 24 24"><polyline points="9 18 15 12 9 6"/></svg>
+                </div>
+              </button>
+            </div>
+
+            <!-- Panel Footer Dock -->
+            <div class="modules-panel-dock">
+              <div class="dock-badge-row">
+                <span class="status-dot-pulse"></span>
+                <span class="dock-title">AUTOBRICK TECHNOLOGIES Â· BRICKTECH</span>
+              </div>
+              <p class="dock-note">PrÃ¡cticas Profesionalizantes del Curso 5Â° 1Â° â€” Escuela MerÃ­n. Maquinaria industrial de impacto sustentable.</p>
+            </div>
+          </div>
+
+          <!-- Tab Panes -->
+          <div class="vision-display-area">
+            <!-- Pane 1: Historia del Proyecto -->
+            <div class="tab-pane active" id="tab-historia">
+              <div>
+                <div class="pane-kicker">GÃ‰NESIS Y EVOLUCIÃ“N DEL PROYECTO</div>
+                <h3 class="pane-headline">De las primeras propuestas a la compactadora de ladrillos.</h3>
+                <p class="pane-text">
+                  En los inicios del ciclo lectivo de 5Â° 1Â°, nuestro equipo explorÃ³ alternativas como una "Cuna Inteligente" con mecedora automatizada y una compactadora de reciclaje. Sin embargo, al detectar el alto dÃ©ficit habitacional y el impacto ecolÃ³gico de los hornos tradicionales de leÃ±a, decidimos unÃ¡nimemente orientar nuestras capacidades tÃ©cnicas al diseÃ±o de una <strong>MÃ¡quina Compactadora de Ladrillos EcolÃ³gicos</strong>.
+                </p>
+                <ul class="pane-feature-list">
+                  <li class="pane-feature-item">
+                    <span class="pane-check-dot"></span>
+                    <span>ReorientaciÃ³n estratÃ©gica hacia la construcciÃ³n sostenible</span>
+                  </li>
+                  <li class="pane-feature-item">
+                    <span class="pane-check-dot"></span>
+                    <span>EliminaciÃ³n total de cocciÃ³n y emisiÃ³n de gases de efecto invernadero</span>
+                  </li>
+                  <li class="pane-feature-item">
+                    <span class="pane-check-dot"></span>
+                    <span>OptimizaciÃ³n de costos para autoconstrucciÃ³n comunitaria</span>
+                  </li>
+                  <li class="pane-feature-item">
+                    <span class="pane-check-dot"></span>
+                    <span>IntegraciÃ³n de automatizaciÃ³n industrial accesible (PLC Siemens)</span>
+                  </li>
+                </ul>
+              </div>
+              <div class="vision-cta-strip">
+                <span class="beta-disclaimer">Dossier Oficial Â· Escuela MerÃ­n Expo 2026</span>
+                <a href="assets/maquina_ladrillos_isometrico.dwg" download="maquina_ladrillos_isometrico.dwg" class="btn-primary" style="padding: 13px 26px; font-size: 0.9rem;">
+                  <span>Descargar Plano CAD (.DWG)</span>
+                  <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
+                </a>
+              </div>
+            </div>
+
+            <!-- Pane 2: UbicaciÃ³n Parque Industrial -->
+            <div class="tab-pane" id="tab-ubicacion">
+              <div>
+                <div class="pane-kicker">LOCALIZACIÃ“N ESTRATÃ‰GICA</div>
+                <h3 class="pane-headline">Parque Industrial de San Rafael Â· Cuadro Nacional.</h3>
+                <p class="pane-text">
+                  La sede operativa y productiva de AutoBrick Technologies se sitÃºa en el Parque Industrial de San Rafael, ubicado en el distrito de Cuadro Nacional, provincia de Mendoza. Esta localizaciÃ³n estratÃ©gica brinda acceso directo a las rutas provinciales y nacionales, facilitando el suministro de suelo arcilloso, arena seleccionada y la distribuciÃ³n de los bloques compactados a toda la regiÃ³n.
+                </p>
+                <ul class="pane-feature-list">
+                  <li class="pane-feature-item">
+                    <span class="pane-check-dot"></span>
+                    <span>Sede en Parque Industrial San Rafael (Cuadro Nacional)</span>
+                  </li>
+                  <li class="pane-feature-item">
+                    <span class="pane-check-dot"></span>
+                    <span>ConexiÃ³n logÃ­stica directa con corredores cuyanos</span>
+                  </li>
+                  <li class="pane-feature-item">
+                    <span class="pane-check-dot"></span>
+                    <span>CercanÃ­a a canteras de suelo y Ã¡ridos Ã³ptimos</span>
+                  </li>
+                  <li class="pane-feature-item">
+                    <span class="pane-check-dot"></span>
+                    <span>Infraestructura trifÃ¡sica adecuada para maquinaria industrial</span>
+                  </li>
+                </ul>
+              </div>
+              <div class="vision-cta-strip">
+                <span class="beta-disclaimer">Cuadro Nacional Â· San Rafael Â· Mendoza</span>
+                <a href="#scene-engineering" class="btn-primary" style="padding: 13px 26px; font-size: 0.9rem;">
+                  <span>Explorar MÃ¡quina 3D</span>
+                  <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </a>
+              </div>
+            </div>
+
+            <!-- Pane 3: Organigrama & Integrantes -->
+            <div class="tab-pane" id="tab-equipo">
+              <div>
+                <div class="pane-kicker">ORGANIGRAMA DEPARTAMENTAL & EQUIPO TÃ‰CNICO</div>
+                <h3 class="pane-headline">6 Departamentos funcionales Â· Alumnos de 5Â° 1Â°.</h3>
+                <p class="pane-text">
+                  Para llevar a cabo el proyecto, conformamos una estructura organizativa profesional de 6 departamentos especializados, garantizando rigurosidad en cada etapa del desarrollo tÃ©cnico y de gestiÃ³n:
+                </p>
+                <ul class="pane-feature-list">
+                  <li class="pane-feature-item">
+                    <span class="pane-check-dot"></span>
+                    <span><strong>Bruno Ruarte</strong> â€” DirecciÃ³n General & GestiÃ³n EstratÃ©gica</span>
+                  </li>
+                  <li class="pane-feature-item">
+                    <span class="pane-check-dot"></span>
+                    <span><strong>Francesco Conthe</strong> â€” DiseÃ±o MecÃ¡nico, Chasis & Modelado 3D CAD</span>
+                  </li>
+                  <li class="pane-feature-item">
+                    <span class="pane-check-dot"></span>
+                    <span><strong>Tiago Barroso</strong> â€” AutomatizaciÃ³n, Cableado & ProgramaciÃ³n PLC</span>
+                  </li>
+                  <li class="pane-feature-item">
+                    <span class="pane-check-dot"></span>
+                    <span><strong>Adam Abby</strong> â€” InvestigaciÃ³n y Desarrollo (I+D) & Ensayos de Suelo</span>
+                  </li>
+                  <li class="pane-feature-item">
+                    <span class="pane-check-dot"></span>
+                    <span><strong>Bruno Vuanello</strong> â€” AdministraciÃ³n, Finanzas & Presupuesto ($2.02M)</span>
+                  </li>
+                  <li class="pane-feature-item">
+                    <span class="pane-check-dot"></span>
+                    <span><strong>Derli Alossi</strong> â€” Mantenimiento ElectromecÃ¡nico & Seguridad Operativa</span>
+                  </li>
+                </ul>
+              </div>
+              <div class="vision-cta-strip">
+                <span class="beta-disclaimer">Curso 5Â° 1Â° Â· Escuela MerÃ­n Â· Expo 2026</span>
+                <a href="#scene-simulator" class="btn-primary" style="padding: 13px 26px; font-size: 0.9rem;">
+                  <span>Ver Control PLC</span>
+                  <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Social Media Dock en la Ãºltima diapositiva (Instagram, X, GitHub) -->
+        <footer class="scene-social-dock">
+          <div class="social-dock-label">AutoBrick Technologies Â· BrickTech Â· Redes Oficiales</div>
+          <div class="social-dock-links">
+            <a href="https://www.instagram.com/joaandress/" target="_blank" rel="noopener noreferrer" class="social-dock-item" aria-label="Instagram de SmartNav">
+              <svg viewBox="0 0 24 24"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+              <span>Instagram</span>
+              <span class="dock-handle">@bricktech.merin</span>
+            </a>
+            <a href="https://x.com/joaandress1" target="_blank" rel="noopener noreferrer" class="social-dock-item" aria-label="X (Twitter) de SmartNav">
+              <svg viewBox="0 0 24 24"><path d="M4 4l11.7 16h4.3L8.3 4z"/><path d="M4 20l6.8-7.2L4.5 4"/></svg>
+              <span>X (Twitter)</span>
+              <span class="dock-handle">@bricktech_ar</span>
+            </a>
+            <a href="https://github.com/Heisenberg-org" target="_blank" rel="noopener noreferrer" class="social-dock-item" aria-label="GitHub de Heisenberg Org">
+              <svg viewBox="0 0 24 24"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
+              <span>GitHub</span>
+              <span class="dock-handle">@bricktech-merin</span>
+            </a>
+          </div>
+        </footer>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- External Animation & 3D Libraries: GSAP + Three.js -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script>
+/**
+ * SMARTNAV // MAIN.JS
+ * High-Impact Interactive Controller (Awwwards Grade)
+ * Navy Blue & Warm Beige Luxury Color Palette
+ * 0. Cinematic Fullscreen Opening Eye Intro (A24 / Content Architecture Grade)
+ * 1. Contextual & Unique Transitions per Slide (GSAP Powered)
+ * 2. Three.js Procedural 3D Glasses Viewer (Navy Blue & Beige Titanium)
+ * 3. Canvas 2D Simulator: Navy Blue Walker + Beige Obstacle
+ * 4. Vision 2.0 Tab Transitions & Micro-Interactions
+ */
+
+document.addEventListener('DOMContentLoaded', () => {
+  initEyeIntroAnimation();
+  initContextualDeck();
+  initThreeJsViewer();
+  initSimulator2D();
+  initVisionTabs();
+});
+
+/* ==========================================================================
+   0. INTRO CINEMATOGRÃFICA EN PANTALLA COMPLETA: LADRILLO ISOMÃ‰TRICO & PRENSA
+   Inspirado en la MÃ¡quina Compactadora de Ladrillos y DiseÃ±o Editorial
+   ========================================================================== */
+function initEyeIntroAnimation() {
+  const introCurtain = document.getElementById('intro-eye-curtain');
+  if (!introCurtain) return;
+
+  const upperLid = document.getElementById('intro-upper-lid');
+  const lowerLid = document.getElementById('intro-lower-lid');
+  const grandIris = document.getElementById('intro-iris');
+  const grandPupil = document.getElementById('intro-pupil');
+  const grandPupilCenter = document.getElementById('intro-pupil-center');
+  const irisZoomCircle = document.getElementById('intro-iris-zoom-circle');
+  const introStage = document.getElementById('intro-eye-stage');
+  const introContainer = document.querySelector('.intro-container');
+  const skipBtn = document.getElementById('intro-skip-btn');
+  const lateralEyes = document.querySelectorAll('.nav-eye-item, .nav-brick-item');
+  const brickGroup = document.getElementById('intro-brick-group');
+  const lashFlyers = document.querySelectorAll('.intro-lash-flyer');
+
+  let hasEnded = false;
+
+  function endIntroImmediately() {
+    if (hasEnded) return;
+    hasEnded = true;
+    if (typeof gsap !== 'undefined') {
+      gsap.killTweensOf(['#intro-eye-curtain', '#intro-upper-lid', '#intro-lower-lid', '#intro-iris', '#intro-pupil', '#intro-iris-zoom-circle', '#intro-eye-stage', '#intro-brick-group', '.intro-container']);
+      gsap.to(introCurtain, {
+        opacity: 0,
+        duration: 0.45,
+        ease: 'power2.out',
+        onComplete: () => {
+          introCurtain.style.display = 'none';
+          triggerHeroReveal();
+        }
+      });
+      gsap.to(lateralEyes, { opacity: 1, x: 0, scale: 1, duration: 0.4, stagger: 0.05, ease: 'power2.out' });
+    } else {
+      introCurtain.style.display = 'none';
+      triggerHeroReveal();
+    }
+  }
+
+  if (skipBtn) {
+    skipBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      endIntroImmediately();
+    });
+  }
+
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !hasEnded) {
+      endIntroImmediately();
+    }
+  });
+
+  introCurtain.addEventListener('click', (e) => {
+    if (e.target !== skipBtn && !skipBtn?.contains(e.target)) {
+      endIntroImmediately();
+    }
+  });
+
+  if (typeof gsap === 'undefined') {
+    setTimeout(endIntroImmediately, 1200);
+    return;
+  }
+
+  // Posicionar selectores de ladrillos laterales inicialmente para apariciÃ³n limpia y sin duplicaciones
+  gsap.set(lateralEyes, { opacity: 0, x: -20, scale: 0.9 });
+
+  const introTimeline = gsap.timeline({
+    defaults: { ease: 'power3.out' },
+    onComplete: () => {
+      if (!hasEnded) {
+        hasEnded = true;
+        introCurtain.style.display = 'none';
+        triggerHeroReveal();
+      }
+    }
+  });
+
+  // 1. Entrada de Rayos de ProyecciÃ³n IsomÃ©trica y FormaciÃ³n del Ladrillo
+  if (brickGroup) {
+    gsap.set(brickGroup, { scale: 0.8, opacity: 0, transformOrigin: '270px 180px' });
+  }
+
+  introTimeline
+    .fromTo(lashFlyers, 
+      { strokeDashoffset: 40, opacity: 0 },
+      { strokeDashoffset: 0, opacity: 0.8, duration: 0.6, stagger: 0.08, ease: 'power2.out' },
+      0.1
+    )
+    // 2. Golpe de CompresiÃ³n MecÃ¡nica: El Ladrillo IsomÃ©trico se Materializa y Compacta
+    .to(brickGroup, {
+      scale: 1,
+      opacity: 1,
+      duration: 0.85,
+      ease: 'back.out(2.2)'
+    }, 0.25)
+    // SimulaciÃ³n de prensado y pulso de compactaciÃ³n
+    .to(brickGroup, {
+      scaleY: 0.94,
+      duration: 0.12,
+      ease: 'power2.in',
+      yoyo: true,
+      repeat: 1
+    }, 0.85)
+    // Destello de compactaciÃ³n central
+    .fromTo([grandIris, grandPupilCenter], 
+      { opacity: 0, scale: 0.4 }, 
+      { opacity: 0.8, scale: 1.4, duration: 0.4, ease: 'power2.out' }, 
+      0.88
+    )
+    // 3. TRANSICIÃ“N CINEMÃTICA: ZOOM SUAVE CREMA (#FAF7F2) QUE REVELA LA PÃGINA
+    .to(irisZoomCircle, {
+      scale: 130,
+      duration: 1.15,
+      ease: 'power4.inOut'
+    }, 1.05)
+    .to(introStage, {
+      scale: 2.8,
+      opacity: 0.1,
+      transformOrigin: '270px 180px',
+      duration: 0.95,
+      ease: 'power3.in'
+    }, 1.05)
+    .to(introContainer, {
+      opacity: 0,
+      duration: 0.6,
+      ease: 'power2.out'
+    }, 1.15)
+    .to(introCurtain, {
+      opacity: 0,
+      duration: 0.35,
+      ease: 'power2.out'
+    }, 1.85)
+    // 4. Entrada elegante del selector de ladrillos lateral
+    .to(lateralEyes, {
+      opacity: 1,
+      x: 0,
+      scale: 1,
+      duration: 0.6,
+      stagger: 0.08,
+      ease: 'back.out(1.4)'
+    }, 1.75);
+}
+
+function triggerHeroReveal() {
+  const hero = document.getElementById('scene-hero');
+  if (!hero || typeof gsap === 'undefined') return;
+  gsap.fromTo(hero.querySelectorAll('.kicker-pill, .heading-display, .lead-editorial, .hero-actions, .stat-item, .hero-telemetry-widget'), 
+    { opacity: 0, y: 35 },
+    { opacity: 1, y: 0, stagger: 0.08, duration: 1.0, ease: 'power3.out' }
+  );
+  initTelemetryLiveTicker();
+}
+
+/**
+ * Micro-animaciÃ³n de telemetrÃ­a en tiempo real para Diapositiva 1 (Hero)
+ */
+let telemetryInterval = null;
+function initTelemetryLiveTicker() {
+  if (telemetryInterval) clearInterval(telemetryInterval);
+  const latVal = document.getElementById('telemetry-lat-val');
+  const sparkBars = document.querySelectorAll('#telemetry-sparkline .spark-bar');
+
+  if (!latVal) return;
+
+  const latencies = ['3.4 ms', '3.2 ms', '3.6 ms', '3.3 ms', '3.7 ms', '3.1 ms', '3.5 ms'];
+  let idx = 0;
+
+  telemetryInterval = setInterval(() => {
+    idx = (idx + 1) % latencies.length;
+    latVal.textContent = latencies[idx];
+
+    if (sparkBars.length > 0) {
+      sparkBars.forEach(bar => {
+        const h = Math.floor(Math.random() * 45 + 40);
+        bar.style.height = `${h}%`;
+        bar.classList.remove('active');
+      });
+      const activeBar = sparkBars[Math.floor(Math.random() * sparkBars.length)];
+      if (activeBar) activeBar.classList.add('active');
+    }
+  }, 1600);
+}
+
+/* ==========================================================================
+   1. CONTEXTUAL SLIDE TRANSITION MANAGER
+   ========================================================================== */
+let currentSlideIndex = 0;
+let isTransitioning = false;
+
+function initContextualDeck() {
+  const scenes = document.querySelectorAll('.slide-scene');
+  const navEyes = document.querySelectorAll('.nav-eye-item, .nav-dot-item');
+  const advanceBtn = document.getElementById('advance-btn');
+  const progressFill = document.getElementById('progress-ring-fill');
+  const advanceCounter = document.getElementById('advance-counter');
+  const advanceIcon = document.getElementById('advance-icon');
+
+  if (scenes.length === 0) return;
+
+  const totalScenes = scenes.length;
+  const circumference = 2 * Math.PI * 26; // r = 26 in SVG
+
+  if (progressFill) {
+    progressFill.style.strokeDasharray = `${circumference}`;
+    progressFill.style.strokeDashoffset = `${circumference}`;
+  }
+
+  // Set initial slide active
+  scenes[0].classList.add('active');
+  if (typeof gsap !== 'undefined') {
+    gsap.set(scenes[0], { opacity: 1, scale: 1, y: 0, filter: 'blur(0px)', visibility: 'visible' });
+  }
+
+  // Router to specific contextual transition
+  window.goToSlide = function(targetIndex) {
+    if (isTransitioning || targetIndex === currentSlideIndex || targetIndex < 0 || targetIndex >= totalScenes) {
+      return;
+    }
+
+    isTransitioning = true;
+    const fromIndex = currentSlideIndex;
+    const outgoing = scenes[fromIndex];
+    const incoming = scenes[targetIndex];
+    currentSlideIndex = targetIndex;
+
+    // Update UI Indicators con animaciÃ³n de entrada y salida del ladrillo
+    navEyes.forEach((item, idx) => {
+      item.classList.remove('anim-entrance', 'anim-exit');
+      if (idx === targetIndex) {
+        item.classList.add('active');
+        item.classList.add('anim-entrance');
+      } else if (idx === fromIndex) {
+        item.classList.remove('active');
+        item.classList.add('anim-exit');
+      } else {
+        item.classList.remove('active');
+      }
+    });
+
+    // Limpiar clases transitorias de animaciÃ³n tras completar la transiciÃ³n
+    setTimeout(() => {
+      navEyes.forEach(item => item.classList.remove('anim-entrance', 'anim-exit'));
+    }, 600);
+
+    if (progressFill) {
+      const progress = targetIndex / (totalScenes - 1);
+      progressFill.style.strokeDashoffset = circumference - progress * circumference;
+    }
+
+    if (advanceCounter) {
+      advanceCounter.textContent = `0${targetIndex + 1} / 0${totalScenes}`;
+    }
+
+    if (advanceIcon) {
+      advanceIcon.style.transform = targetIndex === totalScenes - 1 ? 'rotate(180deg)' : 'rotate(0deg)';
+    }
+
+    // DISPATCH UNIQUE CONTEXTUAL TRANSITION
+    if (fromIndex === 0 && targetIndex === 1) {
+      transitionHeroTo3D(outgoing, incoming);
+    } else if (fromIndex === 1 && targetIndex === 2) {
+      transition3DToSimulator(outgoing, incoming);
+    } else if (fromIndex === 2 && targetIndex === 3) {
+      transitionSimulatorToBento(outgoing, incoming);
+    } else if (fromIndex === 3 && targetIndex === 4) {
+      transitionBentoToVision(outgoing, incoming);
+    } else {
+      // General or Reverse Contextual Fallback Transition
+      transitionGeneral(outgoing, incoming, targetIndex > fromIndex ? 1 : -1);
+    }
+  };
+
+  /* ------------------------------------------------------------------------
+     TRANSICIÃ“N 1: De Diapositiva 1 (Hero) a Diapositiva 2 (Render 3D)
+     Onda de radar expansiva que cubre la pantalla y revela el 3D
+     ------------------------------------------------------------------------ */
+  function transitionHeroTo3D(outgoing, incoming) {
+    const layer = document.getElementById('trans-radar-scan');
+    const disc = document.querySelector('.trans-radar-disc');
+    const wave = document.querySelector('.trans-radar-wave-ring');
+
+    if (!layer || typeof gsap === 'undefined') {
+      transitionGeneral(outgoing, incoming, 1);
+      return;
+    }
+
+    const tl = gsap.timeline({
+      onComplete: () => {
+        outgoing.classList.remove('active');
+        incoming.classList.add('active');
+        isTransitioning = false;
+      }
+    });
+
+    tl.set(layer, { visibility: 'visible', opacity: 1 })
+      .set(disc, { scale: 0, opacity: 0.95 })
+      .set(wave, { scale: 0, opacity: 1 })
+      // Onda radar expansiva desde el Hero
+      .to(disc, { scale: 1.6, duration: 0.65, ease: 'power2.inOut' }, 0)
+      .to(wave, { scale: 1.9, opacity: 0, duration: 0.8, ease: 'power2.out' }, 0.05)
+      .to(outgoing, { opacity: 0, scale: 0.94, filter: 'blur(12px)', duration: 0.45, ease: 'power2.in' }, 0)
+      // Cambio en el Ã¡pice de la onda
+      .add(() => {
+        outgoing.style.visibility = 'hidden';
+        incoming.style.visibility = 'visible';
+      }, 0.5)
+      // Revelado del modelo 3D y especificaciones
+      .fromTo(incoming, {
+        opacity: 0,
+        scale: 1.06,
+        filter: 'blur(14px)'
+      }, {
+        opacity: 1,
+        scale: 1,
+        filter: 'blur(0px)',
+        duration: 0.65,
+        ease: 'power3.out'
+      }, 0.5)
+      // DisoluciÃ³n suave del radar
+      .to(layer, {
+        opacity: 0,
+        duration: 0.35,
+        ease: 'power1.out',
+        onComplete: () => { layer.style.visibility = 'hidden'; }
+      }, 0.65)
+      .from(incoming.querySelectorAll('.spec-card, .viewer-3d-stage, .kicker-pill, .heading-section, .lead-editorial'), {
+        y: 20,
+        opacity: 0,
+        stagger: 0.06,
+        duration: 0.6,
+        ease: 'power2.out'
+      }, 0.6);
+  }
+
+  /* ------------------------------------------------------------------------
+     TRANSICIÃ“N 2: De Diapositiva 2 (Render 3D) a Diapositiva 3 (Simulador)
+     CompresiÃ³n horizontal en haz de luz y apertura de cortina deslizante
+     ------------------------------------------------------------------------ */
+  function transition3DToSimulator(outgoing, incoming) {
+    const layer = document.getElementById('trans-beam-shutter');
+    const beam = document.querySelector('.trans-light-beam');
+    const curtainL = document.querySelector('.trans-slit-curtain-left');
+    const curtainR = document.querySelector('.trans-slit-curtain-right');
+
+    if (!layer || typeof gsap === 'undefined') {
+      transitionGeneral(outgoing, incoming, 1);
+      return;
+    }
+
+    const tl = gsap.timeline({
+      onComplete: () => {
+        outgoing.classList.remove('active');
+        incoming.classList.add('active');
+        isTransitioning = false;
+      }
+    });
+
+    tl.set(layer, { visibility: 'visible', opacity: 1 })
+      .set(beam, { opacity: 0, scaleY: 0, scaleX: 1 })
+      .set(curtainL, { x: 0 })
+      .set(curtainR, { x: 0 })
+      // 1. El 3D se comprime horizontalmente hacia el centro
+      .to(outgoing, {
+        scaleX: 0.02,
+        opacity: 0.5,
+        filter: 'blur(8px)',
+        duration: 0.45,
+        ease: 'power3.in'
+      }, 0)
+      // 2. Aparece el haz de luz vertical brillante en el centro
+      .to(beam, {
+        opacity: 1,
+        scaleY: 1.2,
+        duration: 0.35,
+        ease: 'expo.out'
+      }, 0.35)
+      // 3. Switch de diapositivas detrÃ¡s del haz
+      .add(() => {
+        outgoing.style.visibility = 'hidden';
+        incoming.style.visibility = 'visible';
+      }, 0.48)
+      // 4. El haz se ensancha y el telÃ³n/persiana se abre hacia los costados
+      .to(beam, {
+        scaleX: 60,
+        opacity: 0,
+        duration: 0.45,
+        ease: 'power2.inOut'
+      }, 0.5)
+      .to(curtainL, { x: '-100%', duration: 0.55, ease: 'power3.inOut' }, 0.5)
+      .to(curtainR, { x: '100%', duration: 0.55, ease: 'power3.inOut' }, 0.5)
+      .fromTo(incoming, {
+        opacity: 0,
+        scale: 0.96
+      }, {
+        opacity: 1,
+        scale: 1,
+        duration: 0.6,
+        ease: 'power2.out'
+      }, 0.52)
+      .to(layer, {
+        opacity: 0,
+        duration: 0.2,
+        onComplete: () => { layer.style.visibility = 'hidden'; }
+      }, 0.9);
+  }
+
+  /* ------------------------------------------------------------------------
+     TRANSICIÃ“N 3: De Diapositiva 3 (Simulador) a Diapositiva 4 (Bento Grid)
+     El obstÃ¡culo amarillo vibra, estalla en partÃ­culas y ensambla el Bento Grid
+     ------------------------------------------------------------------------ */
+  function transitionSimulatorToBento(outgoing, incoming) {
+    const burstContainer = document.getElementById('trans-particle-burst');
+    const simCanvas = document.getElementById('canvas-sim-2d');
+
+    if (!burstContainer || typeof gsap === 'undefined') {
+      transitionGeneral(outgoing, incoming, 1);
+      return;
+    }
+
+    // Calcular la posiciÃ³n del obstÃ¡culo amarillo en pantalla
+    let originX = window.innerWidth * 0.72;
+    let originY = window.innerHeight * 0.5;
+
+    if (simCanvas) {
+      const rect = simCanvas.getBoundingClientRect();
+      originX = rect.left + 330;
+      originY = rect.top + rect.height / 2;
+    }
+
+    // Crear partÃ­culas dinÃ¡micas luminosas (Caviar & Cream)
+    burstContainer.innerHTML = '';
+    const particleCount = 32;
+    const particles = [];
+    const luxuryColors = ['#181818', '#DCCFC2', '#A4A09A', '#333333'];
+
+    for (let i = 0; i < particleCount; i++) {
+      const p = document.createElement('div');
+      p.className = 'burst-particle';
+      const size = Math.random() * 12 + 6;
+      p.style.width = `${size}px`;
+      p.style.height = `${size}px`;
+      p.style.left = `${originX}px`;
+      p.style.top = `${originY}px`;
+      const color = luxuryColors[i % luxuryColors.length];
+      p.style.background = color;
+      p.style.boxShadow = `0 0 16px ${color === '#181818' ? 'rgba(24, 24, 24, 0.4)' : 'rgba(220, 207, 194, 0.85)'}`;
+      burstContainer.appendChild(p);
+      particles.push(p);
+    }
+
+    const bentoCards = incoming.querySelectorAll('.bento-card');
+
+    const tl = gsap.timeline({
+      onComplete: () => {
+        outgoing.classList.remove('active');
+        incoming.classList.add('active');
+        burstContainer.innerHTML = '';
+        burstContainer.style.visibility = 'hidden';
+        isTransitioning = false;
+      }
+    });
+
+    tl.set(burstContainer, { visibility: 'visible', opacity: 1 })
+      // 1. El simulador hace flash hacia atrÃ¡s
+      .to(outgoing, {
+        scale: 0.94,
+        opacity: 0,
+        filter: 'blur(10px)',
+        duration: 0.4,
+        ease: 'power2.in'
+      }, 0)
+      // 2. Las partÃ­culas amarillas y terracota explotan hacia las 4 esquinas de la pantalla
+      .to(particles, {
+        x: () => (Math.random() - 0.5) * window.innerWidth * 0.85,
+        y: () => (Math.random() - 0.5) * window.innerHeight * 0.75,
+        scale: () => Math.random() * 2 + 1,
+        duration: 0.55,
+        stagger: 0.01,
+        ease: 'power3.out'
+      }, 0.1)
+      .add(() => {
+        outgoing.style.visibility = 'hidden';
+        incoming.style.visibility = 'visible';
+      }, 0.4)
+      // 3. Las 4 tarjetas del Bento Grid se ordenan y aparecen volando desde las partÃ­culas
+      .fromTo(incoming, {
+        opacity: 0
+      }, {
+        opacity: 1,
+        duration: 0.5
+      }, 0.45)
+      .fromTo(bentoCards, {
+        scale: 0.82,
+        y: 40,
+        opacity: 0,
+        filter: 'blur(8px)'
+      }, {
+        scale: 1,
+        y: 0,
+        opacity: 1,
+        filter: 'blur(0px)',
+        stagger: 0.08,
+        duration: 0.65,
+        ease: 'power3.out'
+      }, 0.48)
+      // 4. Las partÃ­culas se disuelven suavemente
+      .to(particles, {
+        opacity: 0,
+        scale: 0.2,
+        duration: 0.35,
+        ease: 'power1.out'
+      }, 0.6);
+  }
+
+  /* ------------------------------------------------------------------------
+     TRANSICIÃ“N 4: De Diapositiva 4 (Bento Grid) a Diapositiva 5 (VisiÃ³n 2.0)
+     Desenfoque progresivo de profundidad y cortina ascendente verde salvia
+     ------------------------------------------------------------------------ */
+  function transitionBentoToVision(outgoing, incoming) {
+    const layer = document.getElementById('trans-sage-curtain');
+    const sheet = document.querySelector('.sage-curtain-sheet');
+    const bentoCards = outgoing.querySelectorAll('.bento-card');
+
+    if (!layer || typeof gsap === 'undefined') {
+      transitionGeneral(outgoing, incoming, 1);
+      return;
+    }
+
+    const tl = gsap.timeline({
+      onComplete: () => {
+        outgoing.classList.remove('active');
+        incoming.classList.add('active');
+        isTransitioning = false;
+      }
+    });
+
+    tl.set(layer, { visibility: 'visible', opacity: 1 })
+      .set(sheet, { y: '100%' })
+      // 1. Las tarjetas del Bento Grid se deslizan hacia el fondo con desenfoque de profundidad
+      .to(bentoCards, {
+        scale: 0.85,
+        y: -30,
+        opacity: 0,
+        filter: 'blur(14px)',
+        stagger: 0.04,
+        duration: 0.45,
+        ease: 'power2.in'
+      }, 0)
+      .to(outgoing, { opacity: 0, duration: 0.4 }, 0.1)
+      // 2. La cortina verde salvia asciende como un velo luminoso desde abajo
+      .to(sheet, {
+        y: '0%',
+        duration: 0.55,
+        ease: 'power3.inOut'
+      }, 0.15)
+      .add(() => {
+        outgoing.style.visibility = 'hidden';
+        incoming.style.visibility = 'visible';
+      }, 0.5)
+      // 3. La cortina sigue subiendo hacia arriba, revelando VisiÃ³n 2.0
+      .to(sheet, {
+        y: '-100%',
+        duration: 0.55,
+        ease: 'power3.inOut'
+      }, 0.5)
+      .fromTo(incoming, {
+        opacity: 0,
+        y: 35,
+        filter: 'blur(8px)'
+      }, {
+        opacity: 1,
+        y: 0,
+        filter: 'blur(0px)',
+        duration: 0.6,
+        ease: 'power3.out'
+      }, 0.55)
+      .from(incoming.querySelectorAll('.tab-btn, .vision-display-area'), {
+        y: 20,
+        opacity: 0,
+        stagger: 0.06,
+        duration: 0.5,
+        ease: 'power2.out'
+      }, 0.6)
+      .to(layer, {
+        opacity: 0,
+        duration: 0.2,
+        onComplete: () => { layer.style.visibility = 'hidden'; }
+      }, 0.9);
+  }
+
+  /* ------------------------------------------------------------------------
+     TRANSICIÃ“N GENERAL / INVERSA CONTEXTUAL
+     ------------------------------------------------------------------------ */
+  function transitionGeneral(outgoing, incoming, direction) {
+    if (typeof gsap !== 'undefined') {
+      const tl = gsap.timeline({
+        onComplete: () => {
+          outgoing.classList.remove('active');
+          incoming.classList.add('active');
+          isTransitioning = false;
+        }
+      });
+
+      tl.to(outgoing, {
+        y: direction > 0 ? -40 : 40,
+        scale: 0.94,
+        opacity: 0,
+        filter: 'blur(12px)',
+        duration: 0.4,
+        ease: 'power2.in'
+      }, 0)
+      .add(() => {
+        outgoing.style.visibility = 'hidden';
+        incoming.style.visibility = 'visible';
+      }, 0.38)
+      .fromTo(incoming, {
+        y: direction > 0 ? 40 : -40,
+        scale: 1.05,
+        opacity: 0,
+        filter: 'blur(12px)'
+      }, {
+        y: 0,
+        scale: 1,
+        opacity: 1,
+        filter: 'blur(0px)',
+        duration: 0.55,
+        ease: 'power3.out'
+      }, 0.38);
+    } else {
+      outgoing.classList.remove('active');
+      outgoing.style.visibility = 'hidden';
+      incoming.classList.add('active');
+      incoming.style.visibility = 'visible';
+      incoming.style.opacity = '1';
+      isTransitioning = false;
+    }
+  }
+
+  // Handle Lateral Eye Navigation Clicks
+  navEyes.forEach((eyeItem, index) => {
+    eyeItem.addEventListener('click', () => {
+      window.goToSlide(index);
+    });
+  });
+
+  // Handle Advance Floating Button Click
+  if (advanceBtn) {
+    advanceBtn.addEventListener('click', () => {
+      const nextIndex = (currentSlideIndex + 1) % totalScenes;
+      window.goToSlide(nextIndex);
+    });
+  }
+
+  // Links in Hero
+  document.querySelectorAll('a[href^="#scene-"]').forEach(anchor => {
+    anchor.addEventListener('click', (e) => {
+      e.preventDefault();
+      const href = anchor.getAttribute('href');
+      let targetIdx = 0;
+      if (href === '#scene-hero') targetIdx = 0;
+      else if (href === '#scene-engineering') targetIdx = 1;
+      else if (href === '#scene-simulator') targetIdx = 2;
+      else if (href === '#scene-architecture') targetIdx = 3;
+      else if (href === '#scene-vision') targetIdx = 4;
+      window.goToSlide(targetIdx);
+    });
+  });
+
+  // Mouse Wheel Navigation
+  // Checks if the event target is inside a scrollable element that still has
+  // scroll room â€” if so, let native scroll handle it instead of switching slides.
+  function isInsideScrollable(target) {
+    let el = target;
+    while (el && el !== document.body) {
+      const style = window.getComputedStyle(el);
+      const ov = style.overflow + ' ' + style.overflowY;
+      if (/auto|scroll/.test(ov)) {
+        const canScrollDown = el.scrollHeight > el.clientHeight + 1;
+        if (canScrollDown) return el;
+      }
+      el = el.parentElement;
+    }
+    return null;
+  }
+
+  let wheelCooldown = false;
+  window.addEventListener('wheel', (e) => {
+    if (window.innerWidth <= 860) return;
+
+    // If we're scrolling inside the active scene itself, check if the scene
+    // still has room to scroll natively â€” only then block the event.
+    const activeScene = scenes[currentSlideIndex];
+    const scrollableEl = isInsideScrollable(e.target);
+
+    if (scrollableEl) {
+      const scrollingDown = e.deltaY > 0;
+      const scrollingUp  = e.deltaY < 0;
+      const atBottom = scrollableEl.scrollTop + scrollableEl.clientHeight >= scrollableEl.scrollHeight - 2;
+      const atTop    = scrollableEl.scrollTop <= 1;
+
+      // Let native scroll run unless we've hit the boundary
+      if (scrollingDown && !atBottom) return;
+      if (scrollingUp  && !atTop)    return;
+    }
+
+    e.preventDefault();
+    if (wheelCooldown || isTransitioning) return;
+    if (Math.abs(e.deltaY) < 25) return;
+
+    wheelCooldown = true;
+    setTimeout(() => { wheelCooldown = false; }, 950);
+
+    if (e.deltaY > 0 && currentSlideIndex < totalScenes - 1) {
+      window.goToSlide(currentSlideIndex + 1);
+    } else if (e.deltaY < 0 && currentSlideIndex > 0) {
+      window.goToSlide(currentSlideIndex - 1);
+    }
+  }, { passive: false });
+
+  // Keyboard Navigation
+  window.addEventListener('keydown', (e) => {
+    if (isTransitioning) return;
+    if (e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' ') {
+      e.preventDefault();
+      if (currentSlideIndex < totalScenes - 1) window.goToSlide(currentSlideIndex + 1);
+    } else if (e.key === 'ArrowUp' || e.key === 'PageUp') {
+      e.preventDefault();
+      if (currentSlideIndex > 0) window.goToSlide(currentSlideIndex - 1);
+    }
+  });
+
+  // Touch Swipe
+  let touchStartY = 0;
+  let touchStartX = 0;
+  window.addEventListener('touchstart', (e) => {
+    if (e.touches.length === 1) {
+      touchStartY = e.touches[0].clientY;
+      touchStartX = e.touches[0].clientX;
+    }
+  }, { passive: true });
+
+  window.addEventListener('touchend', (e) => {
+    if (window.innerWidth <= 860 || isTransitioning) return;
+    const diff = touchStartY - e.changedTouches[0].clientY;
+    const diffX = Math.abs(touchStartX - e.changedTouches[0].clientX);
+    // Ignore horizontal swipes and small vertical movements
+    if (Math.abs(diff) < 50 || diffX > Math.abs(diff)) return;
+
+    // Check if the touch target is inside a scrollable element that still has room
+    const scrollableEl = isInsideScrollable(e.target);
+    if (scrollableEl) {
+      const atBottom = scrollableEl.scrollTop + scrollableEl.clientHeight >= scrollableEl.scrollHeight - 2;
+      const atTop    = scrollableEl.scrollTop <= 1;
+      if (diff > 0 && !atBottom) return;
+      if (diff < 0 && !atTop)    return;
+    }
+
+    if (diff > 0 && currentSlideIndex < totalScenes - 1) {
+      window.goToSlide(currentSlideIndex + 1);
+    } else if (diff < 0 && currentSlideIndex > 0) {
+      window.goToSlide(currentSlideIndex - 1);
+    }
+  }, { passive: true });
+}
+
+/* ==========================================================================
+   2. THREE.JS 3D: MÃQUINA COMPACTADORA DE LADRILLOS EN VISTA ISOMÃ‰TRICA
+   Modelo tÃ©cnico interactivo con chasis de acero, tolva, pistÃ³n y ladrillo ecolÃ³gico
+   ========================================================================== */
+function initThreeJsViewer() {
+  const container = document.getElementById('canvas-3d-glasses');
+  if (!container) return;
+
+  if (typeof THREE === 'undefined') {
+    renderCanvas3DFallback(container);
+    return;
+  }
+
+  const width = container.clientWidth || 600;
+  const height = container.clientHeight || 500;
+
+  const scene = new THREE.Scene();
+  scene.background = new THREE.Color(0xE6D7C4); // Beige CÃ¡lido (#E6D7C4)
+
+  const camera = new THREE.PerspectiveCamera(38, width / height, 0.1, 100);
+  camera.position.set(3.2, 2.6, 3.2);
+
+  const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+  renderer.setSize(width, height);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.shadowMap.enabled = true;
+  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+  container.appendChild(renderer.domElement);
+
+  // IluminaciÃ³n de Estudio Industrial (Navy & Warm Beige)
+  const ambientLight = new THREE.AmbientLight(0xFFFFFF, 1.35);
+  scene.add(ambientLight);
+
+  const dirLight1 = new THREE.DirectionalLight(0xF4ECE1, 1.6);
+  dirLight1.position.set(5, 7, 5);
+  dirLight1.castShadow = true;
+  dirLight1.shadow.mapSize.width = 1024;
+  dirLight1.shadow.mapSize.height = 1024;
+  scene.add(dirLight1);
+
+  const dirLight2 = new THREE.DirectionalLight(0xD5C4AD, 0.9);
+  dirLight2.position.set(-5, -2, -3);
+  scene.add(dirLight2);
+
+  const dirLight3 = new THREE.DirectionalLight(0x212842, 0.5);
+  dirLight3.position.set(2, -4, 4);
+  scene.add(dirLight3);
+
+  // Grupo Principal de la MÃ¡quina Compactadora
+  const machineGroup = new THREE.Group();
+  scene.add(machineGroup);
+  // Alias para mantener compatibilidad total con referencias internas
+  const glassesGroup = machineGroup;
+
+  // Materiales Industriales PBR (Paleta Navy Blue, Beige Titanio y Terracota)
+  const steelDarkMat = new THREE.MeshStandardMaterial({
+    color: 0x212842, // Acero Industrial Navy Blue
+    roughness: 0.28,
+    metalness: 0.85
+  });
+
+  const steelBrightMat = new THREE.MeshStandardMaterial({
+    color: 0xD5C4AD, // Columnas en Beige Titanio
+    roughness: 0.22,
+    metalness: 0.92
+  });
+
+  const chromeMat = new THREE.MeshStandardMaterial({
+    color: 0xF5F2EA, // VÃ¡stago de pistÃ³n cromado espejo
+    roughness: 0.08,
+    metalness: 0.98
+  });
+
+  const terracottaMat = new THREE.MeshStandardMaterial({
+    color: 0xD4622C, // Arcilla de Ladrillo Terracota (Imagen de referencia)
+    roughness: 0.85,
+    metalness: 0.04
+  });
+
+  const terracottaHoleMat = new THREE.MeshStandardMaterial({
+    color: 0x9E3B13, // Sombra interior orificios ladrillo
+    roughness: 0.9,
+    metalness: 0.02
+  });
+
+  const brassMat = new THREE.MeshStandardMaterial({
+    color: 0xC88A32, // ManÃ³metro y acoples de bronce
+    roughness: 0.25,
+    metalness: 0.88
+  });
+
+  const rubberHoseMat = new THREE.MeshStandardMaterial({
+    color: 0x161C2E,
+    roughness: 0.65,
+    metalness: 0.15
+  });
+
+  /* ------------------------------------------------------------------------
+     1. BASE Y ESTRUCTURA DE ANCLAJE INDUSTRIAL
+     ------------------------------------------------------------------------ */
+  // Placa base estructural
+  const baseGeo = new THREE.BoxGeometry(2.1, 0.12, 1.5);
+  const baseMesh = new THREE.Mesh(baseGeo, steelDarkMat);
+  baseMesh.position.set(0, -1.05, 0);
+  baseMesh.receiveShadow = true;
+  machineGroup.add(baseMesh);
+
+  // Zapatas y pernos de fijaciÃ³n en las 4 esquinas
+  const footingOffsets = [
+    [-0.92, -0.62], [0.92, -0.62],
+    [-0.92, 0.62], [0.92, 0.62]
+  ];
+  footingOffsets.forEach(([fx, fz]) => {
+    const footGeo = new THREE.BoxGeometry(0.24, 0.06, 0.24);
+    const footMesh = new THREE.Mesh(footGeo, steelBrightMat);
+    footMesh.position.set(fx, -0.96, fz);
+    machineGroup.add(footMesh);
+
+    const boltGeo = new THREE.CylinderGeometry(0.025, 0.025, 0.06, 12);
+    const boltMesh = new THREE.Mesh(boltGeo, chromeMat);
+    boltMesh.position.set(fx, -0.9, fz);
+    machineGroup.add(boltMesh);
+  });
+
+  /* ------------------------------------------------------------------------
+     2. CUATRO COLUMNAS GUÃA REFORZADAS (Acero Templado IsomÃ©trico)
+     ------------------------------------------------------------------------ */
+  const colGeo = new THREE.CylinderGeometry(0.048, 0.048, 2.5, 24);
+  const colOffsets = [
+    [-0.72, -0.44], [0.72, -0.44],
+    [-0.72, 0.44], [0.72, 0.44]
+  ];
+  colOffsets.forEach(([cx, cz]) => {
+    const colMesh = new THREE.Mesh(colGeo, steelBrightMat);
+    colMesh.position.set(cx, 0.2, cz);
+    colMesh.castShadow = true;
+    machineGroup.add(colMesh);
+  });
+
+  /* ------------------------------------------------------------------------
+     3. CORONA SUPERIOR & CHIP DE COMPRESIÃ“N
+     ------------------------------------------------------------------------ */
+  const topCrownGeo = new THREE.BoxGeometry(1.68, 0.2, 1.12);
+  const topCrownMesh = new THREE.Mesh(topCrownGeo, steelDarkMat);
+  topCrownMesh.position.set(0, 1.45, 0);
+  topCrownMesh.castShadow = true;
+  machineGroup.add(topCrownMesh);
+
+  // Placa central de refuerzo de cilindro
+  const cylMountGeo = new THREE.CylinderGeometry(0.32, 0.32, 0.08, 28);
+  const cylMount = new THREE.Mesh(cylMountGeo, steelBrightMat);
+  cylMount.position.set(0, 1.58, 0);
+  machineGroup.add(cylMount);
+
+  /* ------------------------------------------------------------------------
+     4. CILINDRO HIDRÃULICO DE ALTA PRESIÃ“N Y PISTÃ“N DESLIZANTE
+     ------------------------------------------------------------------------ */
+  // Cilindro hidrÃ¡ulico superior
+  const cylBodyGeo = new THREE.CylinderGeometry(0.2, 0.2, 0.75, 32);
+  const cylBody = new THREE.Mesh(cylBodyGeo, steelDarkMat);
+  cylBody.position.set(0, 1.98, 0);
+  cylBody.castShadow = true;
+  machineGroup.add(cylBody);
+
+  // Tapa superior del cilindro con vÃ¡lvula
+  const cylCapGeo = new THREE.CylinderGeometry(0.22, 0.22, 0.08, 32);
+  const cylCap = new THREE.Mesh(cylCapGeo, brassMat);
+  cylCap.position.set(0, 2.38, 0);
+  machineGroup.add(cylCap);
+
+  // Grupo mÃ³vil del prensador (se desplaza durante el ciclo de compactaciÃ³n)
+  const presserGroup = new THREE.Group();
+  machineGroup.add(presserGroup);
+
+  // VÃ¡stago de pistÃ³n cromado
+  const pistonRodGeo = new THREE.CylinderGeometry(0.09, 0.09, 0.95, 28);
+  const pistonRod = new THREE.Mesh(pistonRodGeo, chromeMat);
+  pistonRod.position.set(0, 1.1, 0);
+  presserGroup.add(pistonRod);
+
+  // Plato compactador / estampador superior
+  const ramPlateGeo = new THREE.BoxGeometry(1.15, 0.18, 0.76);
+  const ramPlate = new THREE.Mesh(ramPlateGeo, steelDarkMat);
+  ramPlate.position.set(0, 0.65, 0);
+  ramPlate.castShadow = true;
+  presserGroup.add(ramPlate);
+
+  // Machos superiores de compresiÃ³n que entran al molde
+  const stampHeadGeo = new THREE.BoxGeometry(1.05, 0.12, 0.68);
+  const stampHead = new THREE.Mesh(stampHeadGeo, steelBrightMat);
+  stampHead.position.set(0, 0.5, 0);
+  presserGroup.add(stampHead);
+
+  // Bujes de guÃ­a en las 4 esquinas del plato
+  colOffsets.forEach(([cx, cz]) => {
+    const bushingGeo = new THREE.CylinderGeometry(0.075, 0.075, 0.22, 18);
+    const bushing = new THREE.Mesh(bushingGeo, brassMat);
+    bushing.position.set(cx, 0.65, cz);
+    presserGroup.add(bushing);
+  });
+
+  /* ------------------------------------------------------------------------
+     5. CÃMARA DE MOLDEO / MATRIZ DE LADRILLO MODULAR
+     ------------------------------------------------------------------------ */
+  const moldBoxGeo = new THREE.BoxGeometry(1.28, 0.58, 0.88);
+  const moldBox = new THREE.Mesh(moldBoxGeo, steelDarkMat);
+  moldBox.position.set(0, -0.15, 0);
+  moldBox.castShadow = true;
+  machineGroup.add(moldBox);
+
+  // Marco de la matriz
+  const moldFrameGeo = new THREE.BoxGeometry(1.36, 0.08, 0.96);
+  const moldFrame = new THREE.Mesh(moldFrameGeo, steelBrightMat);
+  moldFrame.position.set(0, 0.14, 0);
+  machineGroup.add(moldFrame);
+
+  // Machos cilÃ­ndricos interiores del molde (para agujeros del ladrillo ecolÃ³gico)
+  const core1Geo = new THREE.CylinderGeometry(0.07, 0.07, 0.52, 20);
+  const core1 = new THREE.Mesh(core1Geo, chromeMat);
+  core1.position.set(-0.22, -0.15, 0);
+  machineGroup.add(core1);
+
+  const core2 = new THREE.Mesh(core1Geo, chromeMat);
+  core2.position.set(0.22, -0.15, 0);
+  machineGroup.add(core2);
+
+  /* ------------------------------------------------------------------------
+     6. TOLVA DE ALIMENTACIÃ“N SUPERIOR (Hopper de mezcla ecolÃ³gica)
+     ------------------------------------------------------------------------ */
+  // Tolva troncocÃ³nica invertida montada en la parte superior trasera
+  const hopperGeo = new THREE.CylinderGeometry(0.5, 0.26, 0.58, 4);
+  hopperGeo.rotateY(Math.PI / 4);
+  const hopperMesh = new THREE.Mesh(hopperGeo, steelDarkMat);
+  hopperMesh.position.set(0, 0.52, -0.62);
+  hopperMesh.castShadow = true;
+  machineGroup.add(hopperMesh);
+
+  // Borde superior reforzado de la tolva
+  const hopperRimGeo = new THREE.BoxGeometry(0.74, 0.06, 0.74);
+  const hopperRim = new THREE.Mesh(hopperRimGeo, steelBrightMat);
+  hopperRim.position.set(0, 0.82, -0.62);
+  machineGroup.add(hopperRim);
+
+  /* ------------------------------------------------------------------------
+     7. EL LADRILLO ECOLÃ“GICO COMPACTADO (Inspirado en la imagen de referencia)
+     ------------------------------------------------------------------------ */
+  const brickEntityGroup = new THREE.Group();
+  machineGroup.add(brickEntityGroup);
+
+  // Cuerpo rectangular del ladrillo en terracota
+  const brickBodyGeo = new THREE.BoxGeometry(0.82, 0.28, 0.46);
+  const brickBody = new THREE.Mesh(brickBodyGeo, terracottaMat);
+  brickBody.position.set(0, 0.28, 0.06);
+  brickBody.castShadow = true;
+  brickEntityGroup.add(brickBody);
+
+  // 2 Perforaciones cilÃ­ndricas del bloque ecolÃ³gico
+  const brickHoleGeo = new THREE.CylinderGeometry(0.072, 0.072, 0.29, 20);
+  const brickHole1 = new THREE.Mesh(brickHoleGeo, terracottaHoleMat);
+  brickHole1.position.set(-0.22, 0.28, 0.06);
+  brickEntityGroup.add(brickHole1);
+
+  const brickHole2 = new THREE.Mesh(brickHoleGeo, terracottaHoleMat);
+  brickHole2.position.set(0.22, 0.28, 0.06);
+  brickEntityGroup.add(brickHole2);
+
+  // Bandeja de desmolde / expulsiÃ³n bajo el ladrillo
+  const ejectTrayGeo = new THREE.BoxGeometry(0.96, 0.06, 0.56);
+  const ejectTray = new THREE.Mesh(ejectTrayGeo, steelBrightMat);
+  ejectTray.position.set(0, 0.12, 0.06);
+  brickEntityGroup.add(ejectTray);
+
+  /* ------------------------------------------------------------------------
+     8. DETALLES INDUSTRIALES: MANÃ“METRO, PALANCA Y LÃNEAS HIDRÃULICAS
+     ------------------------------------------------------------------------ */
+  // ManÃ³metro de presiÃ³n hidrÃ¡ulica (0 a 10 Toneladas)
+  const gaugeHousingGeo = new THREE.CylinderGeometry(0.12, 0.12, 0.08, 24);
+  gaugeHousingGeo.rotateX(Math.PI / 2);
+  const gaugeHousing = new THREE.Mesh(gaugeHousingGeo, brassMat);
+  gaugeHousing.position.set(0.55, 1.1, 0.48);
+  machineGroup.add(gaugeHousing);
+
+  const gaugeDialGeo = new THREE.CircleGeometry(0.1, 24);
+  const gaugeDialMat = new THREE.MeshBasicMaterial({ color: 0xFAF7F2 });
+  const gaugeDial = new THREE.Mesh(gaugeDialGeo, gaugeDialMat);
+  gaugeDial.position.set(0.55, 1.1, 0.525);
+  machineGroup.add(gaugeDial);
+
+  // Aguja del manÃ³metro (animable con la presiÃ³n)
+  const needleGeo = new THREE.BoxGeometry(0.012, 0.075, 0.01);
+  const needleMat = new THREE.MeshBasicMaterial({ color: 0xC85A32 });
+  const gaugeNeedle = new THREE.Mesh(needleGeo, needleMat);
+  gaugeNeedle.position.set(0.55, 1.12, 0.53);
+  machineGroup.add(gaugeNeedle);
+
+  // Palanca mecÃ¡nica lateral de accionamiento
+  const leverArmCurve = new THREE.CatmullRomCurve3([
+    new THREE.Vector3(0.68, 0.15, 0.2),
+    new THREE.Vector3(1.05, 0.45, 0.4),
+    new THREE.Vector3(1.35, 0.72, 0.55)
+  ]);
+  const leverGeo = new THREE.TubeGeometry(leverArmCurve, 18, 0.03, 12, false);
+  const leverMesh = new THREE.Mesh(leverGeo, steelBrightMat);
+  machineGroup.add(leverMesh);
+
+  // Mango ergonÃ³mico de la palanca
+  const handleGeo = new THREE.CylinderGeometry(0.045, 0.045, 0.26, 16);
+  handleGeo.rotateZ(Math.PI / 4);
+  const handleMesh = new THREE.Mesh(handleGeo, rubberHoseMat);
+  handleMesh.position.set(1.35, 0.72, 0.55);
+  machineGroup.add(handleMesh);
+
+  // Mangueras hidrÃ¡ulicas flexibles
+  const hoseCurve = new THREE.CatmullRomCurve3([
+    new THREE.Vector3(0.2, 2.1, 0),
+    new THREE.Vector3(0.55, 1.8, 0.3),
+    new THREE.Vector3(0.55, 1.25, 0.48)
+  ]);
+  const hoseGeo = new THREE.TubeGeometry(hoseCurve, 20, 0.024, 10, false);
+  const hoseMesh = new THREE.Mesh(hoseGeo, rubberHoseMat);
+  machineGroup.add(hoseMesh);
+
+  // Ondas / pulso de compactaciÃ³n (anillos de eco para compatibilidad total)
+  const echoWaves = [];
+  for (let i = 0; i < 3; i++) {
+    const ringGeo = new THREE.RingGeometry(0.2 + i * 0.2, 0.24 + i * 0.2, 32);
+    ringGeo.rotateX(Math.PI / 2);
+    const ringMat = new THREE.MeshBasicMaterial({
+      color: 0xC85A32,
+      transparent: true,
+      opacity: 0,
+      side: THREE.DoubleSide
+    });
+    const ringMesh = new THREE.Mesh(ringGeo, ringMat);
+    ringMesh.position.set(0, 0.16, 0.06);
+    machineGroup.add(ringMesh);
+    echoWaves.push(ringMesh);
+  }
+
+  /* ------------------------------------------------------------------------
+     9. CONTROLES DE RATÃ“N, ARRASTRE Y PERSPECTIVA ISOMÃ‰TRICA
+     ------------------------------------------------------------------------ */
+  let isDragging = false;
+  let prevMouseX = 0, prevMouseY = 0;
+  // Ãngulo isomÃ©trico clÃ¡sico predeterminado
+  let targetRotX = 0.32, targetRotY = -0.65;
+  let autoRotate = true;
+  let isPressingCycle = false;
+  let pressCycleTime = 0;
+
+  container.addEventListener('mousedown', (e) => {
+    isDragging = true;
+    prevMouseX = e.clientX;
+    prevMouseY = e.clientY;
+    autoRotate = false;
+  });
+
+  window.addEventListener('mouseup', () => isDragging = false);
+
+  window.addEventListener('mousemove', (e) => {
+    if (!isDragging) return;
+    targetRotY += (e.clientX - prevMouseX) * 0.008;
+    targetRotX += (e.clientY - prevMouseY) * 0.008;
+    targetRotX = Math.max(-0.6, Math.min(0.65, targetRotX));
+    prevMouseX = e.clientX;
+    prevMouseY = e.clientY;
+  });
+
+  // Soporte tÃ¡ctil en dispositivos mÃ³viles
+  container.addEventListener('touchstart', (e) => {
+    if (e.touches.length === 1) {
+      isDragging = true;
+      prevMouseX = e.touches[0].clientX;
+      prevMouseY = e.touches[0].clientY;
+      autoRotate = false;
+    }
+  }, { passive: true });
+
+  window.addEventListener('touchend', () => isDragging = false);
+
+  window.addEventListener('touchmove', (e) => {
+    if (!isDragging || e.touches.length !== 1) return;
+    targetRotY += (e.touches[0].clientX - prevMouseX) * 0.008;
+    targetRotX += (e.touches[0].clientY - prevMouseY) * 0.008;
+    targetRotX = Math.max(-0.6, Math.min(0.65, targetRotX));
+    prevMouseX = e.touches[0].clientX;
+    prevMouseY = e.touches[0].clientY;
+  }, { passive: true });
+
+  /* ------------------------------------------------------------------------
+     10. ACCIONES DE BOTONES HUD
+     ------------------------------------------------------------------------ */
+  const btnReset = document.getElementById('btn-3d-reset');
+  const btnPress = document.getElementById('btn-3d-echo');
+  const btnIso = document.getElementById('btn-3d-temples');
+
+  if (btnReset) {
+    btnReset.addEventListener('click', () => {
+      autoRotate = !autoRotate;
+      btnReset.textContent = autoRotate ? 'Pausar Giro' : 'Rotar 360Â°';
+    });
+  }
+
+  // AnimaciÃ³n del Ciclo de CompactaciÃ³n y Prensado
+  function triggerCompactionCycle() {
+    if (isPressingCycle) return;
+    isPressingCycle = true;
+    pressCycleTime = 0;
+    autoRotate = false;
+
+    if (btnPress) btnPress.textContent = 'Prensando... (10 Tn)';
+
+    if (typeof gsap !== 'undefined') {
+      const tl = gsap.timeline({
+        onComplete: () => {
+          isPressingCycle = false;
+          if (btnPress) btnPress.textContent = 'Ciclo de Prensado';
+        }
+      });
+
+      // 1. Descenso potente del pistÃ³n hacia el molde
+      tl.to(presserGroup.position, { y: -0.42, duration: 0.65, ease: 'power3.in' })
+        // 2. Pico de compresiÃ³n: vibraciÃ³n del chasis y aguja de manÃ³metro
+        .to(machineGroup.position, { y: '+=0.03', duration: 0.05, yoyo: true, repeat: 5 })
+        .to(gaugeNeedle.rotation, { z: -Math.PI * 0.7, duration: 0.2 }, '<')
+        // Ondas de choque / presiÃ³n
+        .call(() => {
+          echoWaves.forEach((w, idx) => {
+            gsap.fromTo(w.scale, { x: 0.8, y: 0.8 }, { x: 2.2 + idx * 0.4, y: 2.2 + idx * 0.4, duration: 0.5 });
+            gsap.fromTo(w.material, { opacity: 0.7 }, { opacity: 0, duration: 0.5 });
+          });
+        })
+        // 3. ElevaciÃ³n del pistÃ³n
+        .to(presserGroup.position, { y: 0, duration: 0.75, ease: 'power2.out' }, '+=0.3')
+        .to(gaugeNeedle.rotation, { z: 0, duration: 0.5 }, '<')
+        // 4. ElevaciÃ³n y entrega del ladrillo reciÃ©n compactado
+        .to(brickEntityGroup.position, { y: 0.18, duration: 0.55, ease: 'back.out(1.8)' }, '-=0.4')
+        // 5. Asentamiento en bandeja de desmolde
+        .to(brickEntityGroup.position, { y: 0, duration: 0.4, ease: 'power2.inOut' }, '+=0.6');
+    } else {
+      setTimeout(() => {
+        isPressingCycle = false;
+        if (btnPress) btnPress.textContent = 'Ciclo de Prensado';
+      }, 1800);
+    }
+  }
+
+  if (btnPress) {
+    btnPress.textContent = 'Ciclo de Prensado';
+    btnPress.addEventListener('click', triggerCompactionCycle);
+  }
+
+  // Vista IsomÃ©trica CAD (30Â°/30Â°)
+  if (btnIso) {
+    btnIso.textContent = 'Vista IsomÃ©trica';
+    btnIso.addEventListener('click', () => {
+      autoRotate = false;
+      targetRotX = 0.38;
+      targetRotY = -Math.PI / 4; // Ãngulo isomÃ©trico clÃ¡sico 45Â°
+    });
+  }
+
+  /* ------------------------------------------------------------------------
+     11. HOTSPOTS FLOTANTES INTERACTIVOS EN LA MÃQUINA
+     ------------------------------------------------------------------------ */
+  const hotspots = document.querySelectorAll('.model-hotspot');
+  hotspots.forEach(hotspot => {
+    const trigger = hotspot.querySelector('.hotspot-trigger');
+    const comp = hotspot.getAttribute('data-component');
+
+    if (trigger) {
+      trigger.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const wasActive = hotspot.classList.contains('active');
+        hotspots.forEach(h => h.classList.remove('active'));
+        if (!wasActive) hotspot.classList.add('active');
+
+        autoRotate = false;
+        if (comp === 'tolva' || comp === 'sensors') {
+          targetRotX = 0.42;
+          targetRotY = Math.PI - 0.4; // Vista superior de la tolva
+        } else if (comp === 'cilindro' || comp === 'temple-left') {
+          targetRotX = 0.22;
+          targetRotY = -0.3; // Vista del pistÃ³n hidrÃ¡ulico
+        } else if (comp === 'matriz' || comp === 'temple-right') {
+          targetRotX = 0.15;
+          targetRotY = 0.4; // Vista de la cÃ¡mara de moldeo
+        } else if (comp === 'ladrillo' || comp === 'frame') {
+          targetRotX = 0.35;
+          targetRotY = -Math.PI / 4; // Vista isomÃ©trica del ladrillo expulsado
+        }
+      });
+    }
+  });
+
+  // Clic exterior oculta tarjetas de hotspots abiertas
+  container.addEventListener('click', () => {
+    hotspots.forEach(h => h.classList.remove('active'));
+  });
+
+  /* ------------------------------------------------------------------------
+     12. BUCLE DE RENDERIZADO THREE.JS
+     ------------------------------------------------------------------------ */
+  let clock = new THREE.Clock();
+  function animate3D() {
+    requestAnimationFrame(animate3D);
+    const elapsedTime = clock.getElapsedTime();
+
+    if (autoRotate) {
+      targetRotY += 0.004;
+    }
+
+    machineGroup.rotation.y += (targetRotY - machineGroup.rotation.y) * 0.08;
+    machineGroup.rotation.x += (targetRotX - machineGroup.rotation.x) * 0.08;
+
+    // Leve flotaciÃ³n armÃ³nica
+    machineGroup.position.y = Math.sin(elapsedTime * 1.4) * 0.025;
+
+    renderer.render(scene, camera);
+  }
+  animate3D();
+
+  window.addEventListener('resize', () => {
+    if (!container) return;
+    camera.aspect = container.clientWidth / container.clientHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(container.clientWidth, container.clientHeight);
+  });
+}
+
+function renderCanvas3DFallback(container) {
+  const canvas = document.createElement('canvas');
+  canvas.width = container.clientWidth || 600;
+  canvas.height = container.clientHeight || 500;
+  container.appendChild(canvas);
+  const ctx = canvas.getContext('2d');
+  let angle = 0;
+
+  function drawFallback() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    const cx = canvas.width / 2;
+    const cy = canvas.height / 2;
+
+    ctx.save();
+    ctx.translate(cx, cy);
+
+    // Dibujo isomÃ©trico en Canvas 2D de la MÃ¡quina Compactadora de Ladrillos
+    ctx.strokeStyle = '#212842';
+    ctx.lineWidth = 3;
+
+    // Chasis
+    ctx.strokeRect(-120, -140, 240, 280);
+
+    // Cilindro Superior
+    ctx.fillStyle = '#212842';
+    ctx.fillRect(-45, -190, 90, 60);
+
+    // Tolva
+    ctx.beginPath();
+    ctx.moveTo(-70, -110);
+    ctx.lineTo(70, -110);
+    ctx.lineTo(40, -40);
+    ctx.lineTo(-40, -40);
+    ctx.closePath();
+    ctx.fillStyle = '#D5C4AD';
+    ctx.fill();
+    ctx.stroke();
+
+    // Ladrillo IsomÃ©trico en Centro
+    ctx.fillStyle = '#E27237';
+    ctx.beginPath();
+    ctx.moveTo(0, 20);
+    ctx.lineTo(80, 50);
+    ctx.lineTo(0, 80);
+    ctx.lineTo(-80, 50);
+    ctx.closePath();
+    ctx.fill();
+    ctx.stroke();
+
+    ctx.fillStyle = '#C45120';
+    ctx.beginPath();
+    ctx.moveTo(-80, 50);
+    ctx.lineTo(0, 80);
+    ctx.lineTo(0, 130);
+    ctx.lineTo(-80, 100);
+    ctx.closePath();
+    ctx.fill();
+    ctx.stroke();
+
+    ctx.fillStyle = '#9E3B13';
+    ctx.beginPath();
+    ctx.moveTo(0, 80);
+    ctx.lineTo(80, 50);
+    ctx.lineTo(80, 100);
+    ctx.lineTo(0, 130);
+    ctx.closePath();
+    ctx.fill();
+    ctx.stroke();
+
+    ctx.font = '700 12px "JetBrains Mono"';
+    ctx.fillStyle = '#212842';
+    ctx.textAlign = 'center';
+    ctx.fillText('MÃQUINA COMPACTADORA DE LADRILLOS (ISOMÃ‰TRICO)', 0, 160);
+
+    ctx.restore();
+    angle += 0.01;
+    requestAnimationFrame(drawFallback);
+  }
+  drawFallback();
+}
+    const cx = canvas.width / 2;
+    const cy = canvas.height / 2 + Math.sin(angle) * 8;
+    ctx.strokeStyle = '#181818'; ctx.lineWidth = 4;
+    ctx.beginPath();
+    ctx.roundRect(cx - 160, cy - 40, 120, 80, 18);
+    ctx.roundRect(cx + 40, cy - 40, 120, 80, 18);
+    ctx.stroke();
+    ctx.strokeStyle = '#DCCFC2'; ctx.beginPath();
+    ctx.moveTo(cx - 40, cy - 10); ctx.quadraticCurveTo(cx, cy - 30, cx + 40, cy - 10);
+    ctx.stroke();
+    ctx.strokeStyle = 'rgba(220, 207, 194, 0.65)'; ctx.beginPath();
+    ctx.arc(cx, cy, 140 + Math.sin(angle * 2) * 20, -Math.PI / 4, Math.PI / 4);
+    ctx.stroke();
+    angle += 0.02;
+    requestAnimationFrame(drawFallback);
+  }
+  drawFallback();
+}
+
+/* ==========================================================================
+   3. SIMULATOR 2D: "TOCAR VS. ANTICIPAR"
+   Usuario en Caviar Black (#181818) + ObstÃ¡culo en Soft Beige (#DCCFC2) + Ondas 60fps
+   ========================================================================== */
+function initSimulator2D() {
+  const canvas = document.getElementById('canvas-sim-2d');
+  if (!canvas) return;
+
+  const ctx = canvas.getContext('2d');
+  const modeCaneBtn = document.getElementById('mode-cane-btn');
+  const modeSmartNavBtn = document.getElementById('mode-smartnav-btn');
+  const metricDistance = document.getElementById('sim-dist-val');
+  const metricHaptic = document.getElementById('sim-haptic-val');
+  const metricReaction = document.getElementById('sim-reaction-val');
+
+  let mode = 'smartnav';
+  let canvasW = canvas.clientWidth, canvasH = canvas.clientHeight;
+
+  function resizeCanvas() {
+    canvasW = canvas.clientWidth; canvasH = canvas.clientHeight;
+    canvas.width = canvasW * window.devicePixelRatio;
+    canvas.height = canvasH * window.devicePixelRatio;
+    ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+  }
+  resizeCanvas();
+  window.addEventListener('resize', resizeCanvas);
+
+  // Entities
+  const walker = { x: 80, y: canvasH / 2, radius: 18 };
+  // ObstÃ¡culo en Soft Beige (#DCCFC2) con Borde Caviar (#181818)
+  const obstacle = { x: 330, y: canvasH / 2, radius: 24, isDragging: false };
+
+  function getCoords(e) {
+    const rect = canvas.getBoundingClientRect();
+    const cx = e.touches ? e.touches[0].clientX : e.clientX;
+    const cy = e.touches ? e.touches[0].clientY : e.clientY;
+    return { x: cx - rect.left, y: cy - rect.top };
+  }
+
+  canvas.addEventListener('mousedown', (e) => {
+    const c = getCoords(e);
+    if (Math.hypot(c.x - obstacle.x, c.y - obstacle.y) < obstacle.radius + 15) obstacle.isDragging = true;
+  });
+  window.addEventListener('mousemove', (e) => {
+    if (!obstacle.isDragging) return;
+    const c = getCoords(e);
+    obstacle.x = Math.max(160, Math.min(canvasW - 40, c.x));
+    obstacle.y = Math.max(40, Math.min(canvasH - 40, c.y));
+  });
+  window.addEventListener('mouseup', () => obstacle.isDragging = false);
+
+  canvas.addEventListener('touchstart', (e) => {
+    const c = getCoords(e);
+    if (Math.hypot(c.x - obstacle.x, c.y - obstacle.y) < obstacle.radius + 20) obstacle.isDragging = true;
+  });
+  window.addEventListener('touchmove', (e) => {
+    if (!obstacle.isDragging) return;
+    const c = getCoords(e);
+    obstacle.x = Math.max(160, Math.min(canvasW - 40, c.x));
+    obstacle.y = Math.max(40, Math.min(canvasH - 40, c.y));
+  });
+  window.addEventListener('touchend', () => obstacle.isDragging = false);
+
+  if (modeCaneBtn && modeSmartNavBtn) {
+    modeCaneBtn.addEventListener('click', () => {
+      mode = 'cane';
+      modeCaneBtn.classList.add('active');
+      modeSmartNavBtn.classList.remove('active');
+      metricReaction.textContent = 'Reactivo (TardÃ­o)';
+    });
+    modeSmartNavBtn.addEventListener('click', () => {
+      mode = 'smartnav';
+      modeSmartNavBtn.classList.add('active');
+      modeCaneBtn.classList.remove('active');
+      metricReaction.textContent = '<5ms Anticipado';
+    });
+  }
+
+  let simTime = 0;
+  function renderSim() {
+    simTime += 0.03;
+    ctx.clearRect(0, 0, canvasW, canvasH);
+
+    const dx = obstacle.x - walker.x;
+    const dy = obstacle.y - walker.y;
+    const pixelDistance = Math.hypot(dx, dy);
+    const metersDistance = (pixelDistance / 100).toFixed(1);
+
+    if (metricDistance) metricDistance.textContent = `${metersDistance} m`;
+
+    // Grilla arquitectÃ³nica en Beige CÃ¡lido (#D5C4AD)
+    ctx.strokeStyle = '#D5C4AD';
+    ctx.lineWidth = 1;
+    ctx.setLineDash([4, 6]);
+    for (let x = 40; x < canvasW; x += 60) {
+      ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, canvasH); ctx.stroke();
+    }
+    ctx.setLineDash([]);
+
+    if (mode === 'cane') {
+      const caneRange = 85;
+      const isDetected = pixelDistance <= caneRange + obstacle.radius;
+      const sweepAngle = Math.sin(simTime * 4) * 0.45;
+      ctx.strokeStyle = '#212842';
+      ctx.lineWidth = 3;
+      ctx.beginPath();
+      ctx.moveTo(walker.x + 10, walker.y);
+      ctx.lineTo(walker.x + Math.cos(sweepAngle) * caneRange, walker.y + Math.sin(sweepAngle) * caneRange);
+      ctx.stroke();
+
+      if (isDetected) {
+        ctx.fillStyle = 'rgba(213, 196, 173, 0.55)';
+        ctx.beginPath();
+        ctx.arc(obstacle.x, obstacle.y, obstacle.radius + 14, 0, Math.PI * 2);
+        ctx.fill();
+        if (metricHaptic) metricHaptic.textContent = 'ColisiÃ³n FÃ­sica (0m)';
+      } else {
+        if (metricHaptic) metricHaptic.textContent = 'Sin DetecciÃ³n AÃ©rea';
+      }
+    } else {
+      const maxRange = 320;
+      const coneAngle = (120 * Math.PI) / 180;
+      const angleToObs = Math.atan2(dy, dx);
+      const inCone = Math.abs(angleToObs) <= coneAngle / 2 && pixelDistance <= maxRange;
+
+      // Cono UltrasÃ³nico en Warm Beige & Slate
+      const coneGrad = ctx.createRadialGradient(walker.x, walker.y, 20, walker.x, walker.y, maxRange);
+      coneGrad.addColorStop(0, 'rgba(230, 215, 196, 0.6)');
+      coneGrad.addColorStop(0.7, 'rgba(122, 129, 148, 0.22)');
+      coneGrad.addColorStop(1, 'rgba(230, 215, 196, 0)');
+      ctx.fillStyle = coneGrad;
+      ctx.beginPath();
+      ctx.moveTo(walker.x, walker.y);
+      ctx.arc(walker.x, walker.y, maxRange, -coneAngle / 2, coneAngle / 2);
+      ctx.closePath();
+      ctx.fill();
+
+      // Ondas acÃºsticas concÃ©ntricas limpias en Navy Blue & Slate a 60fps
+      for (let r = 40; r < maxRange; r += 50) {
+        const waveOffset = (r + (simTime * 65) % 50);
+        if (waveOffset < maxRange) {
+          ctx.strokeStyle = (r % 100 === 0) ? 'rgba(33, 40, 66, 0.65)' : 'rgba(122, 129, 148, 0.5)';
+          ctx.lineWidth = 1.6;
+          ctx.beginPath();
+          ctx.arc(walker.x, walker.y, waveOffset, -coneAngle / 2, coneAngle / 2);
+          ctx.stroke();
+        }
+      }
+
+      if (inCone) {
+        // Haz de ecolocalizaciÃ³n hacia el obstÃ¡culo en Navy Blue
+        ctx.strokeStyle = '#212842';
+        ctx.lineWidth = 2.5;
+        ctx.setLineDash([4, 4]);
+        ctx.beginPath();
+        ctx.moveTo(walker.x, walker.y);
+        ctx.lineTo(obstacle.x, obstacle.y);
+        ctx.stroke();
+        ctx.setLineDash([]);
+
+        const direction = dy > 10 ? 'Derecha' : dy < -10 ? 'Izquierda' : 'Centro';
+        const intensity = metersDistance < 1.5 ? 'Alta' : 'Moderada';
+        if (metricHaptic) metricHaptic.textContent = `Patilla ${direction} (${intensity})`;
+
+        // Resplandor del obstÃ¡culo
+        ctx.fillStyle = 'rgba(213, 196, 173, 0.6)';
+        ctx.beginPath();
+        ctx.arc(obstacle.x, obstacle.y, obstacle.radius + 14, 0, Math.PI * 2);
+        ctx.fill();
+      } else {
+        if (metricHaptic) metricHaptic.textContent = 'En Espera (VÃ­a Libre)';
+      }
+    }
+
+    // 1. DIBUJAR OBSTÃCULO: WARM BEIGE (#E6D7C4) CON BORDE NAVY (#212842)
+    // Aura de resplandor exterior
+    ctx.fillStyle = 'rgba(213, 196, 173, 0.5)';
+    ctx.beginPath();
+    ctx.arc(obstacle.x, obstacle.y, obstacle.radius + 8, 0, Math.PI * 2);
+    ctx.fill();
+
+    // NÃºcleo Warm Beige
+    ctx.fillStyle = '#E6D7C4';
+    ctx.beginPath();
+    ctx.arc(obstacle.x, obstacle.y, obstacle.radius, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Borde elegante Navy Blue
+    ctx.strokeStyle = '#212842';
+    ctx.lineWidth = 2.5;
+    ctx.stroke();
+
+    // Punto central Navy
+    ctx.fillStyle = '#212842';
+    ctx.beginPath();
+    ctx.arc(obstacle.x, obstacle.y, 5, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.font = '700 11px Plus Jakarta Sans, sans-serif';
+    ctx.fillStyle = '#212842';
+    ctx.fillText('OBSTÃCULO', obstacle.x - 34, obstacle.y + obstacle.radius + 18);
+
+    // 2. DIBUJAR USUARIO: NAVY BLUE (#212842)
+    ctx.fillStyle = '#212842';
+    ctx.beginPath();
+    ctx.arc(walker.x, walker.y, walker.radius, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Detalle de lentes en Beige
+    ctx.fillStyle = '#E6D7C4';
+    ctx.fillRect(walker.x + walker.radius - 2, walker.y - 8, 6, 16);
+
+    ctx.font = '700 11px Plus Jakarta Sans, sans-serif';
+    ctx.fillStyle = '#212842';
+    ctx.fillText('USUARIO', walker.x - 24, walker.y + walker.radius + 18);
+
+    requestAnimationFrame(renderSim);
+  }
+  renderSim();
+}
+
+/* ==========================================================================
+   4. VISION 2.0 TAB SELECTOR
+   ========================================================================== */
+function initVisionTabs() {
+  const tabBtns = document.querySelectorAll('.tab-btn');
+  const tabPanes = document.querySelectorAll('.tab-pane');
+  if (tabBtns.length === 0 || tabPanes.length === 0) return;
+
+  tabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const targetTab = btn.getAttribute('data-tab');
+      tabBtns.forEach(b => {
+        b.classList.remove('active');
+        b.setAttribute('aria-selected', 'false');
+      });
+      btn.classList.add('active');
+      btn.setAttribute('aria-selected', 'true');
+      tabPanes.forEach(pane => {
+        if (pane.id === targetTab) pane.classList.add('active');
+        else pane.classList.remove('active');
+      });
+    });
+  });
+}
+
+</script>
+</body>
+</html>

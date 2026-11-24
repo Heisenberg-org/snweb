@@ -1,577 +1,1150 @@
-const sections = [...document.querySelectorAll(".slide")];
-const dots = [...document.querySelectorAll(".page-dot")];
-const pageLabel = document.querySelector(".page-nav-label");
-const nextButton = document.querySelector(".next-button");
-const announcement = document.querySelector("#navigation-announcement");
-const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)");
+/**
+ * SMARTNAV // MAIN.JS
+ * High-Impact Interactive Controller (Awwwards Grade)
+ * Navy Blue & Warm Beige Luxury Color Palette
+ * 0. Cinematic Fullscreen Opening Eye Intro (A24 / Content Architecture Grade)
+ * 1. Contextual & Unique Transitions per Slide (GSAP Powered)
+ * 2. Three.js Procedural 3D Glasses Viewer (Navy Blue & Beige Titanium)
+ * 3. Canvas 2D Simulator: Navy Blue Walker + Beige Obstacle
+ * 4. Vision 2.0 Tab Transitions & Micro-Interactions
+ */
 
-let activeSection = 0;
-let soundEnabled = false;
-let audioContext;
-
-function playTone(frequency = 520) {
-  // El audio se crea únicamente después de que la persona lo activa.
-  if (!soundEnabled) return;
-  const AudioContext = window.AudioContext || window.webkitAudioContext;
-  if (!AudioContext) return;
-  audioContext ??= new AudioContext();
-  if (audioContext.state === "suspended") void audioContext.resume();
-
-  const oscillator = audioContext.createOscillator();
-  const gain = audioContext.createGain();
-  oscillator.type = "sine";
-  oscillator.frequency.value = frequency;
-  gain.gain.setValueAtTime(0.0001, audioContext.currentTime);
-  gain.gain.exponentialRampToValueAtTime(0.045, audioContext.currentTime + 0.015);
-  gain.gain.exponentialRampToValueAtTime(0.0001, audioContext.currentTime + 0.12);
-  oscillator.connect(gain);
-  gain.connect(audioContext.destination);
-  oscillator.start();
-  oscillator.stop(audioContext.currentTime + 0.13);
-}
-
-function goToSection(index) {
-  const boundedIndex = Math.max(0, Math.min(sections.length - 1, index));
-  sections[boundedIndex].scrollIntoView({
-    behavior: prefersReducedMotion.matches ? "auto" : "smooth",
-    block: "start",
-  });
-  playTone(440 + boundedIndex * 35);
-}
-
-const sectionObserver = new IntersectionObserver((entries) => {
-  const visible = entries
-    .filter((entry) => entry.isIntersecting)
-    .sort((a, b) => b.intersectionRatio - a.intersectionRatio)[0];
-  if (!visible) return;
-
-  activeSection = sections.indexOf(visible.target);
-  dots.forEach((dot, index) => {
-    const isActive = index === activeSection;
-    dot.classList.toggle("is-active", isActive);
-    if (isActive) dot.setAttribute("aria-current", "true");
-    else dot.removeAttribute("aria-current");
-  });
-  pageLabel.textContent = `${String(activeSection + 1).padStart(2, "0")} / ${String(sections.length).padStart(2, "0")}`;
-  if (nextButton) {
-    nextButton.setAttribute(
-      "aria-label",
-      activeSection === sections.length - 1 ? "Volver al inicio" : "Ir a la siguiente sección",
-    );
-    const label = nextButton.querySelector("span:first-child");
-    if (label) label.textContent = activeSection === sections.length - 1 ? "Volver al inicio" : "Desliza para explorar";
-  }
-  announcement.textContent = `Sección ${activeSection + 1} de ${sections.length}: ${visible.target.querySelector("h1, h2")?.textContent.replace(/\s+/g, " ").trim() ?? ""}`;
-}, { threshold: [0.35, 0.6] });
-
-sections.forEach((section) => sectionObserver.observe(section));
-dots.forEach((dot, index) => dot.addEventListener("click", (event) => {
-  event.preventDefault();
-  goToSection(index);
-}));
-nextButton?.addEventListener("click", () => {
-  goToSection(activeSection === sections.length - 1 ? 0 : activeSection + 1);
+document.addEventListener('DOMContentLoaded', () => {
+  initEyeIntroAnimation();
+  initContextualDeck();
+  initThreeJsViewer();
+  initSimulator2D();
+  initVisionTabs();
 });
 
-document.addEventListener("keydown", (event) => {
-  if (event.altKey || event.ctrlKey || event.metaKey) return;
-  const target = event.target;
-  if (target instanceof HTMLElement && (target.isContentEditable || /INPUT|TEXTAREA|SELECT|BUTTON/.test(target.tagName))) return;
-  if (event.key === "ArrowDown" || event.key === "PageDown" || event.key === " ") {
-    event.preventDefault();
-    goToSection(activeSection + 1);
-  } else if (event.key === "ArrowUp" || event.key === "PageUp") {
-    event.preventDefault();
-    goToSection(activeSection - 1);
-  } else if (event.key === "Home") {
-    event.preventDefault();
-    goToSection(0);
-  } else if (event.key === "End") {
-    event.preventDefault();
-    goToSection(sections.length - 1);
-  }
-});
+/* ==========================================================================
+   0. INTRO CINEMATOGRÁFICA EN PANTALLA COMPLETA: LADRILLO ISOMÉTRICO & PRENSA
+   Inspirado en la Máquina Compactadora de Ladrillos y Diseño Editorial
+   ========================================================================== */
+function initEyeIntroAnimation() {
+  const introCurtain = document.getElementById('intro-eye-curtain');
+  if (!introCurtain) return;
 
-document.querySelector("#contrast-toggle")?.addEventListener("click", (event) => {
-  const button = event.currentTarget;
-  const enabled = document.body.classList.toggle("high-contrast");
-  button.setAttribute("aria-pressed", String(enabled));
-});
+  const upperLid = document.getElementById('intro-upper-lid');
+  const lowerLid = document.getElementById('intro-lower-lid');
+  const grandIris = document.getElementById('intro-iris');
+  const grandPupil = document.getElementById('intro-pupil');
+  const grandPupilCenter = document.getElementById('intro-pupil-center');
+  const irisZoomCircle = document.getElementById('intro-iris-zoom-circle');
+  const introStage = document.getElementById('intro-eye-stage');
+  const introContainer = document.querySelector('.intro-container');
+  const skipBtn = document.getElementById('intro-skip-btn');
+  const lateralEyes = document.querySelectorAll('.nav-eye-item, .nav-brick-item');
+  const brickGroup = document.getElementById('intro-brick-group');
+  const lashFlyers = document.querySelectorAll('.intro-lash-flyer');
 
-document.querySelector("#sound-toggle")?.addEventListener("click", (event) => {
-  const button = event.currentTarget;
-  soundEnabled = !soundEnabled;
-  button.setAttribute("aria-pressed", String(soundEnabled));
-  button.setAttribute("aria-label", soundEnabled ? "Desactivar sonidos de interfaz" : "Activar sonidos de interfaz");
-  button.title = soundEnabled ? "Desactivar sonido" : "Sonido opcional";
-  const icon = button.querySelector("svg");
-  if (icon) icon.setAttribute("data-lucide", soundEnabled ? "volume-2" : "volume-x");
-  window.lucide?.createIcons();
-  playTone(660);
-});
+  let hasEnded = false;
 
-document.querySelector("#current-year").textContent = String(new Date().getFullYear());
-window.addEventListener("load", () => {
-  window.lucide?.createIcons();
-  if (window.gsap && !prefersReducedMotion.matches) {
-    window.gsap.from(".hero-copy > *", { y: 18, opacity: 0, duration: 0.8, stagger: 0.11, ease: "power2.out" });
-  }
-});
-
-function initProductViewer() {
-  const canvas = document.querySelector("#product-canvas");
-  const wrapper = document.querySelector("#product-canvas-wrap");
-  const fallback = document.querySelector("#canvas-fallback");
-  if (!canvas || !wrapper) return;
-
-  let initialized = false;
-  const loadViewer = async () => {
-    if (initialized) return;
-    initialized = true;
-
-    try {
-    const THREE = await import("https://cdn.jsdelivr.net/npm/three@0.169.0/build/three.module.js");
-    const renderer = new THREE.WebGLRenderer({
-      canvas,
-      alpha: true,
-      antialias: window.devicePixelRatio <= 1.5,
-      powerPreference: "low-power",
-      stencil: false,
-    });
-    renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 1.5));
-    renderer.setClearColor(0x000000, 0);
-    renderer.outputColorSpace = THREE.SRGBColorSpace;
-    renderer.toneMapping = THREE.ACESFilmicToneMapping;
-
-    const scene = new THREE.Scene();
-    const camera = new THREE.PerspectiveCamera(33, 1, 0.1, 100);
-    camera.position.set(0, 0.2, 8.6);
-    scene.add(new THREE.HemisphereLight(0xfffcf4, 0x77786e, 2.25));
-    const keyLight = new THREE.DirectionalLight(0xffffff, 3.2);
-    keyLight.position.set(-3, 5, 6);
-    scene.add(keyLight);
-    const rimLight = new THREE.DirectionalLight(0xc8d7c6, 2.1);
-    rimLight.position.set(4, 1, -3);
-    scene.add(rimLight);
-
-    const product = new THREE.Group();
-    scene.add(product);
-
-    const frameMaterial = new THREE.MeshStandardMaterial({ color: 0x292a26, roughness: 0.25, metalness: 0.62 });
-    const lensMaterial = new THREE.MeshPhysicalMaterial({
-      color: 0xc6d8cb,
-      roughness: 0.12,
-      metalness: 0.04,
-      transmission: 0.16,
-      transparent: true,
-      opacity: 0.72,
-      thickness: 0.28,
-      side: THREE.DoubleSide,
-    });
-    const sensorMaterial = new THREE.MeshStandardMaterial({ color: 0xb7745d, roughness: 0.25, metalness: 0.55 });
-
-    function roundedRectShape(width, height, radius) {
-      const shape = new THREE.Shape();
-      const x = -width / 2;
-      const y = -height / 2;
-      shape.moveTo(x + radius, y);
-      shape.lineTo(x + width - radius, y);
-      shape.quadraticCurveTo(x + width, y, x + width, y + radius);
-      shape.lineTo(x + width, y + height - radius);
-      shape.quadraticCurveTo(x + width, y + height, x + width - radius, y + height);
-      shape.lineTo(x + radius, y + height);
-      shape.quadraticCurveTo(x, y + height, x, y + height - radius);
-      shape.lineTo(x, y + radius);
-      shape.quadraticCurveTo(x, y, x + radius, y);
-      return shape;
-    }
-
-    function addRod(start, end, radius, material, segments = 10) {
-      const from = new THREE.Vector3(...start);
-      const to = new THREE.Vector3(...end);
-      const direction = new THREE.Vector3().subVectors(to, from);
-      const rod = new THREE.Mesh(new THREE.CylinderGeometry(radius * 0.78, radius, direction.length(), segments), material);
-      rod.position.copy(from).add(to).multiplyScalar(0.5);
-      rod.quaternion.setFromUnitVectors(new THREE.Vector3(0, 1, 0), direction.normalize());
-      product.add(rod);
-      return rod;
-    }
-
-    const lensShape = roundedRectShape(1.4, 0.92, 0.28);
-    for (const centerX of [-0.86, 0.86]) {
-      const lens = new THREE.Mesh(new THREE.ShapeGeometry(lensShape, 18), lensMaterial);
-      lens.position.set(centerX, 0, 0);
-      product.add(lens);
-
-      const outlinePoints = lensShape.getPoints(36).map((point) => new THREE.Vector3(point.x + centerX, point.y, 0.045));
-      const outline = new THREE.Mesh(
-        new THREE.TubeGeometry(new THREE.CatmullRomCurve3(outlinePoints, true), 72, 0.052, 8, true),
-        frameMaterial,
-      );
-      product.add(outline);
-    }
-
-    addRod([-0.18, 0.29, 0.02], [0.18, 0.29, 0.02], 0.065, frameMaterial);
-    addRod([-1.54, 0.25, 0.03], [-2.55, 0.45, -0.24], 0.065, frameMaterial);
-    addRod([1.54, 0.25, 0.03], [2.55, 0.45, -0.24], 0.065, frameMaterial);
-    addRod([-2.55, 0.45, -0.24], [-2.42, 0.27, -1.42], 0.07, frameMaterial);
-    addRod([2.55, 0.45, -0.24], [2.42, 0.27, -1.42], 0.07, frameMaterial);
-
-    for (const x of [-0.24, 0.24]) {
-      const sensor = new THREE.Mesh(new THREE.SphereGeometry(0.09, 20, 16), sensorMaterial);
-      sensor.position.set(x, 0.27, 0.12);
-      product.add(sensor);
-      const sensorRing = new THREE.Mesh(new THREE.TorusGeometry(0.13, 0.018, 8, 24), frameMaterial);
-      sensorRing.position.copy(sensor.position);
-      product.add(sensorRing);
-    }
-
-    const templeSensor = new THREE.Mesh(new THREE.SphereGeometry(0.075, 16, 12), sensorMaterial);
-    templeSensor.position.set(2.42, 0.32, -0.82);
-    product.add(templeSensor);
-
-    let targetRotationY = -0.18;
-    let targetRotationX = 0.02;
-    let velocityX = 0;
-    let velocityY = 0;
-    let dragging = false;
-    let previousPointerX = 0;
-    let previousPointerY = 0;
-    let viewerVisible = false;
-    let renderFrame = 0;
-
-    function requestRender() {
-      if (!viewerVisible || document.hidden || renderFrame) return;
-      renderFrame = window.requestAnimationFrame(render);
-    }
-
-    function resize() {
-      const bounds = wrapper.getBoundingClientRect();
-      const width = Math.max(1, bounds.width);
-      const height = Math.max(1, bounds.height);
-      renderer.setSize(width, height, false);
-      camera.aspect = width / height;
-      camera.position.z = width < 500 ? 9.5 : 8.6;
-      camera.updateProjectionMatrix();
-      requestRender();
-    }
-
-    const resizeObserver = new ResizeObserver(resize);
-    resizeObserver.observe(wrapper);
-    resize();
-
-    canvas.addEventListener("pointerdown", (event) => {
-      dragging = true;
-      previousPointerX = event.clientX;
-      previousPointerY = event.clientY;
-      canvas.setPointerCapture(event.pointerId);
-    });
-    canvas.addEventListener("pointermove", (event) => {
-      if (!dragging) return;
-      const deltaX = event.clientX - previousPointerX;
-      const deltaY = event.clientY - previousPointerY;
-      targetRotationY += deltaX * 0.009;
-      targetRotationX = THREE.MathUtils.clamp(targetRotationX + deltaY * 0.006, -0.55, 0.55);
-      // La velocidad residual se amortigua al soltar para dar inercia al giro.
-      velocityY = deltaX * 0.0007;
-      velocityX = deltaY * 0.0004;
-      previousPointerX = event.clientX;
-      previousPointerY = event.clientY;
-      requestRender();
-    });
-    const stopDragging = () => {
-      dragging = false;
-      requestRender();
-    };
-    canvas.addEventListener("pointerup", stopDragging);
-    canvas.addEventListener("pointercancel", stopDragging);
-
-    document.querySelectorAll(".view-button").forEach((button) => {
-      button.addEventListener("click", () => {
-        const view = button.dataset.view;
-        const rotations = { front: [0.02, -0.18], side: [0.02, -1.08], detail: [0.38, 0.1] };
-        [targetRotationX, targetRotationY] = rotations[view] ?? rotations.front;
-        velocityX = 0;
-        velocityY = 0;
-        document.querySelectorAll(".view-button").forEach((item) => {
-          const selected = item === button;
-          item.classList.toggle("is-selected", selected);
-          item.setAttribute("aria-pressed", String(selected));
-        });
-        requestRender();
-        playTone(540);
+  function endIntroImmediately() {
+    if (hasEnded) return;
+    hasEnded = true;
+    if (typeof gsap !== 'undefined') {
+      gsap.killTweensOf(['#intro-eye-curtain', '#intro-upper-lid', '#intro-lower-lid', '#intro-iris', '#intro-pupil', '#intro-iris-zoom-circle', '#intro-eye-stage', '#intro-brick-group', '.intro-container']);
+      gsap.to(introCurtain, {
+        opacity: 0,
+        duration: 0.45,
+        ease: 'power2.out',
+        onComplete: () => {
+          introCurtain.style.display = 'none';
+          triggerHeroReveal();
+        }
       });
-    });
-
-    const render = () => {
-      renderFrame = 0;
-      if (!viewerVisible || document.hidden) return;
-
-      if (!dragging && !prefersReducedMotion.matches) {
-          targetRotationY += velocityY;
-          targetRotationX += velocityX;
-          velocityX *= 0.94;
-          velocityY *= 0.94;
-      }
-      if (prefersReducedMotion.matches) {
-        product.rotation.y = targetRotationY;
-        product.rotation.x = targetRotationX;
-      } else {
-        product.rotation.y += (targetRotationY - product.rotation.y) * 0.075;
-        product.rotation.x += (targetRotationX - product.rotation.x) * 0.075;
-      }
-      renderer.render(scene, camera);
-      const rotationSettled = Math.abs(targetRotationY - product.rotation.y) < 0.001
-        && Math.abs(targetRotationX - product.rotation.x) < 0.001;
-      const inertiaSettled = Math.abs(velocityX) < 0.0005 && Math.abs(velocityY) < 0.0005;
-      if (dragging || !rotationSettled || !inertiaSettled) requestRender();
-    };
-
-    const visibilityObserver = new IntersectionObserver(([entry]) => {
-      viewerVisible = entry.isIntersecting;
-      if (viewerVisible) requestRender();
-    });
-    visibilityObserver.observe(wrapper);
-    document.addEventListener("visibilitychange", requestRender);
-    } catch (error) {
-      console.warn("No se pudo cargar la visualización 3D de SmartNav.", error);
-      canvas.hidden = true;
-      fallback.hidden = false;
+      gsap.to(lateralEyes, { opacity: 1, x: 0, scale: 1, duration: 0.4, stagger: 0.05, ease: 'power2.out' });
+    } else {
+      introCurtain.style.display = 'none';
+      triggerHeroReveal();
     }
+  }
+
+  if (skipBtn) {
+    skipBtn.addEventListener('click', (e) => {
+      e.stopPropagation();
+      endIntroImmediately();
+    });
+  }
+
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && !hasEnded) {
+      endIntroImmediately();
+    }
+  });
+
+  introCurtain.addEventListener('click', (e) => {
+    if (e.target !== skipBtn && !skipBtn?.contains(e.target)) {
+      endIntroImmediately();
+    }
+  });
+
+  if (typeof gsap === 'undefined') {
+    setTimeout(endIntroImmediately, 1200);
+    return;
+  }
+
+  // Posicionar selectores de ladrillos laterales inicialmente para aparición limpia y sin duplicaciones
+  gsap.set(lateralEyes, { opacity: 0, x: -20, scale: 0.9 });
+
+  const introTimeline = gsap.timeline({
+    defaults: { ease: 'power3.out' },
+    onComplete: () => {
+      if (!hasEnded) {
+        hasEnded = true;
+        introCurtain.style.display = 'none';
+        triggerHeroReveal();
+      }
+    }
+  });
+
+  // 1. Entrada de Rayos de Proyección Isométrica y Formación del Ladrillo
+  if (brickGroup) {
+    gsap.set(brickGroup, { scale: 0.8, opacity: 0, transformOrigin: '270px 180px' });
+  }
+
+  introTimeline
+    .fromTo(lashFlyers, 
+      { strokeDashoffset: 40, opacity: 0 },
+      { strokeDashoffset: 0, opacity: 0.8, duration: 0.6, stagger: 0.08, ease: 'power2.out' },
+      0.1
+    )
+    // 2. Golpe de Compresión Mecánica: El Ladrillo Isométrico se Materializa y Compacta
+    .to(brickGroup, {
+      scale: 1,
+      opacity: 1,
+      duration: 0.85,
+      ease: 'back.out(2.2)'
+    }, 0.25)
+    // Simulación de prensado y pulso de compactación
+    .to(brickGroup, {
+      scaleY: 0.94,
+      duration: 0.12,
+      ease: 'power2.in',
+      yoyo: true,
+      repeat: 1
+    }, 0.85)
+    // Destello de compactación central
+    .fromTo([grandIris, grandPupilCenter], 
+      { opacity: 0, scale: 0.4 }, 
+      { opacity: 0.8, scale: 1.4, duration: 0.4, ease: 'power2.out' }, 
+      0.88
+    )
+    // 3. TRANSICIÓN CINEMÁTICA: ZOOM SUAVE CREMA (#FAF7F2) QUE REVELA LA PÁGINA
+    .to(irisZoomCircle, {
+      scale: 130,
+      duration: 1.15,
+      ease: 'power4.inOut'
+    }, 1.05)
+    .to(introStage, {
+      scale: 2.8,
+      opacity: 0.1,
+      transformOrigin: '270px 180px',
+      duration: 0.95,
+      ease: 'power3.in'
+    }, 1.05)
+    .to(introContainer, {
+      opacity: 0,
+      duration: 0.6,
+      ease: 'power2.out'
+    }, 1.15)
+    .to(introCurtain, {
+      opacity: 0,
+      duration: 0.35,
+      ease: 'power2.out'
+    }, 1.85)
+    // 4. Entrada elegante del selector de ladrillos lateral
+    .to(lateralEyes, {
+      opacity: 1,
+      x: 0,
+      scale: 1,
+      duration: 0.6,
+      stagger: 0.08,
+      ease: 'back.out(1.4)'
+    }, 1.75);
+}
+
+function triggerHeroReveal() {
+  const hero = document.getElementById('scene-hero');
+  if (!hero || typeof gsap === 'undefined') return;
+  gsap.fromTo(hero.querySelectorAll('.kicker-pill, .heading-display, .lead-editorial, .hero-actions, .stat-item, .hero-telemetry-widget'), 
+    { opacity: 0, y: 35 },
+    { opacity: 1, y: 0, stagger: 0.08, duration: 1.0, ease: 'power3.out' }
+  );
+  initTelemetryLiveTicker();
+}
+
+/**
+ * Micro-animación de telemetría en tiempo real para Diapositiva 1 (Hero)
+ */
+let telemetryInterval = null;
+function initTelemetryLiveTicker() {
+  if (telemetryInterval) clearInterval(telemetryInterval);
+  const latVal = document.getElementById('telemetry-lat-val');
+  const sparkBars = document.querySelectorAll('#telemetry-sparkline .spark-bar');
+
+  if (!latVal) return;
+
+  const latencies = ['3.4 ms', '3.2 ms', '3.6 ms', '3.3 ms', '3.7 ms', '3.1 ms', '3.5 ms'];
+  let idx = 0;
+
+  telemetryInterval = setInterval(() => {
+    idx = (idx + 1) % latencies.length;
+    latVal.textContent = latencies[idx];
+
+    if (sparkBars.length > 0) {
+      sparkBars.forEach(bar => {
+        const h = Math.floor(Math.random() * 45 + 40);
+        bar.style.height = `${h}%`;
+        bar.classList.remove('active');
+      });
+      const activeBar = sparkBars[Math.floor(Math.random() * sparkBars.length)];
+      if (activeBar) activeBar.classList.add('active');
+    }
+  }, 1600);
+}
+
+/* ==========================================================================
+   1. CONTEXTUAL SLIDE TRANSITION MANAGER
+   ========================================================================== */
+let currentSlideIndex = 0;
+
+function initContextualDeck() {
+  const scenes = document.querySelectorAll('.slide-scene');
+  const navItems = document.querySelectorAll('.nav-eye-item, .nav-brick-item');
+  const deck = document.getElementById('viewport-deck');
+
+  if (!deck || scenes.length === 0) return;
+
+  const totalScenes = scenes.length;
+
+  // goToSlide: scroll nativo suave a la escena objetivo
+  window.goToSlide = function(targetIndex) {
+    if (targetIndex < 0 || targetIndex >= totalScenes) return;
+    scenes[targetIndex].scrollIntoView({ behavior: 'smooth', block: 'start' });
   };
 
-  if ("IntersectionObserver" in window) {
-    const loadObserver = new IntersectionObserver(([entry], observer) => {
-      if (!entry.isIntersecting) return;
-      observer.disconnect();
-      void loadViewer();
-    }, { rootMargin: "160px 0px" });
-    loadObserver.observe(wrapper);
-  } else {
-    void loadViewer();
-  }
-}
+  // Actualizar navegación lateral con IntersectionObserver
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
+        const idx = Array.from(scenes).indexOf(entry.target);
+        if (idx < 0) return;
+        currentSlideIndex = idx;
+        navItems.forEach((item, i) => {
+          item.classList.remove('anim-entrance', 'anim-exit');
+          if (i === idx) {
+            item.classList.add('active');
+            item.classList.add('anim-entrance');
+            setTimeout(() => item.classList.remove('anim-entrance'), 500);
+          } else {
+            item.classList.remove('active');
+          }
+        });
+      }
+    });
+  }, { threshold: 0.5, root: deck });
 
-initProductViewer();
+  scenes.forEach(scene => observer.observe(scene));
 
-function initSimulator() {
-  const canvas = document.querySelector("#comparison-canvas");
-  const context = canvas?.getContext("2d");
-  if (!canvas || !context) return;
-
-  const playButton = document.querySelector("#sim-play");
-  const resetButton = document.querySelector("#sim-reset");
-  const status = document.querySelector("#sim-status");
-  let progress = 0;
-  let playing = !prefersReducedMotion.matches;
-  let lastFrame = 0;
-  let frameId = 0;
-  let previousDetection = false;
-  let simulatorVisible = false;
-
-  function requestDraw() {
-    if (frameId || document.hidden || !simulatorVisible) return;
-    frameId = window.requestAnimationFrame(draw);
-  }
-
-  function resize() {
-    const bounds = canvas.getBoundingClientRect();
-    const pixelRatio = Math.min(window.devicePixelRatio || 1, 2);
-    canvas.width = Math.max(1, Math.round(bounds.width * pixelRatio));
-    canvas.height = Math.max(1, Math.round(bounds.height * pixelRatio));
-    context.setTransform(pixelRatio, 0, 0, pixelRatio, 0, 0);
-    requestDraw();
-  }
-
-  function drawPerson(x, y, color, label) {
-    context.save();
-    context.strokeStyle = color;
-    context.fillStyle = color;
-    context.lineWidth = 2;
-    context.lineCap = "round";
-    context.beginPath();
-    context.arc(x, y - 15, 5, 0, Math.PI * 2);
-    context.fill();
-    context.beginPath();
-    context.moveTo(x, y - 9);
-    context.lineTo(x, y + 7);
-    context.moveTo(x, y - 3);
-    context.lineTo(x + 8, y + 1);
-    context.moveTo(x, y + 7);
-    context.lineTo(x - 6, y + 16);
-    context.moveTo(x, y + 7);
-    context.lineTo(x + 7, y + 15);
-    context.stroke();
-    context.fillStyle = "#77766f";
-    context.font = "9px 'DM Sans', sans-serif";
-    context.fillText(label, x - 17, y + 31);
-    context.restore();
-  }
-
-  // Los umbrales son proporciones visuales de una escena conceptual, no mediciones reales.
-  function drawPanel({ left, top, width, height, kind, currentProgress }) {
-    const isNav = kind === "nav";
-    const foreground = isNav ? "#64715e" : "#b7745d";
-    const heading = isNav ? "SMARTNAV · ANTICIPACIÓN" : "BASTÓN BLANCO · CONTACTO";
-    const groundY = top + height * 0.76;
-    const startX = left + width * 0.12;
-    const obstacleX = left + width * 0.86;
-    const personX = startX + (obstacleX - startX) * currentProgress * 0.96;
-    const obstacleTop = groundY - height * 0.34;
-    const obstacleBottom = groundY;
-    const distance = obstacleX - personX;
-    const detected = isNav ? distance < width * 0.48 : distance < width * 0.105;
-
-    context.save();
-    context.fillStyle = "#f4f1e9";
-    context.fillRect(left, top, width, height);
-    context.fillStyle = "#5f5e58";
-    context.font = "600 9px 'DM Sans', sans-serif";
-    context.fillText(heading, left + 13, top + 18);
-
-    context.strokeStyle = "#d8d5cc";
-    context.lineWidth = 1;
-    context.beginPath();
-    context.moveTo(left + 12, groundY + 1);
-    context.lineTo(left + width - 12, groundY + 1);
-    context.stroke();
-
-    if (isNav) {
-      const radius = width * 0.57;
-      context.fillStyle = "rgba(141, 156, 133, 0.17)";
-      context.beginPath();
-      context.moveTo(personX, groundY - 5);
-      context.arc(personX, groundY - 5, radius, -Math.PI / 3, Math.PI / 3);
-      context.closePath();
-      context.fill();
-      context.strokeStyle = "rgba(100, 113, 94, 0.43)";
-      context.setLineDash([4, 5]);
-      context.beginPath();
-      context.arc(personX, groundY - 5, radius, -Math.PI / 3, Math.PI / 3);
-      context.stroke();
-      context.setLineDash([]);
-    } else {
-      context.strokeStyle = "rgba(183, 116, 93, 0.27)";
-      context.setLineDash([3, 5]);
-      context.beginPath();
-      context.arc(personX, groundY - 4, width * 0.1, -Math.PI / 3, Math.PI / 3);
-      context.stroke();
-      context.setLineDash([]);
-    }
-
-    context.fillStyle = detected ? foreground : "#d9d4c8";
-    context.fillRect(obstacleX - 7, obstacleTop, 14, obstacleBottom - obstacleTop);
-    context.beginPath();
-    context.arc(obstacleX, obstacleTop, 7, Math.PI, 0);
-    context.fill();
-
-    if (!isNav) {
-      context.strokeStyle = "#776c5d";
-      context.lineWidth = 1.5;
-      context.beginPath();
-      context.moveTo(personX + 6, groundY + 9);
-      context.lineTo(Math.min(personX + width * 0.22, obstacleX - 3), groundY + 4);
-      context.stroke();
-    }
-    drawPerson(personX, groundY - 2, foreground, isNav ? "persona" : "persona");
-
-    const markerX = isNav ? personX + Math.min(width * 0.28, distance * 0.7) : obstacleX - 13;
-    if (detected) {
-      context.fillStyle = foreground;
-      context.beginPath();
-      context.arc(markerX, obstacleTop - 15, 3, 0, Math.PI * 2);
-      context.fill();
-      context.fillStyle = foreground;
-      context.font = "600 8px 'DM Sans', sans-serif";
-      context.fillText(isNav ? "AVISO A DISTANCIA" : "CONTACTO", Math.max(left + 11, markerX - 38), obstacleTop - 24);
-    } else {
-      context.fillStyle = "#8a8880";
-      context.font = "8px 'DM Sans', sans-serif";
-      context.fillText(isNav ? "campo amplio · 120°" : "detección al alcance", left + 13, groundY + 21);
-    }
-    context.restore();
-    return detected;
-  }
-
-  function draw(timestamp = 0) {
-    frameId = 0;
-    if (document.hidden) return;
-    if (playing && lastFrame) {
-      progress = (progress + (timestamp - lastFrame) / 12500) % 1;
-    }
-    lastFrame = playing ? timestamp : 0;
-
-    const bounds = canvas.getBoundingClientRect();
-    const width = bounds.width;
-    const height = bounds.height;
-    context.clearRect(0, 0, width, height);
-
-    const gap = 12;
-    const panelWidth = (width - gap) / 2;
-    const paddingTop = 3;
-    const panelHeight = height - paddingTop - 4;
-    const navDetected = drawPanel({ left: 0, top: paddingTop, width: panelWidth, height: panelHeight, kind: "nav", currentProgress: progress });
-    const caneDetected = drawPanel({ left: panelWidth + gap, top: paddingTop, width: panelWidth, height: panelHeight, kind: "cane", currentProgress: progress });
-
-    if (navDetected !== previousDetection) {
-      status.textContent = navDetected
-        ? "SmartNav detecta el obstáculo con anticipación; el bastón aún no ha llegado al punto de contacto."
-        : "SmartNav y el bastón muestran momentos de detección distintos en este escenario conceptual.";
-      previousDetection = navDetected;
-    } else if (caneDetected && navDetected) {
-      status.textContent = "En este momento, ambos métodos han identificado el obstáculo; SmartNav lo señaló antes en la simulación.";
-    }
-    if (playing) requestDraw();
-  }
-
-  function updatePlayButton() {
-    const icon = playButton.querySelector("svg");
-    if (icon) icon.setAttribute("data-lucide", playing ? "pause" : "play");
-    playButton.querySelector("span").textContent = playing ? "Pausar" : "Reanudar";
-    window.lucide?.createIcons();
-  }
-
-  playButton.addEventListener("click", () => {
-    playing = !playing;
-    lastFrame = 0;
-    updatePlayButton();
-    requestDraw();
-    playTone(playing ? 580 : 390);
+  // Clics en la nav lateral
+  navItems.forEach((item, index) => {
+    item.addEventListener('click', () => window.goToSlide(index));
   });
-  resetButton.addEventListener("click", () => {
-    progress = 0;
-    previousDetection = false;
-    status.textContent = "SmartNav detecta el obstáculo con anticipación; el bastón lo confirma al contacto.";
-    if (!playing) {
-      playing = true;
-      updatePlayButton();
-    }
-    lastFrame = 0;
-    requestDraw();
-    playTone(500);
-  });
-  const resizeObserver = new ResizeObserver(resize);
-  resizeObserver.observe(canvas);
-  resize();
-  updatePlayButton();
-  const visibilityObserver = new IntersectionObserver(([entry]) => {
-    simulatorVisible = entry.isIntersecting;
-    if (!simulatorVisible && frameId) {
-      window.cancelAnimationFrame(frameId);
-      frameId = 0;
-      lastFrame = 0;
-    } else requestDraw();
-  });
-  visibilityObserver.observe(canvas);
-  requestDraw();
 
-  document.addEventListener("visibilitychange", () => {
-    if (document.hidden) {
-      if (frameId) window.cancelAnimationFrame(frameId);
-      frameId = 0;
-      lastFrame = 0;
-    } else requestDraw();
+  // Links internos tipo href="#scene-X"
+  document.querySelectorAll('a[href^="#scene-"]').forEach(anchor => {
+    anchor.addEventListener('click', (e) => {
+      e.preventDefault();
+      const target = document.querySelector(anchor.getAttribute('href'));
+      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+  });
+
+  // Teclado: flechas y espacio
+  window.addEventListener('keydown', (e) => {
+    if (e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' ') {
+      e.preventDefault();
+      if (currentSlideIndex < totalScenes - 1) window.goToSlide(currentSlideIndex + 1);
+    } else if (e.key === 'ArrowUp' || e.key === 'PageUp') {
+      e.preventDefault();
+      if (currentSlideIndex > 0) window.goToSlide(currentSlideIndex - 1);
+    }
   });
 }
 
-initSimulator();
+/* ==========================================================================
+   2. THREE.JS 3D: MÁQUINA COMPACTADORA DE LADRILLOS EN VISTA ISOMÉTRICA
+   Modelo técnico interactivo con chasis de acero, tolva, pistón y ladrillo ecológico
+   ========================================================================== */
+function initThreeJsViewer() {
+  const container = document.getElementById('canvas-3d-glasses');
+  if (!container) return;
+
+  if (typeof THREE === 'undefined') {
+    renderCanvas3DFallback(container);
+    return;
+  }
+
+  const width = container.clientWidth || 600;
+  const height = container.clientHeight || 500;
+
+  const scene = new THREE.Scene();
+  scene.background = new THREE.Color(0xE6D7C4); // Beige Cálido (#E6D7C4)
+
+  const camera = new THREE.PerspectiveCamera(38, width / height, 0.1, 100);
+  camera.position.set(3.2, 2.6, 3.2);
+
+  const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
+  renderer.setSize(width, height);
+  renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
+  renderer.shadowMap.enabled = true;
+  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+  container.appendChild(renderer.domElement);
+
+  // Iluminación de Estudio Industrial (Navy & Warm Beige)
+  const ambientLight = new THREE.AmbientLight(0xFFFFFF, 1.35);
+  scene.add(ambientLight);
+
+  const dirLight1 = new THREE.DirectionalLight(0xF4ECE1, 1.6);
+  dirLight1.position.set(5, 7, 5);
+  dirLight1.castShadow = true;
+  dirLight1.shadow.mapSize.width = 1024;
+  dirLight1.shadow.mapSize.height = 1024;
+  scene.add(dirLight1);
+
+  const dirLight2 = new THREE.DirectionalLight(0xD5C4AD, 0.9);
+  dirLight2.position.set(-5, -2, -3);
+  scene.add(dirLight2);
+
+  const dirLight3 = new THREE.DirectionalLight(0x212842, 0.5);
+  dirLight3.position.set(2, -4, 4);
+  scene.add(dirLight3);
+
+  // Grupo Principal de la Máquina Compactadora
+  const machineGroup = new THREE.Group();
+  scene.add(machineGroup);
+  // Alias para mantener compatibilidad total con referencias internas
+  const glassesGroup = machineGroup;
+
+  // Materiales Industriales PBR (Paleta Navy Blue, Beige Titanio y Terracota)
+  const steelDarkMat = new THREE.MeshStandardMaterial({
+    color: 0x212842, // Acero Industrial Navy Blue
+    roughness: 0.28,
+    metalness: 0.85
+  });
+
+  const steelBrightMat = new THREE.MeshStandardMaterial({
+    color: 0xD5C4AD, // Columnas en Beige Titanio
+    roughness: 0.22,
+    metalness: 0.92
+  });
+
+  const chromeMat = new THREE.MeshStandardMaterial({
+    color: 0xF5F2EA, // Vástago de pistón cromado espejo
+    roughness: 0.08,
+    metalness: 0.98
+  });
+
+  const terracottaMat = new THREE.MeshStandardMaterial({
+    color: 0xD4622C, // Arcilla de Ladrillo Terracota (Imagen de referencia)
+    roughness: 0.85,
+    metalness: 0.04
+  });
+
+  const terracottaHoleMat = new THREE.MeshStandardMaterial({
+    color: 0x9E3B13, // Sombra interior orificios ladrillo
+    roughness: 0.9,
+    metalness: 0.02
+  });
+
+  const brassMat = new THREE.MeshStandardMaterial({
+    color: 0xC88A32, // Manómetro y acoples de bronce
+    roughness: 0.25,
+    metalness: 0.88
+  });
+
+  const rubberHoseMat = new THREE.MeshStandardMaterial({
+    color: 0x161C2E,
+    roughness: 0.65,
+    metalness: 0.15
+  });
+
+  /* ------------------------------------------------------------------------
+     1. BASE Y ESTRUCTURA DE ANCLAJE INDUSTRIAL
+     ------------------------------------------------------------------------ */
+  // Placa base estructural
+  const baseGeo = new THREE.BoxGeometry(2.1, 0.12, 1.5);
+  const baseMesh = new THREE.Mesh(baseGeo, steelDarkMat);
+  baseMesh.position.set(0, -1.05, 0);
+  baseMesh.receiveShadow = true;
+  machineGroup.add(baseMesh);
+
+  // Zapatas y pernos de fijación en las 4 esquinas
+  const footingOffsets = [
+    [-0.92, -0.62], [0.92, -0.62],
+    [-0.92, 0.62], [0.92, 0.62]
+  ];
+  footingOffsets.forEach(([fx, fz]) => {
+    const footGeo = new THREE.BoxGeometry(0.24, 0.06, 0.24);
+    const footMesh = new THREE.Mesh(footGeo, steelBrightMat);
+    footMesh.position.set(fx, -0.96, fz);
+    machineGroup.add(footMesh);
+
+    const boltGeo = new THREE.CylinderGeometry(0.025, 0.025, 0.06, 12);
+    const boltMesh = new THREE.Mesh(boltGeo, chromeMat);
+    boltMesh.position.set(fx, -0.9, fz);
+    machineGroup.add(boltMesh);
+  });
+
+  /* ------------------------------------------------------------------------
+     2. CUATRO COLUMNAS GUÍA REFORZADAS (Acero Templado Isométrico)
+     ------------------------------------------------------------------------ */
+  const colGeo = new THREE.CylinderGeometry(0.048, 0.048, 2.5, 24);
+  const colOffsets = [
+    [-0.72, -0.44], [0.72, -0.44],
+    [-0.72, 0.44], [0.72, 0.44]
+  ];
+  colOffsets.forEach(([cx, cz]) => {
+    const colMesh = new THREE.Mesh(colGeo, steelBrightMat);
+    colMesh.position.set(cx, 0.2, cz);
+    colMesh.castShadow = true;
+    machineGroup.add(colMesh);
+  });
+
+  /* ------------------------------------------------------------------------
+     3. CORONA SUPERIOR & CHIP DE COMPRESIÓN
+     ------------------------------------------------------------------------ */
+  const topCrownGeo = new THREE.BoxGeometry(1.68, 0.2, 1.12);
+  const topCrownMesh = new THREE.Mesh(topCrownGeo, steelDarkMat);
+  topCrownMesh.position.set(0, 1.45, 0);
+  topCrownMesh.castShadow = true;
+  machineGroup.add(topCrownMesh);
+
+  // Placa central de refuerzo de cilindro
+  const cylMountGeo = new THREE.CylinderGeometry(0.32, 0.32, 0.08, 28);
+  const cylMount = new THREE.Mesh(cylMountGeo, steelBrightMat);
+  cylMount.position.set(0, 1.58, 0);
+  machineGroup.add(cylMount);
+
+  /* ------------------------------------------------------------------------
+     4. CILINDRO HIDRÁULICO DE ALTA PRESIÓN Y PISTÓN DESLIZANTE
+     ------------------------------------------------------------------------ */
+  // Cilindro hidráulico superior
+  const cylBodyGeo = new THREE.CylinderGeometry(0.2, 0.2, 0.75, 32);
+  const cylBody = new THREE.Mesh(cylBodyGeo, steelDarkMat);
+  cylBody.position.set(0, 1.98, 0);
+  cylBody.castShadow = true;
+  machineGroup.add(cylBody);
+
+  // Tapa superior del cilindro con válvula
+  const cylCapGeo = new THREE.CylinderGeometry(0.22, 0.22, 0.08, 32);
+  const cylCap = new THREE.Mesh(cylCapGeo, brassMat);
+  cylCap.position.set(0, 2.38, 0);
+  machineGroup.add(cylCap);
+
+  // Grupo móvil del prensador (se desplaza durante el ciclo de compactación)
+  const presserGroup = new THREE.Group();
+  machineGroup.add(presserGroup);
+
+  // Vástago de pistón cromado
+  const pistonRodGeo = new THREE.CylinderGeometry(0.09, 0.09, 0.95, 28);
+  const pistonRod = new THREE.Mesh(pistonRodGeo, chromeMat);
+  pistonRod.position.set(0, 1.1, 0);
+  presserGroup.add(pistonRod);
+
+  // Plato compactador / estampador superior
+  const ramPlateGeo = new THREE.BoxGeometry(1.15, 0.18, 0.76);
+  const ramPlate = new THREE.Mesh(ramPlateGeo, steelDarkMat);
+  ramPlate.position.set(0, 0.65, 0);
+  ramPlate.castShadow = true;
+  presserGroup.add(ramPlate);
+
+  // Machos superiores de compresión que entran al molde
+  const stampHeadGeo = new THREE.BoxGeometry(1.05, 0.12, 0.68);
+  const stampHead = new THREE.Mesh(stampHeadGeo, steelBrightMat);
+  stampHead.position.set(0, 0.5, 0);
+  presserGroup.add(stampHead);
+
+  // Bujes de guía en las 4 esquinas del plato
+  colOffsets.forEach(([cx, cz]) => {
+    const bushingGeo = new THREE.CylinderGeometry(0.075, 0.075, 0.22, 18);
+    const bushing = new THREE.Mesh(bushingGeo, brassMat);
+    bushing.position.set(cx, 0.65, cz);
+    presserGroup.add(bushing);
+  });
+
+  /* ------------------------------------------------------------------------
+     5. CÁMARA DE MOLDEO / MATRIZ DE LADRILLO MODULAR
+     ------------------------------------------------------------------------ */
+  const moldBoxGeo = new THREE.BoxGeometry(1.28, 0.58, 0.88);
+  const moldBox = new THREE.Mesh(moldBoxGeo, steelDarkMat);
+  moldBox.position.set(0, -0.15, 0);
+  moldBox.castShadow = true;
+  machineGroup.add(moldBox);
+
+  // Marco de la matriz
+  const moldFrameGeo = new THREE.BoxGeometry(1.36, 0.08, 0.96);
+  const moldFrame = new THREE.Mesh(moldFrameGeo, steelBrightMat);
+  moldFrame.position.set(0, 0.14, 0);
+  machineGroup.add(moldFrame);
+
+  // Machos cilíndricos interiores del molde (para agujeros del ladrillo ecológico)
+  const core1Geo = new THREE.CylinderGeometry(0.07, 0.07, 0.52, 20);
+  const core1 = new THREE.Mesh(core1Geo, chromeMat);
+  core1.position.set(-0.22, -0.15, 0);
+  machineGroup.add(core1);
+
+  const core2 = new THREE.Mesh(core1Geo, chromeMat);
+  core2.position.set(0.22, -0.15, 0);
+  machineGroup.add(core2);
+
+  /* ------------------------------------------------------------------------
+     6. TOLVA DE ALIMENTACIÓN SUPERIOR (Hopper de mezcla ecológica)
+     ------------------------------------------------------------------------ */
+  // Tolva troncocónica invertida montada en la parte superior trasera
+  const hopperGeo = new THREE.CylinderGeometry(0.5, 0.26, 0.58, 4);
+  hopperGeo.rotateY(Math.PI / 4);
+  const hopperMesh = new THREE.Mesh(hopperGeo, steelDarkMat);
+  hopperMesh.position.set(0, 0.52, -0.62);
+  hopperMesh.castShadow = true;
+  machineGroup.add(hopperMesh);
+
+  // Borde superior reforzado de la tolva
+  const hopperRimGeo = new THREE.BoxGeometry(0.74, 0.06, 0.74);
+  const hopperRim = new THREE.Mesh(hopperRimGeo, steelBrightMat);
+  hopperRim.position.set(0, 0.82, -0.62);
+  machineGroup.add(hopperRim);
+
+  /* ------------------------------------------------------------------------
+     7. EL LADRILLO ECOLÓGICO COMPACTADO (Inspirado en la imagen de referencia)
+     ------------------------------------------------------------------------ */
+  const brickEntityGroup = new THREE.Group();
+  machineGroup.add(brickEntityGroup);
+
+  // Cuerpo rectangular del ladrillo en terracota
+  const brickBodyGeo = new THREE.BoxGeometry(0.82, 0.28, 0.46);
+  const brickBody = new THREE.Mesh(brickBodyGeo, terracottaMat);
+  brickBody.position.set(0, 0.28, 0.06);
+  brickBody.castShadow = true;
+  brickEntityGroup.add(brickBody);
+
+  // 2 Perforaciones cilíndricas del bloque ecológico
+  const brickHoleGeo = new THREE.CylinderGeometry(0.072, 0.072, 0.29, 20);
+  const brickHole1 = new THREE.Mesh(brickHoleGeo, terracottaHoleMat);
+  brickHole1.position.set(-0.22, 0.28, 0.06);
+  brickEntityGroup.add(brickHole1);
+
+  const brickHole2 = new THREE.Mesh(brickHoleGeo, terracottaHoleMat);
+  brickHole2.position.set(0.22, 0.28, 0.06);
+  brickEntityGroup.add(brickHole2);
+
+  // Bandeja de desmolde / expulsión bajo el ladrillo
+  const ejectTrayGeo = new THREE.BoxGeometry(0.96, 0.06, 0.56);
+  const ejectTray = new THREE.Mesh(ejectTrayGeo, steelBrightMat);
+  ejectTray.position.set(0, 0.12, 0.06);
+  brickEntityGroup.add(ejectTray);
+
+  /* ------------------------------------------------------------------------
+     8. DETALLES INDUSTRIALES: MANÓMETRO, PALANCA Y LÍNEAS HIDRÁULICAS
+     ------------------------------------------------------------------------ */
+  // Manómetro de presión hidráulica (0 a 10 Toneladas)
+  const gaugeHousingGeo = new THREE.CylinderGeometry(0.12, 0.12, 0.08, 24);
+  gaugeHousingGeo.rotateX(Math.PI / 2);
+  const gaugeHousing = new THREE.Mesh(gaugeHousingGeo, brassMat);
+  gaugeHousing.position.set(0.55, 1.1, 0.48);
+  machineGroup.add(gaugeHousing);
+
+  const gaugeDialGeo = new THREE.CircleGeometry(0.1, 24);
+  const gaugeDialMat = new THREE.MeshBasicMaterial({ color: 0xFAF7F2 });
+  const gaugeDial = new THREE.Mesh(gaugeDialGeo, gaugeDialMat);
+  gaugeDial.position.set(0.55, 1.1, 0.525);
+  machineGroup.add(gaugeDial);
+
+  // Aguja del manómetro (animable con la presión)
+  const needleGeo = new THREE.BoxGeometry(0.012, 0.075, 0.01);
+  const needleMat = new THREE.MeshBasicMaterial({ color: 0xC85A32 });
+  const gaugeNeedle = new THREE.Mesh(needleGeo, needleMat);
+  gaugeNeedle.position.set(0.55, 1.12, 0.53);
+  machineGroup.add(gaugeNeedle);
+
+  // Palanca mecánica lateral de accionamiento
+  const leverArmCurve = new THREE.CatmullRomCurve3([
+    new THREE.Vector3(0.68, 0.15, 0.2),
+    new THREE.Vector3(1.05, 0.45, 0.4),
+    new THREE.Vector3(1.35, 0.72, 0.55)
+  ]);
+  const leverGeo = new THREE.TubeGeometry(leverArmCurve, 18, 0.03, 12, false);
+  const leverMesh = new THREE.Mesh(leverGeo, steelBrightMat);
+  machineGroup.add(leverMesh);
+
+  // Mango ergonómico de la palanca
+  const handleGeo = new THREE.CylinderGeometry(0.045, 0.045, 0.26, 16);
+  handleGeo.rotateZ(Math.PI / 4);
+  const handleMesh = new THREE.Mesh(handleGeo, rubberHoseMat);
+  handleMesh.position.set(1.35, 0.72, 0.55);
+  machineGroup.add(handleMesh);
+
+  // Mangueras hidráulicas flexibles
+  const hoseCurve = new THREE.CatmullRomCurve3([
+    new THREE.Vector3(0.2, 2.1, 0),
+    new THREE.Vector3(0.55, 1.8, 0.3),
+    new THREE.Vector3(0.55, 1.25, 0.48)
+  ]);
+  const hoseGeo = new THREE.TubeGeometry(hoseCurve, 20, 0.024, 10, false);
+  const hoseMesh = new THREE.Mesh(hoseGeo, rubberHoseMat);
+  machineGroup.add(hoseMesh);
+
+  // Ondas / pulso de compactación (anillos de eco para compatibilidad total)
+  const echoWaves = [];
+  for (let i = 0; i < 3; i++) {
+    const ringGeo = new THREE.RingGeometry(0.2 + i * 0.2, 0.24 + i * 0.2, 32);
+    ringGeo.rotateX(Math.PI / 2);
+    const ringMat = new THREE.MeshBasicMaterial({
+      color: 0xC85A32,
+      transparent: true,
+      opacity: 0,
+      side: THREE.DoubleSide
+    });
+    const ringMesh = new THREE.Mesh(ringGeo, ringMat);
+    ringMesh.position.set(0, 0.16, 0.06);
+    machineGroup.add(ringMesh);
+    echoWaves.push(ringMesh);
+  }
+
+  /* ------------------------------------------------------------------------
+     9. CONTROLES DE RATÓN, ARRASTRE Y PERSPECTIVA ISOMÉTRICA
+     ------------------------------------------------------------------------ */
+  let isDragging = false;
+  let prevMouseX = 0, prevMouseY = 0;
+  // Ángulo isométrico clásico predeterminado
+  let targetRotX = 0.32, targetRotY = -0.65;
+  let autoRotate = true;
+  let isPressingCycle = false;
+  let pressCycleTime = 0;
+
+  container.addEventListener('mousedown', (e) => {
+    isDragging = true;
+    prevMouseX = e.clientX;
+    prevMouseY = e.clientY;
+    autoRotate = false;
+  });
+
+  window.addEventListener('mouseup', () => isDragging = false);
+
+  window.addEventListener('mousemove', (e) => {
+    if (!isDragging) return;
+    targetRotY += (e.clientX - prevMouseX) * 0.008;
+    targetRotX += (e.clientY - prevMouseY) * 0.008;
+    targetRotX = Math.max(-0.6, Math.min(0.65, targetRotX));
+    prevMouseX = e.clientX;
+    prevMouseY = e.clientY;
+  });
+
+  // Soporte táctil en dispositivos móviles
+  container.addEventListener('touchstart', (e) => {
+    if (e.touches.length === 1) {
+      isDragging = true;
+      prevMouseX = e.touches[0].clientX;
+      prevMouseY = e.touches[0].clientY;
+      autoRotate = false;
+    }
+  }, { passive: true });
+
+  window.addEventListener('touchend', () => isDragging = false);
+
+  window.addEventListener('touchmove', (e) => {
+    if (!isDragging || e.touches.length !== 1) return;
+    targetRotY += (e.touches[0].clientX - prevMouseX) * 0.008;
+    targetRotX += (e.touches[0].clientY - prevMouseY) * 0.008;
+    targetRotX = Math.max(-0.6, Math.min(0.65, targetRotX));
+    prevMouseX = e.touches[0].clientX;
+    prevMouseY = e.touches[0].clientY;
+  }, { passive: true });
+
+  /* ------------------------------------------------------------------------
+     10. ACCIONES DE BOTONES HUD
+     ------------------------------------------------------------------------ */
+  const btnReset = document.getElementById('btn-3d-reset');
+  const btnPress = document.getElementById('btn-3d-echo');
+  const btnIso = document.getElementById('btn-3d-temples');
+
+  if (btnReset) {
+    btnReset.addEventListener('click', () => {
+      autoRotate = !autoRotate;
+      btnReset.textContent = autoRotate ? 'Pausar Giro' : 'Rotar 360°';
+    });
+  }
+
+  // Animación del Ciclo de Compactación y Prensado
+  function triggerCompactionCycle() {
+    if (isPressingCycle) return;
+    isPressingCycle = true;
+    pressCycleTime = 0;
+    autoRotate = false;
+
+    if (btnPress) btnPress.textContent = 'Prensando... (10 Tn)';
+
+    if (typeof gsap !== 'undefined') {
+      const tl = gsap.timeline({
+        onComplete: () => {
+          isPressingCycle = false;
+          if (btnPress) btnPress.textContent = 'Ciclo de Prensado';
+        }
+      });
+
+      // 1. Descenso potente del pistón hacia el molde
+      tl.to(presserGroup.position, { y: -0.42, duration: 0.65, ease: 'power3.in' })
+        // 2. Pico de compresión: vibración del chasis y aguja de manómetro
+        .to(machineGroup.position, { y: '+=0.03', duration: 0.05, yoyo: true, repeat: 5 })
+        .to(gaugeNeedle.rotation, { z: -Math.PI * 0.7, duration: 0.2 }, '<')
+        // Ondas de choque / presión
+        .call(() => {
+          echoWaves.forEach((w, idx) => {
+            gsap.fromTo(w.scale, { x: 0.8, y: 0.8 }, { x: 2.2 + idx * 0.4, y: 2.2 + idx * 0.4, duration: 0.5 });
+            gsap.fromTo(w.material, { opacity: 0.7 }, { opacity: 0, duration: 0.5 });
+          });
+        })
+        // 3. Elevación del pistón
+        .to(presserGroup.position, { y: 0, duration: 0.75, ease: 'power2.out' }, '+=0.3')
+        .to(gaugeNeedle.rotation, { z: 0, duration: 0.5 }, '<')
+        // 4. Elevación y entrega del ladrillo recién compactado
+        .to(brickEntityGroup.position, { y: 0.18, duration: 0.55, ease: 'back.out(1.8)' }, '-=0.4')
+        // 5. Asentamiento en bandeja de desmolde
+        .to(brickEntityGroup.position, { y: 0, duration: 0.4, ease: 'power2.inOut' }, '+=0.6');
+    } else {
+      setTimeout(() => {
+        isPressingCycle = false;
+        if (btnPress) btnPress.textContent = 'Ciclo de Prensado';
+      }, 1800);
+    }
+  }
+
+  if (btnPress) {
+    btnPress.textContent = 'Ciclo de Prensado';
+    btnPress.addEventListener('click', triggerCompactionCycle);
+  }
+
+  // Vista Isométrica CAD (30°/30°)
+  if (btnIso) {
+    btnIso.textContent = 'Vista Isométrica';
+    btnIso.addEventListener('click', () => {
+      autoRotate = false;
+      targetRotX = 0.38;
+      targetRotY = -Math.PI / 4; // Ángulo isométrico clásico 45°
+    });
+  }
+
+  /* ------------------------------------------------------------------------
+     11. HOTSPOTS FLOTANTES INTERACTIVOS EN LA MÁQUINA
+     ------------------------------------------------------------------------ */
+  const hotspots = document.querySelectorAll('.model-hotspot');
+  hotspots.forEach(hotspot => {
+    const trigger = hotspot.querySelector('.hotspot-trigger');
+    const comp = hotspot.getAttribute('data-component');
+
+    if (trigger) {
+      trigger.addEventListener('click', (e) => {
+        e.stopPropagation();
+        const wasActive = hotspot.classList.contains('active');
+        hotspots.forEach(h => h.classList.remove('active'));
+        if (!wasActive) hotspot.classList.add('active');
+
+        autoRotate = false;
+        if (comp === 'tolva' || comp === 'sensors') {
+          targetRotX = 0.42;
+          targetRotY = Math.PI - 0.4; // Vista superior de la tolva
+        } else if (comp === 'cilindro' || comp === 'temple-left') {
+          targetRotX = 0.22;
+          targetRotY = -0.3; // Vista del pistón hidráulico
+        } else if (comp === 'matriz' || comp === 'temple-right') {
+          targetRotX = 0.15;
+          targetRotY = 0.4; // Vista de la cámara de moldeo
+        } else if (comp === 'ladrillo' || comp === 'frame') {
+          targetRotX = 0.35;
+          targetRotY = -Math.PI / 4; // Vista isométrica del ladrillo expulsado
+        }
+      });
+    }
+  });
+
+  // Clic exterior oculta tarjetas de hotspots abiertas
+  container.addEventListener('click', () => {
+    hotspots.forEach(h => h.classList.remove('active'));
+  });
+
+  /* ------------------------------------------------------------------------
+     12. BUCLE DE RENDERIZADO THREE.JS
+     ------------------------------------------------------------------------ */
+  let clock = new THREE.Clock();
+  function animate3D() {
+    requestAnimationFrame(animate3D);
+    const elapsedTime = clock.getElapsedTime();
+
+    if (autoRotate) {
+      targetRotY += 0.004;
+    }
+
+    machineGroup.rotation.y += (targetRotY - machineGroup.rotation.y) * 0.08;
+    machineGroup.rotation.x += (targetRotX - machineGroup.rotation.x) * 0.08;
+
+    // Leve flotación armónica
+    machineGroup.position.y = Math.sin(elapsedTime * 1.4) * 0.025;
+
+    renderer.render(scene, camera);
+  }
+  animate3D();
+
+  window.addEventListener('resize', () => {
+    if (!container) return;
+    camera.aspect = container.clientWidth / container.clientHeight;
+    camera.updateProjectionMatrix();
+    renderer.setSize(container.clientWidth, container.clientHeight);
+  });
+}
+
+function renderCanvas3DFallback(container) {
+  const canvas = document.createElement('canvas');
+  canvas.width = container.clientWidth || 600;
+  canvas.height = container.clientHeight || 500;
+  container.appendChild(canvas);
+  const ctx = canvas.getContext('2d');
+  let angle = 0;
+
+  function drawFallback() {
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    const cx = canvas.width / 2;
+    const cy = canvas.height / 2;
+
+    ctx.save();
+    ctx.translate(cx, cy);
+
+    // Dibujo isométrico en Canvas 2D de la Máquina Compactadora de Ladrillos
+    ctx.strokeStyle = '#212842';
+    ctx.lineWidth = 3;
+
+    // Chasis
+    ctx.strokeRect(-120, -140, 240, 280);
+
+    // Cilindro Superior
+    ctx.fillStyle = '#212842';
+    ctx.fillRect(-45, -190, 90, 60);
+
+    // Tolva
+    ctx.beginPath();
+    ctx.moveTo(-70, -110);
+    ctx.lineTo(70, -110);
+    ctx.lineTo(40, -40);
+    ctx.lineTo(-40, -40);
+    ctx.closePath();
+    ctx.fillStyle = '#D5C4AD';
+    ctx.fill();
+    ctx.stroke();
+
+    // Ladrillo Isométrico en Centro
+    ctx.fillStyle = '#E27237';
+    ctx.beginPath();
+    ctx.moveTo(0, 20);
+    ctx.lineTo(80, 50);
+    ctx.lineTo(0, 80);
+    ctx.lineTo(-80, 50);
+    ctx.closePath();
+    ctx.fill();
+    ctx.stroke();
+
+    ctx.fillStyle = '#C45120';
+    ctx.beginPath();
+    ctx.moveTo(-80, 50);
+    ctx.lineTo(0, 80);
+    ctx.lineTo(0, 130);
+    ctx.lineTo(-80, 100);
+    ctx.closePath();
+    ctx.fill();
+    ctx.stroke();
+
+    ctx.fillStyle = '#9E3B13';
+    ctx.beginPath();
+    ctx.moveTo(0, 80);
+    ctx.lineTo(80, 50);
+    ctx.lineTo(80, 100);
+    ctx.lineTo(0, 130);
+    ctx.closePath();
+    ctx.fill();
+    ctx.stroke();
+
+    ctx.font = '700 12px "JetBrains Mono"';
+    ctx.fillStyle = '#212842';
+    ctx.textAlign = 'center';
+    ctx.fillText('MÁQUINA COMPACTADORA DE LADRILLOS (ISOMÉTRICO)', 0, 160);
+
+    ctx.restore();
+    angle += 0.01;
+    requestAnimationFrame(drawFallback);
+  }
+  drawFallback();
+}
+    const cx = canvas.width / 2;
+    const cy = canvas.height / 2 + Math.sin(angle) * 8;
+    ctx.strokeStyle = '#181818'; ctx.lineWidth = 4;
+    ctx.beginPath();
+    ctx.roundRect(cx - 160, cy - 40, 120, 80, 18);
+    ctx.roundRect(cx + 40, cy - 40, 120, 80, 18);
+    ctx.stroke();
+    ctx.strokeStyle = '#DCCFC2'; ctx.beginPath();
+    ctx.moveTo(cx - 40, cy - 10); ctx.quadraticCurveTo(cx, cy - 30, cx + 40, cy - 10);
+    ctx.stroke();
+    ctx.strokeStyle = 'rgba(220, 207, 194, 0.65)'; ctx.beginPath();
+    ctx.arc(cx, cy, 140 + Math.sin(angle * 2) * 20, -Math.PI / 4, Math.PI / 4);
+    ctx.stroke();
+    angle += 0.02;
+    requestAnimationFrame(drawFallback);
+  }
+  drawFallback();
+}
+
+/* ==========================================================================
+   3. SIMULATOR 2D: "TOCAR VS. ANTICIPAR"
+   Usuario en Caviar Black (#181818) + Obstáculo en Soft Beige (#DCCFC2) + Ondas 60fps
+   ========================================================================== */
+function initSimulator2D() {
+  const canvas = document.getElementById('canvas-sim-2d');
+  if (!canvas) return;
+
+  const ctx = canvas.getContext('2d');
+  const modeCaneBtn = document.getElementById('mode-cane-btn');
+  const modeSmartNavBtn = document.getElementById('mode-smartnav-btn');
+  const metricDistance = document.getElementById('sim-dist-val');
+  const metricHaptic = document.getElementById('sim-haptic-val');
+  const metricReaction = document.getElementById('sim-reaction-val');
+
+  let mode = 'smartnav';
+  let canvasW = canvas.clientWidth, canvasH = canvas.clientHeight;
+
+  function resizeCanvas() {
+    canvasW = canvas.clientWidth; canvasH = canvas.clientHeight;
+    canvas.width = canvasW * window.devicePixelRatio;
+    canvas.height = canvasH * window.devicePixelRatio;
+    ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+  }
+  resizeCanvas();
+  window.addEventListener('resize', resizeCanvas);
+
+  // Entities
+  const walker = { x: 80, y: canvasH / 2, radius: 18 };
+  // Obstáculo en Soft Beige (#DCCFC2) con Borde Caviar (#181818)
+  const obstacle = { x: 330, y: canvasH / 2, radius: 24, isDragging: false };
+
+  function getCoords(e) {
+    const rect = canvas.getBoundingClientRect();
+    const cx = e.touches ? e.touches[0].clientX : e.clientX;
+    const cy = e.touches ? e.touches[0].clientY : e.clientY;
+    return { x: cx - rect.left, y: cy - rect.top };
+  }
+
+  canvas.addEventListener('mousedown', (e) => {
+    const c = getCoords(e);
+    if (Math.hypot(c.x - obstacle.x, c.y - obstacle.y) < obstacle.radius + 15) obstacle.isDragging = true;
+  });
+  window.addEventListener('mousemove', (e) => {
+    if (!obstacle.isDragging) return;
+    const c = getCoords(e);
+    obstacle.x = Math.max(160, Math.min(canvasW - 40, c.x));
+    obstacle.y = Math.max(40, Math.min(canvasH - 40, c.y));
+  });
+  window.addEventListener('mouseup', () => obstacle.isDragging = false);
+
+  canvas.addEventListener('touchstart', (e) => {
+    const c = getCoords(e);
+    if (Math.hypot(c.x - obstacle.x, c.y - obstacle.y) < obstacle.radius + 20) obstacle.isDragging = true;
+  });
+  window.addEventListener('touchmove', (e) => {
+    if (!obstacle.isDragging) return;
+    const c = getCoords(e);
+    obstacle.x = Math.max(160, Math.min(canvasW - 40, c.x));
+    obstacle.y = Math.max(40, Math.min(canvasH - 40, c.y));
+  });
+  window.addEventListener('touchend', () => obstacle.isDragging = false);
+
+  if (modeCaneBtn && modeSmartNavBtn) {
+    modeCaneBtn.addEventListener('click', () => {
+      mode = 'cane';
+      modeCaneBtn.classList.add('active');
+      modeSmartNavBtn.classList.remove('active');
+      metricReaction.textContent = 'Reactivo (Tardío)';
+    });
+    modeSmartNavBtn.addEventListener('click', () => {
+      mode = 'smartnav';
+      modeSmartNavBtn.classList.add('active');
+      modeCaneBtn.classList.remove('active');
+      metricReaction.textContent = '<5ms Anticipado';
+    });
+  }
+
+  let simTime = 0;
+  function renderSim() {
+    simTime += 0.03;
+    ctx.clearRect(0, 0, canvasW, canvasH);
+
+    const dx = obstacle.x - walker.x;
+    const dy = obstacle.y - walker.y;
+    const pixelDistance = Math.hypot(dx, dy);
+    const metersDistance = (pixelDistance / 100).toFixed(1);
+
+    if (metricDistance) metricDistance.textContent = `${metersDistance} m`;
+
+    // Grilla arquitectónica en Beige Cálido (#D5C4AD)
+    ctx.strokeStyle = '#D5C4AD';
+    ctx.lineWidth = 1;
+    ctx.setLineDash([4, 6]);
+    for (let x = 40; x < canvasW; x += 60) {
+      ctx.beginPath(); ctx.moveTo(x, 0); ctx.lineTo(x, canvasH); ctx.stroke();
+    }
+    ctx.setLineDash([]);
+
+    if (mode === 'cane') {
+      const caneRange = 85;
+      const isDetected = pixelDistance <= caneRange + obstacle.radius;
+      const sweepAngle = Math.sin(simTime * 4) * 0.45;
+      ctx.strokeStyle = '#212842';
+      ctx.lineWidth = 3;
+      ctx.beginPath();
+      ctx.moveTo(walker.x + 10, walker.y);
+      ctx.lineTo(walker.x + Math.cos(sweepAngle) * caneRange, walker.y + Math.sin(sweepAngle) * caneRange);
+      ctx.stroke();
+
+      if (isDetected) {
+        ctx.fillStyle = 'rgba(213, 196, 173, 0.55)';
+        ctx.beginPath();
+        ctx.arc(obstacle.x, obstacle.y, obstacle.radius + 14, 0, Math.PI * 2);
+        ctx.fill();
+        if (metricHaptic) metricHaptic.textContent = 'Colisión Física (0m)';
+      } else {
+        if (metricHaptic) metricHaptic.textContent = 'Sin Detección Aérea';
+      }
+    } else {
+      const maxRange = 320;
+      const coneAngle = (120 * Math.PI) / 180;
+      const angleToObs = Math.atan2(dy, dx);
+      const inCone = Math.abs(angleToObs) <= coneAngle / 2 && pixelDistance <= maxRange;
+
+      // Cono Ultrasónico en Warm Beige & Slate
+      const coneGrad = ctx.createRadialGradient(walker.x, walker.y, 20, walker.x, walker.y, maxRange);
+      coneGrad.addColorStop(0, 'rgba(230, 215, 196, 0.6)');
+      coneGrad.addColorStop(0.7, 'rgba(122, 129, 148, 0.22)');
+      coneGrad.addColorStop(1, 'rgba(230, 215, 196, 0)');
+      ctx.fillStyle = coneGrad;
+      ctx.beginPath();
+      ctx.moveTo(walker.x, walker.y);
+      ctx.arc(walker.x, walker.y, maxRange, -coneAngle / 2, coneAngle / 2);
+      ctx.closePath();
+      ctx.fill();
+
+      // Ondas acústicas concéntricas limpias en Navy Blue & Slate a 60fps
+      for (let r = 40; r < maxRange; r += 50) {
+        const waveOffset = (r + (simTime * 65) % 50);
+        if (waveOffset < maxRange) {
+          ctx.strokeStyle = (r % 100 === 0) ? 'rgba(33, 40, 66, 0.65)' : 'rgba(122, 129, 148, 0.5)';
+          ctx.lineWidth = 1.6;
+          ctx.beginPath();
+          ctx.arc(walker.x, walker.y, waveOffset, -coneAngle / 2, coneAngle / 2);
+          ctx.stroke();
+        }
+      }
+
+      if (inCone) {
+        // Haz de ecolocalización hacia el obstáculo en Navy Blue
+        ctx.strokeStyle = '#212842';
+        ctx.lineWidth = 2.5;
+        ctx.setLineDash([4, 4]);
+        ctx.beginPath();
+        ctx.moveTo(walker.x, walker.y);
+        ctx.lineTo(obstacle.x, obstacle.y);
+        ctx.stroke();
+        ctx.setLineDash([]);
+
+        const direction = dy > 10 ? 'Derecha' : dy < -10 ? 'Izquierda' : 'Centro';
+        const intensity = metersDistance < 1.5 ? 'Alta' : 'Moderada';
+        if (metricHaptic) metricHaptic.textContent = `Patilla ${direction} (${intensity})`;
+
+        // Resplandor del obstáculo
+        ctx.fillStyle = 'rgba(213, 196, 173, 0.6)';
+        ctx.beginPath();
+        ctx.arc(obstacle.x, obstacle.y, obstacle.radius + 14, 0, Math.PI * 2);
+        ctx.fill();
+      } else {
+        if (metricHaptic) metricHaptic.textContent = 'En Espera (Vía Libre)';
+      }
+    }
+
+    // 1. DIBUJAR OBSTÁCULO: WARM BEIGE (#E6D7C4) CON BORDE NAVY (#212842)
+    // Aura de resplandor exterior
+    ctx.fillStyle = 'rgba(213, 196, 173, 0.5)';
+    ctx.beginPath();
+    ctx.arc(obstacle.x, obstacle.y, obstacle.radius + 8, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Núcleo Warm Beige
+    ctx.fillStyle = '#E6D7C4';
+    ctx.beginPath();
+    ctx.arc(obstacle.x, obstacle.y, obstacle.radius, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Borde elegante Navy Blue
+    ctx.strokeStyle = '#212842';
+    ctx.lineWidth = 2.5;
+    ctx.stroke();
+
+    // Punto central Navy
+    ctx.fillStyle = '#212842';
+    ctx.beginPath();
+    ctx.arc(obstacle.x, obstacle.y, 5, 0, Math.PI * 2);
+    ctx.fill();
+
+    ctx.font = '700 11px Plus Jakarta Sans, sans-serif';
+    ctx.fillStyle = '#212842';
+    ctx.fillText('OBSTÁCULO', obstacle.x - 34, obstacle.y + obstacle.radius + 18);
+
+    // 2. DIBUJAR USUARIO: NAVY BLUE (#212842)
+    ctx.fillStyle = '#212842';
+    ctx.beginPath();
+    ctx.arc(walker.x, walker.y, walker.radius, 0, Math.PI * 2);
+    ctx.fill();
+
+    // Detalle de lentes en Beige
+    ctx.fillStyle = '#E6D7C4';
+    ctx.fillRect(walker.x + walker.radius - 2, walker.y - 8, 6, 16);
+
+    ctx.font = '700 11px Plus Jakarta Sans, sans-serif';
+    ctx.fillStyle = '#212842';
+    ctx.fillText('USUARIO', walker.x - 24, walker.y + walker.radius + 18);
+
+    requestAnimationFrame(renderSim);
+  }
+  renderSim();
+}
+
+/* ==========================================================================
+   4. VISION 2.0 TAB SELECTOR
+   ========================================================================== */
+function initVisionTabs() {
+  const tabBtns = document.querySelectorAll('.tab-btn');
+  const tabPanes = document.querySelectorAll('.tab-pane');
+  if (tabBtns.length === 0 || tabPanes.length === 0) return;
+
+  tabBtns.forEach(btn => {
+    btn.addEventListener('click', () => {
+      const targetTab = btn.getAttribute('data-tab');
+      tabBtns.forEach(b => {
+        b.classList.remove('active');
+        b.setAttribute('aria-selected', 'false');
+      });
+      btn.classList.add('active');
+      btn.setAttribute('aria-selected', 'true');
+      tabPanes.forEach(pane => {
+        if (pane.id === targetTab) pane.classList.add('active');
+        else pane.classList.remove('active');
+      });
+    });
+  });
+}

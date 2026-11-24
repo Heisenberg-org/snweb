@@ -1,69 +1,103 @@
-# SmartNav
+# SmartNav — Lentes Hápticos de Anticipación Sensorial
 
-**Versión base: 1.0**
+Web oficial de presentación de producto de alto impacto (nivel Awwwards / Apple Product Page) para **SmartNav**: lentes inteligentes con sensores ultrasónicos y retroalimentación háptica para personas con discapacidad visual.
 
-SmartNav es una experiencia web conceptual para presentar unas gafas inteligentes de asistencia a la movilidad. El proyecto explora cómo sensores ultrasónicos y señales hápticas podrían ayudar a percibir obstáculos antes de llegar a ellos, complementando —no reemplazando— las herramientas de movilidad habituales.
+---
 
-La página combina una narrativa editorial por secciones, una paleta crema, navegación lateral en cápsula, enlaces de redes y contacto en el encabezado, un modelo 3D interactivo y una simulación ilustrativa en 2D. SmartNav es un concepto en desarrollo: las cifras, escenas y funciones que aparecen en la web no representan resultados clínicos ni especificaciones validadas de un producto.
+## 🎨 Identidad Visual & Estética "Caviar & Cream" Luxury
 
-## Tecnologías
+- **Paleta de Lujo Intemporal (Caviar & Cream):**
+  - **Cream (`#F5F2EA`):** Fondo principal sedoso, cálido y luminoso.
+  - **Caviar Black (`#181818`):** Máximo contraste, botones de acción primarios, tipografía de titular y acentos de lujo.
+  - **Charcoal (`#333333`):** Grafito profundo para lectura editorial secundaria y hover states.
+  - **Soft Beige (`#DCCFC2`):** Superficies arquitectónicas, bordes de tarjetas, auras y detalles de titanio.
+  - **Stone (`#A4A09A`):** Neutralidad arquitectónica para micro-etiquetas, especificaciones y rejillas.
+  - **Tarjetas y Superficies:** Blanco puro (`#FFFFFF`) con bordes en Soft Beige (`#DCCFC2`).
+- **Tipografía:** `Plus Jakarta Sans` (pesos 600, 700, 800) para titulares de alto impacto combinada con `Inter` (pesos 300, 400, 500) para lectura fluida.
+- **Header Flotante:** Isla separada con logotipo minimalista ("S" geométrica en recuadro Caviar Black `#181818`), indicador de estado activo y botones circulares para Instagram, X y GitHub.
 
-- HTML semántico y CSS adaptable, sin proceso de compilación.
-- JavaScript moderno para navegación, accesibilidad y Canvas 2D.
-- [Three.js](https://threejs.org/) para el modelo conceptual interactivo.
-- [GSAP](https://gsap.com/) para animación de entrada progresiva.
-- [Lucide](https://lucide.dev/) y Font Awesome para iconografía.
-- DM Sans y DM Serif Display servidas por Google Fonts, con alternativas del sistema.
+---
 
-Three.js y las fuentes e iconos se cargan desde CDN. Si el navegador no puede cargar Three.js, la página muestra una alternativa visual y el resto de la experiencia continúa disponible.
+## 🧭 Experiencia Fullpage y Transiciones Contextuales Únicas
 
-El visor 3D carga Three.js al acercarse a su sección y pausa el renderizado cuando no está visible. El modelo se dibuja bajo demanda, con resolución limitada para reducir el uso de GPU; la simulación pausa sus cuadros al salir del área visible, detenerse o dejar la pestaña en segundo plano.
+Cada cambio de diapositiva cuenta una historia visual conectada con su temática en estética Caviar & Cream:
 
-## Requisitos
+1. **De Escena 1 (Hero) a Escena 2 (Ingeniería 3D):**
+   - *Onda de Radar Expansiva*: La onda acústica se expande a pantalla completa en un suave barrido radial de Caviar & Cream disolviéndose suavemente para revelar el modelo 3D y especificaciones.
+2. **De Escena 2 (Ingeniería 3D) a Escena 3 (Simulador "Tocar vs. Anticipar"):**
+   - *Compresión en Haz de Luz y Persiana*: La interfaz 3D se comprime horizontalmente en un haz de luz vertical central Soft Beige que se abre como una persiana deslizante revelando el simulador interactivo.
+3. **De Escena 3 (Simulador 2D) a Escena 4 (Arquitectura Bento Grid):**
+   - *Estallido de Partículas*: El obstáculo Soft Beige estalla en 32 partículas de lujo (Caviar, Beige, Stone) que vuelan hacia los cuatro cuadrantes para ensamblar las 4 tarjetas del Bento Grid.
+4. **De Escena 4 (Bento Grid) a Escena 5 (Visión 2.0 Prototipo):**
+   - *Desenfoque de Profundidad y Cortina de Luz Lujosa*: Las tarjetas retroceden con motion blur mientras un velo ascendente en Soft Beige y Stone descubre el laboratorio de Visión 2.0.
 
-- Un navegador moderno con soporte para módulos JavaScript, Canvas 2D y WebGL para la vista 3D.
-- Conexión a Internet para cargar librerías, iconos y fuentes externas.
-- Un servidor HTTP local para abrir el proyecto como módulos ES. No hace falta instalar dependencias.
+### Controles de Navegación Especiales:
+- **Cápsula Lateral Flotante:** Indicador con rectángulos de bordes redondeados (`border-radius: 12px`), números de diapositiva (`01` a `05`) y núcleo brillante activo.
+- **Botón de Avance Creativo:** Botón flotante inferior derecho con anillo SVG que se rellena progresivamente según el avance de las escenas.
 
-## Clonar y ejecutar
+---
 
-```bash
-git clone https://github.com/Heisenberg-org/snweb.git
-cd snweb
-python3 -m http.server 8000
-```
-
-Abre [http://localhost:8000](http://localhost:8000) en el navegador. También puedes utilizar la extensión Live Server de VS Code.
-
-## Controles
-
-- Desplázate o utiliza las flechas, `Page Up` / `Page Down`, `Home` y `End` para navegar por las secciones.
-- En el visor de producto, arrastra para girar los lentes y selecciona una vista predeterminada.
-- Usa los controles de reproducción y reinicio para explorar la simulación.
-- Los botones flotantes permiten activar alto contraste y sonidos opcionales. La animación respeta la preferencia del sistema para reducir movimiento.
-
-## Accesibilidad y alcance
-
-La interfaz incluye estructura semántica, etiquetas para controles, navegación por teclado, estados anunciados a tecnologías de asistencia y una alternativa para el modelo 3D. La simulación es únicamente ilustrativa; no debe interpretarse como una medición de alcance, desempeño o seguridad. El prototipo no sustituye un bastón blanco, perro guía ni asesoría profesional de movilidad.
-
-## Estructura
+## 📂 Arquitectura del Proyecto
 
 ```text
-.
-├── index.html   # Contenido semántico y secciones de la experiencia
-├── styles.css   # Sistema visual, responsive y preferencias de accesibilidad
-├── main.js      # Navegación, visor 3D, simulación y microinteracciones
-├── README.md    # Documentación del proyecto
-├── .gitignore   # Archivos locales y artefactos generados excluidos de Git
-└── test/
-    └── test_v1.0.html # Demo autónoma para abrir directamente con file://
+├── .github/
+│   └── workflows/
+│       └── deploy.yml              # CI/CD: Despliegue en GitHub Pages al publicar una Release
+├── test/
+│   └── smartnav_standalone.html    # Versión 100% autocontenida (abre con doble clic sin CORS)
+├── index.html                      # Estructura semántica principal
+├── styles.css                      # Estilos editorial boutique, variables CSS y snap-scroll
+├── main.js                         # Three.js 3D, Canvas 2D Simulator, Snap Navigation y Tabs
+├── test.js                         # Suite de auditoría y tests unitarios
+├── .gitignore                      # Exclusiones de archivos del sistema y temporales
+└── README.md                       # Documentación técnica
 ```
 
-## Demos autónomas
+---
 
-Abre la carpeta `test` y haz doble clic en `test_v1.0.html`; no requiere servidor, instalación ni comandos. Sus estilos y lógica están incluidos en el HTML y Three.js se carga como un script clásico desde CDN, sin módulos ES ni recursos locales. El visor 3D necesita conexión a Internet para descargar Three.js; si no está disponible, se muestra una alternativa visual y el resto de la demo sigue funcionando. La página no intenta leer archivos locales.
+## 🚀 Cómo Probar Localmente
 
-## Registro de cambios
+### Opción Rápida (Sin Servidor Local / Sin CORS)
+Haz doble clic directamente en el archivo:
+👉 `test/smartnav_standalone.html`
+*(Funciona directamente en tu navegador mediante `file:///`, sin necesidad de servidores locales ni problemas de políticas de seguridad).*
 
-- **1.0** — Se establece la base visual crema, el encabezado con enlaces de GitHub y correo, la navegación lateral en cápsula y el visor 3D con carga diferida y renderizado bajo demanda.
-- **test_v1.0** — Se añade una demo autónoma en un único HTML, compatible con apertura directa mediante `file://`.
+### Opción Servidor Web (index.html)
+Si prefieres servir la versión modular:
+```bash
+# Con Node / npx
+npx serve .
+
+# O con Python
+python -m http.server 8080
+```
+Abre `http://localhost:8080` en tu navegador.
+
+---
+
+## 🧪 Pruebas Unitarias y Auditoría Técnica
+
+Para validar que todas las escenas, tokens de diseño y scripts estén en perfecto estado:
+
+```bash
+node test.js
+```
+
+---
+
+## 🚢 Despliegue en GitHub Pages
+
+El proyecto incluye `.github/workflows/deploy.yml` configurado para desplegar automáticamente el sitio en **GitHub Pages** cada vez que publiques una **Release** en tu repositorio:
+
+1. Sube los archivos a tu repositorio de GitHub:
+   ```bash
+   cd c:\Users\andre\Documents\SNWEB
+   git init
+   git add .
+   git commit -m "feat: smartnav official sensory anticipation release"
+   git branch -M main
+   git remote add origin https://github.com/Heisenberg-org/snweb.git
+   git push -u origin main
+   ```
+2. En GitHub, ve a **Settings** > **Pages** y selecciona **GitHub Actions** en *Source*.
+3. Ve a **Releases** > **Create a new release** (etiqueta `v1.0.0`) y publica. ¡Tu web estará online al instante!
