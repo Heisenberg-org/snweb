@@ -72,16 +72,16 @@
   --cream: #FAF7F2;
   --charcoal: #2D375B;
 
-  /* Acentos Vivos Refinados: Terracota BrickTech y Verde Sustentable */
-  --accent-terracotta: #D9531E;      /* Naranja Terracota del logo BrickTech */
-  --accent-terracotta-hover: #BF4414;
-  --accent-terracotta-soft: rgba(217, 83, 30, 0.12);
-  --accent-terracotta-glow: rgba(217, 83, 30, 0.35);
+  /* Acentos Vivos Refinados: Terracota y Verde Salvia */
+  --accent-terracotta: #C85A32;
+  --accent-terracotta-hover: #B24823;
+  --accent-terracotta-soft: rgba(200, 90, 50, 0.12);
+  --accent-terracotta-glow: rgba(200, 90, 50, 0.3);
 
-  --accent-sage: #2E7D47;            /* Verde Industrial y EcolÃ³gico de la carpeta */
-  --accent-sage-hover: #236838;
-  --accent-sage-soft: rgba(46, 125, 71, 0.14);
-  --accent-sage-glow: rgba(46, 125, 71, 0.3);
+  --accent-sage: #5B7566;
+  --accent-sage-hover: #486153;
+  --accent-sage-soft: rgba(91, 117, 102, 0.14);
+  --accent-sage-glow: rgba(91, 117, 102, 0.28);
 
   /* Luxury Accents */
   --accent-caviar: #212842;
@@ -90,10 +90,10 @@
   --accent-stone: #7A8194;
 
   /* Semantic UI Bindings */
-  --accent-coral: #D9531E;          /* Terracota BrickTech para acentos primarios */
-  --accent-coral-hover: #BF4414;    /* Terracota hover */
-  --accent-coral-glow: rgba(217, 83, 30, 0.35);
-  --accent-coral-soft: rgba(217, 83, 30, 0.12);
+  --accent-coral: #C85A32;          /* Terracota para acentos primarios dinÃ¡micos */
+  --accent-coral-hover: #B24823;    /* Terracota hover */
+  --accent-coral-glow: rgba(200, 90, 50, 0.3);
+  --accent-coral-soft: rgba(200, 90, 50, 0.12);
 
   --accent-yellow: #D5C4AD;
   --accent-yellow-glow: rgba(213, 196, 173, 0.6);
@@ -134,7 +134,7 @@
 html, body {
   width: 100%;
   height: 100%;
-  overflow: hidden; /* scenes scroll individually via .slide-scene overflow-y:auto */
+  overflow: hidden;
   background-color: var(--bg-main);
   color: var(--text-primary);
   font-family: var(--font-body);
@@ -156,113 +156,10 @@ html, body {
 }
 
 /* --------------------------------------------------------------------------
-   3. Floating Top Header: BrickTech Brand & Team Badge
+   3. Floating Header (Eliminado por completo para una UI limpia y minimalista)
    -------------------------------------------------------------------------- */
 .smart-header {
   display: none !important;
-}
-
-.bricktech-top-header {
-  position: fixed;
-  top: 22px;
-  right: 32px;
-  z-index: 180;
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  pointer-events: auto;
-}
-
-.header-left-pill {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 6px 14px;
-  border-radius: var(--radius-pill);
-  background: rgba(250, 247, 242, 0.94);
-  border: 1px solid var(--border-card);
-  backdrop-filter: blur(16px);
-  box-shadow: 0 4px 16px rgba(29, 61, 111, 0.08);
-}
-
-.header-project-tag {
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  font-weight: 700;
-  color: var(--color-navy);
-  letter-spacing: 0.06em;
-}
-
-.header-logo-container {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  padding: 6px 16px 6px 18px;
-  border-radius: var(--radius-pill);
-  background: rgba(255, 255, 255, 0.94);
-  border: 1.5px solid var(--border-card);
-  backdrop-filter: blur(20px);
-  box-shadow: 0 10px 28px -6px rgba(29, 61, 111, 0.14), 0 0 0 1px rgba(255, 255, 255, 0.8) inset;
-  transition: all 0.3s var(--ease-expo);
-}
-
-.header-logo-container:hover {
-  transform: translateY(-2px);
-  border-color: var(--accent-terracotta);
-  box-shadow: 0 14px 34px -6px rgba(217, 83, 30, 0.25);
-}
-
-.header-org-info {
-  display: flex;
-  flex-direction: column;
-  text-align: right;
-}
-
-.header-company-name {
-  font-family: var(--font-display);
-  font-size: 0.82rem;
-  font-weight: 800;
-  color: var(--color-navy);
-  letter-spacing: -0.01em;
-  line-height: 1.2;
-}
-
-.header-sub-tag {
-  font-family: var(--font-mono);
-  font-size: 0.65rem;
-  color: var(--accent-terracotta);
-  font-weight: 700;
-  letter-spacing: 0.04em;
-}
-
-.header-logo-badge {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.header-logo-img {
-  height: 36px;
-  width: auto;
-  object-fit: contain;
-  filter: drop-shadow(0 2px 6px rgba(217, 83, 30, 0.25));
-}
-
-@media (max-width: 860px) {
-  .bricktech-top-header {
-    top: 14px;
-    right: 14px;
-    gap: 8px;
-  }
-  .header-left-pill {
-    display: none;
-  }
-  .header-logo-container {
-    padding: 4px 12px;
-  }
-  .header-logo-img {
-    height: 28px;
-  }
 }
 
 /* --------------------------------------------------------------------------
@@ -309,17 +206,15 @@ html, body {
   overflow: visible;
 }
 
-.nav-eye-svg,
-.nav-brick-svg {
+.nav-eye-svg {
   width: 58px;
   height: 38px;
   overflow: visible;
   transition: transform 0.35s var(--ease-expo);
 }
 
-/* Ladrillo e indicador en reposo cerrado / salida */
-.nav-eye-btn .eye-closed-group,
-.nav-brick-btn .brick-idle-group {
+/* Ojo en reposo cerrado */
+.nav-eye-btn .eye-closed-group {
   transition: opacity 0.3s ease, transform 0.35s var(--ease-expo);
   transform-origin: 27px 18px;
   opacity: 1;
@@ -331,13 +226,12 @@ html, body {
   stroke-width: 2.8;
 }
 
-/* Ladrillo e indicador activo / entrada */
-.nav-eye-btn .eye-open-group,
-.nav-brick-btn .brick-active-group {
+/* Ojo abierto dinÃ¡mico */
+.nav-eye-btn .eye-open-group {
   transition: opacity 0.35s ease, transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
   transform-origin: 27px 18px;
   opacity: 0;
-  transform: scaleY(0.7) scaleX(0.7) translateY(4px);
+  transform: scaleY(0.12) scaleX(0.7);
 }
 
 .nav-eye-btn .eye-sclera {
@@ -361,8 +255,7 @@ html, body {
   fill: var(--color-navy-deep);
 }
 
-.nav-eye-btn .eye-num-text,
-.nav-brick-btn .brick-num-text {
+.nav-eye-btn .eye-num-text {
   font-family: var(--font-mono);
   font-size: 10px;
   font-weight: 800;
@@ -372,57 +265,9 @@ html, body {
   letter-spacing: -0.02em;
 }
 
-/* ==========================================================================
-   ANIMACIONES CINEMÃTICAS DE ENTRADA Y SALIDA DEL LADRILLO EN EL SELECTOR
-   ========================================================================== */
-@keyframes brickPopEntrance {
-  0% {
-    transform: translateY(-14px) scale(0.65) rotate(-4deg);
-    opacity: 0;
-    filter: drop-shadow(0 0 0 rgba(200, 90, 50, 0));
-  }
-  65% {
-    transform: translateY(2px) scale(1.15) rotate(1deg);
-    opacity: 1;
-    filter: drop-shadow(0 6px 14px rgba(200, 90, 50, 0.45));
-  }
-  100% {
-    transform: translateY(0) scale(1.08) rotate(0deg);
-    opacity: 1;
-    filter: drop-shadow(0 4px 10px rgba(200, 90, 50, 0.3));
-  }
-}
-
-@keyframes brickPopExit {
-  0% {
-    transform: translateY(0) scale(1.08) rotate(0deg);
-    opacity: 1;
-  }
-  30% {
-    transform: translateY(-4px) scale(1.02);
-  }
-  100% {
-    transform: translateY(12px) scale(0.7) rotate(3deg);
-    opacity: 0;
-  }
-}
-
-/* Clases dinÃ¡micas aplicadas durante la navegaciÃ³n */
-.nav-brick-item.anim-entrance .brick-active-group,
-.nav-eye-item.anim-entrance .eye-open-group {
-  animation: brickPopEntrance 0.52s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-}
-
-.nav-brick-item.anim-exit .brick-active-group,
-.nav-eye-item.anim-exit .eye-open-group {
-  animation: brickPopExit 0.38s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-/* HOVER Y ACTIVO: APERTURA Y ENTRADA DEL LADRILLO */
+/* HOVER Y ACTIVO: APERTURA CINEMATOGRÃFICA DEL OJO */
 .nav-eye-btn:hover,
-.nav-eye-item.active .nav-eye-btn,
-.nav-brick-btn:hover,
-.nav-brick-item.active .nav-brick-btn {
+.nav-eye-item.active .nav-eye-btn {
   background: #FFFFFF;
   border-color: var(--color-navy);
   box-shadow: 0 8px 24px rgba(33, 40, 66, 0.16);
@@ -430,64 +275,54 @@ html, body {
 }
 
 .nav-eye-btn:hover .nav-eye-svg,
-.nav-eye-item.active .nav-eye-svg,
-.nav-brick-btn:hover .nav-brick-svg,
-.nav-brick-item.active .nav-brick-svg {
+.nav-eye-item.active .nav-eye-svg {
   transform: scale(1.08);
 }
 
 .nav-eye-btn:hover .eye-closed-group,
-.nav-eye-item.active .eye-closed-group,
-.nav-brick-btn:hover .brick-idle-group,
-.nav-brick-item.active .brick-idle-group {
+.nav-eye-item.active .eye-closed-group {
   opacity: 0;
-  transform: scale(0.65) translateY(-6px);
+  transform: scaleY(0.05);
 }
 
 .nav-eye-btn:hover .eye-open-group,
-.nav-eye-item.active .eye-open-group,
-.nav-brick-btn:hover .brick-active-group,
-.nav-brick-item.active .brick-active-group {
+.nav-eye-item.active .eye-open-group {
   opacity: 1;
-  transform: scale(1.08) translateY(0);
+  transform: scaleY(1) scaleX(1);
 }
 
-/* Resaltado del ladrillo activo */
-.nav-eye-item.active .nav-eye-btn,
-.nav-brick-item.active .nav-brick-btn {
+/* Resaltado del ojo activo */
+.nav-eye-item.active .nav-eye-btn {
   border-color: var(--color-navy);
   box-shadow: 0 10px 28px rgba(33, 40, 66, 0.22), 0 0 0 2px var(--color-navy);
   transform: translateX(10px) scale(1.06);
 }
 
-.nav-eye-item.active::before,
-.nav-brick-item.active::before {
+.nav-eye-item.active::before {
   content: '';
   position: absolute;
   left: -8px;
   top: 50%;
   transform: translateY(-50%);
-  width: 5px;
-  height: 28px;
+  width: 4px;
+  height: 26px;
   border-radius: 4px;
   background: var(--accent-terracotta, #C85A32);
-  box-shadow: 0 0 12px rgba(200, 90, 50, 0.7);
+  box-shadow: 0 0 10px rgba(200, 90, 50, 0.6);
 }
 
 .nav-eye-item.active .nav-eye-btn .eye-iris {
   filter: drop-shadow(0 0 4px rgba(33, 40, 66, 0.35));
 }
 
-.nav-eye-item.active .nav-eye-btn .eye-num-text,
-.nav-brick-item.active .nav-brick-btn .brick-num-text {
+.nav-eye-item.active .nav-eye-btn .eye-num-text {
   fill: #FFFFFF;
   font-size: 10.5px;
   font-weight: 800;
 }
 
 /* Etiqueta tooltip lateral */
-.nav-eye-label,
-.nav-brick-label {
+.nav-eye-label {
   position: absolute;
   left: 88px;
   padding: 8px 18px;
@@ -507,11 +342,9 @@ html, body {
   border: 1px solid rgba(255, 255, 255, 0.12);
 }
 
-.nav-eye-item:hover .nav-eye-label,
-.nav-brick-item:hover .nav-brick-label {
+.nav-eye-item:hover .nav-eye-label {
   opacity: 1;
   transform: translateX(0);
-}
 }
 
 /* --------------------------------------------------------------------------
@@ -591,17 +424,11 @@ html, body {
   margin: 0 auto;
 }
 
-.intro-grand-eye-svg,
-.intro-grand-brick-svg {
+.intro-grand-eye-svg {
   width: 100%;
   height: auto;
   overflow: visible;
-  filter: drop-shadow(0 24px 48px rgba(0, 0, 0, 0.55));
-}
-
-#intro-brick-group {
-  transform-origin: 270px 180px;
-  will-change: transform, opacity;
+  filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.45));
 }
 
 .intro-lash-flyer {
@@ -875,29 +702,13 @@ html, body {
   width: 100%;
   height: 100%;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
   padding: 40px 70px 40px 140px;
   visibility: hidden;
   opacity: 0;
   transform: scale(0.96) translateY(24px);
   will-change: transform, opacity, filter;
-  overflow-y: auto;
-  overflow-x: hidden;
-  /* Custom scrollbar subtle */
-  scrollbar-width: thin;
-  scrollbar-color: rgba(217, 83, 30, 0.25) transparent;
-}
-
-.slide-scene::-webkit-scrollbar {
-  width: 4px;
-}
-.slide-scene::-webkit-scrollbar-track {
-  background: transparent;
-}
-.slide-scene::-webkit-scrollbar-thumb {
-  background: rgba(217, 83, 30, 0.3);
-  border-radius: 4px;
 }
 
 .slide-scene.active {
@@ -910,13 +721,11 @@ html, body {
 .scene-inner {
   width: 100%;
   max-width: 1360px;
-  min-height: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   position: relative;
-  padding-top: 20px;
-  padding-bottom: 20px;
 }
 
 /* --------------------------------------------------------------------------
@@ -1648,19 +1457,6 @@ html, body {
   background: var(--caviar-black);
   color: var(--cream);
   border-color: var(--caviar-black);
-  transform: translateY(-2px);
-}
-
-#btn-3d-dwg {
-  background: rgba(200, 90, 50, 0.14);
-  border-color: rgba(200, 90, 50, 0.45);
-  color: var(--accent-terracotta, #C85A32);
-}
-
-#btn-3d-dwg:hover {
-  background: var(--accent-terracotta, #C85A32);
-  color: #FAF7F2;
-  border-color: var(--accent-terracotta, #C85A32);
   transform: translateY(-2px);
 }
 
@@ -2465,134 +2261,99 @@ html, body {
 
 </style>
 </head>
+
 <body>
   <!-- Editorial Paper Grain Texture -->
   <div class="editorial-grain" aria-hidden="true"></div>
 
   <!-- ======================================================================
-       INTRO CINEMATOGRÃFICA EN PANTALLA COMPLETA: LADRILLO ISOMÃ‰TRICO (#FAF7F2)
-       Inspirado en la MÃ¡quina Compactadora de Ladrillos y DiseÃ±o Editorial
+       INTRO CINEMATOGRÃFICA EN PANTALLA COMPLETA: EFECTO IRIS DE OJO (#FAF7F2)
+       Inspirado en A24 (Ravi Klaassens) y Content Architecture
        ====================================================================== -->
-  <div id="intro-eye-curtain" class="intro-eye-curtain" aria-label="Intro Proyecto MÃ¡quina de Ladrillos">
+  <div id="intro-eye-curtain" class="intro-eye-curtain" aria-label="Intro SmartNav">
     <div class="intro-grain" aria-hidden="true"></div>
     <!-- CÃ­rculo de Zoom Iris en Color Crema #FAF7F2 -->
     <div class="intro-iris-zoom-circle" id="intro-iris-zoom-circle" aria-hidden="true"></div>
     <div class="intro-container">
       <div class="intro-badge">
         <span class="status-dot-pulse"></span>
-        <span>PROYECTO 5Â° AÃ‘O Â· MÃQUINA COMPACTADORA DE LADRILLOS</span>
+        <span>SMARTNAV Â· SENSORY ANTICIPATION</span>
       </div>
 
-      <div class="intro-eye-stage intro-brick-stage" id="intro-eye-stage">
-        <!-- SVG Ladrillo IsomÃ©trico de PrecisiÃ³n con DiseÃ±o Editorial -->
-        <svg class="intro-grand-eye-svg intro-grand-brick-svg" viewBox="0 0 540 340" fill="none">
+      <div class="intro-eye-stage" id="intro-eye-stage">
+        <svg class="intro-grand-eye-svg" viewBox="0 0 540 340" fill="none">
           <defs>
-            <!-- Gradientes de Terracota Realista (Inspirado en la imagen de referencia y paleta web) -->
-            <linearGradient id="brickTopGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#EE7E48"/>
-              <stop offset="50%" stop-color="#E26D34"/>
-              <stop offset="100%" stop-color="#D15B24"/>
-            </linearGradient>
-
-            <linearGradient id="brickFrontGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" stop-color="#C7511E"/>
-              <stop offset="60%" stop-color="#B84414"/>
-              <stop offset="100%" stop-color="#9C350B"/>
-            </linearGradient>
-
-            <linearGradient id="brickSideGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#9E3A10"/>
-              <stop offset="100%" stop-color="#7A2805"/>
-            </linearGradient>
-
-            <radialGradient id="brickCompactionGlow" cx="50%" cy="50%" r="50%">
+            <radialGradient id="irisGrad" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#C85A32"/>
+              <stop offset="35%" stop-color="#364268"/>
+              <stop offset="75%" stop-color="#212842"/>
+              <stop offset="100%" stop-color="#161C2E"/>
+            </radialGradient>
+            <radialGradient id="pupilAura" cx="50%" cy="50%" r="50%">
               <stop offset="0%" stop-color="#FAF7F2" stop-opacity="0.95"/>
-              <stop offset="40%" stop-color="#E6D7C4" stop-opacity="0.6"/>
-              <stop offset="80%" stop-color="#C85A32" stop-opacity="0.25"/>
+              <stop offset="40%" stop-color="#E6D7C4" stop-opacity="0.5"/>
               <stop offset="100%" stop-color="#212842" stop-opacity="0"/>
             </radialGradient>
-
             <clipPath id="eyeContourClip">
-              <!-- Contorno isomÃ©trico envolvente para compatibilidad -->
-              <polygon id="intro-contour-path" points="270,45 475,130 475,225 270,305 65,225 65,130"/>
+              <path id="intro-contour-path" d="M 30 170 C 130 30 410 30 510 170 C 410 310 130 310 30 170 Z"/>
             </clipPath>
           </defs>
 
-          <!-- Rayos y GuÃ­as de ProyecciÃ³n IsomÃ©trica TÃ©cnica -->
+          <!-- PestaÃ±as Maestras y Decorativas del Contorno -->
           <g class="intro-lashes-group" id="intro-lashes-group">
-            <line id="intro-lash-0" class="intro-lash-flyer" x1="120" y1="105" x2="60" y2="40" stroke="var(--color-beige)" stroke-width="3" stroke-linecap="round" stroke-dasharray="4 4"/>
-            <line id="intro-lash-1" class="intro-lash-flyer" x1="200" y1="75" x2="180" y2="10" stroke="var(--color-beige)" stroke-width="3" stroke-linecap="round" stroke-dasharray="4 4"/>
-            <line id="intro-lash-2" class="intro-lash-flyer" x1="270" y1="45" x2="270" y2="-15" stroke="var(--color-beige)" stroke-width="3.5" stroke-linecap="round"/>
-            <line id="intro-lash-3" class="intro-lash-flyer" x1="340" y1="75" x2="360" y2="10" stroke="var(--color-beige)" stroke-width="3" stroke-linecap="round" stroke-dasharray="4 4"/>
-            <line id="intro-lash-4" class="intro-lash-flyer" x1="420" y1="105" x2="480" y2="40" stroke="var(--color-beige)" stroke-width="3" stroke-linecap="round" stroke-dasharray="4 4"/>
-
-            <!-- LÃ­neas de acotaciÃ³n milimÃ©trica industrial -->
-            <line class="intro-sublash" x1="65" y1="240" x2="270" y2="320" stroke="var(--color-beige-dark)" stroke-width="1.8" stroke-dasharray="3 3"/>
-            <line class="intro-sublash" x1="270" y1="320" x2="475" y2="240" stroke="var(--color-beige-dark)" stroke-width="1.8" stroke-dasharray="3 3"/>
-            <line class="intro-sublash" x1="65" y1="230" x2="65" y2="250" stroke="var(--color-beige-dark)" stroke-width="2"/>
-            <line class="intro-sublash" x1="270" y1="310" x2="270" y2="330" stroke="var(--color-beige-dark)" stroke-width="2"/>
-            <line class="intro-sublash" x1="475" y1="230" x2="475" y2="250" stroke="var(--color-beige-dark)" stroke-width="2"/>
+            <line id="intro-lash-0" class="intro-lash-flyer" x1="130" y1="92" x2="90" y2="28" stroke="var(--color-beige)" stroke-width="4.5" stroke-linecap="round"/>
+            <line id="intro-lash-1" class="intro-lash-flyer" x1="200" y1="52" x2="180" y2="-12" stroke="var(--color-beige)" stroke-width="4.5" stroke-linecap="round"/>
+            <line id="intro-lash-2" class="intro-lash-flyer" x1="270" y1="40" x2="270" y2="-28" stroke="var(--color-beige)" stroke-width="5" stroke-linecap="round"/>
+            <line id="intro-lash-3" class="intro-lash-flyer" x1="340" y1="52" x2="360" y2="-12" stroke="var(--color-beige)" stroke-width="4.5" stroke-linecap="round"/>
+            <line id="intro-lash-4" class="intro-lash-flyer" x1="410" y1="92" x2="450" y2="28" stroke="var(--color-beige)" stroke-width="4.5" stroke-linecap="round"/>
+            <!-- PestaÃ±as secundarias decorativas de marco -->
+            <line class="intro-sublash" x1="165" y1="70" x2="140" y2="4" stroke="var(--color-beige-dark)" stroke-width="2.5" stroke-linecap="round"/>
+            <line class="intro-sublash" x1="235" y1="44" x2="225" y2="-20" stroke="var(--color-beige-dark)" stroke-width="2.5" stroke-linecap="round"/>
+            <line class="intro-sublash" x1="305" y1="44" x2="315" y2="-20" stroke="var(--color-beige-dark)" stroke-width="2.5" stroke-linecap="round"/>
+            <line class="intro-sublash" x1="375" y1="70" x2="400" y2="4" stroke="var(--color-beige-dark)" stroke-width="2.5" stroke-linecap="round"/>
+            <line class="intro-sublash" x1="170" y1="268" x2="145" y2="330" stroke="var(--color-beige-dark)" stroke-width="2.5" stroke-linecap="round"/>
+            <line class="intro-sublash" x1="270" y1="298" x2="270" y2="362" stroke="var(--color-beige-dark)" stroke-width="3" stroke-linecap="round"/>
+            <line class="intro-sublash" x1="370" y1="268" x2="395" y2="330" stroke="var(--color-beige-dark)" stroke-width="2.5" stroke-linecap="round"/>
           </g>
 
-          <!-- Bloque IsomÃ©trico del Ladrillo con Textura y Biseles -->
-          <g id="intro-brick-group">
-            <!-- Sombra de Apoyo en Base -->
-            <polygon points="270,312 478,230 460,250 270,325 80,250 62,230" fill="rgba(22, 28, 46, 0.45)" filter="blur(6px)"/>
+          <!-- Globo Ocular Interno -->
+          <g clip-path="url(#eyeContourClip)">
+            <!-- Fondo Esclera Beige CÃ¡lida -->
+            <rect x="0" y="0" width="540" height="340" fill="var(--color-beige)"/>
 
-            <!-- CARA FRONTAL LARGA (Izquierda en perspectiva isomÃ©trica) -->
-            <polygon id="intro-brick-front" points="65,130 270,205 270,295 65,220" fill="url(#brickFrontGrad)" stroke="var(--color-navy)" stroke-width="4.5" stroke-linejoin="round"/>
-            <!-- Textura de arcilla y grietas sutiles cara frontal -->
-            <path d="M 90 155 Q 115 168 150 162 Q 175 178 220 185" stroke="#9C350B" stroke-width="1.6" fill="none" opacity="0.6"/>
-            <path d="M 85 190 Q 130 200 180 196" stroke="#D15B24" stroke-width="1.2" fill="none" opacity="0.45"/>
-            <path d="M 195 240 Q 230 252 255 248" stroke="#7A2805" stroke-width="1.5" fill="none" opacity="0.55"/>
+            <!-- Anillos concÃ©ntricos de anticipaciÃ³n sensorial -->
+            <circle cx="270" cy="170" r="140" fill="none" stroke="var(--color-beige-dark)" stroke-width="1.5" stroke-dasharray="6 6"/>
+            <circle cx="270" cy="170" r="115" fill="none" stroke="var(--color-navy)" stroke-width="1" opacity="0.3"/>
 
-            <!-- CARA LATERAL CORTA (Derecha en perspectiva isomÃ©trica) -->
-            <polygon id="intro-brick-side" points="270,205 475,130 475,220 270,295" fill="url(#brickSideGrad)" stroke="var(--color-navy)" stroke-width="4.5" stroke-linejoin="round"/>
-            <!-- Textura y sombras cara lateral -->
-            <path d="M 310 195 Q 360 175 420 162" stroke="#682103" stroke-width="1.6" fill="none" opacity="0.65"/>
-            <path d="M 330 240 Q 380 220 440 208" stroke="#8A2E08" stroke-width="1.4" fill="none" opacity="0.5"/>
-
-            <!-- CARA SUPERIOR (IsomÃ©trica Top) con acabado biselado y textura de arcilla de la imagen -->
-            <polygon id="intro-brick-top" points="270,55 475,130 270,205 65,130" fill="url(#brickTopGrad)" stroke="var(--color-navy)" stroke-width="4.5" stroke-linejoin="round"/>
-            <!-- LÃ­neas de bisel y fisuras naturales de arcilla inspiradas en la imagen -->
-            <path d="M 75 130 C 130 110 210 75 265 60" stroke="#F49566" stroke-width="2.5" fill="none" opacity="0.8"/>
-            <path d="M 275 60 C 335 80 415 110 465 130" stroke="#F49566" stroke-width="2" fill="none" opacity="0.7"/>
-            <path d="M 75 130 C 135 152 215 182 265 200" stroke="#C7511E" stroke-width="2" fill="none" opacity="0.75"/>
-            <path d="M 275 200 C 335 180 415 150 465 130" stroke="#9E3A10" stroke-width="2.2" fill="none" opacity="0.8"/>
-            <!-- Grietas orgÃ¡nicas de la imagen de referencia -->
-            <path d="M 140 120 Q 200 135 270 125 Q 350 142 410 118" stroke="#B84414" stroke-width="2" fill="none" opacity="0.65"/>
-            <path d="M 220 95 Q 260 115 310 100" stroke="#9C350B" stroke-width="1.8" fill="none" opacity="0.6"/>
-            <path d="M 180 150 Q 240 168 320 152" stroke="#FAF7F2" stroke-width="1.4" fill="none" opacity="0.55"/>
-
-            <!-- Sellos tÃ©cnicos de compresiÃ³n de ladrillo -->
-            <text x="270" y="138" text-anchor="middle" font-family="var(--font-mono)" font-size="12" font-weight="700" fill="#FAF7F2" opacity="0.85" letter-spacing="3">240 Ã— 115 Ã— 65 mm</text>
-            <text x="270" y="156" text-anchor="middle" font-family="var(--font-mono)" font-size="10" font-weight="600" fill="#FAF7F2" opacity="0.65" letter-spacing="2">COMPACTACIÃ“N HIDRÃULICA 10 Tn</text>
-
-            <!-- Elementos interactivos / animables requeridos para la cinemÃ¡tica -->
+            <!-- Iris Central Graphic -->
             <g id="intro-iris-group">
-              <circle id="intro-iris" cx="270" cy="135" r="32" fill="url(#brickCompactionGlow)" opacity="0"/>
-              <circle id="intro-pupil" cx="270" cy="135" r="18" fill="#161C2E" opacity="0"/>
-              <circle id="intro-pupil-center" cx="270" cy="135" r="8" fill="#FAF7F2" opacity="0"/>
+              <circle id="intro-iris" cx="270" cy="170" r="88" fill="url(#irisGrad)" stroke="var(--color-beige-dark)" stroke-width="3"/>
+              <circle cx="270" cy="170" r="76" fill="none" stroke="#FAF7F2" stroke-width="1.5" stroke-dasharray="3 3"/>
+              <!-- Pupila Navy Profunda con Centro Crema para Zoom Iris -->
+              <circle id="intro-pupil" cx="270" cy="170" r="46" fill="#161C2E"/>
+              <circle id="intro-pupil-glint" cx="254" cy="154" r="10" fill="#FAF7F2" opacity="0.85"/>
+              <circle id="intro-pupil-center" cx="270" cy="170" r="16" fill="url(#pupilAura)"/>
+              <circle id="intro-iris-zoom-core" cx="270" cy="170" r="10" fill="#FAF7F2"/>
             </g>
 
-            <!-- Placas de Prensado y CompactaciÃ³n Animables (Sustituyen pÃ¡rpados para efecto prensa) -->
-            <path id="intro-upper-lid" d="M 50 130 Q 270 50 490 130 L 490 0 L 50 0 Z" fill="var(--color-navy)" opacity="0"/>
-            <path id="intro-lower-lid" d="M 50 220 Q 270 300 490 220 L 490 340 L 50 340 Z" fill="var(--color-navy)" opacity="0"/>
+            <!-- PÃ¡rpados animables en Navy Blue -->
+            <path id="intro-upper-lid" d="M 20 170 Q 270 170 520 170 L 520 0 L 20 0 Z" fill="var(--color-navy)"/>
+            <path id="intro-lower-lid" d="M 20 170 Q 270 170 520 170 L 520 340 L 20 340 Z" fill="var(--color-navy)"/>
           </g>
 
-          <!-- Borde de Contorno IsomÃ©trico de PrecisiÃ³n -->
-          <polygon id="intro-contour-stroke" points="270,55 475,130 475,220 270,295 65,220 65,130" fill="none" stroke="var(--color-beige)" stroke-width="3" stroke-linejoin="round" opacity="0.4"/>
+          <!-- Borde Almendrado Exterior Elegante -->
+          <path id="intro-contour-stroke" d="M 30 170 C 130 30 410 30 510 170 C 410 310 130 310 30 170 Z" fill="none" stroke="var(--color-beige)" stroke-width="5" stroke-linejoin="round"/>
         </svg>
       </div>
 
       <div class="intro-caption">
-        <h2 class="intro-headline">IngenierÃ­a de CompactaciÃ³n de Ladrillos.</h2>
-        <p class="intro-sub">Moldeando resistencia, eficiencia y sustentabilidad bloque a bloque...</p>
+        <h2 class="intro-headline">La visiÃ³n comienza con la anticipaciÃ³n.</h2>
+        <p class="intro-sub">Despertando bio-sensores y cartografÃ­a hÃ¡ptica...</p>
       </div>
 
       <div class="intro-actions">
-        <button class="intro-skip-btn" id="intro-skip-btn" aria-label="Entrar al proyecto">
-          <span>ENTRAR AL PROYECTO</span>
+        <button class="intro-skip-btn" id="intro-skip-btn" aria-label="Saltar animaciÃ³n inicial">
+          <span>ENTRAR A SMARTNAV</span>
           <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </button>
       </div>
@@ -2623,154 +2384,175 @@ html, body {
     <div class="sage-curtain-sheet"></div>
   </div>
 
-  <!-- 1. FLOATING LATERAL BRICK INDICATOR (Selector Lateral de Ladrillos con AnimaciÃ³n de Salida y Entrada) -->
-  <nav class="lateral-capsule lateral-brick-capsule" aria-label="NavegaciÃ³n de escenas por ladrillos">
-    <div class="nav-eye-item nav-brick-item active" data-index="0">
-      <button class="nav-eye-btn nav-brick-btn" aria-label="Escena 1: Inicio">
-        <svg class="nav-eye-svg nav-brick-svg" viewBox="0 0 54 36" fill="none">
-          <!-- Estado Reposo / Salida (Ladrillo ArquitectÃ³nico) -->
-          <g class="eye-closed-group brick-idle-group">
-            <polygon class="brick-idle-top" points="27,7 46,14.5 27,21.5 8,14.5" fill="#E6D7C4" stroke="var(--color-navy)" stroke-width="1.8" stroke-linejoin="round"/>
-            <polygon class="brick-idle-front" points="8,14.5 27,21.5 27,29.5 8,22.5" fill="#FAF7F2" stroke="var(--color-navy)" stroke-width="1.8" stroke-linejoin="round"/>
-            <polygon class="brick-idle-side" points="27,21.5 46,14.5 46,22.5 27,29.5" fill="#D5C4AD" stroke="var(--color-navy)" stroke-width="1.8" stroke-linejoin="round"/>
-            <path class="eye-closed-slit" d="M 12 18 C 18 20 36 20 42 18" stroke="transparent" stroke-width="0.1"/>
+  <!-- 1. FLOATING LATERAL EYE INDICATOR (GuÃ­a Lateral de Ojos de Alta Visibilidad) -->
+  <nav class="lateral-capsule" aria-label="NavegaciÃ³n de escenas por ojos">
+    <div class="nav-eye-item active" data-index="0">
+      <button class="nav-eye-btn" aria-label="Escena 1: Inicio">
+        <svg class="nav-eye-svg" viewBox="0 0 54 36" fill="none">
+          <g class="eye-closed-group">
+            <path class="eye-closed-slit" d="M 6 18 C 18 24 36 24 48 18" stroke="var(--color-navy)" stroke-width="2.5" stroke-linecap="round"/>
+            <line x1="14" y1="21" x2="11" y2="28" stroke="var(--color-navy)" stroke-width="1.8" stroke-linecap="round"/>
+            <line x1="21" y1="23" x2="20" y2="30" stroke="var(--color-navy)" stroke-width="1.8" stroke-linecap="round"/>
+            <line x1="27" y1="23" x2="27" y2="31" stroke="var(--color-navy)" stroke-width="1.8" stroke-linecap="round"/>
+            <line x1="33" y1="23" x2="34" y2="30" stroke="var(--color-navy)" stroke-width="1.8" stroke-linecap="round"/>
+            <line x1="40" y1="21" x2="43" y2="28" stroke="var(--color-navy)" stroke-width="1.8" stroke-linecap="round"/>
           </g>
-          <!-- Estado Activo / Entrada (Ladrillo IsomÃ©trico Terracota Vibrante con Agujeros y AnimaciÃ³n) -->
-          <g class="eye-open-group brick-active-group">
-            <polygon class="brick-act-top" points="27,6 47,13.8 27,21.2 7,13.8" fill="#E27237" stroke="var(--color-navy)" stroke-width="2.2" stroke-linejoin="round"/>
-            <polygon class="brick-act-front" points="7,13.8 27,21.2 27,29.8 7,22.4" fill="#C45120" stroke="var(--color-navy)" stroke-width="2.2" stroke-linejoin="round"/>
-            <polygon class="brick-act-side" points="27,21.2 47,13.8 47,22.4 27,29.8" fill="#993B12" stroke="var(--color-navy)" stroke-width="2.2" stroke-linejoin="round"/>
-            <!-- Cavidades del Ladrillo EcolÃ³gico -->
-            <ellipse cx="20" cy="13.8" rx="3.2" ry="1.6" fill="#A83F15" stroke="var(--color-navy)" stroke-width="1.2"/>
-            <ellipse cx="34" cy="13.8" rx="3.2" ry="1.6" fill="#A83F15" stroke="var(--color-navy)" stroke-width="1.2"/>
-            <circle class="eye-iris" cx="27" cy="18" r="0.1" fill="none"/>
-            <circle class="eye-pupil" cx="27" cy="18" r="0.1" fill="none"/>
-            <text class="eye-num-text brick-num-text" x="27" y="27.5" text-anchor="middle">01</text>
+          <g class="eye-open-group">
+            <g class="eye-open-lashes">
+              <line x1="13" y1="11" x2="9" y2="5" stroke="var(--color-navy)" stroke-width="1.6" stroke-linecap="round"/>
+              <line x1="20" y1="7" x2="18" y2="1" stroke="var(--color-navy)" stroke-width="1.6" stroke-linecap="round"/>
+              <line x1="27" y1="6" x2="27" y2="0" stroke="var(--color-navy)" stroke-width="1.6" stroke-linecap="round"/>
+              <line x1="34" y1="7" x2="36" y2="1" stroke="var(--color-navy)" stroke-width="1.6" stroke-linecap="round"/>
+              <line x1="41" y1="11" x2="45" y2="5" stroke="var(--color-navy)" stroke-width="1.6" stroke-linecap="round"/>
+              <line x1="18" y1="27" x2="16" y2="33" stroke="var(--color-navy)" stroke-width="1.4" stroke-linecap="round"/>
+              <line x1="27" y1="29" x2="27" y2="35" stroke="var(--color-navy)" stroke-width="1.4" stroke-linecap="round"/>
+              <line x1="36" y1="27" x2="38" y2="33" stroke="var(--color-navy)" stroke-width="1.4" stroke-linecap="round"/>
+            </g>
+            <path class="eye-sclera" d="M 4 18 C 16 5 38 5 50 18 C 38 31 16 31 4 18 Z" fill="var(--color-beige-light)" stroke="var(--color-navy)" stroke-width="2.2" stroke-linejoin="round"/>
+            <circle class="eye-iris" cx="27" cy="18" r="11" fill="var(--color-navy)"/>
+            <circle class="eye-iris-ring" cx="27" cy="18" r="9.2" fill="none" stroke="var(--color-beige)" stroke-width="1" stroke-dasharray="2 1.5"/>
+            <circle class="eye-pupil" cx="27" cy="18" r="7.5" fill="var(--color-navy-deep)"/>
+            <text class="eye-num-text" x="27" y="21" text-anchor="middle">01</text>
           </g>
         </svg>
       </button>
-      <span class="nav-eye-label nav-brick-label">01 Inicio</span>
+      <span class="nav-eye-label">01 Inicio</span>
     </div>
-
-    <div class="nav-eye-item nav-brick-item" data-index="1">
-      <button class="nav-eye-btn nav-brick-btn" aria-label="Escena 2: MÃ¡quina 3D">
-        <svg class="nav-eye-svg nav-brick-svg" viewBox="0 0 54 36" fill="none">
-          <g class="eye-closed-group brick-idle-group">
-            <polygon class="brick-idle-top" points="27,7 46,14.5 27,21.5 8,14.5" fill="#E6D7C4" stroke="var(--color-navy)" stroke-width="1.8" stroke-linejoin="round"/>
-            <polygon class="brick-idle-front" points="8,14.5 27,21.5 27,29.5 8,22.5" fill="#FAF7F2" stroke="var(--color-navy)" stroke-width="1.8" stroke-linejoin="round"/>
-            <polygon class="brick-idle-side" points="27,21.5 46,14.5 46,22.5 27,29.5" fill="#D5C4AD" stroke="var(--color-navy)" stroke-width="1.8" stroke-linejoin="round"/>
-            <path class="eye-closed-slit" d="M 12 18 C 18 20 36 20 42 18" stroke="transparent" stroke-width="0.1"/>
+    <div class="nav-eye-item" data-index="1">
+      <button class="nav-eye-btn" aria-label="Escena 2: IngenierÃ­a 3D">
+        <svg class="nav-eye-svg" viewBox="0 0 54 36" fill="none">
+          <g class="eye-closed-group">
+            <path class="eye-closed-slit" d="M 6 18 C 18 24 36 24 48 18" stroke="var(--color-navy)" stroke-width="2.5" stroke-linecap="round"/>
+            <line x1="14" y1="21" x2="11" y2="28" stroke="var(--color-navy)" stroke-width="1.8" stroke-linecap="round"/>
+            <line x1="21" y1="23" x2="20" y2="30" stroke="var(--color-navy)" stroke-width="1.8" stroke-linecap="round"/>
+            <line x1="27" y1="23" x2="27" y2="31" stroke="var(--color-navy)" stroke-width="1.8" stroke-linecap="round"/>
+            <line x1="33" y1="23" x2="34" y2="30" stroke="var(--color-navy)" stroke-width="1.8" stroke-linecap="round"/>
+            <line x1="40" y1="21" x2="43" y2="28" stroke="var(--color-navy)" stroke-width="1.8" stroke-linecap="round"/>
           </g>
-          <g class="eye-open-group brick-active-group">
-            <polygon class="brick-act-top" points="27,6 47,13.8 27,21.2 7,13.8" fill="#E27237" stroke="var(--color-navy)" stroke-width="2.2" stroke-linejoin="round"/>
-            <polygon class="brick-act-front" points="7,13.8 27,21.2 27,29.8 7,22.4" fill="#C45120" stroke="var(--color-navy)" stroke-width="2.2" stroke-linejoin="round"/>
-            <polygon class="brick-act-side" points="27,21.2 47,13.8 47,22.4 27,29.8" fill="#993B12" stroke="var(--color-navy)" stroke-width="2.2" stroke-linejoin="round"/>
-            <ellipse cx="20" cy="13.8" rx="3.2" ry="1.6" fill="#A83F15" stroke="var(--color-navy)" stroke-width="1.2"/>
-            <ellipse cx="34" cy="13.8" rx="3.2" ry="1.6" fill="#A83F15" stroke="var(--color-navy)" stroke-width="1.2"/>
-            <circle class="eye-iris" cx="27" cy="18" r="0.1" fill="none"/>
-            <circle class="eye-pupil" cx="27" cy="18" r="0.1" fill="none"/>
-            <text class="eye-num-text brick-num-text" x="27" y="27.5" text-anchor="middle">02</text>
+          <g class="eye-open-group">
+            <g class="eye-open-lashes">
+              <line x1="13" y1="11" x2="9" y2="5" stroke="var(--color-navy)" stroke-width="1.6" stroke-linecap="round"/>
+              <line x1="20" y1="7" x2="18" y2="1" stroke="var(--color-navy)" stroke-width="1.6" stroke-linecap="round"/>
+              <line x1="27" y1="6" x2="27" y2="0" stroke="var(--color-navy)" stroke-width="1.6" stroke-linecap="round"/>
+              <line x1="34" y1="7" x2="36" y2="1" stroke="var(--color-navy)" stroke-width="1.6" stroke-linecap="round"/>
+              <line x1="41" y1="11" x2="45" y2="5" stroke="var(--color-navy)" stroke-width="1.6" stroke-linecap="round"/>
+              <line x1="18" y1="27" x2="16" y2="33" stroke="var(--color-navy)" stroke-width="1.4" stroke-linecap="round"/>
+              <line x1="27" y1="29" x2="27" y2="35" stroke="var(--color-navy)" stroke-width="1.4" stroke-linecap="round"/>
+              <line x1="36" y1="27" x2="38" y2="33" stroke="var(--color-navy)" stroke-width="1.4" stroke-linecap="round"/>
+            </g>
+            <path class="eye-sclera" d="M 4 18 C 16 5 38 5 50 18 C 38 31 16 31 4 18 Z" fill="var(--color-beige-light)" stroke="var(--color-navy)" stroke-width="2.2" stroke-linejoin="round"/>
+            <circle class="eye-iris" cx="27" cy="18" r="11" fill="var(--color-navy)"/>
+            <circle class="eye-iris-ring" cx="27" cy="18" r="9.2" fill="none" stroke="var(--color-beige)" stroke-width="1" stroke-dasharray="2 1.5"/>
+            <circle class="eye-pupil" cx="27" cy="18" r="7.5" fill="var(--color-navy-deep)"/>
+            <text class="eye-num-text" x="27" y="21" text-anchor="middle">02</text>
           </g>
         </svg>
       </button>
-      <span class="nav-eye-label nav-brick-label">02 MÃ¡quina 3D</span>
+      <span class="nav-eye-label">02 IngenierÃ­a 3D</span>
     </div>
-
-    <div class="nav-eye-item nav-brick-item" data-index="2">
-      <button class="nav-eye-btn nav-brick-btn" aria-label="Escena 3: Prensado">
-        <svg class="nav-eye-svg nav-brick-svg" viewBox="0 0 54 36" fill="none">
-          <g class="eye-closed-group brick-idle-group">
-            <polygon class="brick-idle-top" points="27,7 46,14.5 27,21.5 8,14.5" fill="#E6D7C4" stroke="var(--color-navy)" stroke-width="1.8" stroke-linejoin="round"/>
-            <polygon class="brick-idle-front" points="8,14.5 27,21.5 27,29.5 8,22.5" fill="#FAF7F2" stroke="var(--color-navy)" stroke-width="1.8" stroke-linejoin="round"/>
-            <polygon class="brick-idle-side" points="27,21.5 46,14.5 46,22.5 27,29.5" fill="#D5C4AD" stroke="var(--color-navy)" stroke-width="1.8" stroke-linejoin="round"/>
-            <path class="eye-closed-slit" d="M 12 18 C 18 20 36 20 42 18" stroke="transparent" stroke-width="0.1"/>
+    <div class="nav-eye-item" data-index="2">
+      <button class="nav-eye-btn" aria-label="Escena 3: Simulador">
+        <svg class="nav-eye-svg" viewBox="0 0 54 36" fill="none">
+          <g class="eye-closed-group">
+            <path class="eye-closed-slit" d="M 6 18 C 18 24 36 24 48 18" stroke="var(--color-navy)" stroke-width="2.5" stroke-linecap="round"/>
+            <line x1="14" y1="21" x2="11" y2="28" stroke="var(--color-navy)" stroke-width="1.8" stroke-linecap="round"/>
+            <line x1="21" y1="23" x2="20" y2="30" stroke="var(--color-navy)" stroke-width="1.8" stroke-linecap="round"/>
+            <line x1="27" y1="23" x2="27" y2="31" stroke="var(--color-navy)" stroke-width="1.8" stroke-linecap="round"/>
+            <line x1="33" y1="23" x2="34" y2="30" stroke="var(--color-navy)" stroke-width="1.8" stroke-linecap="round"/>
+            <line x1="40" y1="21" x2="43" y2="28" stroke="var(--color-navy)" stroke-width="1.8" stroke-linecap="round"/>
           </g>
-          <g class="eye-open-group brick-active-group">
-            <polygon class="brick-act-top" points="27,6 47,13.8 27,21.2 7,13.8" fill="#E27237" stroke="var(--color-navy)" stroke-width="2.2" stroke-linejoin="round"/>
-            <polygon class="brick-act-front" points="7,13.8 27,21.2 27,29.8 7,22.4" fill="#C45120" stroke="var(--color-navy)" stroke-width="2.2" stroke-linejoin="round"/>
-            <polygon class="brick-act-side" points="27,21.2 47,13.8 47,22.4 27,29.8" fill="#993B12" stroke="var(--color-navy)" stroke-width="2.2" stroke-linejoin="round"/>
-            <ellipse cx="20" cy="13.8" rx="3.2" ry="1.6" fill="#A83F15" stroke="var(--color-navy)" stroke-width="1.2"/>
-            <ellipse cx="34" cy="13.8" rx="3.2" ry="1.6" fill="#A83F15" stroke="var(--color-navy)" stroke-width="1.2"/>
-            <circle class="eye-iris" cx="27" cy="18" r="0.1" fill="none"/>
-            <circle class="eye-pupil" cx="27" cy="18" r="0.1" fill="none"/>
-            <text class="eye-num-text brick-num-text" x="27" y="27.5" text-anchor="middle">03</text>
+          <g class="eye-open-group">
+            <g class="eye-open-lashes">
+              <line x1="13" y1="11" x2="9" y2="5" stroke="var(--color-navy)" stroke-width="1.6" stroke-linecap="round"/>
+              <line x1="20" y1="7" x2="18" y2="1" stroke="var(--color-navy)" stroke-width="1.6" stroke-linecap="round"/>
+              <line x1="27" y1="6" x2="27" y2="0" stroke="var(--color-navy)" stroke-width="1.6" stroke-linecap="round"/>
+              <line x1="34" y1="7" x2="36" y2="1" stroke="var(--color-navy)" stroke-width="1.6" stroke-linecap="round"/>
+              <line x1="41" y1="11" x2="45" y2="5" stroke="var(--color-navy)" stroke-width="1.6" stroke-linecap="round"/>
+              <line x1="18" y1="27" x2="16" y2="33" stroke="var(--color-navy)" stroke-width="1.4" stroke-linecap="round"/>
+              <line x1="27" y1="29" x2="27" y2="35" stroke="var(--color-navy)" stroke-width="1.4" stroke-linecap="round"/>
+              <line x1="36" y1="27" x2="38" y2="33" stroke="var(--color-navy)" stroke-width="1.4" stroke-linecap="round"/>
+            </g>
+            <path class="eye-sclera" d="M 4 18 C 16 5 38 5 50 18 C 38 31 16 31 4 18 Z" fill="var(--color-beige-light)" stroke="var(--color-navy)" stroke-width="2.2" stroke-linejoin="round"/>
+            <circle class="eye-iris" cx="27" cy="18" r="11" fill="var(--color-navy)"/>
+            <circle class="eye-iris-ring" cx="27" cy="18" r="9.2" fill="none" stroke="var(--color-beige)" stroke-width="1" stroke-dasharray="2 1.5"/>
+            <circle class="eye-pupil" cx="27" cy="18" r="7.5" fill="var(--color-navy-deep)"/>
+            <text class="eye-num-text" x="27" y="21" text-anchor="middle">03</text>
           </g>
         </svg>
       </button>
-      <span class="nav-eye-label nav-brick-label">03 Prensado</span>
+      <span class="nav-eye-label">03 Simulador</span>
     </div>
-
-    <div class="nav-eye-item nav-brick-item" data-index="3">
-      <button class="nav-eye-btn nav-brick-btn" aria-label="Escena 4: Estructura">
-        <svg class="nav-eye-svg nav-brick-svg" viewBox="0 0 54 36" fill="none">
-          <g class="eye-closed-group brick-idle-group">
-            <polygon class="brick-idle-top" points="27,7 46,14.5 27,21.5 8,14.5" fill="#E6D7C4" stroke="var(--color-navy)" stroke-width="1.8" stroke-linejoin="round"/>
-            <polygon class="brick-idle-front" points="8,14.5 27,21.5 27,29.5 8,22.5" fill="#FAF7F2" stroke="var(--color-navy)" stroke-width="1.8" stroke-linejoin="round"/>
-            <polygon class="brick-idle-side" points="27,21.5 46,14.5 46,22.5 27,29.5" fill="#D5C4AD" stroke="var(--color-navy)" stroke-width="1.8" stroke-linejoin="round"/>
-            <path class="eye-closed-slit" d="M 12 18 C 18 20 36 20 42 18" stroke="transparent" stroke-width="0.1"/>
+    <div class="nav-eye-item" data-index="3">
+      <button class="nav-eye-btn" aria-label="Escena 4: Arquitectura">
+        <svg class="nav-eye-svg" viewBox="0 0 54 36" fill="none">
+          <g class="eye-closed-group">
+            <path class="eye-closed-slit" d="M 6 18 C 18 24 36 24 48 18" stroke="var(--color-navy)" stroke-width="2.5" stroke-linecap="round"/>
+            <line x1="14" y1="21" x2="11" y2="28" stroke="var(--color-navy)" stroke-width="1.8" stroke-linecap="round"/>
+            <line x1="21" y1="23" x2="20" y2="30" stroke="var(--color-navy)" stroke-width="1.8" stroke-linecap="round"/>
+            <line x1="27" y1="23" x2="27" y2="31" stroke="var(--color-navy)" stroke-width="1.8" stroke-linecap="round"/>
+            <line x1="33" y1="23" x2="34" y2="30" stroke="var(--color-navy)" stroke-width="1.8" stroke-linecap="round"/>
+            <line x1="40" y1="21" x2="43" y2="28" stroke="var(--color-navy)" stroke-width="1.8" stroke-linecap="round"/>
           </g>
-          <g class="eye-open-group brick-active-group">
-            <polygon class="brick-act-top" points="27,6 47,13.8 27,21.2 7,13.8" fill="#E27237" stroke="var(--color-navy)" stroke-width="2.2" stroke-linejoin="round"/>
-            <polygon class="brick-act-front" points="7,13.8 27,21.2 27,29.8 7,22.4" fill="#C45120" stroke="var(--color-navy)" stroke-width="2.2" stroke-linejoin="round"/>
-            <polygon class="brick-act-side" points="27,21.2 47,13.8 47,22.4 27,29.8" fill="#993B12" stroke="var(--color-navy)" stroke-width="2.2" stroke-linejoin="round"/>
-            <ellipse cx="20" cy="13.8" rx="3.2" ry="1.6" fill="#A83F15" stroke="var(--color-navy)" stroke-width="1.2"/>
-            <ellipse cx="34" cy="13.8" rx="3.2" ry="1.6" fill="#A83F15" stroke="var(--color-navy)" stroke-width="1.2"/>
-            <circle class="eye-iris" cx="27" cy="18" r="0.1" fill="none"/>
-            <circle class="eye-pupil" cx="27" cy="18" r="0.1" fill="none"/>
-            <text class="eye-num-text brick-num-text" x="27" y="27.5" text-anchor="middle">04</text>
+          <g class="eye-open-group">
+            <g class="eye-open-lashes">
+              <line x1="13" y1="11" x2="9" y2="5" stroke="var(--color-navy)" stroke-width="1.6" stroke-linecap="round"/>
+              <line x1="20" y1="7" x2="18" y2="1" stroke="var(--color-navy)" stroke-width="1.6" stroke-linecap="round"/>
+              <line x1="27" y1="6" x2="27" y2="0" stroke="var(--color-navy)" stroke-width="1.6" stroke-linecap="round"/>
+              <line x1="34" y1="7" x2="36" y2="1" stroke="var(--color-navy)" stroke-width="1.6" stroke-linecap="round"/>
+              <line x1="41" y1="11" x2="45" y2="5" stroke="var(--color-navy)" stroke-width="1.6" stroke-linecap="round"/>
+              <line x1="18" y1="27" x2="16" y2="33" stroke="var(--color-navy)" stroke-width="1.4" stroke-linecap="round"/>
+              <line x1="27" y1="29" x2="27" y2="35" stroke="var(--color-navy)" stroke-width="1.4" stroke-linecap="round"/>
+              <line x1="36" y1="27" x2="38" y2="33" stroke="var(--color-navy)" stroke-width="1.4" stroke-linecap="round"/>
+            </g>
+            <path class="eye-sclera" d="M 4 18 C 16 5 38 5 50 18 C 38 31 16 31 4 18 Z" fill="var(--color-beige-light)" stroke="var(--color-navy)" stroke-width="2.2" stroke-linejoin="round"/>
+            <circle class="eye-iris" cx="27" cy="18" r="11" fill="var(--color-navy)"/>
+            <circle class="eye-iris-ring" cx="27" cy="18" r="9.2" fill="none" stroke="var(--color-beige)" stroke-width="1" stroke-dasharray="2 1.5"/>
+            <circle class="eye-pupil" cx="27" cy="18" r="7.5" fill="var(--color-navy-deep)"/>
+            <text class="eye-num-text" x="27" y="21" text-anchor="middle">04</text>
           </g>
         </svg>
       </button>
-      <span class="nav-eye-label nav-brick-label">04 Estructura</span>
+      <span class="nav-eye-label">04 Arquitectura</span>
     </div>
-
-    <div class="nav-eye-item nav-brick-item" data-index="4">
-      <button class="nav-eye-btn nav-brick-btn" aria-label="Escena 5: VisiÃ³n 2.0">
-        <svg class="nav-eye-svg nav-brick-svg" viewBox="0 0 54 36" fill="none">
-          <g class="eye-closed-group brick-idle-group">
-            <polygon class="brick-idle-top" points="27,7 46,14.5 27,21.5 8,14.5" fill="#E6D7C4" stroke="var(--color-navy)" stroke-width="1.8" stroke-linejoin="round"/>
-            <polygon class="brick-idle-front" points="8,14.5 27,21.5 27,29.5 8,22.5" fill="#FAF7F2" stroke="var(--color-navy)" stroke-width="1.8" stroke-linejoin="round"/>
-            <polygon class="brick-idle-side" points="27,21.5 46,14.5 46,22.5 27,29.5" fill="#D5C4AD" stroke="var(--color-navy)" stroke-width="1.8" stroke-linejoin="round"/>
-            <path class="eye-closed-slit" d="M 12 18 C 18 20 36 20 42 18" stroke="transparent" stroke-width="0.1"/>
+    <div class="nav-eye-item" data-index="4">
+      <button class="nav-eye-btn" aria-label="Escena 5: VisiÃ³n 2.0">
+        <svg class="nav-eye-svg" viewBox="0 0 54 36" fill="none">
+          <g class="eye-closed-group">
+            <path class="eye-closed-slit" d="M 6 18 C 18 24 36 24 48 18" stroke="var(--color-navy)" stroke-width="2.5" stroke-linecap="round"/>
+            <line x1="14" y1="21" x2="11" y2="28" stroke="var(--color-navy)" stroke-width="1.8" stroke-linecap="round"/>
+            <line x1="21" y1="23" x2="20" y2="30" stroke="var(--color-navy)" stroke-width="1.8" stroke-linecap="round"/>
+            <line x1="27" y1="23" x2="27" y2="31" stroke="var(--color-navy)" stroke-width="1.8" stroke-linecap="round"/>
+            <line x1="33" y1="23" x2="34" y2="30" stroke="var(--color-navy)" stroke-width="1.8" stroke-linecap="round"/>
+            <line x1="40" y1="21" x2="43" y2="28" stroke="var(--color-navy)" stroke-width="1.8" stroke-linecap="round"/>
           </g>
-          <g class="eye-open-group brick-active-group">
-            <polygon class="brick-act-top" points="27,6 47,13.8 27,21.2 7,13.8" fill="#E27237" stroke="var(--color-navy)" stroke-width="2.2" stroke-linejoin="round"/>
-            <polygon class="brick-act-front" points="7,13.8 27,21.2 27,29.8 7,22.4" fill="#C45120" stroke="var(--color-navy)" stroke-width="2.2" stroke-linejoin="round"/>
-            <polygon class="brick-act-side" points="27,21.2 47,13.8 47,22.4 27,29.8" fill="#993B12" stroke="var(--color-navy)" stroke-width="2.2" stroke-linejoin="round"/>
-            <ellipse cx="20" cy="13.8" rx="3.2" ry="1.6" fill="#A83F15" stroke="var(--color-navy)" stroke-width="1.2"/>
-            <ellipse cx="34" cy="13.8" rx="3.2" ry="1.6" fill="#A83F15" stroke="var(--color-navy)" stroke-width="1.2"/>
-            <circle class="eye-iris" cx="27" cy="18" r="0.1" fill="none"/>
-            <circle class="eye-pupil" cx="27" cy="18" r="0.1" fill="none"/>
-            <text class="eye-num-text brick-num-text" x="27" y="27.5" text-anchor="middle">05</text>
+          <g class="eye-open-group">
+            <g class="eye-open-lashes">
+              <line x1="13" y1="11" x2="9" y2="5" stroke="var(--color-navy)" stroke-width="1.6" stroke-linecap="round"/>
+              <line x1="20" y1="7" x2="18" y2="1" stroke="var(--color-navy)" stroke-width="1.6" stroke-linecap="round"/>
+              <line x1="27" y1="6" x2="27" y2="0" stroke="var(--color-navy)" stroke-width="1.6" stroke-linecap="round"/>
+              <line x1="34" y1="7" x2="36" y2="1" stroke="var(--color-navy)" stroke-width="1.6" stroke-linecap="round"/>
+              <line x1="41" y1="11" x2="45" y2="5" stroke="var(--color-navy)" stroke-width="1.6" stroke-linecap="round"/>
+              <line x1="18" y1="27" x2="16" y2="33" stroke="var(--color-navy)" stroke-width="1.4" stroke-linecap="round"/>
+              <line x1="27" y1="29" x2="27" y2="35" stroke="var(--color-navy)" stroke-width="1.4" stroke-linecap="round"/>
+              <line x1="36" y1="27" x2="38" y2="33" stroke="var(--color-navy)" stroke-width="1.4" stroke-linecap="round"/>
+            </g>
+            <path class="eye-sclera" d="M 4 18 C 16 5 38 5 50 18 C 38 31 16 31 4 18 Z" fill="var(--color-beige-light)" stroke="var(--color-navy)" stroke-width="2.2" stroke-linejoin="round"/>
+            <circle class="eye-iris" cx="27" cy="18" r="11" fill="var(--color-navy)"/>
+            <circle class="eye-iris-ring" cx="27" cy="18" r="9.2" fill="none" stroke="var(--color-beige)" stroke-width="1" stroke-dasharray="2 1.5"/>
+            <circle class="eye-pupil" cx="27" cy="18" r="7.5" fill="var(--color-navy-deep)"/>
+            <text class="eye-num-text" x="27" y="21" text-anchor="middle">05</text>
           </g>
         </svg>
       </button>
-      <span class="nav-eye-label nav-brick-label">05 VisiÃ³n 2.0</span>
+      <span class="nav-eye-label">05 VisiÃ³n 2.0</span>
     </div>
   </nav>
-
-  <!-- Top Right Header: BrickTech Brand & Team Information -->
-  <header class="bricktech-top-header" aria-label="Cabecera BrickTech">
-    <div class="header-left-pill">
-      <span class="status-dot-pulse"></span>
-      <span class="header-project-tag">ESCUELA MERÃN Â· EXPO 2026</span>
-    </div>
-    <div class="header-logo-container">
-      <div class="header-org-info">
-        <span class="header-company-name">AutoBrick Technologies</span>
-        <span class="header-sub-tag">Parque Industrial San Rafael</span>
-      </div>
-      <div class="header-logo-badge">
-        <img src="assets/logo_bricktech.png" alt="Logo BrickTech" class="header-logo-img">
-      </div>
-    </div>
-  </header>
 
   <!-- 4. VIEWPORT DECK WITH STACKED CINEMATIC SLIDES -->
   <main class="viewport-deck" id="viewport-deck">
     
     <!-- ======================================================================
-         SCENE 1: HERO CINEMATOGRÃFICO â€” AUTOBRICK TECHNOLOGIES
+         SCENE 1: HERO CINEMATOGRÃFICO
          ====================================================================== -->
     <section class="slide-scene active" id="scene-hero">
       <div class="scene-inner">
@@ -2779,43 +2561,43 @@ html, body {
           <div class="hero-content">
             <div class="kicker-pill">
               <span class="status-dot-pulse"></span>
-              <span>AUTOBRICK TECHNOLOGIES Â· PRÃCTICAS PROFESIONALIZANTES 5Â° 1Â°</span>
+              <span>AUTONOMÃA SENSORIAL Â· INGENIERÃA BIOMÃ‰DICA</span>
             </div>
 
             <h1 class="heading-display">
-              TecnologÃ­a de FabricaciÃ³n de Ladrillos <span class="text-vibrant">Accesible para Todos.</span>
+              La visiÃ³n no termina en los ojos. Comienza con la <span class="text-vibrant">anticipaciÃ³n.</span>
             </h1>
 
             <p class="lead-editorial">
-              Desarrollamos compactadoras de ladrillos automatizadas que optimizan el proceso de fabricaciÃ³n, aumentan la productividad y reducen la necesidad de intervenciÃ³n manual. ProducciÃ³n limpia y eficiente de bloques de tierra comprimida (BTC) desde el Parque Industrial de San Rafael.
+              SmartNav redefine la movilidad de personas con discapacidad visual. Sensores ultrasÃ³nicos de rango milimÃ©trico traducidos instantÃ¡neamente en pulsos hÃ¡pticos en las patillas: imperceptibles para otros, revolucionarios para ti. Sin bloquear tu audiciÃ³n, sin depender de pantallas.
             </p>
 
             <div class="hero-actions">
               <a href="#scene-engineering" class="btn-primary">
-                <span>Explorar MÃ¡quina 3D</span>
+                <span>Explorar TecnologÃ­a</span>
                 <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
               </a>
               <a href="#scene-simulator" class="btn-secondary">
-                <span>Ver Proceso & PLC</span>
+                <span>Ver Simulador HÃ¡ptico</span>
               </a>
             </div>
 
             <div class="hero-stats-band">
               <div class="stat-item">
-                <span class="stat-value">10<span class="stat-accent">Tn</span></span>
-                <span class="stat-caption">Fuerza HidrÃ¡ulica</span>
+                <span class="stat-value">38<span class="stat-accent">g</span></span>
+                <span class="stat-caption">Chasis Titanio</span>
               </div>
               <div class="stat-item">
-                <span class="stat-value">5<span class="stat-accent">Pasos</span></span>
-                <span class="stat-caption">Proceso Integrado</span>
+                <span class="stat-value">120<span class="stat-accent">Â°</span></span>
+                <span class="stat-caption">Cobertura AcÃºstica</span>
               </div>
               <div class="stat-item">
-                <span class="stat-value">S7<span class="stat-accent">200</span></span>
-                <span class="stat-caption">AutomatizaciÃ³n PLC</span>
+                <span class="stat-value">&lt;5<span class="stat-accent">ms</span></span>
+                <span class="stat-caption">Latencia Refleja</span>
               </div>
               <div class="stat-item">
-                <span class="stat-value">100<span class="stat-accent">%</span></span>
-                <span class="stat-caption">Curado EcolÃ³gico</span>
+                <span class="stat-value">3.5<span class="stat-accent">m</span></span>
+                <span class="stat-caption">Rango Radar</span>
               </div>
             </div>
           </div>
@@ -2827,10 +2609,10 @@ html, body {
               <div class="telemetry-widget-header">
                 <div class="telemetry-chip-live">
                   <span class="telemetry-live-dot"></span>
-                  <span class="telemetry-chip-title">COMPACTADORA BRICKTECH Â· ESTADO EN VIVO</span>
+                  <span class="telemetry-chip-title">TELEMETRÃA EN VIVO Â· SISTEMA v1.0</span>
                 </div>
                 <div class="telemetry-status-badge">
-                  <span>SISTEMA HIDRÃULICO ACTIVO</span>
+                  <span>40 kHz ACTIVO</span>
                 </div>
               </div>
 
@@ -2840,48 +2622,48 @@ html, body {
                 <div class="radar-ping-ring ring-2"></div>
                 <div class="radar-ping-ring ring-3"></div>
                 <div class="radar-sweep-needle"></div>
-                <div class="radar-echo-blip blip-1" title="Sensor fin de carrera activo"></div>
-                <div class="radar-echo-blip blip-2" title="PresiÃ³n de prensado nominal"></div>
+                <div class="radar-echo-blip blip-1" title="ObstÃ¡culo detectado a 2.4m"></div>
+                <div class="radar-echo-blip blip-2" title="ObstÃ¡culo detectado a 3.2m"></div>
                 <div class="radar-specs-overlay">
-                  <span class="radar-range-pill">PRESIÃ“N MÃX 180 BAR</span>
-                  <span class="radar-fov-pill">CICLO 8.4s</span>
+                  <span class="radar-range-pill">RANGO MÃX 3.5m</span>
+                  <span class="radar-fov-pill">CAMPO 120Â°</span>
                 </div>
               </div>
 
               <!-- Telemetry Metrics Grid -->
               <div class="telemetry-cards-row">
-                <!-- Hydraulic Pressure Card -->
+                <!-- Battery Card -->
                 <div class="telemetry-mini-card">
                   <div class="tcard-head">
-                    <span class="tcard-title">PRENSA HIDRÃULICA</span>
-                    <span class="tcard-pill-sage" id="telemetry-bat-pct">10 Tn</span>
+                    <span class="tcard-title">BATERÃA DUAL</span>
+                    <span class="tcard-pill-sage" id="telemetry-bat-pct">94%</span>
                   </div>
                   <div class="tcard-progress-track">
-                    <div class="tcard-progress-bar" id="telemetry-bat-bar" style="width: 92%;"></div>
+                    <div class="tcard-progress-bar" id="telemetry-bat-bar" style="width: 94%;"></div>
                   </div>
                   <div class="tcard-meta-line">
-                    <span>180 bar regulado</span>
-                    <span class="tcard-highlight">PistÃ³n: Activo Â· Matriz: Cerrada</span>
+                    <span>14.2h estimadas</span>
+                    <span class="tcard-highlight">L: 94% Â· R: 95%</span>
                   </div>
                 </div>
 
-                <!-- Cycle Time Card -->
+                <!-- Latency Card -->
                 <div class="telemetry-mini-card">
                   <div class="tcard-head">
-                    <span class="tcard-title">DOSIFICACIÃ“N SINFÃN</span>
-                    <span class="tcard-pill-terracotta" id="telemetry-lat-val">3.2 s</span>
+                    <span class="tcard-title">LATENCIA REFLEJA</span>
+                    <span class="tcard-pill-terracotta" id="telemetry-lat-val">3.4 ms</span>
                   </div>
                   <div class="tcard-sparkline" id="telemetry-sparkline">
-                    <span class="spark-bar" style="height: 60%;"></span>
-                    <span class="spark-bar" style="height: 85%;"></span>
-                    <span class="spark-bar" style="height: 55%;"></span>
-                    <span class="spark-bar" style="height: 95%;"></span>
-                    <span class="spark-bar active" style="height: 70%;"></span>
-                    <span class="spark-bar" style="height: 80%;"></span>
+                    <span class="spark-bar" style="height: 48%;"></span>
+                    <span class="spark-bar" style="height: 74%;"></span>
+                    <span class="spark-bar" style="height: 52%;"></span>
+                    <span class="spark-bar" style="height: 88%;"></span>
+                    <span class="spark-bar active" style="height: 64%;"></span>
+                    <span class="spark-bar" style="height: 78%;"></span>
                   </div>
                   <div class="tcard-meta-line">
-                    <span>PLC Siemens S7-200</span>
-                    <span class="tcard-green">Salida Q1 / Q4 Sincronizada</span>
+                    <span>NPU BiomÃ©dica</span>
+                    <span class="tcard-green">&lt;5ms Tiempo Real</span>
                   </div>
                 </div>
               </div>
@@ -2889,22 +2671,22 @@ html, body {
               <!-- Sensor Submodules Strip -->
               <div class="telemetry-sensors-panel">
                 <div class="tcard-head" style="margin-bottom: 8px;">
-                  <span class="tcard-title">SISTEMAS ELECTROMECÃNICOS & ACTUADORES</span>
+                  <span class="tcard-title">ESTADO DE SENSORES Y ACTUADORES</span>
                   <span class="tcard-online-pill">SINCRONIZADO</span>
                 </div>
                 <div class="telemetry-sensors-grid">
                   <div class="sensor-pill-status active">
                     <span class="sensor-indicator-dot"></span>
                     <div class="sensor-pill-info">
-                      <span class="sensor-pill-name">Motor ElÃ©ctrico & SinfÃ­n Mezclador</span>
-                      <span class="sensor-pill-desc">12V 100 RPM Â· HomogenizaciÃ³n continua de suelo y cemento</span>
+                      <span class="sensor-pill-name">Transductores UltrasÃ³nicos Duales</span>
+                      <span class="sensor-pill-desc">40kHz Â· DetecciÃ³n de altura y perÃ­metro</span>
                     </div>
                   </div>
                   <div class="sensor-pill-status active">
                     <span class="sensor-indicator-dot"></span>
                     <div class="sensor-pill-info">
-                      <span class="sensor-pill-name">Cilindro HidrÃ¡ulico & Bandeja de ExpulsiÃ³n</span>
-                      <span class="sensor-pill-desc">ElectrovÃ¡lvulas 5/2 Â· Prensado uniforme y desmolde inmediato</span>
+                      <span class="sensor-pill-name">Actuadores HÃ¡pticos LRA (Sienes L/R)</span>
+                      <span class="sensor-pill-desc">170Hz Â· Resonancia tÃ¡ctil bilateral</span>
                     </div>
                   </div>
                 </div>
@@ -2914,9 +2696,9 @@ html, body {
               <div class="telemetry-widget-footer">
                 <span class="telemetry-dock-tag">
                   <span class="status-dot-pulse"></span>
-                  <span>PARQUE INDUSTRIAL SAN RAFAEL Â· CUADRO NACIONAL</span>
+                  <span>CALIBRACIÃ“N DINÃMICA CONTINUA</span>
                 </span>
-                <span class="telemetry-dock-code">EXPO 2026</span>
+                <span class="telemetry-dock-code">ISO 13485 CERT</span>
               </div>
             </div>
           </div>
@@ -2932,7 +2714,7 @@ html, body {
     </section>
 
     <!-- ======================================================================
-         SCENE 2: INGENIERÃA 3D INTERACTIVA â€” MÃQUINA COMPACTADORA DE LADRILLOS
+         SCENE 2: INGENIERÃA 3D INTERACTIVA
          ====================================================================== -->
     <section class="slide-scene" id="scene-engineering">
       <div class="scene-inner">
@@ -2940,15 +2722,15 @@ html, body {
           <!-- Left: Spec Details -->
           <div class="tech-spec-panel">
             <div class="kicker-pill kicker-coral">
-              <span>EXPLORACIÃ“N ISOMÃ‰TRICA CAD</span>
+              <span>EXPLORACIÃ“N ESTRUCTURAL</span>
             </div>
 
             <h2 class="heading-section">
-              MÃ¡quina Compactadora de Ladrillos EcolÃ³gicos.
+              IngenierÃ­a acÃºstica encapsulada en 38 gramos.
             </h2>
 
             <p class="lead-editorial" style="margin-bottom: 20px;">
-              DiseÃ±o electromecÃ¡nico e isomÃ©trico de alta precisiÃ³n para fabricar bloques de suelo-cemento de encastre modular, garantizando densidad homogÃ©nea y compresiÃ³n certificada.
+              Cada milÃ­metro de SmartNav responde a un propÃ³sito de bio-compatibilidad: libertad auricular absoluta para no interferir con la orientaciÃ³n sonora natural.
             </p>
 
             <div class="spec-list">
@@ -2957,8 +2739,8 @@ html, body {
                   <svg viewBox="0 0 24 24"><path d="M12 2v20M2 12h20M4.93 4.93l14.14 14.14M4.93 19.07l14.14-14.14"/></svg>
                 </div>
                 <div class="spec-body">
-                  <h4>Tolva de AlimentaciÃ³n & DosificaciÃ³n</h4>
-                  <p>Tolva superior troncocÃ³nica con Ã¡ngulo de deslizamiento optimizado para mezclas homogÃ©neas de suelo arcilloso, arena y estabilizador ecolÃ³gico.</p>
+                  <h4>Transductores UltrasÃ³nicos Duales</h4>
+                  <p>Frecuencia de 40kHz calibrada para escanear obstÃ¡culos superiores (ramas, carteles y marcos de puertas) que el bastÃ³n blanco no percibe.</p>
                 </div>
               </div>
 
@@ -2967,8 +2749,8 @@ html, body {
                   <svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
                 </div>
                 <div class="spec-body">
-                  <h4>PistÃ³n HidrÃ¡ulico de Prensado (10 Toneladas)</h4>
-                  <p>Cilindro de compresiÃ³n vertical con vÃ¡stago de acero rectificado que compacta la masa a presiones superiores a 4.5 MPa, eliminando porosidades.</p>
+                  <h4>Actuadores HÃ¡pticos Resonantes LRA</h4>
+                  <p>Pulsos micro-vibratorios independientes en las patillas izquierda y derecha: direcciÃ³n intuitiva sin sonidos invasivos.</p>
                 </div>
               </div>
 
@@ -2977,8 +2759,8 @@ html, body {
                   <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
                 </div>
                 <div class="spec-body">
-                  <h4>Matriz Intercambiable para Bloques Modulares</h4>
-                  <p>Caja de moldeo de acero templado antidesgaste con doble macho para ladrillos con orificios tÃ©cnicos y conductos de instalaciÃ³n sin roturas.</p>
+                  <h4>Chasis en Titanio Beta y TR90</h4>
+                  <p>DistribuciÃ³n de masa 50/50 ergonomizada para uso continuo durante todo el dÃ­a sin fatiga nasal.</p>
                 </div>
               </div>
             </div>
@@ -2990,73 +2772,69 @@ html, body {
 
             <!-- Dynamic Interactive Floating Hotspots (Aprovechamiento Espacial) -->
             <div class="hotspots-floating-container" id="hotspots-floating-container">
-              <!-- Hotspot 1: Tolva de Carga -->
-              <div class="model-hotspot hotspot-bridge" data-component="tolva">
-                <button class="hotspot-trigger" aria-label="Ver Tolva de Carga">
+              <!-- Hotspot 1: Transductores UltrasÃ³nicos (Puente Frontal) -->
+              <div class="model-hotspot hotspot-bridge" data-component="sensors">
+                <button class="hotspot-trigger" aria-label="Ver Transductores UltrasÃ³nicos">
                   <span class="hotspot-pulse"></span>
                   <span class="hotspot-dot"></span>
                   <span class="hotspot-num">01</span>
                 </button>
                 <div class="hotspot-card">
-                  <div class="hotspot-card-badge">TOLVA DE ALIMENTACIÃ“N</div>
-                  <h5 class="hotspot-card-title">Carga de Mezcla</h5>
-                  <p class="hotspot-card-desc">RecepciÃ³n superior para dosificaciÃ³n precisa de Ã¡ridos y arcilla seleccionada hacia la cÃ¡mara de prensado.</p>
+                  <div class="hotspot-card-badge">TRANSDUCTORES 40kHz</div>
+                  <h5 class="hotspot-card-title">Doble Haz UltrasÃ³nico</h5>
+                  <p class="hotspot-card-desc">Emisores cÃ³nicos en el puente frontal que detectan ramas y obstÃ¡culos elevados hasta 3.5m antes.</p>
                 </div>
               </div>
 
-              <!-- Hotspot 2: Cilindro HidrÃ¡ulico -->
-              <div class="model-hotspot hotspot-temple-left" data-component="cilindro">
-                <button class="hotspot-trigger" aria-label="Ver Cilindro de Prensado">
+              <!-- Hotspot 2: Actuador HÃ¡ptico Izquierdo (Patilla Izquierda) -->
+              <div class="model-hotspot hotspot-temple-left" data-component="temple-left">
+                <button class="hotspot-trigger" aria-label="Ver Actuador HÃ¡ptico Izquierdo">
                   <span class="hotspot-pulse"></span>
                   <span class="hotspot-dot"></span>
                   <span class="hotspot-num">02</span>
                 </button>
                 <div class="hotspot-card">
-                  <div class="hotspot-card-badge">PRENSA HIDRÃULICA 10 Tn</div>
-                  <h5 class="hotspot-card-title">PistÃ³n de Alta Densidad</h5>
-                  <p class="hotspot-card-desc">VÃ¡stago templado y plato estampador que compacta la masa garantizando alta resistencia mecÃ¡nica.</p>
+                  <div class="hotspot-card-badge">RETROALIMENTACIÃ“N HÃPTICA</div>
+                  <h5 class="hotspot-card-title">Actuador LRA Izquierdo</h5>
+                  <p class="hotspot-card-desc">Motor resonante lineal de 170Hz. Pulso micro-vibratorio para desvÃ­o de obstÃ¡culos a la izquierda.</p>
                 </div>
               </div>
 
-              <!-- Hotspot 3: Matriz de Moldeo -->
-              <div class="model-hotspot hotspot-temple-right" data-component="matriz">
-                <button class="hotspot-trigger" aria-label="Ver Matriz de Moldeo">
+              <!-- Hotspot 3: Actuador HÃ¡ptico Derecho & Celda Dual (Patilla Derecha) -->
+              <div class="model-hotspot hotspot-temple-right" data-component="temple-right">
+                <button class="hotspot-trigger" aria-label="Ver Actuador HÃ¡ptico Derecho y BaterÃ­a">
                   <span class="hotspot-pulse"></span>
                   <span class="hotspot-dot"></span>
                   <span class="hotspot-num">03</span>
                 </button>
                 <div class="hotspot-card">
-                  <div class="hotspot-card-badge">CÃMARA DE MOLDEO</div>
-                  <h5 class="hotspot-card-title">Matriz Modular con Machos</h5>
-                  <p class="hotspot-card-desc">CÃ¡mara de 240Ã—115Ã—65 mm con nÃºcleos dobles para encastre machihembrado de mÃ¡xima precisiÃ³n.</p>
+                  <div class="hotspot-card-badge">AUTONOMÃA & HÃPTICA</div>
+                  <h5 class="hotspot-card-title">Actuador Derecho & BaterÃ­a</h5>
+                  <p class="hotspot-card-desc">DistribuciÃ³n simÃ©trica 50/50 y celda de polÃ­mero con 14 horas de autonomÃ­a continua.</p>
                 </div>
               </div>
 
-              <!-- Hotspot 4: Ladrillo EcolÃ³gico & Desmolde -->
-              <div class="model-hotspot hotspot-frame" data-component="ladrillo">
-                <button class="hotspot-trigger" aria-label="Ver Ladrillo Compactado">
+              <!-- Hotspot 4: Chasis Titanio Beta & TR90 (Montura) -->
+              <div class="model-hotspot hotspot-frame" data-component="frame">
+                <button class="hotspot-trigger" aria-label="Ver Chasis Ultraligero">
                   <span class="hotspot-pulse"></span>
                   <span class="hotspot-dot"></span>
                   <span class="hotspot-num">04</span>
                 </button>
                 <div class="hotspot-card">
-                  <div class="hotspot-card-badge">LADRILLO ECOLÃ“GICO</div>
-                  <h5 class="hotspot-card-title">Bandeja de Desmolde</h5>
-                  <p class="hotspot-card-desc">Sistema de expulsiÃ³n vertical que entrega el bloque terminado sin cocciÃ³n ni deformaciones superficiales.</p>
+                  <div class="hotspot-card-badge">BIOMATERIALES 38g</div>
+                  <h5 class="hotspot-card-title">Titanio Beta & TR90</h5>
+                  <p class="hotspot-card-desc">PolÃ­mero suizo TR90 biocompatible con memoria elÃ¡stica. MÃ¡ximo confort para uso diario sin fatiga.</p>
                 </div>
               </div>
             </div>
 
             <div class="stage-overlay-hud">
-              <span class="hud-pill">MOTOR 3D // CAD ISOMÃ‰TRICO THREE.JS</span>
+              <span class="hud-pill">MOTOR 3D // THREE.JS REAL-TIME</span>
               <div class="hud-controls">
                 <button class="hud-btn" id="btn-3d-reset">Rotar 360Â°</button>
-                <button class="hud-btn" id="btn-3d-echo">Ciclo de Prensado</button>
-                <button class="hud-btn" id="btn-3d-temples">Vista IsomÃ©trica</button>
-                <a class="hud-btn" id="btn-3d-dwg" href="assets/maquina_ladrillos_isometrico.dwg" download="maquina_ladrillos_isometrico.dwg" style="text-decoration:none; display:inline-flex; align-items:center; gap:6px;">
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
-                  <span>Plano DWG</span>
-                </a>
+                <button class="hud-btn" id="btn-3d-echo">EcolocalizaciÃ³n ON</button>
+                <button class="hud-btn" id="btn-3d-temples">Ver Patillas</button>
               </div>
             </div>
           </div>
@@ -3065,19 +2843,19 @@ html, body {
     </section>
 
     <!-- ======================================================================
-         SCENE 3: SIMULADOR DE AUTOMATIZACIÃ“N & CONTROL PLC
+         SCENE 3: SIMULADOR "TOCAR VS. ANTICIPAR"
          ====================================================================== -->
     <section class="slide-scene" id="scene-simulator">
       <div class="scene-inner">
         <div style="margin-bottom: 24px;">
           <div class="kicker-pill">
-            <span>SISTEMA DE CONTROL & AUTOMATIZACIÃ“N</span>
+            <span>EXPERIMENTO EN TIEMPO REAL</span>
           </div>
           <h2 class="heading-section">
-            Simulador de ciclo de prensado & salidas PLC.
+            Simulador interactivo: Tocar vs. Anticipar.
           </h2>
           <p class="lead-editorial" style="margin-bottom: 0;">
-            Controlador LÃ³gico Programable Siemens S7-200 (CPU 224) coordinando en tiempo real las 6 salidas electromecÃ¡nicas de la mÃ¡quina compactadora.
+            El bastÃ³n blanco tradicional detecta el peligro cuando ya hubo contacto fÃ­sico. SmartNav proyecta un cono de seguridad que advierte 3.5 metros antes.
           </p>
         </div>
 
@@ -3086,45 +2864,37 @@ html, body {
           <div class="sim-control-panel">
             <div>
               <span style="font-family: var(--font-display); font-size: 0.84rem; font-weight: 800; color: var(--accent-coral); text-transform: uppercase;">
-                Modo de OperaciÃ³n
+                Modo de DetecciÃ³n
               </span>
               <div class="sim-mode-toggle">
-                <button class="mode-btn" id="mode-cane-btn">Modo Manual</button>
-                <button class="mode-btn active" id="mode-smartnav-btn">Modo AutomÃ¡tico PLC</button>
+                <button class="mode-btn" id="mode-cane-btn">BastÃ³n Blanco</button>
+                <button class="mode-btn active" id="mode-smartnav-btn">SmartNav</button>
               </div>
 
               <div class="sim-metrics-box">
                 <div class="sim-metric-row">
-                  <span class="sim-metric-label">Salida Activa</span>
-                  <span class="sim-metric-val" id="sim-dist-val">Q2: Compactadora</span>
+                  <span class="sim-metric-label">Distancia ObstÃ¡culo</span>
+                  <span class="sim-metric-val" id="sim-dist-val">2.5 m</span>
                 </div>
                 <div class="sim-metric-row">
-                  <span class="sim-metric-label">PresiÃ³n HidrÃ¡ulica</span>
-                  <span class="sim-metric-val" id="sim-haptic-val">180 Bar (10 Tn)</span>
+                  <span class="sim-metric-label">RetroalimentaciÃ³n</span>
+                  <span class="sim-metric-val" id="sim-haptic-val">Patilla Derecha</span>
                 </div>
                 <div class="sim-metric-row">
-                  <span class="sim-metric-label">Tiempo de Ciclo</span>
-                  <span class="sim-metric-val" id="sim-reaction-val">8.4s Continuo</span>
+                  <span class="sim-metric-label">Tiempo de ReacciÃ³n</span>
+                  <span class="sim-metric-val" id="sim-reaction-val">&lt;5ms Anticipado</span>
                 </div>
               </div>
             </div>
 
-            <!-- Listado de Salidas PLC (Q) -->
-            <div style="padding-top: 14px; border-top: 1px solid var(--border-subtle); font-size: 0.8rem; color: var(--text-secondary); line-height: 1.6;">
-              <strong style="color: var(--color-navy); display:block; margin-bottom: 6px;">AsignaciÃ³n de Salidas PLC S7-200:</strong>
-              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 6px; font-family: var(--font-mono); font-size: 0.74rem;">
-                <span style="background: rgba(46, 125, 71, 0.12); color: var(--accent-sage); padding: 2px 6px; border-radius: 4px;">Q1: SinfÃ­n Mezclador</span>
-                <span style="background: rgba(217, 83, 30, 0.12); color: var(--accent-terracotta); padding: 2px 6px; border-radius: 4px;">Q2: PistÃ³n Prensa</span>
-                <span style="background: rgba(29, 61, 111, 0.08); color: var(--color-navy); padding: 2px 6px; border-radius: 4px;">Q4: Compuerta Dosif.</span>
-                <span style="background: rgba(29, 61, 111, 0.08); color: var(--color-navy); padding: 2px 6px; border-radius: 4px;">Q5: Cinta Transp.</span>
-                <span style="background: rgba(217, 83, 30, 0.12); color: var(--accent-terracotta); padding: 2px 6px; border-radius: 4px; grid-column: span 2;">Q6: Ojo de Buey / Fin de Carrera</span>
-              </div>
+            <div style="padding-top: 14px; border-top: 1px solid var(--border-subtle); font-size: 0.8rem; color: var(--text-secondary); line-height: 1.5;">
+              Arrastra el obstÃ¡culo circular amarillo vivo con el cursor en el radar para experimentar el ajuste dinÃ¡mico del pulso acÃºstico.
             </div>
           </div>
 
           <!-- Canvas 2D Radar Simulation -->
           <div class="sim-canvas-container">
-            <span class="canvas-hint-pill">Ciclo de fabricaciÃ³n y compresiÃ³n de mezcla en tiempo real</span>
+            <span class="canvas-hint-pill">Arrastra el obstÃ¡culo amarillo en el radar</span>
             <canvas id="canvas-sim-2d"></canvas>
           </div>
         </div>
@@ -3138,74 +2908,74 @@ html, body {
       <div class="scene-inner">
         <div>
           <div class="kicker-pill kicker-coral">
-            <span>PROCESO SIMPLE, EFICAZ Y ACCESIBLE</span>
+            <span>ARQUITECTURA DE RENDIMIENTO</span>
           </div>
           <h2 class="heading-section">
-            PlanificaciÃ³n tecnolÃ³gica & manufactura sustentable.
+            DiseÃ±ado para desaparecer. Construido para proteger.
           </h2>
           <p class="lead-editorial" style="margin-bottom: 0;">
-            IngenierÃ­a de fabricaciÃ³n de bloques ecolÃ³gicos de tierra comprimida (BTC): del acopio y mezclado al curado natural sin cocciÃ³n ni emisiones contaminantes.
+            Cuatro pilares de hardware que convierten un par de gafas comunes en un Ã³rgano perceptivo aumentado.
           </p>
         </div>
 
         <div class="bento-grid">
-          <!-- Card 1: 5 Fases del Proceso -->
+          <!-- Card 1: 38g -->
+          <div class="bento-card">
+            <div class="bento-top">
+              <div class="bento-icon-box">
+                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+              </div>
+              <span class="action-pill" style="font-size: 0.72rem;">ULTRA-LIGHT</span>
+            </div>
+            <div>
+              <div class="bento-stat-num">38<span class="bento-unit">g</span></div>
+              <h3 class="bento-title">Pluma en el rostro</h3>
+              <p class="bento-desc">AleaciÃ³n de titanio beta y polÃ­mero bio-mÃ©dico suizo TR90. MÃ¡s ligeras que unas gafas de sol de pasta.</p>
+            </div>
+          </div>
+
+          <!-- Card 2: 120Â° -->
           <div class="bento-card">
             <div class="bento-top">
               <div class="bento-icon-box">
                 <svg viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
               </div>
-              <span class="action-pill" style="font-size: 0.72rem;">PROCESO INTEGRAL</span>
+              <span class="action-pill" style="font-size: 0.72rem;">COBERTURA</span>
             </div>
             <div>
-              <div class="bento-stat-num">5<span class="bento-unit">Fases</span></div>
-              <h3 class="bento-title">FabricaciÃ³n en 5 Etapas</h3>
-              <p class="bento-desc">1. Mezcla homogÃ©nea de suelo y estabilizante Â· 2. Llenado por tolva Â· 3. CompactaciÃ³n hidrÃ¡ulica 10 Tn Â· 4. Desmolde vertical suave Â· 5. Curado al aire libre sin hornos.</p>
+              <div class="bento-stat-num">120<span class="bento-unit">Â°</span></div>
+              <h3 class="bento-title">Campo perceptual perifÃ©rico</h3>
+              <p class="bento-desc">Doble haz cÃ³nico ultrasÃ³nico que mapea el plano frontal completo, eliminando colisiones con obstÃ¡culos elevados.</p>
             </div>
           </div>
 
-          <!-- Card 2: Presupuesto Total -->
+          <!-- Card 3: <5ms -->
           <div class="bento-card">
             <div class="bento-top">
               <div class="bento-icon-box">
-                <svg viewBox="0 0 24 24"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>
+                <svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
               </div>
-              <span class="action-pill" style="font-size: 0.72rem;">PRESUPUESTO</span>
+              <span class="action-pill" style="font-size: 0.72rem;">TIEMPO REAL</span>
             </div>
             <div>
-              <div class="bento-stat-num">$2.02<span class="bento-unit">M</span></div>
-              <h3 class="bento-title">InversiÃ³n Total de Insumos</h3>
-              <p class="bento-desc">Costo total $2.023.600: PLC Siemens S7-200 ($380k), cilindro y central hidrÃ¡ulica ($520k), motorreductor 100 RPM ($290k), chasis IPN y sinfÃ­n SAE 1045.</p>
+              <div class="bento-stat-num">&lt;5<span class="bento-unit">ms</span></div>
+              <h3 class="bento-title">Respuesta refleja hÃ¡ptica</h3>
+              <p class="bento-desc">Microprocesador biomÃ©dico dedicado que procesa el eco acÃºstico mÃ¡s rÃ¡pido que el impulso nervioso humano.</p>
             </div>
           </div>
 
-          <!-- Card 3: Cronograma Gantt -->
+          <!-- Card 4: 14h -->
           <div class="bento-card">
             <div class="bento-top">
               <div class="bento-icon-box">
-                <svg viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
+                <svg viewBox="0 0 24 24"><rect width="16" height="10" x="2" y="7" rx="2" ry="2"/><line x1="22" x2="22" y1="11" y2="13"/></svg>
               </div>
-              <span class="action-pill" style="font-size: 0.72rem;">GANTT EXPO 2026</span>
+              <span class="action-pill" style="font-size: 0.72rem;">AUTONOMÃA</span>
             </div>
             <div>
-              <div class="bento-stat-num">11<span class="bento-unit">Hitos</span></div>
-              <h3 class="bento-title">PlanificaciÃ³n TÃ©cnica</h3>
-              <p class="bento-desc">11 etapas estructuradas: desde la delimitaciÃ³n del problema y cÃ¡lculos estructurales, modelado 3D CAD, cableado PLC, hasta validaciÃ³n funcional final.</p>
-            </div>
-          </div>
-
-          <!-- Card 4: Bloques BTC Encastrables -->
-          <div class="bento-card">
-            <div class="bento-top">
-              <div class="bento-icon-box">
-                <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
-              </div>
-              <span class="action-pill" style="font-size: 0.72rem;">PRODUCTO BTC</span>
-            </div>
-            <div>
-              <div class="bento-stat-num">100<span class="bento-unit">%</span></div>
-              <h3 class="bento-title">EcolÃ³gico & Encastrable</h3>
-              <p class="bento-desc">Bloques modulares con orificios para ductos tÃ©cnicos y encastre machihembrado que reduce hasta 30% el consumo de mortero y acelera el montaje en obra.</p>
+              <div class="bento-stat-num">14<span class="bento-unit">h</span></div>
+              <h3 class="bento-title">De sol a sol sin recargar</h3>
+              <p class="bento-desc">BaterÃ­a de polÃ­mero dual en patillas con distribuciÃ³n simÃ©trica y carga rÃ¡pida magnÃ©tica USB-C (80% en 25 min).</p>
             </div>
           </div>
         </div>
@@ -3213,19 +2983,19 @@ html, body {
     </section>
 
     <!-- ======================================================================
-         SCENE 5: VISIÃ“N 2.0 (QUIÃ‰NES SOMOS & ESTRUCTURA ORGANIZATIVA)
+         SCENE 5: VISIÃ“N 2.0 (PROTOTIPO FUTURO & ECOSISTEMA)
          ====================================================================== -->
     <section class="slide-scene" id="scene-vision">
       <div class="scene-inner">
         <div>
           <div class="kicker-pill">
-            <span>QUIÃ‰NES SOMOS & ESTRUCTURA</span>
+            <span>ECOSISTEMA EXPANDIDO</span>
           </div>
           <h2 class="heading-section">
-            AutoBrick Technologies Â· BrickTech.
+            VisiÃ³n 2.0: MÃ¡s allÃ¡ del ultrasonido.
           </h2>
           <p class="lead-editorial" style="margin-bottom: 24px;">
-            Proyecto integral de PrÃ¡cticas Profesionalizantes del Curso 5Â° 1Â° â€” Escuela MerÃ­n (San Rafael, Mendoza). TecnologÃ­a limpia, eficiente y accesible para la construcciÃ³n sustentable.
+            El futuro de SmartNav integra inteligencia artificial auditiva y navegaciÃ³n satelital hÃ¡ptica sin bloquear el canal auditivo.
           </p>
         </div>
 
@@ -3235,29 +3005,29 @@ html, body {
             <div class="modules-panel-header">
               <div class="panel-kicker-tag">
                 <span class="status-dot-pulse"></span>
-                <span>DOSSIER INSTITUCIONAL</span>
+                <span>SUITE DE MÃ“DULOS EXPANDIDOS</span>
               </div>
-              <h3 class="panel-heading">Estructura & Trayectoria</h3>
-              <p class="panel-sub">Selecciona un apartado para conocer la historia, ubicaciÃ³n estratÃ©gica en San Rafael y el equipo de trabajo de 5Â° 1Â°.</p>
+              <h3 class="panel-heading">Ecosistema Bio-Sensorial</h3>
+              <p class="panel-sub">Selecciona un submÃ³dulo para explorar sus especificaciones avanzadas, canal de conectividad y pruebas clÃ­nicas.</p>
             </div>
 
             <!-- Tab Navigation con tarjetas robustas y de alto impacto visual -->
-            <div class="vision-tabs-nav" role="tablist" aria-label="Selector de informaciÃ³n institucional">
-              <button class="tab-btn active" data-tab="tab-historia" role="tab" aria-selected="true">
+            <div class="vision-tabs-nav" role="tablist" aria-label="Selector de submÃ³dulos VisiÃ³n 2.0">
+              <button class="tab-btn active" data-tab="tab-ai-voice" role="tab" aria-selected="true">
                 <div class="tab-card-indicator"></div>
                 <div class="tab-icon-wrap">
-                  <svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                  <svg viewBox="0 0 24 24"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" x2="12" y1="19" y2="22"/></svg>
                 </div>
                 <div class="tab-card-content">
                   <div class="tab-card-meta">
-                    <span class="tab-mod-code">APARTADO 01</span>
-                    <span class="tab-status-chip chip-sage">ORÃGENES</span>
+                    <span class="tab-mod-code">MÃ“DULO 01</span>
+                    <span class="tab-status-chip chip-sage">AUDIO Ã“SEO</span>
                   </div>
-                  <div class="tab-btn-title">Historia del Proyecto</div>
-                  <div class="tab-btn-subtitle">De las ideas iniciales a la compactadora de ladrillos</div>
+                  <div class="tab-btn-title">Asistente IA por Voz</div>
+                  <div class="tab-btn-subtitle">ConducciÃ³n Ã³sea temporal & OCR ambiental</div>
                   <div class="tab-micro-chips">
-                    <span>Descarte de Cuna</span>
-                    <span>Foco Productivo</span>
+                    <span>Reconocimiento OCR</span>
+                    <span>OÃ­do Libre</span>
                   </div>
                 </div>
                 <div class="tab-card-arrow">
@@ -3265,21 +3035,21 @@ html, body {
                 </div>
               </button>
 
-              <button class="tab-btn" data-tab="tab-ubicacion" role="tab" aria-selected="false">
+              <button class="tab-btn" data-tab="tab-haptic-gps" role="tab" aria-selected="false">
                 <div class="tab-card-indicator"></div>
                 <div class="tab-icon-wrap">
-                  <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                  <svg viewBox="0 0 24 24"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
                 </div>
                 <div class="tab-card-content">
                   <div class="tab-card-meta">
-                    <span class="tab-mod-code">APARTADO 02</span>
-                    <span class="tab-status-chip chip-terracotta">SAN RAFAEL</span>
+                    <span class="tab-mod-code">MÃ“DULO 02</span>
+                    <span class="tab-status-chip chip-terracotta">CARTOGRAFÃA</span>
                   </div>
-                  <div class="tab-btn-title">Parque Industrial</div>
-                  <div class="tab-btn-subtitle">UbicaciÃ³n estratÃ©gica en Cuadro Nacional, Mendoza</div>
+                  <div class="tab-btn-title">GPS HÃ¡ptico Urbano</div>
+                  <div class="tab-btn-subtitle">NavegaciÃ³n paso a paso mediante impulsos tÃ¡ctiles</div>
                   <div class="tab-micro-chips">
-                    <span>Polo Productivo</span>
-                    <span>LogÃ­stica Cuyo</span>
+                    <span>SatÃ©lite Dual</span>
+                    <span>Giro HÃ¡ptico</span>
                   </div>
                 </div>
                 <div class="tab-card-arrow">
@@ -3287,21 +3057,21 @@ html, body {
                 </div>
               </button>
 
-              <button class="tab-btn" data-tab="tab-equipo" role="tab" aria-selected="false">
+              <button class="tab-btn" data-tab="tab-app-connect" role="tab" aria-selected="false">
                 <div class="tab-card-indicator"></div>
                 <div class="tab-icon-wrap">
-                  <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                  <svg viewBox="0 0 24 24"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><line x1="12" x2="12.01" y1="18" y2="18"/></svg>
                 </div>
                 <div class="tab-card-content">
                   <div class="tab-card-meta">
-                    <span class="tab-mod-code">APARTADO 03</span>
-                    <span class="tab-status-chip chip-navy">6 ÃREAS</span>
+                    <span class="tab-mod-code">MÃ“DULO 03</span>
+                    <span class="tab-status-chip chip-navy">TELEMETRÃA APP</span>
                   </div>
-                  <div class="tab-btn-title">Organigrama & Equipo</div>
-                  <div class="tab-btn-subtitle">Estructura departamental y alumnos de 5Â° 1Â°</div>
+                  <div class="tab-btn-title">Conectividad App & SOS</div>
+                  <div class="tab-btn-subtitle">Rutas seguras, acelerÃ³metro 6 ejes y socorro</div>
                   <div class="tab-micro-chips">
-                    <span>Escuela MerÃ­n</span>
-                    <span>Expo 2026</span>
+                    <span>DetecciÃ³n CaÃ­das</span>
+                    <span>Canal Seguro</span>
                   </div>
                 </div>
                 <div class="tab-card-arrow">
@@ -3314,125 +3084,117 @@ html, body {
             <div class="modules-panel-dock">
               <div class="dock-badge-row">
                 <span class="status-dot-pulse"></span>
-                <span class="dock-title">AUTOBRICK TECHNOLOGIES Â· BRICKTECH</span>
+                <span class="dock-title">PROTOCOLO ABIERTO SMARTNAV BLE 5.4</span>
               </div>
-              <p class="dock-note">PrÃ¡cticas Profesionalizantes del Curso 5Â° 1Â° â€” Escuela MerÃ­n. Maquinaria industrial de impacto sustentable.</p>
+              <p class="dock-note">Interoperabilidad garantizada con prÃ³tesis auditivas, bastÃ³n sensorizado y cartografÃ­a civil de accesibilidad.</p>
             </div>
           </div>
 
           <!-- Tab Panes -->
           <div class="vision-display-area">
-            <!-- Pane 1: Historia del Proyecto -->
-            <div class="tab-pane active" id="tab-historia">
+            <!-- Pane 1: IA por Voz -->
+            <div class="tab-pane active" id="tab-ai-voice">
               <div>
-                <div class="pane-kicker">GÃ‰NESIS Y EVOLUCIÃ“N DEL PROYECTO</div>
-                <h3 class="pane-headline">De las primeras propuestas a la compactadora de ladrillos.</h3>
+                <div class="pane-kicker">MÃ“DULO DE AUDIO INTELIGENTE</div>
+                <h3 class="pane-headline">Reconocimiento contextual y lectura de seÃ±ales.</h3>
                 <p class="pane-text">
-                  En los inicios del ciclo lectivo de 5Â° 1Â°, nuestro equipo explorÃ³ alternativas como una "Cuna Inteligente" con mecedora automatizada y una compactadora de reciclaje. Sin embargo, al detectar el alto dÃ©ficit habitacional y el impacto ecolÃ³gico de los hornos tradicionales de leÃ±a, decidimos unÃ¡nimemente orientar nuestras capacidades tÃ©cnicas al diseÃ±o de una <strong>MÃ¡quina Compactadora de Ladrillos EcolÃ³gicos</strong>.
+                  Transductores de conducciÃ³n Ã³sea en la zona temporal que transmiten descripciones de texto, semÃ¡foros peatonales y carteles de transporte pÃºblico directamente a tu oÃ­do interno, dejando tu pabellÃ³n auditivo libre para escuchar los sonidos del entorno.
                 </p>
                 <ul class="pane-feature-list">
                   <li class="pane-feature-item">
                     <span class="pane-check-dot"></span>
-                    <span>ReorientaciÃ³n estratÃ©gica hacia la construcciÃ³n sostenible</span>
+                    <span>Lectura OCR de carteles urbanos</span>
                   </li>
                   <li class="pane-feature-item">
                     <span class="pane-check-dot"></span>
-                    <span>EliminaciÃ³n total de cocciÃ³n y emisiÃ³n de gases de efecto invernadero</span>
+                    <span>DetecciÃ³n de semÃ¡foros peatonales</span>
                   </li>
                   <li class="pane-feature-item">
                     <span class="pane-check-dot"></span>
-                    <span>OptimizaciÃ³n de costos para autoconstrucciÃ³n comunitaria</span>
+                    <span>Sin auriculares invasivos</span>
                   </li>
                   <li class="pane-feature-item">
                     <span class="pane-check-dot"></span>
-                    <span>IntegraciÃ³n de automatizaciÃ³n industrial accesible (PLC Siemens)</span>
+                    <span>Privacidad acÃºstica total</span>
                   </li>
                 </ul>
               </div>
               <div class="vision-cta-strip">
-                <span class="beta-disclaimer">Dossier Oficial Â· Escuela MerÃ­n Expo 2026</span>
-                <a href="assets/maquina_ladrillos_isometrico.dwg" download="maquina_ladrillos_isometrico.dwg" class="btn-primary" style="padding: 13px 26px; font-size: 0.9rem;">
-                  <span>Descargar Plano CAD (.DWG)</span>
-                  <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
-                </a>
-              </div>
-            </div>
-
-            <!-- Pane 2: UbicaciÃ³n Parque Industrial -->
-            <div class="tab-pane" id="tab-ubicacion">
-              <div>
-                <div class="pane-kicker">LOCALIZACIÃ“N ESTRATÃ‰GICA</div>
-                <h3 class="pane-headline">Parque Industrial de San Rafael Â· Cuadro Nacional.</h3>
-                <p class="pane-text">
-                  La sede operativa y productiva de AutoBrick Technologies se sitÃºa en el Parque Industrial de San Rafael, ubicado en el distrito de Cuadro Nacional, provincia de Mendoza. Esta localizaciÃ³n estratÃ©gica brinda acceso directo a las rutas provinciales y nacionales, facilitando el suministro de suelo arcilloso, arena seleccionada y la distribuciÃ³n de los bloques compactados a toda la regiÃ³n.
-                </p>
-                <ul class="pane-feature-list">
-                  <li class="pane-feature-item">
-                    <span class="pane-check-dot"></span>
-                    <span>Sede en Parque Industrial San Rafael (Cuadro Nacional)</span>
-                  </li>
-                  <li class="pane-feature-item">
-                    <span class="pane-check-dot"></span>
-                    <span>ConexiÃ³n logÃ­stica directa con corredores cuyanos</span>
-                  </li>
-                  <li class="pane-feature-item">
-                    <span class="pane-check-dot"></span>
-                    <span>CercanÃ­a a canteras de suelo y Ã¡ridos Ã³ptimos</span>
-                  </li>
-                  <li class="pane-feature-item">
-                    <span class="pane-check-dot"></span>
-                    <span>Infraestructura trifÃ¡sica adecuada para maquinaria industrial</span>
-                  </li>
-                </ul>
-              </div>
-              <div class="vision-cta-strip">
-                <span class="beta-disclaimer">Cuadro Nacional Â· San Rafael Â· Mendoza</span>
-                <a href="#scene-engineering" class="btn-primary" style="padding: 13px 26px; font-size: 0.9rem;">
-                  <span>Explorar MÃ¡quina 3D</span>
+                <span class="beta-disclaimer">En fase de pruebas clÃ­nicas Â· Registro Abierto</span>
+                <a href="https://github.com/Heisenberg-org" target="_blank" rel="noopener noreferrer" class="btn-primary" style="padding: 13px 26px; font-size: 0.9rem;">
+                  <span>Solicitar Acceso Beta</span>
                   <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                 </a>
               </div>
             </div>
 
-            <!-- Pane 3: Organigrama & Integrantes -->
-            <div class="tab-pane" id="tab-equipo">
+            <!-- Pane 2: GPS HÃ¡ptico -->
+            <div class="tab-pane" id="tab-haptic-gps">
               <div>
-                <div class="pane-kicker">ORGANIGRAMA DEPARTAMENTAL & EQUIPO TÃ‰CNICO</div>
-                <h3 class="pane-headline">6 Departamentos funcionales Â· Alumnos de 5Â° 1Â°.</h3>
+                <div class="pane-kicker">ORIENTACIÃ“N CARTOGRÃFICA</div>
+                <h3 class="pane-headline">Giro a giro mediante vibraciÃ³n intuitiva.</h3>
                 <p class="pane-text">
-                  Para llevar a cabo el proyecto, conformamos una estructura organizativa profesional de 6 departamentos especializados, garantizando rigurosidad en cada etapa del desarrollo tÃ©cnico y de gestiÃ³n:
+                  ConÃ©ctate con tu navegador: cuando debas girar a la derecha, la patilla derecha vibra suavemente. Cuando llegues a tu destino, una suave vibraciÃ³n bilateral te confirma el arribo. Cero distracciones auditivas ni comandos que interrumpan tu atenciÃ³n.
                 </p>
                 <ul class="pane-feature-list">
                   <li class="pane-feature-item">
                     <span class="pane-check-dot"></span>
-                    <span><strong>Bruno Ruarte</strong> â€” DirecciÃ³n General & GestiÃ³n EstratÃ©gica</span>
+                    <span>Giro intuitivo izquierda / derecha</span>
                   </li>
                   <li class="pane-feature-item">
                     <span class="pane-check-dot"></span>
-                    <span><strong>Francesco Conthe</strong> â€” DiseÃ±o MecÃ¡nico, Chasis & Modelado 3D CAD</span>
+                    <span>IntegraciÃ³n con transporte pÃºblico</span>
                   </li>
                   <li class="pane-feature-item">
                     <span class="pane-check-dot"></span>
-                    <span><strong>Tiago Barroso</strong> â€” AutomatizaciÃ³n, Cableado & ProgramaciÃ³n PLC</span>
+                    <span>GeolocalizaciÃ³n submÃ©trica</span>
                   </li>
                   <li class="pane-feature-item">
                     <span class="pane-check-dot"></span>
-                    <span><strong>Adam Abby</strong> â€” InvestigaciÃ³n y Desarrollo (I+D) & Ensayos de Suelo</span>
-                  </li>
-                  <li class="pane-feature-item">
-                    <span class="pane-check-dot"></span>
-                    <span><strong>Bruno Vuanello</strong> â€” AdministraciÃ³n, Finanzas & Presupuesto ($2.02M)</span>
-                  </li>
-                  <li class="pane-feature-item">
-                    <span class="pane-check-dot"></span>
-                    <span><strong>Derli Alossi</strong> â€” Mantenimiento ElectromecÃ¡nico & Seguridad Operativa</span>
+                    <span>Modo interior para estaciones y centros</span>
                   </li>
                 </ul>
               </div>
               <div class="vision-cta-strip">
-                <span class="beta-disclaimer">Curso 5Â° 1Â° Â· Escuela MerÃ­n Â· Expo 2026</span>
-                <a href="#scene-simulator" class="btn-primary" style="padding: 13px 26px; font-size: 0.9rem;">
-                  <span>Ver Control PLC</span>
+                <span class="beta-disclaimer">Prototipo v2.1 Â· Compatible con iOS y Android</span>
+                <a href="https://github.com/Heisenberg-org" target="_blank" rel="noopener noreferrer" class="btn-primary" style="padding: 13px 26px; font-size: 0.9rem;">
+                  <span>Ver EspecificaciÃ³n TÃ©cnica</span>
+                  <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </a>
+              </div>
+            </div>
+
+            <!-- Pane 3: Conectividad App -->
+            <div class="tab-pane" id="tab-app-connect">
+              <div>
+                <div class="pane-kicker">CONTROL TOTAL EN TU BOLSILLO</div>
+                <h3 class="pane-headline">TelemetrÃ­a de seguridad y detecciÃ³n de caÃ­das.</h3>
+                <p class="pane-text">
+                  La app mÃ³vil de SmartNav permite a tus contactos conocer tu ubicaciÃ³n en tiempo real mediante un canal seguro. AdemÃ¡s, el acelerÃ³metro de 6 ejes integrado detecta caÃ­das o impactos bruscos y activa una llamada SOS automÃ¡tica a tus contactos de emergencia.
+                </p>
+                <ul class="pane-feature-list">
+                  <li class="pane-feature-item">
+                    <span class="pane-check-dot"></span>
+                    <span>Alerta SOS automÃ¡tica ante caÃ­das</span>
+                  </li>
+                  <li class="pane-feature-item">
+                    <span class="pane-check-dot"></span>
+                    <span>PersonalizaciÃ³n de intensidad hÃ¡ptica</span>
+                  </li>
+                  <li class="pane-feature-item">
+                    <span class="pane-check-dot"></span>
+                    <span>Historial de trayectos seguros</span>
+                  </li>
+                  <li class="pane-feature-item">
+                    <span class="pane-check-dot"></span>
+                    <span>Actualizaciones de firmware OTA</span>
+                  </li>
+                </ul>
+              </div>
+              <div class="vision-cta-strip">
+                <span class="beta-disclaimer">SmartNav OS v1.4 Â· Cifrado punto a punto</span>
+                <a href="https://github.com/Heisenberg-org" target="_blank" rel="noopener noreferrer" class="btn-primary" style="padding: 13px 26px; font-size: 0.9rem;">
+                  <span>Descargar App Alpha</span>
                   <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                 </a>
               </div>
@@ -3442,22 +3204,22 @@ html, body {
 
         <!-- Social Media Dock en la Ãºltima diapositiva (Instagram, X, GitHub) -->
         <footer class="scene-social-dock">
-          <div class="social-dock-label">AutoBrick Technologies Â· BrickTech Â· Redes Oficiales</div>
+          <div class="social-dock-label">SmartNav Collective & Redes Oficiales</div>
           <div class="social-dock-links">
             <a href="https://www.instagram.com/joaandress/" target="_blank" rel="noopener noreferrer" class="social-dock-item" aria-label="Instagram de SmartNav">
               <svg viewBox="0 0 24 24"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
               <span>Instagram</span>
-              <span class="dock-handle">@bricktech.merin</span>
+              <span class="dock-handle">@joaandress</span>
             </a>
             <a href="https://x.com/joaandress1" target="_blank" rel="noopener noreferrer" class="social-dock-item" aria-label="X (Twitter) de SmartNav">
               <svg viewBox="0 0 24 24"><path d="M4 4l11.7 16h4.3L8.3 4z"/><path d="M4 20l6.8-7.2L4.5 4"/></svg>
               <span>X (Twitter)</span>
-              <span class="dock-handle">@bricktech_ar</span>
+              <span class="dock-handle">@joandress1</span>
             </a>
             <a href="https://github.com/Heisenberg-org" target="_blank" rel="noopener noreferrer" class="social-dock-item" aria-label="GitHub de Heisenberg Org">
               <svg viewBox="0 0 24 24"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
               <span>GitHub</span>
-              <span class="dock-handle">@bricktech-merin</span>
+              <span class="dock-handle">@Heisenberg-org</span>
             </a>
           </div>
         </footer>
@@ -3490,8 +3252,8 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /* ==========================================================================
-   0. INTRO CINEMATOGRÃFICA EN PANTALLA COMPLETA: LADRILLO ISOMÃ‰TRICO & PRENSA
-   Inspirado en la MÃ¡quina Compactadora de Ladrillos y DiseÃ±o Editorial
+   0. INTRO CINEMATOGRÃFICA EN PANTALLA COMPLETA: GRAN OJO & PESTAÃ‘AS VOLADORAS
+   Inspirado en A24 (Ravi Klaassens) y Content Architecture
    ========================================================================== */
 function initEyeIntroAnimation() {
   const introCurtain = document.getElementById('intro-eye-curtain');
@@ -3506,9 +3268,7 @@ function initEyeIntroAnimation() {
   const introStage = document.getElementById('intro-eye-stage');
   const introContainer = document.querySelector('.intro-container');
   const skipBtn = document.getElementById('intro-skip-btn');
-  const lateralEyes = document.querySelectorAll('.nav-eye-item, .nav-brick-item');
-  const brickGroup = document.getElementById('intro-brick-group');
-  const lashFlyers = document.querySelectorAll('.intro-lash-flyer');
+  const lateralEyes = document.querySelectorAll('.nav-eye-item');
 
   let hasEnded = false;
 
@@ -3516,7 +3276,7 @@ function initEyeIntroAnimation() {
     if (hasEnded) return;
     hasEnded = true;
     if (typeof gsap !== 'undefined') {
-      gsap.killTweensOf(['#intro-eye-curtain', '#intro-upper-lid', '#intro-lower-lid', '#intro-iris', '#intro-pupil', '#intro-iris-zoom-circle', '#intro-eye-stage', '#intro-brick-group', '.intro-container']);
+      gsap.killTweensOf(['#intro-eye-curtain', '#intro-upper-lid', '#intro-lower-lid', '#intro-iris', '#intro-pupil', '#intro-iris-zoom-circle', '#intro-eye-stage', '.intro-container']);
       gsap.to(introCurtain, {
         opacity: 0,
         duration: 0.45,
@@ -3557,7 +3317,7 @@ function initEyeIntroAnimation() {
     return;
   }
 
-  // Posicionar selectores de ladrillos laterales inicialmente para apariciÃ³n limpia y sin duplicaciones
+  // Posicionar ojos laterales inicialmente para apariciÃ³n limpia y sin duplicaciones
   gsap.set(lateralEyes, { opacity: 0, x: -20, scale: 0.9 });
 
   const introTimeline = gsap.timeline({
@@ -3571,62 +3331,54 @@ function initEyeIntroAnimation() {
     }
   });
 
-  // 1. Entrada de Rayos de ProyecciÃ³n IsomÃ©trica y FormaciÃ³n del Ladrillo
-  if (brickGroup) {
-    gsap.set(brickGroup, { scale: 0.8, opacity: 0, transformOrigin: '270px 180px' });
-  }
-
+  // 1. Apertura CinemÃ¡tica de PÃ¡rpados
   introTimeline
-    .fromTo(lashFlyers, 
-      { strokeDashoffset: 40, opacity: 0 },
-      { strokeDashoffset: 0, opacity: 0.8, duration: 0.6, stagger: 0.08, ease: 'power2.out' },
-      0.1
+    .to(upperLid, {
+      attr: { d: 'M 20 170 Q 270 20 520 170 L 520 0 L 20 0 Z' },
+      duration: 1.0,
+      ease: 'power3.inOut'
+    }, 0.2)
+    .to(lowerLid, {
+      attr: { d: 'M 20 170 Q 270 320 520 170 L 520 340 L 20 340 Z' },
+      duration: 1.0,
+      ease: 'power3.inOut'
+    }, 0.2)
+    // 2. Pupila e Iris: Enfoque Sensorial DinÃ¡mico
+    .fromTo([grandIris, grandPupil], 
+      { scale: 0.88, transformOrigin: '270px 170px' },
+      { scale: 1.08, transformOrigin: '270px 170px', duration: 0.7, ease: 'back.out(1.4)' },
+      0.35
     )
-    // 2. Golpe de CompresiÃ³n MecÃ¡nica: El Ladrillo IsomÃ©trico se Materializa y Compacta
-    .to(brickGroup, {
-      scale: 1,
-      opacity: 1,
-      duration: 0.85,
-      ease: 'back.out(2.2)'
-    }, 0.25)
-    // SimulaciÃ³n de prensado y pulso de compactaciÃ³n
-    .to(brickGroup, {
-      scaleY: 0.94,
-      duration: 0.12,
-      ease: 'power2.in',
-      yoyo: true,
-      repeat: 1
-    }, 0.85)
-    // Destello de compactaciÃ³n central
-    .fromTo([grandIris, grandPupilCenter], 
-      { opacity: 0, scale: 0.4 }, 
-      { opacity: 0.8, scale: 1.4, duration: 0.4, ease: 'power2.out' }, 
-      0.88
+    .fromTo(grandPupilCenter, 
+      { opacity: 0, scale: 0 }, 
+      { opacity: 1, scale: 1.3, duration: 0.6, ease: 'power2.out' }, 
+      0.5
     )
-    // 3. TRANSICIÃ“N CINEMÃTICA: ZOOM SUAVE CREMA (#FAF7F2) QUE REVELA LA PÃGINA
+    // 3. TRANSICIÃ“N CINEMÃTICA: ZOOM TIPO "IRIS DE OJO" CREMA (#FAF7F2)
+    // El iris se expande exponencialmente desde el centro exacto cubriendo la pantalla con #FAF7F2
     .to(irisZoomCircle, {
       scale: 130,
       duration: 1.15,
       ease: 'power4.inOut'
-    }, 1.05)
+    }, 0.95)
     .to(introStage, {
-      scale: 2.8,
-      opacity: 0.1,
-      transformOrigin: '270px 180px',
+      scale: 3.2,
+      opacity: 0.15,
+      transformOrigin: '270px 170px',
       duration: 0.95,
       ease: 'power3.in'
-    }, 1.05)
+    }, 0.95)
     .to(introContainer, {
       opacity: 0,
       duration: 0.6,
       ease: 'power2.out'
-    }, 1.15)
+    }, 1.1)
     .to(introCurtain, {
       opacity: 0,
       duration: 0.35,
       ease: 'power2.out'
-    }, 1.85)
-    // 4. Entrada elegante del selector de ladrillos lateral
+    }, 1.8)
+    // 4. Entrada suave y elegante de la guÃ­a lateral sin duplicados
     .to(lateralEyes, {
       opacity: 1,
       x: 0,
@@ -3634,7 +3386,7 @@ function initEyeIntroAnimation() {
       duration: 0.6,
       stagger: 0.08,
       ease: 'back.out(1.4)'
-    }, 1.75);
+    }, 1.7);
 }
 
 function triggerHeroReveal() {
@@ -3719,24 +3471,11 @@ function initContextualDeck() {
     const incoming = scenes[targetIndex];
     currentSlideIndex = targetIndex;
 
-    // Update UI Indicators con animaciÃ³n de entrada y salida del ladrillo
+    // Update UI Eye Indicators
     navEyes.forEach((item, idx) => {
-      item.classList.remove('anim-entrance', 'anim-exit');
-      if (idx === targetIndex) {
-        item.classList.add('active');
-        item.classList.add('anim-entrance');
-      } else if (idx === fromIndex) {
-        item.classList.remove('active');
-        item.classList.add('anim-exit');
-      } else {
-        item.classList.remove('active');
-      }
+      if (idx === targetIndex) item.classList.add('active');
+      else item.classList.remove('active');
     });
-
-    // Limpiar clases transitorias de animaciÃ³n tras completar la transiciÃ³n
-    setTimeout(() => {
-      navEyes.forEach(item => item.classList.remove('anim-entrance', 'anim-exit'));
-    }, 600);
 
     if (progressFill) {
       const progress = targetIndex / (totalScenes - 1);
@@ -4163,42 +3902,9 @@ function initContextualDeck() {
   });
 
   // Mouse Wheel Navigation
-  // Checks if the event target is inside a scrollable element that still has
-  // scroll room â€” if so, let native scroll handle it instead of switching slides.
-  function isInsideScrollable(target) {
-    let el = target;
-    while (el && el !== document.body) {
-      const style = window.getComputedStyle(el);
-      const ov = style.overflow + ' ' + style.overflowY;
-      if (/auto|scroll/.test(ov)) {
-        const canScrollDown = el.scrollHeight > el.clientHeight + 1;
-        if (canScrollDown) return el;
-      }
-      el = el.parentElement;
-    }
-    return null;
-  }
-
   let wheelCooldown = false;
   window.addEventListener('wheel', (e) => {
     if (window.innerWidth <= 860) return;
-
-    // If we're scrolling inside the active scene itself, check if the scene
-    // still has room to scroll natively â€” only then block the event.
-    const activeScene = scenes[currentSlideIndex];
-    const scrollableEl = isInsideScrollable(e.target);
-
-    if (scrollableEl) {
-      const scrollingDown = e.deltaY > 0;
-      const scrollingUp  = e.deltaY < 0;
-      const atBottom = scrollableEl.scrollTop + scrollableEl.clientHeight >= scrollableEl.scrollHeight - 2;
-      const atTop    = scrollableEl.scrollTop <= 1;
-
-      // Let native scroll run unless we've hit the boundary
-      if (scrollingDown && !atBottom) return;
-      if (scrollingUp  && !atTop)    return;
-    }
-
     e.preventDefault();
     if (wheelCooldown || isTransitioning) return;
     if (Math.abs(e.deltaY) < 25) return;
@@ -4227,41 +3933,25 @@ function initContextualDeck() {
 
   // Touch Swipe
   let touchStartY = 0;
-  let touchStartX = 0;
   window.addEventListener('touchstart', (e) => {
-    if (e.touches.length === 1) {
-      touchStartY = e.touches[0].clientY;
-      touchStartX = e.touches[0].clientX;
-    }
+    if (e.touches.length === 1) touchStartY = e.touches[0].clientY;
   }, { passive: true });
 
   window.addEventListener('touchend', (e) => {
     if (window.innerWidth <= 860 || isTransitioning) return;
     const diff = touchStartY - e.changedTouches[0].clientY;
-    const diffX = Math.abs(touchStartX - e.changedTouches[0].clientX);
-    // Ignore horizontal swipes and small vertical movements
-    if (Math.abs(diff) < 50 || diffX > Math.abs(diff)) return;
-
-    // Check if the touch target is inside a scrollable element that still has room
-    const scrollableEl = isInsideScrollable(e.target);
-    if (scrollableEl) {
-      const atBottom = scrollableEl.scrollTop + scrollableEl.clientHeight >= scrollableEl.scrollHeight - 2;
-      const atTop    = scrollableEl.scrollTop <= 1;
-      if (diff > 0 && !atBottom) return;
-      if (diff < 0 && !atTop)    return;
-    }
-
-    if (diff > 0 && currentSlideIndex < totalScenes - 1) {
-      window.goToSlide(currentSlideIndex + 1);
-    } else if (diff < 0 && currentSlideIndex > 0) {
-      window.goToSlide(currentSlideIndex - 1);
+    if (Math.abs(diff) > 50) {
+      if (diff > 0 && currentSlideIndex < totalScenes - 1) {
+        window.goToSlide(currentSlideIndex + 1);
+      } else if (diff < 0 && currentSlideIndex > 0) {
+        window.goToSlide(currentSlideIndex - 1);
+      }
     }
   }, { passive: true });
 }
 
 /* ==========================================================================
-   2. THREE.JS 3D: MÃQUINA COMPACTADORA DE LADRILLOS EN VISTA ISOMÃ‰TRICA
-   Modelo tÃ©cnico interactivo con chasis de acero, tolva, pistÃ³n y ladrillo ecolÃ³gico
+   2. THREE.JS 3D GLASSES VIEWER (Caviar Black & Soft Beige Titanium)
    ========================================================================== */
 function initThreeJsViewer() {
   const container = document.getElementById('canvas-3d-glasses');
@@ -4276,10 +3966,10 @@ function initThreeJsViewer() {
   const height = container.clientHeight || 500;
 
   const scene = new THREE.Scene();
-  scene.background = new THREE.Color(0xE6D7C4); // Beige CÃ¡lido (#E6D7C4)
+  scene.background = new THREE.Color(0xE6D7C4); // Beige (#E6D7C4)
 
-  const camera = new THREE.PerspectiveCamera(38, width / height, 0.1, 100);
-  camera.position.set(3.2, 2.6, 3.2);
+  const camera = new THREE.PerspectiveCamera(40, width / height, 0.1, 100);
+  camera.position.set(0, 0.35, 4.2);
 
   const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
   renderer.setSize(width, height);
@@ -4288,326 +3978,155 @@ function initThreeJsViewer() {
   renderer.shadowMap.type = THREE.PCFSoftShadowMap;
   container.appendChild(renderer.domElement);
 
-  // IluminaciÃ³n de Estudio Industrial (Navy & Warm Beige)
-  const ambientLight = new THREE.AmbientLight(0xFFFFFF, 1.35);
+  // Warm Luxury Studio Lighting (Navy Blue & Beige)
+  const ambientLight = new THREE.AmbientLight(0xFFFFFF, 1.4);
   scene.add(ambientLight);
 
   const dirLight1 = new THREE.DirectionalLight(0xF4ECE1, 1.6);
-  dirLight1.position.set(5, 7, 5);
+  dirLight1.position.set(4, 5, 4);
   dirLight1.castShadow = true;
-  dirLight1.shadow.mapSize.width = 1024;
-  dirLight1.shadow.mapSize.height = 1024;
   scene.add(dirLight1);
 
-  const dirLight2 = new THREE.DirectionalLight(0xD5C4AD, 0.9);
-  dirLight2.position.set(-5, -2, -3);
+  const dirLight2 = new THREE.DirectionalLight(0xD5C4AD, 0.85); // Bounce Warm Beige
+  dirLight2.position.set(-4, -2, -2);
   scene.add(dirLight2);
 
-  const dirLight3 = new THREE.DirectionalLight(0x212842, 0.5);
-  dirLight3.position.set(2, -4, 4);
+  const dirLight3 = new THREE.DirectionalLight(0x212842, 0.45); // Subtle Navy Blue Rim
+  dirLight3.position.set(2, -3, 3);
   scene.add(dirLight3);
 
-  // Grupo Principal de la MÃ¡quina Compactadora
-  const machineGroup = new THREE.Group();
-  scene.add(machineGroup);
-  // Alias para mantener compatibilidad total con referencias internas
-  const glassesGroup = machineGroup;
+  // Glasses Main Group
+  const glassesGroup = new THREE.Group();
+  scene.add(glassesGroup);
 
-  // Materiales Industriales PBR (Paleta Navy Blue, Beige Titanio y Terracota)
-  const steelDarkMat = new THREE.MeshStandardMaterial({
-    color: 0x212842, // Acero Industrial Navy Blue
-    roughness: 0.28,
+  // Navy Blue & Beige Luxury Materials
+  const frameMaterial = new THREE.MeshStandardMaterial({
+    color: 0x212842, // Navy Blue Titanium
+    roughness: 0.22,
     metalness: 0.85
   });
 
-  const steelBrightMat = new THREE.MeshStandardMaterial({
-    color: 0xD5C4AD, // Columnas en Beige Titanio
-    roughness: 0.22,
+  const beigeAccentMat = new THREE.MeshStandardMaterial({
+    color: 0xD5C4AD, // Warm Beige Titanium
+    roughness: 0.25,
     metalness: 0.92
   });
 
-  const chromeMat = new THREE.MeshStandardMaterial({
-    color: 0xF5F2EA, // VÃ¡stago de pistÃ³n cromado espejo
+  const lensMaterial = new THREE.MeshPhysicalMaterial({
+    color: 0x161C2E, // Deep Navy tinted luxury lenses
+    transparent: true,
+    opacity: 0.46,
     roughness: 0.08,
-    metalness: 0.98
+    metalness: 0.2,
+    transmission: 0.68,
+    ior: 1.52
   });
 
-  const terracottaMat = new THREE.MeshStandardMaterial({
-    color: 0xD4622C, // Arcilla de Ladrillo Terracota (Imagen de referencia)
-    roughness: 0.85,
-    metalness: 0.04
+  const sensorMaterial = new THREE.MeshStandardMaterial({
+    color: 0x212842,
+    emissive: 0xE6D7C4,
+    emissiveIntensity: 0.45,
+    roughness: 0.2,
+    metalness: 0.9
   });
 
-  const terracottaHoleMat = new THREE.MeshStandardMaterial({
-    color: 0x9E3B13, // Sombra interior orificios ladrillo
-    roughness: 0.9,
-    metalness: 0.02
-  });
+  // Lenses & Rims
+  const lensRadiusX = 0.54;
+  const lensRadiusY = 0.45;
+  const lensGeo = new THREE.CylinderGeometry(lensRadiusX, lensRadiusX, 0.04, 32);
+  lensGeo.scale(1, 0.1, lensRadiusY / lensRadiusX);
 
-  const brassMat = new THREE.MeshStandardMaterial({
-    color: 0xC88A32, // ManÃ³metro y acoples de bronce
-    roughness: 0.25,
-    metalness: 0.88
-  });
+  const leftLens = new THREE.Mesh(lensGeo, lensMaterial);
+  leftLens.rotation.x = Math.PI / 2;
+  leftLens.position.set(-0.7, 0, 0);
+  glassesGroup.add(leftLens);
 
-  const rubberHoseMat = new THREE.MeshStandardMaterial({
-    color: 0x161C2E,
-    roughness: 0.65,
-    metalness: 0.15
-  });
+  const leftRimGeo = new THREE.TorusGeometry(lensRadiusX, 0.04, 16, 42);
+  leftRimGeo.scale(1, lensRadiusY / lensRadiusX, 1);
+  const leftRim = new THREE.Mesh(leftRimGeo, frameMaterial);
+  leftRim.position.set(-0.7, 0, 0);
+  glassesGroup.add(leftRim);
 
-  /* ------------------------------------------------------------------------
-     1. BASE Y ESTRUCTURA DE ANCLAJE INDUSTRIAL
-     ------------------------------------------------------------------------ */
-  // Placa base estructural
-  const baseGeo = new THREE.BoxGeometry(2.1, 0.12, 1.5);
-  const baseMesh = new THREE.Mesh(baseGeo, steelDarkMat);
-  baseMesh.position.set(0, -1.05, 0);
-  baseMesh.receiveShadow = true;
-  machineGroup.add(baseMesh);
+  const rightLens = new THREE.Mesh(lensGeo, lensMaterial);
+  rightLens.rotation.x = Math.PI / 2;
+  rightLens.position.set(0.7, 0, 0);
+  glassesGroup.add(rightLens);
 
-  // Zapatas y pernos de fijaciÃ³n en las 4 esquinas
-  const footingOffsets = [
-    [-0.92, -0.62], [0.92, -0.62],
-    [-0.92, 0.62], [0.92, 0.62]
-  ];
-  footingOffsets.forEach(([fx, fz]) => {
-    const footGeo = new THREE.BoxGeometry(0.24, 0.06, 0.24);
-    const footMesh = new THREE.Mesh(footGeo, steelBrightMat);
-    footMesh.position.set(fx, -0.96, fz);
-    machineGroup.add(footMesh);
+  const rightRim = new THREE.Mesh(leftRimGeo, frameMaterial);
+  rightRim.position.set(0.7, 0, 0);
+  glassesGroup.add(rightRim);
 
-    const boltGeo = new THREE.CylinderGeometry(0.025, 0.025, 0.06, 12);
-    const boltMesh = new THREE.Mesh(boltGeo, chromeMat);
-    boltMesh.position.set(fx, -0.9, fz);
-    machineGroup.add(boltMesh);
-  });
-
-  /* ------------------------------------------------------------------------
-     2. CUATRO COLUMNAS GUÃA REFORZADAS (Acero Templado IsomÃ©trico)
-     ------------------------------------------------------------------------ */
-  const colGeo = new THREE.CylinderGeometry(0.048, 0.048, 2.5, 24);
-  const colOffsets = [
-    [-0.72, -0.44], [0.72, -0.44],
-    [-0.72, 0.44], [0.72, 0.44]
-  ];
-  colOffsets.forEach(([cx, cz]) => {
-    const colMesh = new THREE.Mesh(colGeo, steelBrightMat);
-    colMesh.position.set(cx, 0.2, cz);
-    colMesh.castShadow = true;
-    machineGroup.add(colMesh);
-  });
-
-  /* ------------------------------------------------------------------------
-     3. CORONA SUPERIOR & CHIP DE COMPRESIÃ“N
-     ------------------------------------------------------------------------ */
-  const topCrownGeo = new THREE.BoxGeometry(1.68, 0.2, 1.12);
-  const topCrownMesh = new THREE.Mesh(topCrownGeo, steelDarkMat);
-  topCrownMesh.position.set(0, 1.45, 0);
-  topCrownMesh.castShadow = true;
-  machineGroup.add(topCrownMesh);
-
-  // Placa central de refuerzo de cilindro
-  const cylMountGeo = new THREE.CylinderGeometry(0.32, 0.32, 0.08, 28);
-  const cylMount = new THREE.Mesh(cylMountGeo, steelBrightMat);
-  cylMount.position.set(0, 1.58, 0);
-  machineGroup.add(cylMount);
-
-  /* ------------------------------------------------------------------------
-     4. CILINDRO HIDRÃULICO DE ALTA PRESIÃ“N Y PISTÃ“N DESLIZANTE
-     ------------------------------------------------------------------------ */
-  // Cilindro hidrÃ¡ulico superior
-  const cylBodyGeo = new THREE.CylinderGeometry(0.2, 0.2, 0.75, 32);
-  const cylBody = new THREE.Mesh(cylBodyGeo, steelDarkMat);
-  cylBody.position.set(0, 1.98, 0);
-  cylBody.castShadow = true;
-  machineGroup.add(cylBody);
-
-  // Tapa superior del cilindro con vÃ¡lvula
-  const cylCapGeo = new THREE.CylinderGeometry(0.22, 0.22, 0.08, 32);
-  const cylCap = new THREE.Mesh(cylCapGeo, brassMat);
-  cylCap.position.set(0, 2.38, 0);
-  machineGroup.add(cylCap);
-
-  // Grupo mÃ³vil del prensador (se desplaza durante el ciclo de compactaciÃ³n)
-  const presserGroup = new THREE.Group();
-  machineGroup.add(presserGroup);
-
-  // VÃ¡stago de pistÃ³n cromado
-  const pistonRodGeo = new THREE.CylinderGeometry(0.09, 0.09, 0.95, 28);
-  const pistonRod = new THREE.Mesh(pistonRodGeo, chromeMat);
-  pistonRod.position.set(0, 1.1, 0);
-  presserGroup.add(pistonRod);
-
-  // Plato compactador / estampador superior
-  const ramPlateGeo = new THREE.BoxGeometry(1.15, 0.18, 0.76);
-  const ramPlate = new THREE.Mesh(ramPlateGeo, steelDarkMat);
-  ramPlate.position.set(0, 0.65, 0);
-  ramPlate.castShadow = true;
-  presserGroup.add(ramPlate);
-
-  // Machos superiores de compresiÃ³n que entran al molde
-  const stampHeadGeo = new THREE.BoxGeometry(1.05, 0.12, 0.68);
-  const stampHead = new THREE.Mesh(stampHeadGeo, steelBrightMat);
-  stampHead.position.set(0, 0.5, 0);
-  presserGroup.add(stampHead);
-
-  // Bujes de guÃ­a en las 4 esquinas del plato
-  colOffsets.forEach(([cx, cz]) => {
-    const bushingGeo = new THREE.CylinderGeometry(0.075, 0.075, 0.22, 18);
-    const bushing = new THREE.Mesh(bushingGeo, brassMat);
-    bushing.position.set(cx, 0.65, cz);
-    presserGroup.add(bushing);
-  });
-
-  /* ------------------------------------------------------------------------
-     5. CÃMARA DE MOLDEO / MATRIZ DE LADRILLO MODULAR
-     ------------------------------------------------------------------------ */
-  const moldBoxGeo = new THREE.BoxGeometry(1.28, 0.58, 0.88);
-  const moldBox = new THREE.Mesh(moldBoxGeo, steelDarkMat);
-  moldBox.position.set(0, -0.15, 0);
-  moldBox.castShadow = true;
-  machineGroup.add(moldBox);
-
-  // Marco de la matriz
-  const moldFrameGeo = new THREE.BoxGeometry(1.36, 0.08, 0.96);
-  const moldFrame = new THREE.Mesh(moldFrameGeo, steelBrightMat);
-  moldFrame.position.set(0, 0.14, 0);
-  machineGroup.add(moldFrame);
-
-  // Machos cilÃ­ndricos interiores del molde (para agujeros del ladrillo ecolÃ³gico)
-  const core1Geo = new THREE.CylinderGeometry(0.07, 0.07, 0.52, 20);
-  const core1 = new THREE.Mesh(core1Geo, chromeMat);
-  core1.position.set(-0.22, -0.15, 0);
-  machineGroup.add(core1);
-
-  const core2 = new THREE.Mesh(core1Geo, chromeMat);
-  core2.position.set(0.22, -0.15, 0);
-  machineGroup.add(core2);
-
-  /* ------------------------------------------------------------------------
-     6. TOLVA DE ALIMENTACIÃ“N SUPERIOR (Hopper de mezcla ecolÃ³gica)
-     ------------------------------------------------------------------------ */
-  // Tolva troncocÃ³nica invertida montada en la parte superior trasera
-  const hopperGeo = new THREE.CylinderGeometry(0.5, 0.26, 0.58, 4);
-  hopperGeo.rotateY(Math.PI / 4);
-  const hopperMesh = new THREE.Mesh(hopperGeo, steelDarkMat);
-  hopperMesh.position.set(0, 0.52, -0.62);
-  hopperMesh.castShadow = true;
-  machineGroup.add(hopperMesh);
-
-  // Borde superior reforzado de la tolva
-  const hopperRimGeo = new THREE.BoxGeometry(0.74, 0.06, 0.74);
-  const hopperRim = new THREE.Mesh(hopperRimGeo, steelBrightMat);
-  hopperRim.position.set(0, 0.82, -0.62);
-  machineGroup.add(hopperRim);
-
-  /* ------------------------------------------------------------------------
-     7. EL LADRILLO ECOLÃ“GICO COMPACTADO (Inspirado en la imagen de referencia)
-     ------------------------------------------------------------------------ */
-  const brickEntityGroup = new THREE.Group();
-  machineGroup.add(brickEntityGroup);
-
-  // Cuerpo rectangular del ladrillo en terracota
-  const brickBodyGeo = new THREE.BoxGeometry(0.82, 0.28, 0.46);
-  const brickBody = new THREE.Mesh(brickBodyGeo, terracottaMat);
-  brickBody.position.set(0, 0.28, 0.06);
-  brickBody.castShadow = true;
-  brickEntityGroup.add(brickBody);
-
-  // 2 Perforaciones cilÃ­ndricas del bloque ecolÃ³gico
-  const brickHoleGeo = new THREE.CylinderGeometry(0.072, 0.072, 0.29, 20);
-  const brickHole1 = new THREE.Mesh(brickHoleGeo, terracottaHoleMat);
-  brickHole1.position.set(-0.22, 0.28, 0.06);
-  brickEntityGroup.add(brickHole1);
-
-  const brickHole2 = new THREE.Mesh(brickHoleGeo, terracottaHoleMat);
-  brickHole2.position.set(0.22, 0.28, 0.06);
-  brickEntityGroup.add(brickHole2);
-
-  // Bandeja de desmolde / expulsiÃ³n bajo el ladrillo
-  const ejectTrayGeo = new THREE.BoxGeometry(0.96, 0.06, 0.56);
-  const ejectTray = new THREE.Mesh(ejectTrayGeo, steelBrightMat);
-  ejectTray.position.set(0, 0.12, 0.06);
-  brickEntityGroup.add(ejectTray);
-
-  /* ------------------------------------------------------------------------
-     8. DETALLES INDUSTRIALES: MANÃ“METRO, PALANCA Y LÃNEAS HIDRÃULICAS
-     ------------------------------------------------------------------------ */
-  // ManÃ³metro de presiÃ³n hidrÃ¡ulica (0 a 10 Toneladas)
-  const gaugeHousingGeo = new THREE.CylinderGeometry(0.12, 0.12, 0.08, 24);
-  gaugeHousingGeo.rotateX(Math.PI / 2);
-  const gaugeHousing = new THREE.Mesh(gaugeHousingGeo, brassMat);
-  gaugeHousing.position.set(0.55, 1.1, 0.48);
-  machineGroup.add(gaugeHousing);
-
-  const gaugeDialGeo = new THREE.CircleGeometry(0.1, 24);
-  const gaugeDialMat = new THREE.MeshBasicMaterial({ color: 0xFAF7F2 });
-  const gaugeDial = new THREE.Mesh(gaugeDialGeo, gaugeDialMat);
-  gaugeDial.position.set(0.55, 1.1, 0.525);
-  machineGroup.add(gaugeDial);
-
-  // Aguja del manÃ³metro (animable con la presiÃ³n)
-  const needleGeo = new THREE.BoxGeometry(0.012, 0.075, 0.01);
-  const needleMat = new THREE.MeshBasicMaterial({ color: 0xC85A32 });
-  const gaugeNeedle = new THREE.Mesh(needleGeo, needleMat);
-  gaugeNeedle.position.set(0.55, 1.12, 0.53);
-  machineGroup.add(gaugeNeedle);
-
-  // Palanca mecÃ¡nica lateral de accionamiento
-  const leverArmCurve = new THREE.CatmullRomCurve3([
-    new THREE.Vector3(0.68, 0.15, 0.2),
-    new THREE.Vector3(1.05, 0.45, 0.4),
-    new THREE.Vector3(1.35, 0.72, 0.55)
+  // Titanium Arch Bridge
+  const bridgeCurve = new THREE.CatmullRomCurve3([
+    new THREE.Vector3(-0.25, 0.08, 0),
+    new THREE.Vector3(0, 0.17, 0.02),
+    new THREE.Vector3(0.25, 0.08, 0)
   ]);
-  const leverGeo = new THREE.TubeGeometry(leverArmCurve, 18, 0.03, 12, false);
-  const leverMesh = new THREE.Mesh(leverGeo, steelBrightMat);
-  machineGroup.add(leverMesh);
+  const bridgeGeo = new THREE.TubeGeometry(bridgeCurve, 20, 0.034, 12, false);
+  const bridgeMesh = new THREE.Mesh(bridgeGeo, beigeAccentMat);
+  glassesGroup.add(bridgeMesh);
 
-  // Mango ergonÃ³mico de la palanca
-  const handleGeo = new THREE.CylinderGeometry(0.045, 0.045, 0.26, 16);
-  handleGeo.rotateZ(Math.PI / 4);
-  const handleMesh = new THREE.Mesh(handleGeo, rubberHoseMat);
-  handleMesh.position.set(1.35, 0.72, 0.55);
-  machineGroup.add(handleMesh);
+  // Ultrasonic Sensors in Bridge
+  const sensorGeo = new THREE.CylinderGeometry(0.048, 0.048, 0.065, 18);
+  sensorGeo.rotateX(Math.PI / 2);
 
-  // Mangueras hidrÃ¡ulicas flexibles
-  const hoseCurve = new THREE.CatmullRomCurve3([
-    new THREE.Vector3(0.2, 2.1, 0),
-    new THREE.Vector3(0.55, 1.8, 0.3),
-    new THREE.Vector3(0.55, 1.25, 0.48)
+  const sensorL = new THREE.Mesh(sensorGeo, sensorMaterial);
+  sensorL.position.set(-0.16, 0.12, 0.04);
+  glassesGroup.add(sensorL);
+
+  const sensorR = new THREE.Mesh(sensorGeo, sensorMaterial);
+  sensorR.position.set(0.16, 0.12, 0.04);
+  glassesGroup.add(sensorR);
+
+  // Temples & Haptic Actuators
+  const templeCurveL = new THREE.CatmullRomCurve3([
+    new THREE.Vector3(-1.25, 0.08, 0),
+    new THREE.Vector3(-1.28, 0.06, -0.6),
+    new THREE.Vector3(-1.26, -0.04, -1.5)
   ]);
-  const hoseGeo = new THREE.TubeGeometry(hoseCurve, 20, 0.024, 10, false);
-  const hoseMesh = new THREE.Mesh(hoseGeo, rubberHoseMat);
-  machineGroup.add(hoseMesh);
+  const templeGeoL = new THREE.TubeGeometry(templeCurveL, 24, 0.036, 12, false);
+  const templeL = new THREE.Mesh(templeGeoL, frameMaterial);
+  glassesGroup.add(templeL);
 
-  // Ondas / pulso de compactaciÃ³n (anillos de eco para compatibilidad total)
+  const hapticGeo = new THREE.BoxGeometry(0.065, 0.085, 0.24);
+  const leftHaptic = new THREE.Mesh(hapticGeo, beigeAccentMat);
+  leftHaptic.position.set(-1.27, 0.02, -0.9);
+  glassesGroup.add(leftHaptic);
+
+  const templeCurveR = new THREE.CatmullRomCurve3([
+    new THREE.Vector3(1.25, 0.08, 0),
+    new THREE.Vector3(1.28, 0.06, -0.6),
+    new THREE.Vector3(1.26, -0.04, -1.5)
+  ]);
+  const templeGeoR = new THREE.TubeGeometry(templeCurveR, 24, 0.036, 12, false);
+  const templeR = new THREE.Mesh(templeGeoR, frameMaterial);
+  glassesGroup.add(templeR);
+
+  const rightHaptic = new THREE.Mesh(hapticGeo, beigeAccentMat);
+  rightHaptic.position.set(1.27, 0.02, -0.9);
+  glassesGroup.add(rightHaptic);
+
+  // Radiant Echo Radar Waves (Soft Beige & Stone)
   const echoWaves = [];
-  for (let i = 0; i < 3; i++) {
-    const ringGeo = new THREE.RingGeometry(0.2 + i * 0.2, 0.24 + i * 0.2, 32);
-    ringGeo.rotateX(Math.PI / 2);
-    const ringMat = new THREE.MeshBasicMaterial({
-      color: 0xC85A32,
+  for (let i = 0; i < 4; i++) {
+    const waveGeo = new THREE.RingGeometry(0.12 + i * 0.26, 0.15 + i * 0.26, 36);
+    const waveMat = new THREE.MeshBasicMaterial({
+      color: 0xDCCFC2, // Soft Beige
       transparent: true,
-      opacity: 0,
+      opacity: 0.8 - i * 0.16,
       side: THREE.DoubleSide
     });
-    const ringMesh = new THREE.Mesh(ringGeo, ringMat);
-    ringMesh.position.set(0, 0.16, 0.06);
-    machineGroup.add(ringMesh);
-    echoWaves.push(ringMesh);
+    const waveMesh = new THREE.Mesh(waveGeo, waveMat);
+    waveMesh.position.set(0, 0.12, 0.22 + i * 0.36);
+    glassesGroup.add(waveMesh);
+    echoWaves.push(waveMesh);
   }
 
-  /* ------------------------------------------------------------------------
-     9. CONTROLES DE RATÃ“N, ARRASTRE Y PERSPECTIVA ISOMÃ‰TRICA
-     ------------------------------------------------------------------------ */
+  // Mouse Controls
   let isDragging = false;
   let prevMouseX = 0, prevMouseY = 0;
-  // Ãngulo isomÃ©trico clÃ¡sico predeterminado
-  let targetRotX = 0.32, targetRotY = -0.65;
-  let autoRotate = true;
-  let isPressingCycle = false;
-  let pressCycleTime = 0;
+  let targetRotX = 0.08, targetRotY = -0.3;
+  let autoRotate = true, echoActive = true;
 
   container.addEventListener('mousedown', (e) => {
     isDragging = true;
@@ -4622,108 +4141,36 @@ function initThreeJsViewer() {
     if (!isDragging) return;
     targetRotY += (e.clientX - prevMouseX) * 0.008;
     targetRotX += (e.clientY - prevMouseY) * 0.008;
-    targetRotX = Math.max(-0.6, Math.min(0.65, targetRotX));
+    targetRotX = Math.max(-0.6, Math.min(0.6, targetRotX));
     prevMouseX = e.clientX;
     prevMouseY = e.clientY;
   });
 
-  // Soporte tÃ¡ctil en dispositivos mÃ³viles
-  container.addEventListener('touchstart', (e) => {
-    if (e.touches.length === 1) {
-      isDragging = true;
-      prevMouseX = e.touches[0].clientX;
-      prevMouseY = e.touches[0].clientY;
-      autoRotate = false;
-    }
-  }, { passive: true });
-
-  window.addEventListener('touchend', () => isDragging = false);
-
-  window.addEventListener('touchmove', (e) => {
-    if (!isDragging || e.touches.length !== 1) return;
-    targetRotY += (e.touches[0].clientX - prevMouseX) * 0.008;
-    targetRotX += (e.touches[0].clientY - prevMouseY) * 0.008;
-    targetRotX = Math.max(-0.6, Math.min(0.65, targetRotX));
-    prevMouseX = e.touches[0].clientX;
-    prevMouseY = e.touches[0].clientY;
-  }, { passive: true });
-
-  /* ------------------------------------------------------------------------
-     10. ACCIONES DE BOTONES HUD
-     ------------------------------------------------------------------------ */
   const btnReset = document.getElementById('btn-3d-reset');
-  const btnPress = document.getElementById('btn-3d-echo');
-  const btnIso = document.getElementById('btn-3d-temples');
+  const btnEcho = document.getElementById('btn-3d-echo');
+  const btnTemples = document.getElementById('btn-3d-temples');
 
   if (btnReset) {
     btnReset.addEventListener('click', () => {
-      autoRotate = !autoRotate;
-      btnReset.textContent = autoRotate ? 'Pausar Giro' : 'Rotar 360Â°';
+      autoRotate = true; targetRotX = 0.08; targetRotY = -0.3;
     });
   }
 
-  // AnimaciÃ³n del Ciclo de CompactaciÃ³n y Prensado
-  function triggerCompactionCycle() {
-    if (isPressingCycle) return;
-    isPressingCycle = true;
-    pressCycleTime = 0;
-    autoRotate = false;
-
-    if (btnPress) btnPress.textContent = 'Prensando... (10 Tn)';
-
-    if (typeof gsap !== 'undefined') {
-      const tl = gsap.timeline({
-        onComplete: () => {
-          isPressingCycle = false;
-          if (btnPress) btnPress.textContent = 'Ciclo de Prensado';
-        }
-      });
-
-      // 1. Descenso potente del pistÃ³n hacia el molde
-      tl.to(presserGroup.position, { y: -0.42, duration: 0.65, ease: 'power3.in' })
-        // 2. Pico de compresiÃ³n: vibraciÃ³n del chasis y aguja de manÃ³metro
-        .to(machineGroup.position, { y: '+=0.03', duration: 0.05, yoyo: true, repeat: 5 })
-        .to(gaugeNeedle.rotation, { z: -Math.PI * 0.7, duration: 0.2 }, '<')
-        // Ondas de choque / presiÃ³n
-        .call(() => {
-          echoWaves.forEach((w, idx) => {
-            gsap.fromTo(w.scale, { x: 0.8, y: 0.8 }, { x: 2.2 + idx * 0.4, y: 2.2 + idx * 0.4, duration: 0.5 });
-            gsap.fromTo(w.material, { opacity: 0.7 }, { opacity: 0, duration: 0.5 });
-          });
-        })
-        // 3. ElevaciÃ³n del pistÃ³n
-        .to(presserGroup.position, { y: 0, duration: 0.75, ease: 'power2.out' }, '+=0.3')
-        .to(gaugeNeedle.rotation, { z: 0, duration: 0.5 }, '<')
-        // 4. ElevaciÃ³n y entrega del ladrillo reciÃ©n compactado
-        .to(brickEntityGroup.position, { y: 0.18, duration: 0.55, ease: 'back.out(1.8)' }, '-=0.4')
-        // 5. Asentamiento en bandeja de desmolde
-        .to(brickEntityGroup.position, { y: 0, duration: 0.4, ease: 'power2.inOut' }, '+=0.6');
-    } else {
-      setTimeout(() => {
-        isPressingCycle = false;
-        if (btnPress) btnPress.textContent = 'Ciclo de Prensado';
-      }, 1800);
-    }
-  }
-
-  if (btnPress) {
-    btnPress.textContent = 'Ciclo de Prensado';
-    btnPress.addEventListener('click', triggerCompactionCycle);
-  }
-
-  // Vista IsomÃ©trica CAD (30Â°/30Â°)
-  if (btnIso) {
-    btnIso.textContent = 'Vista IsomÃ©trica';
-    btnIso.addEventListener('click', () => {
-      autoRotate = false;
-      targetRotX = 0.38;
-      targetRotY = -Math.PI / 4; // Ãngulo isomÃ©trico clÃ¡sico 45Â°
+  if (btnEcho) {
+    btnEcho.addEventListener('click', () => {
+      echoActive = !echoActive;
+      btnEcho.textContent = echoActive ? 'EcolocalizaciÃ³n ON' : 'EcolocalizaciÃ³n OFF';
+      echoWaves.forEach(w => w.visible = echoActive);
     });
   }
 
-  /* ------------------------------------------------------------------------
-     11. HOTSPOTS FLOTANTES INTERACTIVOS EN LA MÃQUINA
-     ------------------------------------------------------------------------ */
+  if (btnTemples) {
+    btnTemples.addEventListener('click', () => {
+      autoRotate = false; targetRotX = 0.2; targetRotY = Math.PI / 2 - 0.25;
+    });
+  }
+
+  // Dynamic Hotspots Interactivity (Aprovechamiento Espacial 3D)
   const hotspots = document.querySelectorAll('.model-hotspot');
   hotspots.forEach(hotspot => {
     const trigger = hotspot.querySelector('.hotspot-trigger');
@@ -4737,45 +4184,47 @@ function initThreeJsViewer() {
         if (!wasActive) hotspot.classList.add('active');
 
         autoRotate = false;
-        if (comp === 'tolva' || comp === 'sensors') {
-          targetRotX = 0.42;
-          targetRotY = Math.PI - 0.4; // Vista superior de la tolva
-        } else if (comp === 'cilindro' || comp === 'temple-left') {
-          targetRotX = 0.22;
-          targetRotY = -0.3; // Vista del pistÃ³n hidrÃ¡ulico
-        } else if (comp === 'matriz' || comp === 'temple-right') {
-          targetRotX = 0.15;
-          targetRotY = 0.4; // Vista de la cÃ¡mara de moldeo
-        } else if (comp === 'ladrillo' || comp === 'frame') {
-          targetRotX = 0.35;
-          targetRotY = -Math.PI / 4; // Vista isomÃ©trica del ladrillo expulsado
+        if (comp === 'sensors') {
+          targetRotX = 0.04;
+          targetRotY = 0;
+        } else if (comp === 'temple-left') {
+          targetRotX = 0.14;
+          targetRotY = -Math.PI / 2 + 0.3;
+        } else if (comp === 'temple-right') {
+          targetRotX = 0.14;
+          targetRotY = Math.PI / 2 - 0.3;
+        } else if (comp === 'frame') {
+          targetRotX = 0.26;
+          targetRotY = 0.45;
         }
       });
     }
   });
 
-  // Clic exterior oculta tarjetas de hotspots abiertas
+  // Clicking outside dismisses open hotspot card
   container.addEventListener('click', () => {
     hotspots.forEach(h => h.classList.remove('active'));
   });
 
-  /* ------------------------------------------------------------------------
-     12. BUCLE DE RENDERIZADO THREE.JS
-     ------------------------------------------------------------------------ */
+  // Animation Loop
   let clock = new THREE.Clock();
   function animate3D() {
     requestAnimationFrame(animate3D);
     const elapsedTime = clock.getElapsedTime();
 
-    if (autoRotate) {
-      targetRotY += 0.004;
+    if (autoRotate) targetRotY += 0.005;
+    glassesGroup.rotation.y += (targetRotY - glassesGroup.rotation.y) * 0.08;
+    glassesGroup.rotation.x += (targetRotX - glassesGroup.rotation.x) * 0.08;
+    glassesGroup.position.y = Math.sin(elapsedTime * 1.5) * 0.04;
+
+    if (echoActive) {
+      echoWaves.forEach((wave, idx) => {
+        const phase = (elapsedTime * 2.2 + idx * 0.6) % 2.5;
+        wave.scale.set(1 + phase * 0.85, 1 + phase * 0.85, 1);
+        wave.position.z = 0.22 + phase * 0.75;
+        wave.material.opacity = Math.max(0, 0.7 - (phase / 2.5) * 0.7);
+      });
     }
-
-    machineGroup.rotation.y += (targetRotY - machineGroup.rotation.y) * 0.08;
-    machineGroup.rotation.x += (targetRotX - machineGroup.rotation.x) * 0.08;
-
-    // Leve flotaciÃ³n armÃ³nica
-    machineGroup.position.y = Math.sin(elapsedTime * 1.4) * 0.025;
 
     renderer.render(scene, camera);
   }
@@ -4796,79 +4245,8 @@ function renderCanvas3DFallback(container) {
   container.appendChild(canvas);
   const ctx = canvas.getContext('2d');
   let angle = 0;
-
   function drawFallback() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    const cx = canvas.width / 2;
-    const cy = canvas.height / 2;
-
-    ctx.save();
-    ctx.translate(cx, cy);
-
-    // Dibujo isomÃ©trico en Canvas 2D de la MÃ¡quina Compactadora de Ladrillos
-    ctx.strokeStyle = '#212842';
-    ctx.lineWidth = 3;
-
-    // Chasis
-    ctx.strokeRect(-120, -140, 240, 280);
-
-    // Cilindro Superior
-    ctx.fillStyle = '#212842';
-    ctx.fillRect(-45, -190, 90, 60);
-
-    // Tolva
-    ctx.beginPath();
-    ctx.moveTo(-70, -110);
-    ctx.lineTo(70, -110);
-    ctx.lineTo(40, -40);
-    ctx.lineTo(-40, -40);
-    ctx.closePath();
-    ctx.fillStyle = '#D5C4AD';
-    ctx.fill();
-    ctx.stroke();
-
-    // Ladrillo IsomÃ©trico en Centro
-    ctx.fillStyle = '#E27237';
-    ctx.beginPath();
-    ctx.moveTo(0, 20);
-    ctx.lineTo(80, 50);
-    ctx.lineTo(0, 80);
-    ctx.lineTo(-80, 50);
-    ctx.closePath();
-    ctx.fill();
-    ctx.stroke();
-
-    ctx.fillStyle = '#C45120';
-    ctx.beginPath();
-    ctx.moveTo(-80, 50);
-    ctx.lineTo(0, 80);
-    ctx.lineTo(0, 130);
-    ctx.lineTo(-80, 100);
-    ctx.closePath();
-    ctx.fill();
-    ctx.stroke();
-
-    ctx.fillStyle = '#9E3B13';
-    ctx.beginPath();
-    ctx.moveTo(0, 80);
-    ctx.lineTo(80, 50);
-    ctx.lineTo(80, 100);
-    ctx.lineTo(0, 130);
-    ctx.closePath();
-    ctx.fill();
-    ctx.stroke();
-
-    ctx.font = '700 12px "JetBrains Mono"';
-    ctx.fillStyle = '#212842';
-    ctx.textAlign = 'center';
-    ctx.fillText('MÃQUINA COMPACTADORA DE LADRILLOS (ISOMÃ‰TRICO)', 0, 160);
-
-    ctx.restore();
-    angle += 0.01;
-    requestAnimationFrame(drawFallback);
-  }
-  drawFallback();
-}
     const cx = canvas.width / 2;
     const cy = canvas.height / 2 + Math.sin(angle) * 8;
     ctx.strokeStyle = '#181818'; ctx.lineWidth = 4;

@@ -21,129 +21,93 @@
   <div class="editorial-grain" aria-hidden="true"></div>
 
   <!-- ======================================================================
-       INTRO CINEMATOGRÁFICA EN PANTALLA COMPLETA: LADRILLO ISOMÉTRICO (#FAF7F2)
-       Inspirado en la Máquina Compactadora de Ladrillos y Diseño Editorial
+       INTRO CINEMATOGRÁFICA EN PANTALLA COMPLETA: EFECTO IRIS DE OJO (#FAF7F2)
+       Inspirado en A24 (Ravi Klaassens) y Content Architecture
        ====================================================================== -->
-  <div id="intro-eye-curtain" class="intro-eye-curtain" aria-label="Intro Proyecto Máquina de Ladrillos">
+  <div id="intro-eye-curtain" class="intro-eye-curtain" aria-label="Intro SmartNav">
     <div class="intro-grain" aria-hidden="true"></div>
     <!-- Círculo de Zoom Iris en Color Crema #FAF7F2 -->
     <div class="intro-iris-zoom-circle" id="intro-iris-zoom-circle" aria-hidden="true"></div>
     <div class="intro-container">
       <div class="intro-badge">
         <span class="status-dot-pulse"></span>
-        <span>PROYECTO 5° AÑO · MÁQUINA COMPACTADORA DE LADRILLOS</span>
+        <span>SMARTNAV · SENSORY ANTICIPATION</span>
       </div>
 
-      <div class="intro-eye-stage intro-brick-stage" id="intro-eye-stage">
-        <!-- SVG Ladrillo Isométrico de Precisión con Diseño Editorial -->
-        <svg class="intro-grand-eye-svg intro-grand-brick-svg" viewBox="0 0 540 340" fill="none">
+      <div class="intro-eye-stage" id="intro-eye-stage">
+        <svg class="intro-grand-eye-svg" viewBox="0 0 540 340" fill="none">
           <defs>
-            <!-- Gradientes de Terracota Realista (Inspirado en la imagen de referencia y paleta web) -->
-            <linearGradient id="brickTopGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#EE7E48"/>
-              <stop offset="50%" stop-color="#E26D34"/>
-              <stop offset="100%" stop-color="#D15B24"/>
-            </linearGradient>
-
-            <linearGradient id="brickFrontGrad" x1="0%" y1="0%" x2="0%" y2="100%">
-              <stop offset="0%" stop-color="#C7511E"/>
-              <stop offset="60%" stop-color="#B84414"/>
-              <stop offset="100%" stop-color="#9C350B"/>
-            </linearGradient>
-
-            <linearGradient id="brickSideGrad" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#9E3A10"/>
-              <stop offset="100%" stop-color="#7A2805"/>
-            </linearGradient>
-
-            <radialGradient id="brickCompactionGlow" cx="50%" cy="50%" r="50%">
+            <radialGradient id="irisGrad" cx="50%" cy="50%" r="50%">
+              <stop offset="0%" stop-color="#C85A32"/>
+              <stop offset="35%" stop-color="#364268"/>
+              <stop offset="75%" stop-color="#212842"/>
+              <stop offset="100%" stop-color="#161C2E"/>
+            </radialGradient>
+            <radialGradient id="pupilAura" cx="50%" cy="50%" r="50%">
               <stop offset="0%" stop-color="#FAF7F2" stop-opacity="0.95"/>
-              <stop offset="40%" stop-color="#E6D7C4" stop-opacity="0.6"/>
-              <stop offset="80%" stop-color="#C85A32" stop-opacity="0.25"/>
+              <stop offset="40%" stop-color="#E6D7C4" stop-opacity="0.5"/>
               <stop offset="100%" stop-color="#212842" stop-opacity="0"/>
             </radialGradient>
-
             <clipPath id="eyeContourClip">
-              <!-- Contorno isométrico envolvente para compatibilidad -->
-              <polygon id="intro-contour-path" points="270,45 475,130 475,225 270,305 65,225 65,130"/>
+              <path id="intro-contour-path" d="M 30 170 C 130 30 410 30 510 170 C 410 310 130 310 30 170 Z"/>
             </clipPath>
           </defs>
 
-          <!-- Rayos y Guías de Proyección Isométrica Técnica -->
+          <!-- Pestañas Maestras y Decorativas del Contorno -->
           <g class="intro-lashes-group" id="intro-lashes-group">
-            <line id="intro-lash-0" class="intro-lash-flyer" x1="120" y1="105" x2="60" y2="40" stroke="var(--color-beige)" stroke-width="3" stroke-linecap="round" stroke-dasharray="4 4"/>
-            <line id="intro-lash-1" class="intro-lash-flyer" x1="200" y1="75" x2="180" y2="10" stroke="var(--color-beige)" stroke-width="3" stroke-linecap="round" stroke-dasharray="4 4"/>
-            <line id="intro-lash-2" class="intro-lash-flyer" x1="270" y1="45" x2="270" y2="-15" stroke="var(--color-beige)" stroke-width="3.5" stroke-linecap="round"/>
-            <line id="intro-lash-3" class="intro-lash-flyer" x1="340" y1="75" x2="360" y2="10" stroke="var(--color-beige)" stroke-width="3" stroke-linecap="round" stroke-dasharray="4 4"/>
-            <line id="intro-lash-4" class="intro-lash-flyer" x1="420" y1="105" x2="480" y2="40" stroke="var(--color-beige)" stroke-width="3" stroke-linecap="round" stroke-dasharray="4 4"/>
-
-            <!-- Líneas de acotación milimétrica industrial -->
-            <line class="intro-sublash" x1="65" y1="240" x2="270" y2="320" stroke="var(--color-beige-dark)" stroke-width="1.8" stroke-dasharray="3 3"/>
-            <line class="intro-sublash" x1="270" y1="320" x2="475" y2="240" stroke="var(--color-beige-dark)" stroke-width="1.8" stroke-dasharray="3 3"/>
-            <line class="intro-sublash" x1="65" y1="230" x2="65" y2="250" stroke="var(--color-beige-dark)" stroke-width="2"/>
-            <line class="intro-sublash" x1="270" y1="310" x2="270" y2="330" stroke="var(--color-beige-dark)" stroke-width="2"/>
-            <line class="intro-sublash" x1="475" y1="230" x2="475" y2="250" stroke="var(--color-beige-dark)" stroke-width="2"/>
+            <line id="intro-lash-0" class="intro-lash-flyer" x1="130" y1="92" x2="90" y2="28" stroke="var(--color-beige)" stroke-width="4.5" stroke-linecap="round"/>
+            <line id="intro-lash-1" class="intro-lash-flyer" x1="200" y1="52" x2="180" y2="-12" stroke="var(--color-beige)" stroke-width="4.5" stroke-linecap="round"/>
+            <line id="intro-lash-2" class="intro-lash-flyer" x1="270" y1="40" x2="270" y2="-28" stroke="var(--color-beige)" stroke-width="5" stroke-linecap="round"/>
+            <line id="intro-lash-3" class="intro-lash-flyer" x1="340" y1="52" x2="360" y2="-12" stroke="var(--color-beige)" stroke-width="4.5" stroke-linecap="round"/>
+            <line id="intro-lash-4" class="intro-lash-flyer" x1="410" y1="92" x2="450" y2="28" stroke="var(--color-beige)" stroke-width="4.5" stroke-linecap="round"/>
+            <!-- Pestañas secundarias decorativas de marco -->
+            <line class="intro-sublash" x1="165" y1="70" x2="140" y2="4" stroke="var(--color-beige-dark)" stroke-width="2.5" stroke-linecap="round"/>
+            <line class="intro-sublash" x1="235" y1="44" x2="225" y2="-20" stroke="var(--color-beige-dark)" stroke-width="2.5" stroke-linecap="round"/>
+            <line class="intro-sublash" x1="305" y1="44" x2="315" y2="-20" stroke="var(--color-beige-dark)" stroke-width="2.5" stroke-linecap="round"/>
+            <line class="intro-sublash" x1="375" y1="70" x2="400" y2="4" stroke="var(--color-beige-dark)" stroke-width="2.5" stroke-linecap="round"/>
+            <line class="intro-sublash" x1="170" y1="268" x2="145" y2="330" stroke="var(--color-beige-dark)" stroke-width="2.5" stroke-linecap="round"/>
+            <line class="intro-sublash" x1="270" y1="298" x2="270" y2="362" stroke="var(--color-beige-dark)" stroke-width="3" stroke-linecap="round"/>
+            <line class="intro-sublash" x1="370" y1="268" x2="395" y2="330" stroke="var(--color-beige-dark)" stroke-width="2.5" stroke-linecap="round"/>
           </g>
 
-          <!-- Bloque Isométrico del Ladrillo con Textura y Biseles -->
-          <g id="intro-brick-group">
-            <!-- Sombra de Apoyo en Base -->
-            <polygon points="270,312 478,230 460,250 270,325 80,250 62,230" fill="rgba(22, 28, 46, 0.45)" filter="blur(6px)"/>
+          <!-- Globo Ocular Interno -->
+          <g clip-path="url(#eyeContourClip)">
+            <!-- Fondo Esclera Beige Cálida -->
+            <rect x="0" y="0" width="540" height="340" fill="var(--color-beige)"/>
 
-            <!-- CARA FRONTAL LARGA (Izquierda en perspectiva isométrica) -->
-            <polygon id="intro-brick-front" points="65,130 270,205 270,295 65,220" fill="url(#brickFrontGrad)" stroke="var(--color-navy)" stroke-width="4.5" stroke-linejoin="round"/>
-            <!-- Textura de arcilla y grietas sutiles cara frontal -->
-            <path d="M 90 155 Q 115 168 150 162 Q 175 178 220 185" stroke="#9C350B" stroke-width="1.6" fill="none" opacity="0.6"/>
-            <path d="M 85 190 Q 130 200 180 196" stroke="#D15B24" stroke-width="1.2" fill="none" opacity="0.45"/>
-            <path d="M 195 240 Q 230 252 255 248" stroke="#7A2805" stroke-width="1.5" fill="none" opacity="0.55"/>
+            <!-- Anillos concéntricos de anticipación sensorial -->
+            <circle cx="270" cy="170" r="140" fill="none" stroke="var(--color-beige-dark)" stroke-width="1.5" stroke-dasharray="6 6"/>
+            <circle cx="270" cy="170" r="115" fill="none" stroke="var(--color-navy)" stroke-width="1" opacity="0.3"/>
 
-            <!-- CARA LATERAL CORTA (Derecha en perspectiva isométrica) -->
-            <polygon id="intro-brick-side" points="270,205 475,130 475,220 270,295" fill="url(#brickSideGrad)" stroke="var(--color-navy)" stroke-width="4.5" stroke-linejoin="round"/>
-            <!-- Textura y sombras cara lateral -->
-            <path d="M 310 195 Q 360 175 420 162" stroke="#682103" stroke-width="1.6" fill="none" opacity="0.65"/>
-            <path d="M 330 240 Q 380 220 440 208" stroke="#8A2E08" stroke-width="1.4" fill="none" opacity="0.5"/>
-
-            <!-- CARA SUPERIOR (Isométrica Top) con acabado biselado y textura de arcilla de la imagen -->
-            <polygon id="intro-brick-top" points="270,55 475,130 270,205 65,130" fill="url(#brickTopGrad)" stroke="var(--color-navy)" stroke-width="4.5" stroke-linejoin="round"/>
-            <!-- Líneas de bisel y fisuras naturales de arcilla inspiradas en la imagen -->
-            <path d="M 75 130 C 130 110 210 75 265 60" stroke="#F49566" stroke-width="2.5" fill="none" opacity="0.8"/>
-            <path d="M 275 60 C 335 80 415 110 465 130" stroke="#F49566" stroke-width="2" fill="none" opacity="0.7"/>
-            <path d="M 75 130 C 135 152 215 182 265 200" stroke="#C7511E" stroke-width="2" fill="none" opacity="0.75"/>
-            <path d="M 275 200 C 335 180 415 150 465 130" stroke="#9E3A10" stroke-width="2.2" fill="none" opacity="0.8"/>
-            <!-- Grietas orgánicas de la imagen de referencia -->
-            <path d="M 140 120 Q 200 135 270 125 Q 350 142 410 118" stroke="#B84414" stroke-width="2" fill="none" opacity="0.65"/>
-            <path d="M 220 95 Q 260 115 310 100" stroke="#9C350B" stroke-width="1.8" fill="none" opacity="0.6"/>
-            <path d="M 180 150 Q 240 168 320 152" stroke="#FAF7F2" stroke-width="1.4" fill="none" opacity="0.55"/>
-
-            <!-- Sellos técnicos de compresión de ladrillo -->
-            <text x="270" y="138" text-anchor="middle" font-family="var(--font-mono)" font-size="12" font-weight="700" fill="#FAF7F2" opacity="0.85" letter-spacing="3">240 × 115 × 65 mm</text>
-            <text x="270" y="156" text-anchor="middle" font-family="var(--font-mono)" font-size="10" font-weight="600" fill="#FAF7F2" opacity="0.65" letter-spacing="2">COMPACTACIÓN HIDRÁULICA 10 Tn</text>
-
-            <!-- Elementos interactivos / animables requeridos para la cinemática -->
+            <!-- Iris Central Graphic -->
             <g id="intro-iris-group">
-              <circle id="intro-iris" cx="270" cy="135" r="32" fill="url(#brickCompactionGlow)" opacity="0"/>
-              <circle id="intro-pupil" cx="270" cy="135" r="18" fill="#161C2E" opacity="0"/>
-              <circle id="intro-pupil-center" cx="270" cy="135" r="8" fill="#FAF7F2" opacity="0"/>
+              <circle id="intro-iris" cx="270" cy="170" r="88" fill="url(#irisGrad)" stroke="var(--color-beige-dark)" stroke-width="3"/>
+              <circle cx="270" cy="170" r="76" fill="none" stroke="#FAF7F2" stroke-width="1.5" stroke-dasharray="3 3"/>
+              <!-- Pupila Navy Profunda con Centro Crema para Zoom Iris -->
+              <circle id="intro-pupil" cx="270" cy="170" r="46" fill="#161C2E"/>
+              <circle id="intro-pupil-glint" cx="254" cy="154" r="10" fill="#FAF7F2" opacity="0.85"/>
+              <circle id="intro-pupil-center" cx="270" cy="170" r="16" fill="url(#pupilAura)"/>
+              <circle id="intro-iris-zoom-core" cx="270" cy="170" r="10" fill="#FAF7F2"/>
             </g>
 
-            <!-- Placas de Prensado y Compactación Animables (Sustituyen párpados para efecto prensa) -->
-            <path id="intro-upper-lid" d="M 50 130 Q 270 50 490 130 L 490 0 L 50 0 Z" fill="var(--color-navy)" opacity="0"/>
-            <path id="intro-lower-lid" d="M 50 220 Q 270 300 490 220 L 490 340 L 50 340 Z" fill="var(--color-navy)" opacity="0"/>
+            <!-- Párpados animables en Navy Blue -->
+            <path id="intro-upper-lid" d="M 20 170 Q 270 170 520 170 L 520 0 L 20 0 Z" fill="var(--color-navy)"/>
+            <path id="intro-lower-lid" d="M 20 170 Q 270 170 520 170 L 520 340 L 20 340 Z" fill="var(--color-navy)"/>
           </g>
 
-          <!-- Borde de Contorno Isométrico de Precisión -->
-          <polygon id="intro-contour-stroke" points="270,55 475,130 475,220 270,295 65,220 65,130" fill="none" stroke="var(--color-beige)" stroke-width="3" stroke-linejoin="round" opacity="0.4"/>
+          <!-- Borde Almendrado Exterior Elegante -->
+          <path id="intro-contour-stroke" d="M 30 170 C 130 30 410 30 510 170 C 410 310 130 310 30 170 Z" fill="none" stroke="var(--color-beige)" stroke-width="5" stroke-linejoin="round"/>
         </svg>
       </div>
 
       <div class="intro-caption">
-        <h2 class="intro-headline">Ingeniería de Compactación de Ladrillos.</h2>
-        <p class="intro-sub">Moldeando resistencia, eficiencia y sustentabilidad bloque a bloque...</p>
+        <h2 class="intro-headline">La visión comienza con la anticipación.</h2>
+        <p class="intro-sub">Despertando bio-sensores y cartografía háptica...</p>
       </div>
 
       <div class="intro-actions">
-        <button class="intro-skip-btn" id="intro-skip-btn" aria-label="Entrar al proyecto">
-          <span>ENTRAR AL PROYECTO</span>
+        <button class="intro-skip-btn" id="intro-skip-btn" aria-label="Saltar animación inicial">
+          <span>ENTRAR A SMARTNAV</span>
           <svg viewBox="0 0 24 24"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
         </button>
       </div>
@@ -174,154 +138,175 @@
     <div class="sage-curtain-sheet"></div>
   </div>
 
-  <!-- 1. FLOATING LATERAL BRICK INDICATOR (Selector Lateral de Ladrillos con Animación de Salida y Entrada) -->
-  <nav class="lateral-capsule lateral-brick-capsule" aria-label="Navegación de escenas por ladrillos">
-    <div class="nav-eye-item nav-brick-item active" data-index="0">
-      <button class="nav-eye-btn nav-brick-btn" aria-label="Escena 1: Inicio">
-        <svg class="nav-eye-svg nav-brick-svg" viewBox="0 0 54 36" fill="none">
-          <!-- Estado Reposo / Salida (Ladrillo Arquitectónico) -->
-          <g class="eye-closed-group brick-idle-group">
-            <polygon class="brick-idle-top" points="27,7 46,14.5 27,21.5 8,14.5" fill="#E6D7C4" stroke="var(--color-navy)" stroke-width="1.8" stroke-linejoin="round"/>
-            <polygon class="brick-idle-front" points="8,14.5 27,21.5 27,29.5 8,22.5" fill="#FAF7F2" stroke="var(--color-navy)" stroke-width="1.8" stroke-linejoin="round"/>
-            <polygon class="brick-idle-side" points="27,21.5 46,14.5 46,22.5 27,29.5" fill="#D5C4AD" stroke="var(--color-navy)" stroke-width="1.8" stroke-linejoin="round"/>
-            <path class="eye-closed-slit" d="M 12 18 C 18 20 36 20 42 18" stroke="transparent" stroke-width="0.1"/>
+  <!-- 1. FLOATING LATERAL EYE INDICATOR (Guía Lateral de Ojos de Alta Visibilidad) -->
+  <nav class="lateral-capsule" aria-label="Navegación de escenas por ojos">
+    <div class="nav-eye-item active" data-index="0">
+      <button class="nav-eye-btn" aria-label="Escena 1: Inicio">
+        <svg class="nav-eye-svg" viewBox="0 0 54 36" fill="none">
+          <g class="eye-closed-group">
+            <path class="eye-closed-slit" d="M 6 18 C 18 24 36 24 48 18" stroke="var(--color-navy)" stroke-width="2.5" stroke-linecap="round"/>
+            <line x1="14" y1="21" x2="11" y2="28" stroke="var(--color-navy)" stroke-width="1.8" stroke-linecap="round"/>
+            <line x1="21" y1="23" x2="20" y2="30" stroke="var(--color-navy)" stroke-width="1.8" stroke-linecap="round"/>
+            <line x1="27" y1="23" x2="27" y2="31" stroke="var(--color-navy)" stroke-width="1.8" stroke-linecap="round"/>
+            <line x1="33" y1="23" x2="34" y2="30" stroke="var(--color-navy)" stroke-width="1.8" stroke-linecap="round"/>
+            <line x1="40" y1="21" x2="43" y2="28" stroke="var(--color-navy)" stroke-width="1.8" stroke-linecap="round"/>
           </g>
-          <!-- Estado Activo / Entrada (Ladrillo Isométrico Terracota Vibrante con Agujeros y Animación) -->
-          <g class="eye-open-group brick-active-group">
-            <polygon class="brick-act-top" points="27,6 47,13.8 27,21.2 7,13.8" fill="#E27237" stroke="var(--color-navy)" stroke-width="2.2" stroke-linejoin="round"/>
-            <polygon class="brick-act-front" points="7,13.8 27,21.2 27,29.8 7,22.4" fill="#C45120" stroke="var(--color-navy)" stroke-width="2.2" stroke-linejoin="round"/>
-            <polygon class="brick-act-side" points="27,21.2 47,13.8 47,22.4 27,29.8" fill="#993B12" stroke="var(--color-navy)" stroke-width="2.2" stroke-linejoin="round"/>
-            <!-- Cavidades del Ladrillo Ecológico -->
-            <ellipse cx="20" cy="13.8" rx="3.2" ry="1.6" fill="#A83F15" stroke="var(--color-navy)" stroke-width="1.2"/>
-            <ellipse cx="34" cy="13.8" rx="3.2" ry="1.6" fill="#A83F15" stroke="var(--color-navy)" stroke-width="1.2"/>
-            <circle class="eye-iris" cx="27" cy="18" r="0.1" fill="none"/>
-            <circle class="eye-pupil" cx="27" cy="18" r="0.1" fill="none"/>
-            <text class="eye-num-text brick-num-text" x="27" y="27.5" text-anchor="middle">01</text>
+          <g class="eye-open-group">
+            <g class="eye-open-lashes">
+              <line x1="13" y1="11" x2="9" y2="5" stroke="var(--color-navy)" stroke-width="1.6" stroke-linecap="round"/>
+              <line x1="20" y1="7" x2="18" y2="1" stroke="var(--color-navy)" stroke-width="1.6" stroke-linecap="round"/>
+              <line x1="27" y1="6" x2="27" y2="0" stroke="var(--color-navy)" stroke-width="1.6" stroke-linecap="round"/>
+              <line x1="34" y1="7" x2="36" y2="1" stroke="var(--color-navy)" stroke-width="1.6" stroke-linecap="round"/>
+              <line x1="41" y1="11" x2="45" y2="5" stroke="var(--color-navy)" stroke-width="1.6" stroke-linecap="round"/>
+              <line x1="18" y1="27" x2="16" y2="33" stroke="var(--color-navy)" stroke-width="1.4" stroke-linecap="round"/>
+              <line x1="27" y1="29" x2="27" y2="35" stroke="var(--color-navy)" stroke-width="1.4" stroke-linecap="round"/>
+              <line x1="36" y1="27" x2="38" y2="33" stroke="var(--color-navy)" stroke-width="1.4" stroke-linecap="round"/>
+            </g>
+            <path class="eye-sclera" d="M 4 18 C 16 5 38 5 50 18 C 38 31 16 31 4 18 Z" fill="var(--color-beige-light)" stroke="var(--color-navy)" stroke-width="2.2" stroke-linejoin="round"/>
+            <circle class="eye-iris" cx="27" cy="18" r="11" fill="var(--color-navy)"/>
+            <circle class="eye-iris-ring" cx="27" cy="18" r="9.2" fill="none" stroke="var(--color-beige)" stroke-width="1" stroke-dasharray="2 1.5"/>
+            <circle class="eye-pupil" cx="27" cy="18" r="7.5" fill="var(--color-navy-deep)"/>
+            <text class="eye-num-text" x="27" y="21" text-anchor="middle">01</text>
           </g>
         </svg>
       </button>
-      <span class="nav-eye-label nav-brick-label">01 Inicio</span>
+      <span class="nav-eye-label">01 Inicio</span>
     </div>
-
-    <div class="nav-eye-item nav-brick-item" data-index="1">
-      <button class="nav-eye-btn nav-brick-btn" aria-label="Escena 2: Máquina 3D">
-        <svg class="nav-eye-svg nav-brick-svg" viewBox="0 0 54 36" fill="none">
-          <g class="eye-closed-group brick-idle-group">
-            <polygon class="brick-idle-top" points="27,7 46,14.5 27,21.5 8,14.5" fill="#E6D7C4" stroke="var(--color-navy)" stroke-width="1.8" stroke-linejoin="round"/>
-            <polygon class="brick-idle-front" points="8,14.5 27,21.5 27,29.5 8,22.5" fill="#FAF7F2" stroke="var(--color-navy)" stroke-width="1.8" stroke-linejoin="round"/>
-            <polygon class="brick-idle-side" points="27,21.5 46,14.5 46,22.5 27,29.5" fill="#D5C4AD" stroke="var(--color-navy)" stroke-width="1.8" stroke-linejoin="round"/>
-            <path class="eye-closed-slit" d="M 12 18 C 18 20 36 20 42 18" stroke="transparent" stroke-width="0.1"/>
+    <div class="nav-eye-item" data-index="1">
+      <button class="nav-eye-btn" aria-label="Escena 2: Ingeniería 3D">
+        <svg class="nav-eye-svg" viewBox="0 0 54 36" fill="none">
+          <g class="eye-closed-group">
+            <path class="eye-closed-slit" d="M 6 18 C 18 24 36 24 48 18" stroke="var(--color-navy)" stroke-width="2.5" stroke-linecap="round"/>
+            <line x1="14" y1="21" x2="11" y2="28" stroke="var(--color-navy)" stroke-width="1.8" stroke-linecap="round"/>
+            <line x1="21" y1="23" x2="20" y2="30" stroke="var(--color-navy)" stroke-width="1.8" stroke-linecap="round"/>
+            <line x1="27" y1="23" x2="27" y2="31" stroke="var(--color-navy)" stroke-width="1.8" stroke-linecap="round"/>
+            <line x1="33" y1="23" x2="34" y2="30" stroke="var(--color-navy)" stroke-width="1.8" stroke-linecap="round"/>
+            <line x1="40" y1="21" x2="43" y2="28" stroke="var(--color-navy)" stroke-width="1.8" stroke-linecap="round"/>
           </g>
-          <g class="eye-open-group brick-active-group">
-            <polygon class="brick-act-top" points="27,6 47,13.8 27,21.2 7,13.8" fill="#E27237" stroke="var(--color-navy)" stroke-width="2.2" stroke-linejoin="round"/>
-            <polygon class="brick-act-front" points="7,13.8 27,21.2 27,29.8 7,22.4" fill="#C45120" stroke="var(--color-navy)" stroke-width="2.2" stroke-linejoin="round"/>
-            <polygon class="brick-act-side" points="27,21.2 47,13.8 47,22.4 27,29.8" fill="#993B12" stroke="var(--color-navy)" stroke-width="2.2" stroke-linejoin="round"/>
-            <ellipse cx="20" cy="13.8" rx="3.2" ry="1.6" fill="#A83F15" stroke="var(--color-navy)" stroke-width="1.2"/>
-            <ellipse cx="34" cy="13.8" rx="3.2" ry="1.6" fill="#A83F15" stroke="var(--color-navy)" stroke-width="1.2"/>
-            <circle class="eye-iris" cx="27" cy="18" r="0.1" fill="none"/>
-            <circle class="eye-pupil" cx="27" cy="18" r="0.1" fill="none"/>
-            <text class="eye-num-text brick-num-text" x="27" y="27.5" text-anchor="middle">02</text>
+          <g class="eye-open-group">
+            <g class="eye-open-lashes">
+              <line x1="13" y1="11" x2="9" y2="5" stroke="var(--color-navy)" stroke-width="1.6" stroke-linecap="round"/>
+              <line x1="20" y1="7" x2="18" y2="1" stroke="var(--color-navy)" stroke-width="1.6" stroke-linecap="round"/>
+              <line x1="27" y1="6" x2="27" y2="0" stroke="var(--color-navy)" stroke-width="1.6" stroke-linecap="round"/>
+              <line x1="34" y1="7" x2="36" y2="1" stroke="var(--color-navy)" stroke-width="1.6" stroke-linecap="round"/>
+              <line x1="41" y1="11" x2="45" y2="5" stroke="var(--color-navy)" stroke-width="1.6" stroke-linecap="round"/>
+              <line x1="18" y1="27" x2="16" y2="33" stroke="var(--color-navy)" stroke-width="1.4" stroke-linecap="round"/>
+              <line x1="27" y1="29" x2="27" y2="35" stroke="var(--color-navy)" stroke-width="1.4" stroke-linecap="round"/>
+              <line x1="36" y1="27" x2="38" y2="33" stroke="var(--color-navy)" stroke-width="1.4" stroke-linecap="round"/>
+            </g>
+            <path class="eye-sclera" d="M 4 18 C 16 5 38 5 50 18 C 38 31 16 31 4 18 Z" fill="var(--color-beige-light)" stroke="var(--color-navy)" stroke-width="2.2" stroke-linejoin="round"/>
+            <circle class="eye-iris" cx="27" cy="18" r="11" fill="var(--color-navy)"/>
+            <circle class="eye-iris-ring" cx="27" cy="18" r="9.2" fill="none" stroke="var(--color-beige)" stroke-width="1" stroke-dasharray="2 1.5"/>
+            <circle class="eye-pupil" cx="27" cy="18" r="7.5" fill="var(--color-navy-deep)"/>
+            <text class="eye-num-text" x="27" y="21" text-anchor="middle">02</text>
           </g>
         </svg>
       </button>
-      <span class="nav-eye-label nav-brick-label">02 Máquina 3D</span>
+      <span class="nav-eye-label">02 Ingeniería 3D</span>
     </div>
-
-    <div class="nav-eye-item nav-brick-item" data-index="2">
-      <button class="nav-eye-btn nav-brick-btn" aria-label="Escena 3: Prensado">
-        <svg class="nav-eye-svg nav-brick-svg" viewBox="0 0 54 36" fill="none">
-          <g class="eye-closed-group brick-idle-group">
-            <polygon class="brick-idle-top" points="27,7 46,14.5 27,21.5 8,14.5" fill="#E6D7C4" stroke="var(--color-navy)" stroke-width="1.8" stroke-linejoin="round"/>
-            <polygon class="brick-idle-front" points="8,14.5 27,21.5 27,29.5 8,22.5" fill="#FAF7F2" stroke="var(--color-navy)" stroke-width="1.8" stroke-linejoin="round"/>
-            <polygon class="brick-idle-side" points="27,21.5 46,14.5 46,22.5 27,29.5" fill="#D5C4AD" stroke="var(--color-navy)" stroke-width="1.8" stroke-linejoin="round"/>
-            <path class="eye-closed-slit" d="M 12 18 C 18 20 36 20 42 18" stroke="transparent" stroke-width="0.1"/>
+    <div class="nav-eye-item" data-index="2">
+      <button class="nav-eye-btn" aria-label="Escena 3: Simulador">
+        <svg class="nav-eye-svg" viewBox="0 0 54 36" fill="none">
+          <g class="eye-closed-group">
+            <path class="eye-closed-slit" d="M 6 18 C 18 24 36 24 48 18" stroke="var(--color-navy)" stroke-width="2.5" stroke-linecap="round"/>
+            <line x1="14" y1="21" x2="11" y2="28" stroke="var(--color-navy)" stroke-width="1.8" stroke-linecap="round"/>
+            <line x1="21" y1="23" x2="20" y2="30" stroke="var(--color-navy)" stroke-width="1.8" stroke-linecap="round"/>
+            <line x1="27" y1="23" x2="27" y2="31" stroke="var(--color-navy)" stroke-width="1.8" stroke-linecap="round"/>
+            <line x1="33" y1="23" x2="34" y2="30" stroke="var(--color-navy)" stroke-width="1.8" stroke-linecap="round"/>
+            <line x1="40" y1="21" x2="43" y2="28" stroke="var(--color-navy)" stroke-width="1.8" stroke-linecap="round"/>
           </g>
-          <g class="eye-open-group brick-active-group">
-            <polygon class="brick-act-top" points="27,6 47,13.8 27,21.2 7,13.8" fill="#E27237" stroke="var(--color-navy)" stroke-width="2.2" stroke-linejoin="round"/>
-            <polygon class="brick-act-front" points="7,13.8 27,21.2 27,29.8 7,22.4" fill="#C45120" stroke="var(--color-navy)" stroke-width="2.2" stroke-linejoin="round"/>
-            <polygon class="brick-act-side" points="27,21.2 47,13.8 47,22.4 27,29.8" fill="#993B12" stroke="var(--color-navy)" stroke-width="2.2" stroke-linejoin="round"/>
-            <ellipse cx="20" cy="13.8" rx="3.2" ry="1.6" fill="#A83F15" stroke="var(--color-navy)" stroke-width="1.2"/>
-            <ellipse cx="34" cy="13.8" rx="3.2" ry="1.6" fill="#A83F15" stroke="var(--color-navy)" stroke-width="1.2"/>
-            <circle class="eye-iris" cx="27" cy="18" r="0.1" fill="none"/>
-            <circle class="eye-pupil" cx="27" cy="18" r="0.1" fill="none"/>
-            <text class="eye-num-text brick-num-text" x="27" y="27.5" text-anchor="middle">03</text>
+          <g class="eye-open-group">
+            <g class="eye-open-lashes">
+              <line x1="13" y1="11" x2="9" y2="5" stroke="var(--color-navy)" stroke-width="1.6" stroke-linecap="round"/>
+              <line x1="20" y1="7" x2="18" y2="1" stroke="var(--color-navy)" stroke-width="1.6" stroke-linecap="round"/>
+              <line x1="27" y1="6" x2="27" y2="0" stroke="var(--color-navy)" stroke-width="1.6" stroke-linecap="round"/>
+              <line x1="34" y1="7" x2="36" y2="1" stroke="var(--color-navy)" stroke-width="1.6" stroke-linecap="round"/>
+              <line x1="41" y1="11" x2="45" y2="5" stroke="var(--color-navy)" stroke-width="1.6" stroke-linecap="round"/>
+              <line x1="18" y1="27" x2="16" y2="33" stroke="var(--color-navy)" stroke-width="1.4" stroke-linecap="round"/>
+              <line x1="27" y1="29" x2="27" y2="35" stroke="var(--color-navy)" stroke-width="1.4" stroke-linecap="round"/>
+              <line x1="36" y1="27" x2="38" y2="33" stroke="var(--color-navy)" stroke-width="1.4" stroke-linecap="round"/>
+            </g>
+            <path class="eye-sclera" d="M 4 18 C 16 5 38 5 50 18 C 38 31 16 31 4 18 Z" fill="var(--color-beige-light)" stroke="var(--color-navy)" stroke-width="2.2" stroke-linejoin="round"/>
+            <circle class="eye-iris" cx="27" cy="18" r="11" fill="var(--color-navy)"/>
+            <circle class="eye-iris-ring" cx="27" cy="18" r="9.2" fill="none" stroke="var(--color-beige)" stroke-width="1" stroke-dasharray="2 1.5"/>
+            <circle class="eye-pupil" cx="27" cy="18" r="7.5" fill="var(--color-navy-deep)"/>
+            <text class="eye-num-text" x="27" y="21" text-anchor="middle">03</text>
           </g>
         </svg>
       </button>
-      <span class="nav-eye-label nav-brick-label">03 Prensado</span>
+      <span class="nav-eye-label">03 Simulador</span>
     </div>
-
-    <div class="nav-eye-item nav-brick-item" data-index="3">
-      <button class="nav-eye-btn nav-brick-btn" aria-label="Escena 4: Estructura">
-        <svg class="nav-eye-svg nav-brick-svg" viewBox="0 0 54 36" fill="none">
-          <g class="eye-closed-group brick-idle-group">
-            <polygon class="brick-idle-top" points="27,7 46,14.5 27,21.5 8,14.5" fill="#E6D7C4" stroke="var(--color-navy)" stroke-width="1.8" stroke-linejoin="round"/>
-            <polygon class="brick-idle-front" points="8,14.5 27,21.5 27,29.5 8,22.5" fill="#FAF7F2" stroke="var(--color-navy)" stroke-width="1.8" stroke-linejoin="round"/>
-            <polygon class="brick-idle-side" points="27,21.5 46,14.5 46,22.5 27,29.5" fill="#D5C4AD" stroke="var(--color-navy)" stroke-width="1.8" stroke-linejoin="round"/>
-            <path class="eye-closed-slit" d="M 12 18 C 18 20 36 20 42 18" stroke="transparent" stroke-width="0.1"/>
+    <div class="nav-eye-item" data-index="3">
+      <button class="nav-eye-btn" aria-label="Escena 4: Arquitectura">
+        <svg class="nav-eye-svg" viewBox="0 0 54 36" fill="none">
+          <g class="eye-closed-group">
+            <path class="eye-closed-slit" d="M 6 18 C 18 24 36 24 48 18" stroke="var(--color-navy)" stroke-width="2.5" stroke-linecap="round"/>
+            <line x1="14" y1="21" x2="11" y2="28" stroke="var(--color-navy)" stroke-width="1.8" stroke-linecap="round"/>
+            <line x1="21" y1="23" x2="20" y2="30" stroke="var(--color-navy)" stroke-width="1.8" stroke-linecap="round"/>
+            <line x1="27" y1="23" x2="27" y2="31" stroke="var(--color-navy)" stroke-width="1.8" stroke-linecap="round"/>
+            <line x1="33" y1="23" x2="34" y2="30" stroke="var(--color-navy)" stroke-width="1.8" stroke-linecap="round"/>
+            <line x1="40" y1="21" x2="43" y2="28" stroke="var(--color-navy)" stroke-width="1.8" stroke-linecap="round"/>
           </g>
-          <g class="eye-open-group brick-active-group">
-            <polygon class="brick-act-top" points="27,6 47,13.8 27,21.2 7,13.8" fill="#E27237" stroke="var(--color-navy)" stroke-width="2.2" stroke-linejoin="round"/>
-            <polygon class="brick-act-front" points="7,13.8 27,21.2 27,29.8 7,22.4" fill="#C45120" stroke="var(--color-navy)" stroke-width="2.2" stroke-linejoin="round"/>
-            <polygon class="brick-act-side" points="27,21.2 47,13.8 47,22.4 27,29.8" fill="#993B12" stroke="var(--color-navy)" stroke-width="2.2" stroke-linejoin="round"/>
-            <ellipse cx="20" cy="13.8" rx="3.2" ry="1.6" fill="#A83F15" stroke="var(--color-navy)" stroke-width="1.2"/>
-            <ellipse cx="34" cy="13.8" rx="3.2" ry="1.6" fill="#A83F15" stroke="var(--color-navy)" stroke-width="1.2"/>
-            <circle class="eye-iris" cx="27" cy="18" r="0.1" fill="none"/>
-            <circle class="eye-pupil" cx="27" cy="18" r="0.1" fill="none"/>
-            <text class="eye-num-text brick-num-text" x="27" y="27.5" text-anchor="middle">04</text>
+          <g class="eye-open-group">
+            <g class="eye-open-lashes">
+              <line x1="13" y1="11" x2="9" y2="5" stroke="var(--color-navy)" stroke-width="1.6" stroke-linecap="round"/>
+              <line x1="20" y1="7" x2="18" y2="1" stroke="var(--color-navy)" stroke-width="1.6" stroke-linecap="round"/>
+              <line x1="27" y1="6" x2="27" y2="0" stroke="var(--color-navy)" stroke-width="1.6" stroke-linecap="round"/>
+              <line x1="34" y1="7" x2="36" y2="1" stroke="var(--color-navy)" stroke-width="1.6" stroke-linecap="round"/>
+              <line x1="41" y1="11" x2="45" y2="5" stroke="var(--color-navy)" stroke-width="1.6" stroke-linecap="round"/>
+              <line x1="18" y1="27" x2="16" y2="33" stroke="var(--color-navy)" stroke-width="1.4" stroke-linecap="round"/>
+              <line x1="27" y1="29" x2="27" y2="35" stroke="var(--color-navy)" stroke-width="1.4" stroke-linecap="round"/>
+              <line x1="36" y1="27" x2="38" y2="33" stroke="var(--color-navy)" stroke-width="1.4" stroke-linecap="round"/>
+            </g>
+            <path class="eye-sclera" d="M 4 18 C 16 5 38 5 50 18 C 38 31 16 31 4 18 Z" fill="var(--color-beige-light)" stroke="var(--color-navy)" stroke-width="2.2" stroke-linejoin="round"/>
+            <circle class="eye-iris" cx="27" cy="18" r="11" fill="var(--color-navy)"/>
+            <circle class="eye-iris-ring" cx="27" cy="18" r="9.2" fill="none" stroke="var(--color-beige)" stroke-width="1" stroke-dasharray="2 1.5"/>
+            <circle class="eye-pupil" cx="27" cy="18" r="7.5" fill="var(--color-navy-deep)"/>
+            <text class="eye-num-text" x="27" y="21" text-anchor="middle">04</text>
           </g>
         </svg>
       </button>
-      <span class="nav-eye-label nav-brick-label">04 Estructura</span>
+      <span class="nav-eye-label">04 Arquitectura</span>
     </div>
-
-    <div class="nav-eye-item nav-brick-item" data-index="4">
-      <button class="nav-eye-btn nav-brick-btn" aria-label="Escena 5: Visión 2.0">
-        <svg class="nav-eye-svg nav-brick-svg" viewBox="0 0 54 36" fill="none">
-          <g class="eye-closed-group brick-idle-group">
-            <polygon class="brick-idle-top" points="27,7 46,14.5 27,21.5 8,14.5" fill="#E6D7C4" stroke="var(--color-navy)" stroke-width="1.8" stroke-linejoin="round"/>
-            <polygon class="brick-idle-front" points="8,14.5 27,21.5 27,29.5 8,22.5" fill="#FAF7F2" stroke="var(--color-navy)" stroke-width="1.8" stroke-linejoin="round"/>
-            <polygon class="brick-idle-side" points="27,21.5 46,14.5 46,22.5 27,29.5" fill="#D5C4AD" stroke="var(--color-navy)" stroke-width="1.8" stroke-linejoin="round"/>
-            <path class="eye-closed-slit" d="M 12 18 C 18 20 36 20 42 18" stroke="transparent" stroke-width="0.1"/>
+    <div class="nav-eye-item" data-index="4">
+      <button class="nav-eye-btn" aria-label="Escena 5: Visión 2.0">
+        <svg class="nav-eye-svg" viewBox="0 0 54 36" fill="none">
+          <g class="eye-closed-group">
+            <path class="eye-closed-slit" d="M 6 18 C 18 24 36 24 48 18" stroke="var(--color-navy)" stroke-width="2.5" stroke-linecap="round"/>
+            <line x1="14" y1="21" x2="11" y2="28" stroke="var(--color-navy)" stroke-width="1.8" stroke-linecap="round"/>
+            <line x1="21" y1="23" x2="20" y2="30" stroke="var(--color-navy)" stroke-width="1.8" stroke-linecap="round"/>
+            <line x1="27" y1="23" x2="27" y2="31" stroke="var(--color-navy)" stroke-width="1.8" stroke-linecap="round"/>
+            <line x1="33" y1="23" x2="34" y2="30" stroke="var(--color-navy)" stroke-width="1.8" stroke-linecap="round"/>
+            <line x1="40" y1="21" x2="43" y2="28" stroke="var(--color-navy)" stroke-width="1.8" stroke-linecap="round"/>
           </g>
-          <g class="eye-open-group brick-active-group">
-            <polygon class="brick-act-top" points="27,6 47,13.8 27,21.2 7,13.8" fill="#E27237" stroke="var(--color-navy)" stroke-width="2.2" stroke-linejoin="round"/>
-            <polygon class="brick-act-front" points="7,13.8 27,21.2 27,29.8 7,22.4" fill="#C45120" stroke="var(--color-navy)" stroke-width="2.2" stroke-linejoin="round"/>
-            <polygon class="brick-act-side" points="27,21.2 47,13.8 47,22.4 27,29.8" fill="#993B12" stroke="var(--color-navy)" stroke-width="2.2" stroke-linejoin="round"/>
-            <ellipse cx="20" cy="13.8" rx="3.2" ry="1.6" fill="#A83F15" stroke="var(--color-navy)" stroke-width="1.2"/>
-            <ellipse cx="34" cy="13.8" rx="3.2" ry="1.6" fill="#A83F15" stroke="var(--color-navy)" stroke-width="1.2"/>
-            <circle class="eye-iris" cx="27" cy="18" r="0.1" fill="none"/>
-            <circle class="eye-pupil" cx="27" cy="18" r="0.1" fill="none"/>
-            <text class="eye-num-text brick-num-text" x="27" y="27.5" text-anchor="middle">05</text>
+          <g class="eye-open-group">
+            <g class="eye-open-lashes">
+              <line x1="13" y1="11" x2="9" y2="5" stroke="var(--color-navy)" stroke-width="1.6" stroke-linecap="round"/>
+              <line x1="20" y1="7" x2="18" y2="1" stroke="var(--color-navy)" stroke-width="1.6" stroke-linecap="round"/>
+              <line x1="27" y1="6" x2="27" y2="0" stroke="var(--color-navy)" stroke-width="1.6" stroke-linecap="round"/>
+              <line x1="34" y1="7" x2="36" y2="1" stroke="var(--color-navy)" stroke-width="1.6" stroke-linecap="round"/>
+              <line x1="41" y1="11" x2="45" y2="5" stroke="var(--color-navy)" stroke-width="1.6" stroke-linecap="round"/>
+              <line x1="18" y1="27" x2="16" y2="33" stroke="var(--color-navy)" stroke-width="1.4" stroke-linecap="round"/>
+              <line x1="27" y1="29" x2="27" y2="35" stroke="var(--color-navy)" stroke-width="1.4" stroke-linecap="round"/>
+              <line x1="36" y1="27" x2="38" y2="33" stroke="var(--color-navy)" stroke-width="1.4" stroke-linecap="round"/>
+            </g>
+            <path class="eye-sclera" d="M 4 18 C 16 5 38 5 50 18 C 38 31 16 31 4 18 Z" fill="var(--color-beige-light)" stroke="var(--color-navy)" stroke-width="2.2" stroke-linejoin="round"/>
+            <circle class="eye-iris" cx="27" cy="18" r="11" fill="var(--color-navy)"/>
+            <circle class="eye-iris-ring" cx="27" cy="18" r="9.2" fill="none" stroke="var(--color-beige)" stroke-width="1" stroke-dasharray="2 1.5"/>
+            <circle class="eye-pupil" cx="27" cy="18" r="7.5" fill="var(--color-navy-deep)"/>
+            <text class="eye-num-text" x="27" y="21" text-anchor="middle">05</text>
           </g>
         </svg>
       </button>
-      <span class="nav-eye-label nav-brick-label">05 Visión 2.0</span>
+      <span class="nav-eye-label">05 Visión 2.0</span>
     </div>
   </nav>
-
-  <!-- Top Right Header: BrickTech Brand & Team Information -->
-  <header class="bricktech-top-header" aria-label="Cabecera BrickTech">
-    <div class="header-left-pill">
-      <span class="status-dot-pulse"></span>
-      <span class="header-project-tag">ESCUELA MERÍN · EXPO 2026</span>
-    </div>
-    <div class="header-logo-container">
-      <div class="header-org-info">
-        <span class="header-company-name">AutoBrick Technologies</span>
-        <span class="header-sub-tag">Parque Industrial San Rafael</span>
-      </div>
-      <div class="header-logo-badge">
-        <img src="assets/logo_bricktech.png" alt="Logo BrickTech" class="header-logo-img">
-      </div>
-    </div>
-  </header>
 
   <!-- 4. VIEWPORT DECK WITH STACKED CINEMATIC SLIDES -->
   <main class="viewport-deck" id="viewport-deck">
     
     <!-- ======================================================================
-         SCENE 1: HERO CINEMATOGRÁFICO — AUTOBRICK TECHNOLOGIES
+         SCENE 1: HERO CINEMATOGRÁFICO
          ====================================================================== -->
     <section class="slide-scene active" id="scene-hero">
       <div class="scene-inner">
@@ -330,43 +315,43 @@
           <div class="hero-content">
             <div class="kicker-pill">
               <span class="status-dot-pulse"></span>
-              <span>AUTOBRICK TECHNOLOGIES · PRÁCTICAS PROFESIONALIZANTES 5° 1°</span>
+              <span>AUTONOMÍA SENSORIAL · INGENIERÍA BIOMÉDICA</span>
             </div>
 
             <h1 class="heading-display">
-              Tecnología de Fabricación de Ladrillos <span class="text-vibrant">Accesible para Todos.</span>
+              La visión no termina en los ojos. Comienza con la <span class="text-vibrant">anticipación.</span>
             </h1>
 
             <p class="lead-editorial">
-              Desarrollamos compactadoras de ladrillos automatizadas que optimizan el proceso de fabricación, aumentan la productividad y reducen la necesidad de intervención manual. Producción limpia y eficiente de bloques de tierra comprimida (BTC) desde el Parque Industrial de San Rafael.
+              SmartNav redefine la movilidad de personas con discapacidad visual. Sensores ultrasónicos de rango milimétrico traducidos instantáneamente en pulsos hápticos en las patillas: imperceptibles para otros, revolucionarios para ti. Sin bloquear tu audición, sin depender de pantallas.
             </p>
 
             <div class="hero-actions">
               <a href="#scene-engineering" class="btn-primary">
-                <span>Explorar Máquina 3D</span>
+                <span>Explorar Tecnología</span>
                 <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
               </a>
               <a href="#scene-simulator" class="btn-secondary">
-                <span>Ver Proceso & PLC</span>
+                <span>Ver Simulador Háptico</span>
               </a>
             </div>
 
             <div class="hero-stats-band">
               <div class="stat-item">
-                <span class="stat-value">10<span class="stat-accent">Tn</span></span>
-                <span class="stat-caption">Fuerza Hidráulica</span>
+                <span class="stat-value">38<span class="stat-accent">g</span></span>
+                <span class="stat-caption">Chasis Titanio</span>
               </div>
               <div class="stat-item">
-                <span class="stat-value">5<span class="stat-accent">Pasos</span></span>
-                <span class="stat-caption">Proceso Integrado</span>
+                <span class="stat-value">120<span class="stat-accent">°</span></span>
+                <span class="stat-caption">Cobertura Acústica</span>
               </div>
               <div class="stat-item">
-                <span class="stat-value">S7<span class="stat-accent">200</span></span>
-                <span class="stat-caption">Automatización PLC</span>
+                <span class="stat-value">&lt;5<span class="stat-accent">ms</span></span>
+                <span class="stat-caption">Latencia Refleja</span>
               </div>
               <div class="stat-item">
-                <span class="stat-value">100<span class="stat-accent">%</span></span>
-                <span class="stat-caption">Curado Ecológico</span>
+                <span class="stat-value">3.5<span class="stat-accent">m</span></span>
+                <span class="stat-caption">Rango Radar</span>
               </div>
             </div>
           </div>
@@ -378,10 +363,10 @@
               <div class="telemetry-widget-header">
                 <div class="telemetry-chip-live">
                   <span class="telemetry-live-dot"></span>
-                  <span class="telemetry-chip-title">COMPACTADORA BRICKTECH · ESTADO EN VIVO</span>
+                  <span class="telemetry-chip-title">TELEMETRÍA EN VIVO · SISTEMA v1.0</span>
                 </div>
                 <div class="telemetry-status-badge">
-                  <span>SISTEMA HIDRÁULICO ACTIVO</span>
+                  <span>40 kHz ACTIVO</span>
                 </div>
               </div>
 
@@ -391,48 +376,48 @@
                 <div class="radar-ping-ring ring-2"></div>
                 <div class="radar-ping-ring ring-3"></div>
                 <div class="radar-sweep-needle"></div>
-                <div class="radar-echo-blip blip-1" title="Sensor fin de carrera activo"></div>
-                <div class="radar-echo-blip blip-2" title="Presión de prensado nominal"></div>
+                <div class="radar-echo-blip blip-1" title="Obstáculo detectado a 2.4m"></div>
+                <div class="radar-echo-blip blip-2" title="Obstáculo detectado a 3.2m"></div>
                 <div class="radar-specs-overlay">
-                  <span class="radar-range-pill">PRESIÓN MÁX 180 BAR</span>
-                  <span class="radar-fov-pill">CICLO 8.4s</span>
+                  <span class="radar-range-pill">RANGO MÁX 3.5m</span>
+                  <span class="radar-fov-pill">CAMPO 120°</span>
                 </div>
               </div>
 
               <!-- Telemetry Metrics Grid -->
               <div class="telemetry-cards-row">
-                <!-- Hydraulic Pressure Card -->
+                <!-- Battery Card -->
                 <div class="telemetry-mini-card">
                   <div class="tcard-head">
-                    <span class="tcard-title">PRENSA HIDRÁULICA</span>
-                    <span class="tcard-pill-sage" id="telemetry-bat-pct">10 Tn</span>
+                    <span class="tcard-title">BATERÍA DUAL</span>
+                    <span class="tcard-pill-sage" id="telemetry-bat-pct">94%</span>
                   </div>
                   <div class="tcard-progress-track">
-                    <div class="tcard-progress-bar" id="telemetry-bat-bar" style="width: 92%;"></div>
+                    <div class="tcard-progress-bar" id="telemetry-bat-bar" style="width: 94%;"></div>
                   </div>
                   <div class="tcard-meta-line">
-                    <span>180 bar regulado</span>
-                    <span class="tcard-highlight">Pistón: Activo · Matriz: Cerrada</span>
+                    <span>14.2h estimadas</span>
+                    <span class="tcard-highlight">L: 94% · R: 95%</span>
                   </div>
                 </div>
 
-                <!-- Cycle Time Card -->
+                <!-- Latency Card -->
                 <div class="telemetry-mini-card">
                   <div class="tcard-head">
-                    <span class="tcard-title">DOSIFICACIÓN SINFÍN</span>
-                    <span class="tcard-pill-terracotta" id="telemetry-lat-val">3.2 s</span>
+                    <span class="tcard-title">LATENCIA REFLEJA</span>
+                    <span class="tcard-pill-terracotta" id="telemetry-lat-val">3.4 ms</span>
                   </div>
                   <div class="tcard-sparkline" id="telemetry-sparkline">
-                    <span class="spark-bar" style="height: 60%;"></span>
-                    <span class="spark-bar" style="height: 85%;"></span>
-                    <span class="spark-bar" style="height: 55%;"></span>
-                    <span class="spark-bar" style="height: 95%;"></span>
-                    <span class="spark-bar active" style="height: 70%;"></span>
-                    <span class="spark-bar" style="height: 80%;"></span>
+                    <span class="spark-bar" style="height: 48%;"></span>
+                    <span class="spark-bar" style="height: 74%;"></span>
+                    <span class="spark-bar" style="height: 52%;"></span>
+                    <span class="spark-bar" style="height: 88%;"></span>
+                    <span class="spark-bar active" style="height: 64%;"></span>
+                    <span class="spark-bar" style="height: 78%;"></span>
                   </div>
                   <div class="tcard-meta-line">
-                    <span>PLC Siemens S7-200</span>
-                    <span class="tcard-green">Salida Q1 / Q4 Sincronizada</span>
+                    <span>NPU Biomédica</span>
+                    <span class="tcard-green">&lt;5ms Tiempo Real</span>
                   </div>
                 </div>
               </div>
@@ -440,22 +425,22 @@
               <!-- Sensor Submodules Strip -->
               <div class="telemetry-sensors-panel">
                 <div class="tcard-head" style="margin-bottom: 8px;">
-                  <span class="tcard-title">SISTEMAS ELECTROMECÁNICOS & ACTUADORES</span>
+                  <span class="tcard-title">ESTADO DE SENSORES Y ACTUADORES</span>
                   <span class="tcard-online-pill">SINCRONIZADO</span>
                 </div>
                 <div class="telemetry-sensors-grid">
                   <div class="sensor-pill-status active">
                     <span class="sensor-indicator-dot"></span>
                     <div class="sensor-pill-info">
-                      <span class="sensor-pill-name">Motor Eléctrico & Sinfín Mezclador</span>
-                      <span class="sensor-pill-desc">12V 100 RPM · Homogenización continua de suelo y cemento</span>
+                      <span class="sensor-pill-name">Transductores Ultrasónicos Duales</span>
+                      <span class="sensor-pill-desc">40kHz · Detección de altura y perímetro</span>
                     </div>
                   </div>
                   <div class="sensor-pill-status active">
                     <span class="sensor-indicator-dot"></span>
                     <div class="sensor-pill-info">
-                      <span class="sensor-pill-name">Cilindro Hidráulico & Bandeja de Expulsión</span>
-                      <span class="sensor-pill-desc">Electroválvulas 5/2 · Prensado uniforme y desmolde inmediato</span>
+                      <span class="sensor-pill-name">Actuadores Hápticos LRA (Sienes L/R)</span>
+                      <span class="sensor-pill-desc">170Hz · Resonancia táctil bilateral</span>
                     </div>
                   </div>
                 </div>
@@ -465,9 +450,9 @@
               <div class="telemetry-widget-footer">
                 <span class="telemetry-dock-tag">
                   <span class="status-dot-pulse"></span>
-                  <span>PARQUE INDUSTRIAL SAN RAFAEL · CUADRO NACIONAL</span>
+                  <span>CALIBRACIÓN DINÁMICA CONTINUA</span>
                 </span>
-                <span class="telemetry-dock-code">EXPO 2026</span>
+                <span class="telemetry-dock-code">ISO 13485 CERT</span>
               </div>
             </div>
           </div>
@@ -483,7 +468,7 @@
     </section>
 
     <!-- ======================================================================
-         SCENE 2: INGENIERÍA 3D INTERACTIVA — MÁQUINA COMPACTADORA DE LADRILLOS
+         SCENE 2: INGENIERÍA 3D INTERACTIVA
          ====================================================================== -->
     <section class="slide-scene" id="scene-engineering">
       <div class="scene-inner">
@@ -491,15 +476,15 @@
           <!-- Left: Spec Details -->
           <div class="tech-spec-panel">
             <div class="kicker-pill kicker-coral">
-              <span>EXPLORACIÓN ISOMÉTRICA CAD</span>
+              <span>EXPLORACIÓN ESTRUCTURAL</span>
             </div>
 
             <h2 class="heading-section">
-              Máquina Compactadora de Ladrillos Ecológicos.
+              Ingeniería acústica encapsulada en 38 gramos.
             </h2>
 
             <p class="lead-editorial" style="margin-bottom: 20px;">
-              Diseño electromecánico e isométrico de alta precisión para fabricar bloques de suelo-cemento de encastre modular, garantizando densidad homogénea y compresión certificada.
+              Cada milímetro de SmartNav responde a un propósito de bio-compatibilidad: libertad auricular absoluta para no interferir con la orientación sonora natural.
             </p>
 
             <div class="spec-list">
@@ -508,8 +493,8 @@
                   <svg viewBox="0 0 24 24"><path d="M12 2v20M2 12h20M4.93 4.93l14.14 14.14M4.93 19.07l14.14-14.14"/></svg>
                 </div>
                 <div class="spec-body">
-                  <h4>Tolva de Alimentación & Dosificación</h4>
-                  <p>Tolva superior troncocónica con ángulo de deslizamiento optimizado para mezclas homogéneas de suelo arcilloso, arena y estabilizador ecológico.</p>
+                  <h4>Transductores Ultrasónicos Duales</h4>
+                  <p>Frecuencia de 40kHz calibrada para escanear obstáculos superiores (ramas, carteles y marcos de puertas) que el bastón blanco no percibe.</p>
                 </div>
               </div>
 
@@ -518,8 +503,8 @@
                   <svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
                 </div>
                 <div class="spec-body">
-                  <h4>Pistón Hidráulico de Prensado (10 Toneladas)</h4>
-                  <p>Cilindro de compresión vertical con vástago de acero rectificado que compacta la masa a presiones superiores a 4.5 MPa, eliminando porosidades.</p>
+                  <h4>Actuadores Hápticos Resonantes LRA</h4>
+                  <p>Pulsos micro-vibratorios independientes en las patillas izquierda y derecha: dirección intuitiva sin sonidos invasivos.</p>
                 </div>
               </div>
 
@@ -528,8 +513,8 @@
                   <svg viewBox="0 0 24 24"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
                 </div>
                 <div class="spec-body">
-                  <h4>Matriz Intercambiable para Bloques Modulares</h4>
-                  <p>Caja de moldeo de acero templado antidesgaste con doble macho para ladrillos con orificios técnicos y conductos de instalación sin roturas.</p>
+                  <h4>Chasis en Titanio Beta y TR90</h4>
+                  <p>Distribución de masa 50/50 ergonomizada para uso continuo durante todo el día sin fatiga nasal.</p>
                 </div>
               </div>
             </div>
@@ -541,73 +526,69 @@
 
             <!-- Dynamic Interactive Floating Hotspots (Aprovechamiento Espacial) -->
             <div class="hotspots-floating-container" id="hotspots-floating-container">
-              <!-- Hotspot 1: Tolva de Carga -->
-              <div class="model-hotspot hotspot-bridge" data-component="tolva">
-                <button class="hotspot-trigger" aria-label="Ver Tolva de Carga">
+              <!-- Hotspot 1: Transductores Ultrasónicos (Puente Frontal) -->
+              <div class="model-hotspot hotspot-bridge" data-component="sensors">
+                <button class="hotspot-trigger" aria-label="Ver Transductores Ultrasónicos">
                   <span class="hotspot-pulse"></span>
                   <span class="hotspot-dot"></span>
                   <span class="hotspot-num">01</span>
                 </button>
                 <div class="hotspot-card">
-                  <div class="hotspot-card-badge">TOLVA DE ALIMENTACIÓN</div>
-                  <h5 class="hotspot-card-title">Carga de Mezcla</h5>
-                  <p class="hotspot-card-desc">Recepción superior para dosificación precisa de áridos y arcilla seleccionada hacia la cámara de prensado.</p>
+                  <div class="hotspot-card-badge">TRANSDUCTORES 40kHz</div>
+                  <h5 class="hotspot-card-title">Doble Haz Ultrasónico</h5>
+                  <p class="hotspot-card-desc">Emisores cónicos en el puente frontal que detectan ramas y obstáculos elevados hasta 3.5m antes.</p>
                 </div>
               </div>
 
-              <!-- Hotspot 2: Cilindro Hidráulico -->
-              <div class="model-hotspot hotspot-temple-left" data-component="cilindro">
-                <button class="hotspot-trigger" aria-label="Ver Cilindro de Prensado">
+              <!-- Hotspot 2: Actuador Háptico Izquierdo (Patilla Izquierda) -->
+              <div class="model-hotspot hotspot-temple-left" data-component="temple-left">
+                <button class="hotspot-trigger" aria-label="Ver Actuador Háptico Izquierdo">
                   <span class="hotspot-pulse"></span>
                   <span class="hotspot-dot"></span>
                   <span class="hotspot-num">02</span>
                 </button>
                 <div class="hotspot-card">
-                  <div class="hotspot-card-badge">PRENSA HIDRÁULICA 10 Tn</div>
-                  <h5 class="hotspot-card-title">Pistón de Alta Densidad</h5>
-                  <p class="hotspot-card-desc">Vástago templado y plato estampador que compacta la masa garantizando alta resistencia mecánica.</p>
+                  <div class="hotspot-card-badge">RETROALIMENTACIÓN HÁPTICA</div>
+                  <h5 class="hotspot-card-title">Actuador LRA Izquierdo</h5>
+                  <p class="hotspot-card-desc">Motor resonante lineal de 170Hz. Pulso micro-vibratorio para desvío de obstáculos a la izquierda.</p>
                 </div>
               </div>
 
-              <!-- Hotspot 3: Matriz de Moldeo -->
-              <div class="model-hotspot hotspot-temple-right" data-component="matriz">
-                <button class="hotspot-trigger" aria-label="Ver Matriz de Moldeo">
+              <!-- Hotspot 3: Actuador Háptico Derecho & Celda Dual (Patilla Derecha) -->
+              <div class="model-hotspot hotspot-temple-right" data-component="temple-right">
+                <button class="hotspot-trigger" aria-label="Ver Actuador Háptico Derecho y Batería">
                   <span class="hotspot-pulse"></span>
                   <span class="hotspot-dot"></span>
                   <span class="hotspot-num">03</span>
                 </button>
                 <div class="hotspot-card">
-                  <div class="hotspot-card-badge">CÁMARA DE MOLDEO</div>
-                  <h5 class="hotspot-card-title">Matriz Modular con Machos</h5>
-                  <p class="hotspot-card-desc">Cámara de 240×115×65 mm con núcleos dobles para encastre machihembrado de máxima precisión.</p>
+                  <div class="hotspot-card-badge">AUTONOMÍA & HÁPTICA</div>
+                  <h5 class="hotspot-card-title">Actuador Derecho & Batería</h5>
+                  <p class="hotspot-card-desc">Distribución simétrica 50/50 y celda de polímero con 14 horas de autonomía continua.</p>
                 </div>
               </div>
 
-              <!-- Hotspot 4: Ladrillo Ecológico & Desmolde -->
-              <div class="model-hotspot hotspot-frame" data-component="ladrillo">
-                <button class="hotspot-trigger" aria-label="Ver Ladrillo Compactado">
+              <!-- Hotspot 4: Chasis Titanio Beta & TR90 (Montura) -->
+              <div class="model-hotspot hotspot-frame" data-component="frame">
+                <button class="hotspot-trigger" aria-label="Ver Chasis Ultraligero">
                   <span class="hotspot-pulse"></span>
                   <span class="hotspot-dot"></span>
                   <span class="hotspot-num">04</span>
                 </button>
                 <div class="hotspot-card">
-                  <div class="hotspot-card-badge">LADRILLO ECOLÓGICO</div>
-                  <h5 class="hotspot-card-title">Bandeja de Desmolde</h5>
-                  <p class="hotspot-card-desc">Sistema de expulsión vertical que entrega el bloque terminado sin cocción ni deformaciones superficiales.</p>
+                  <div class="hotspot-card-badge">BIOMATERIALES 38g</div>
+                  <h5 class="hotspot-card-title">Titanio Beta & TR90</h5>
+                  <p class="hotspot-card-desc">Polímero suizo TR90 biocompatible con memoria elástica. Máximo confort para uso diario sin fatiga.</p>
                 </div>
               </div>
             </div>
 
             <div class="stage-overlay-hud">
-              <span class="hud-pill">MOTOR 3D // CAD ISOMÉTRICO THREE.JS</span>
+              <span class="hud-pill">MOTOR 3D // THREE.JS REAL-TIME</span>
               <div class="hud-controls">
                 <button class="hud-btn" id="btn-3d-reset">Rotar 360°</button>
-                <button class="hud-btn" id="btn-3d-echo">Ciclo de Prensado</button>
-                <button class="hud-btn" id="btn-3d-temples">Vista Isométrica</button>
-                <a class="hud-btn" id="btn-3d-dwg" href="assets/maquina_ladrillos_isometrico.dwg" download="maquina_ladrillos_isometrico.dwg" style="text-decoration:none; display:inline-flex; align-items:center; gap:6px;">
-                  <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
-                  <span>Plano DWG</span>
-                </a>
+                <button class="hud-btn" id="btn-3d-echo">Ecolocalización ON</button>
+                <button class="hud-btn" id="btn-3d-temples">Ver Patillas</button>
               </div>
             </div>
           </div>
@@ -616,19 +597,19 @@
     </section>
 
     <!-- ======================================================================
-         SCENE 3: SIMULADOR DE AUTOMATIZACIÓN & CONTROL PLC
+         SCENE 3: SIMULADOR "TOCAR VS. ANTICIPAR"
          ====================================================================== -->
     <section class="slide-scene" id="scene-simulator">
       <div class="scene-inner">
         <div style="margin-bottom: 24px;">
           <div class="kicker-pill">
-            <span>SISTEMA DE CONTROL & AUTOMATIZACIÓN</span>
+            <span>EXPERIMENTO EN TIEMPO REAL</span>
           </div>
           <h2 class="heading-section">
-            Simulador de ciclo de prensado & salidas PLC.
+            Simulador interactivo: Tocar vs. Anticipar.
           </h2>
           <p class="lead-editorial" style="margin-bottom: 0;">
-            Controlador Lógico Programable Siemens S7-200 (CPU 224) coordinando en tiempo real las 6 salidas electromecánicas de la máquina compactadora.
+            El bastón blanco tradicional detecta el peligro cuando ya hubo contacto físico. SmartNav proyecta un cono de seguridad que advierte 3.5 metros antes.
           </p>
         </div>
 
@@ -637,45 +618,37 @@
           <div class="sim-control-panel">
             <div>
               <span style="font-family: var(--font-display); font-size: 0.84rem; font-weight: 800; color: var(--accent-coral); text-transform: uppercase;">
-                Modo de Operación
+                Modo de Detección
               </span>
               <div class="sim-mode-toggle">
-                <button class="mode-btn" id="mode-cane-btn">Modo Manual</button>
-                <button class="mode-btn active" id="mode-smartnav-btn">Modo Automático PLC</button>
+                <button class="mode-btn" id="mode-cane-btn">Bastón Blanco</button>
+                <button class="mode-btn active" id="mode-smartnav-btn">SmartNav</button>
               </div>
 
               <div class="sim-metrics-box">
                 <div class="sim-metric-row">
-                  <span class="sim-metric-label">Salida Activa</span>
-                  <span class="sim-metric-val" id="sim-dist-val">Q2: Compactadora</span>
+                  <span class="sim-metric-label">Distancia Obstáculo</span>
+                  <span class="sim-metric-val" id="sim-dist-val">2.5 m</span>
                 </div>
                 <div class="sim-metric-row">
-                  <span class="sim-metric-label">Presión Hidráulica</span>
-                  <span class="sim-metric-val" id="sim-haptic-val">180 Bar (10 Tn)</span>
+                  <span class="sim-metric-label">Retroalimentación</span>
+                  <span class="sim-metric-val" id="sim-haptic-val">Patilla Derecha</span>
                 </div>
                 <div class="sim-metric-row">
-                  <span class="sim-metric-label">Tiempo de Ciclo</span>
-                  <span class="sim-metric-val" id="sim-reaction-val">8.4s Continuo</span>
+                  <span class="sim-metric-label">Tiempo de Reacción</span>
+                  <span class="sim-metric-val" id="sim-reaction-val">&lt;5ms Anticipado</span>
                 </div>
               </div>
             </div>
 
-            <!-- Listado de Salidas PLC (Q) -->
-            <div style="padding-top: 14px; border-top: 1px solid var(--border-subtle); font-size: 0.8rem; color: var(--text-secondary); line-height: 1.6;">
-              <strong style="color: var(--color-navy); display:block; margin-bottom: 6px;">Asignación de Salidas PLC S7-200:</strong>
-              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 6px; font-family: var(--font-mono); font-size: 0.74rem;">
-                <span style="background: rgba(46, 125, 71, 0.12); color: var(--accent-sage); padding: 2px 6px; border-radius: 4px;">Q1: Sinfín Mezclador</span>
-                <span style="background: rgba(217, 83, 30, 0.12); color: var(--accent-terracotta); padding: 2px 6px; border-radius: 4px;">Q2: Pistón Prensa</span>
-                <span style="background: rgba(29, 61, 111, 0.08); color: var(--color-navy); padding: 2px 6px; border-radius: 4px;">Q4: Compuerta Dosif.</span>
-                <span style="background: rgba(29, 61, 111, 0.08); color: var(--color-navy); padding: 2px 6px; border-radius: 4px;">Q5: Cinta Transp.</span>
-                <span style="background: rgba(217, 83, 30, 0.12); color: var(--accent-terracotta); padding: 2px 6px; border-radius: 4px; grid-column: span 2;">Q6: Ojo de Buey / Fin de Carrera</span>
-              </div>
+            <div style="padding-top: 14px; border-top: 1px solid var(--border-subtle); font-size: 0.8rem; color: var(--text-secondary); line-height: 1.5;">
+              Arrastra el obstáculo circular amarillo vivo con el cursor en el radar para experimentar el ajuste dinámico del pulso acústico.
             </div>
           </div>
 
           <!-- Canvas 2D Radar Simulation -->
           <div class="sim-canvas-container">
-            <span class="canvas-hint-pill">Ciclo de fabricación y compresión de mezcla en tiempo real</span>
+            <span class="canvas-hint-pill">Arrastra el obstáculo amarillo en el radar</span>
             <canvas id="canvas-sim-2d"></canvas>
           </div>
         </div>
@@ -689,74 +662,74 @@
       <div class="scene-inner">
         <div>
           <div class="kicker-pill kicker-coral">
-            <span>PROCESO SIMPLE, EFICAZ Y ACCESIBLE</span>
+            <span>ARQUITECTURA DE RENDIMIENTO</span>
           </div>
           <h2 class="heading-section">
-            Planificación tecnológica & manufactura sustentable.
+            Diseñado para desaparecer. Construido para proteger.
           </h2>
           <p class="lead-editorial" style="margin-bottom: 0;">
-            Ingeniería de fabricación de bloques ecológicos de tierra comprimida (BTC): del acopio y mezclado al curado natural sin cocción ni emisiones contaminantes.
+            Cuatro pilares de hardware que convierten un par de gafas comunes en un órgano perceptivo aumentado.
           </p>
         </div>
 
         <div class="bento-grid">
-          <!-- Card 1: 5 Fases del Proceso -->
+          <!-- Card 1: 38g -->
+          <div class="bento-card">
+            <div class="bento-top">
+              <div class="bento-icon-box">
+                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+              </div>
+              <span class="action-pill" style="font-size: 0.72rem;">ULTRA-LIGHT</span>
+            </div>
+            <div>
+              <div class="bento-stat-num">38<span class="bento-unit">g</span></div>
+              <h3 class="bento-title">Pluma en el rostro</h3>
+              <p class="bento-desc">Aleación de titanio beta y polímero bio-médico suizo TR90. Más ligeras que unas gafas de sol de pasta.</p>
+            </div>
+          </div>
+
+          <!-- Card 2: 120° -->
           <div class="bento-card">
             <div class="bento-top">
               <div class="bento-icon-box">
                 <svg viewBox="0 0 24 24"><polygon points="12 2 2 7 12 12 22 7 12 2"/><polyline points="2 17 12 22 22 17"/><polyline points="2 12 12 17 22 12"/></svg>
               </div>
-              <span class="action-pill" style="font-size: 0.72rem;">PROCESO INTEGRAL</span>
+              <span class="action-pill" style="font-size: 0.72rem;">COBERTURA</span>
             </div>
             <div>
-              <div class="bento-stat-num">5<span class="bento-unit">Fases</span></div>
-              <h3 class="bento-title">Fabricación en 5 Etapas</h3>
-              <p class="bento-desc">1. Mezcla homogénea de suelo y estabilizante · 2. Llenado por tolva · 3. Compactación hidráulica 10 Tn · 4. Desmolde vertical suave · 5. Curado al aire libre sin hornos.</p>
+              <div class="bento-stat-num">120<span class="bento-unit">°</span></div>
+              <h3 class="bento-title">Campo perceptual periférico</h3>
+              <p class="bento-desc">Doble haz cónico ultrasónico que mapea el plano frontal completo, eliminando colisiones con obstáculos elevados.</p>
             </div>
           </div>
 
-          <!-- Card 2: Presupuesto Total -->
+          <!-- Card 3: <5ms -->
           <div class="bento-card">
             <div class="bento-top">
               <div class="bento-icon-box">
-                <svg viewBox="0 0 24 24"><rect width="20" height="14" x="2" y="5" rx="2"/><line x1="2" x2="22" y1="10" y2="10"/></svg>
+                <svg viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
               </div>
-              <span class="action-pill" style="font-size: 0.72rem;">PRESUPUESTO</span>
+              <span class="action-pill" style="font-size: 0.72rem;">TIEMPO REAL</span>
             </div>
             <div>
-              <div class="bento-stat-num">$2.02<span class="bento-unit">M</span></div>
-              <h3 class="bento-title">Inversión Total de Insumos</h3>
-              <p class="bento-desc">Costo total $2.023.600: PLC Siemens S7-200 ($380k), cilindro y central hidráulica ($520k), motorreductor 100 RPM ($290k), chasis IPN y sinfín SAE 1045.</p>
+              <div class="bento-stat-num">&lt;5<span class="bento-unit">ms</span></div>
+              <h3 class="bento-title">Respuesta refleja háptica</h3>
+              <p class="bento-desc">Microprocesador biomédico dedicado que procesa el eco acústico más rápido que el impulso nervioso humano.</p>
             </div>
           </div>
 
-          <!-- Card 3: Cronograma Gantt -->
+          <!-- Card 4: 14h -->
           <div class="bento-card">
             <div class="bento-top">
               <div class="bento-icon-box">
-                <svg viewBox="0 0 24 24"><rect width="18" height="18" x="3" y="4" rx="2" ry="2"/><line x1="16" x2="16" y1="2" y2="6"/><line x1="8" x2="8" y1="2" y2="6"/><line x1="3" x2="21" y1="10" y2="10"/></svg>
+                <svg viewBox="0 0 24 24"><rect width="16" height="10" x="2" y="7" rx="2" ry="2"/><line x1="22" x2="22" y1="11" y2="13"/></svg>
               </div>
-              <span class="action-pill" style="font-size: 0.72rem;">GANTT EXPO 2026</span>
+              <span class="action-pill" style="font-size: 0.72rem;">AUTONOMÍA</span>
             </div>
             <div>
-              <div class="bento-stat-num">11<span class="bento-unit">Hitos</span></div>
-              <h3 class="bento-title">Planificación Técnica</h3>
-              <p class="bento-desc">11 etapas estructuradas: desde la delimitación del problema y cálculos estructurales, modelado 3D CAD, cableado PLC, hasta validación funcional final.</p>
-            </div>
-          </div>
-
-          <!-- Card 4: Bloques BTC Encastrables -->
-          <div class="bento-card">
-            <div class="bento-top">
-              <div class="bento-icon-box">
-                <svg viewBox="0 0 24 24"><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/></svg>
-              </div>
-              <span class="action-pill" style="font-size: 0.72rem;">PRODUCTO BTC</span>
-            </div>
-            <div>
-              <div class="bento-stat-num">100<span class="bento-unit">%</span></div>
-              <h3 class="bento-title">Ecológico & Encastrable</h3>
-              <p class="bento-desc">Bloques modulares con orificios para ductos técnicos y encastre machihembrado que reduce hasta 30% el consumo de mortero y acelera el montaje en obra.</p>
+              <div class="bento-stat-num">14<span class="bento-unit">h</span></div>
+              <h3 class="bento-title">De sol a sol sin recargar</h3>
+              <p class="bento-desc">Batería de polímero dual en patillas con distribución simétrica y carga rápida magnética USB-C (80% en 25 min).</p>
             </div>
           </div>
         </div>
@@ -764,19 +737,19 @@
     </section>
 
     <!-- ======================================================================
-         SCENE 5: VISIÓN 2.0 (QUIÉNES SOMOS & ESTRUCTURA ORGANIZATIVA)
+         SCENE 5: VISIÓN 2.0 (PROTOTIPO FUTURO & ECOSISTEMA)
          ====================================================================== -->
     <section class="slide-scene" id="scene-vision">
       <div class="scene-inner">
         <div>
           <div class="kicker-pill">
-            <span>QUIÉNES SOMOS & ESTRUCTURA</span>
+            <span>ECOSISTEMA EXPANDIDO</span>
           </div>
           <h2 class="heading-section">
-            AutoBrick Technologies · BrickTech.
+            Visión 2.0: Más allá del ultrasonido.
           </h2>
           <p class="lead-editorial" style="margin-bottom: 24px;">
-            Proyecto integral de Prácticas Profesionalizantes del Curso 5° 1° — Escuela Merín (San Rafael, Mendoza). Tecnología limpia, eficiente y accesible para la construcción sustentable.
+            El futuro de SmartNav integra inteligencia artificial auditiva y navegación satelital háptica sin bloquear el canal auditivo.
           </p>
         </div>
 
@@ -786,29 +759,29 @@
             <div class="modules-panel-header">
               <div class="panel-kicker-tag">
                 <span class="status-dot-pulse"></span>
-                <span>DOSSIER INSTITUCIONAL</span>
+                <span>SUITE DE MÓDULOS EXPANDIDOS</span>
               </div>
-              <h3 class="panel-heading">Estructura & Trayectoria</h3>
-              <p class="panel-sub">Selecciona un apartado para conocer la historia, ubicación estratégica en San Rafael y el equipo de trabajo de 5° 1°.</p>
+              <h3 class="panel-heading">Ecosistema Bio-Sensorial</h3>
+              <p class="panel-sub">Selecciona un submódulo para explorar sus especificaciones avanzadas, canal de conectividad y pruebas clínicas.</p>
             </div>
 
             <!-- Tab Navigation con tarjetas robustas y de alto impacto visual -->
-            <div class="vision-tabs-nav" role="tablist" aria-label="Selector de información institucional">
-              <button class="tab-btn active" data-tab="tab-historia" role="tab" aria-selected="true">
+            <div class="vision-tabs-nav" role="tablist" aria-label="Selector de submódulos Visión 2.0">
+              <button class="tab-btn active" data-tab="tab-ai-voice" role="tab" aria-selected="true">
                 <div class="tab-card-indicator"></div>
                 <div class="tab-icon-wrap">
-                  <svg viewBox="0 0 24 24"><path d="M4 19.5A2.5 2.5 0 0 1 6.5 17H20"/><path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"/></svg>
+                  <svg viewBox="0 0 24 24"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" x2="12" y1="19" y2="22"/></svg>
                 </div>
                 <div class="tab-card-content">
                   <div class="tab-card-meta">
-                    <span class="tab-mod-code">APARTADO 01</span>
-                    <span class="tab-status-chip chip-sage">ORÍGENES</span>
+                    <span class="tab-mod-code">MÓDULO 01</span>
+                    <span class="tab-status-chip chip-sage">AUDIO ÓSEO</span>
                   </div>
-                  <div class="tab-btn-title">Historia del Proyecto</div>
-                  <div class="tab-btn-subtitle">De las ideas iniciales a la compactadora de ladrillos</div>
+                  <div class="tab-btn-title">Asistente IA por Voz</div>
+                  <div class="tab-btn-subtitle">Conducción ósea temporal & OCR ambiental</div>
                   <div class="tab-micro-chips">
-                    <span>Descarte de Cuna</span>
-                    <span>Foco Productivo</span>
+                    <span>Reconocimiento OCR</span>
+                    <span>Oído Libre</span>
                   </div>
                 </div>
                 <div class="tab-card-arrow">
@@ -816,21 +789,21 @@
                 </div>
               </button>
 
-              <button class="tab-btn" data-tab="tab-ubicacion" role="tab" aria-selected="false">
+              <button class="tab-btn" data-tab="tab-haptic-gps" role="tab" aria-selected="false">
                 <div class="tab-card-indicator"></div>
                 <div class="tab-icon-wrap">
-                  <svg viewBox="0 0 24 24"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                  <svg viewBox="0 0 24 24"><polygon points="3 11 22 2 13 21 11 13 3 11"/></svg>
                 </div>
                 <div class="tab-card-content">
                   <div class="tab-card-meta">
-                    <span class="tab-mod-code">APARTADO 02</span>
-                    <span class="tab-status-chip chip-terracotta">SAN RAFAEL</span>
+                    <span class="tab-mod-code">MÓDULO 02</span>
+                    <span class="tab-status-chip chip-terracotta">CARTOGRAFÍA</span>
                   </div>
-                  <div class="tab-btn-title">Parque Industrial</div>
-                  <div class="tab-btn-subtitle">Ubicación estratégica en Cuadro Nacional, Mendoza</div>
+                  <div class="tab-btn-title">GPS Háptico Urbano</div>
+                  <div class="tab-btn-subtitle">Navegación paso a paso mediante impulsos táctiles</div>
                   <div class="tab-micro-chips">
-                    <span>Polo Productivo</span>
-                    <span>Logística Cuyo</span>
+                    <span>Satélite Dual</span>
+                    <span>Giro Háptico</span>
                   </div>
                 </div>
                 <div class="tab-card-arrow">
@@ -838,21 +811,21 @@
                 </div>
               </button>
 
-              <button class="tab-btn" data-tab="tab-equipo" role="tab" aria-selected="false">
+              <button class="tab-btn" data-tab="tab-app-connect" role="tab" aria-selected="false">
                 <div class="tab-card-indicator"></div>
                 <div class="tab-icon-wrap">
-                  <svg viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg>
+                  <svg viewBox="0 0 24 24"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><line x1="12" x2="12.01" y1="18" y2="18"/></svg>
                 </div>
                 <div class="tab-card-content">
                   <div class="tab-card-meta">
-                    <span class="tab-mod-code">APARTADO 03</span>
-                    <span class="tab-status-chip chip-navy">6 ÁREAS</span>
+                    <span class="tab-mod-code">MÓDULO 03</span>
+                    <span class="tab-status-chip chip-navy">TELEMETRÍA APP</span>
                   </div>
-                  <div class="tab-btn-title">Organigrama & Equipo</div>
-                  <div class="tab-btn-subtitle">Estructura departamental y alumnos de 5° 1°</div>
+                  <div class="tab-btn-title">Conectividad App & SOS</div>
+                  <div class="tab-btn-subtitle">Rutas seguras, acelerómetro 6 ejes y socorro</div>
                   <div class="tab-micro-chips">
-                    <span>Escuela Merín</span>
-                    <span>Expo 2026</span>
+                    <span>Detección Caídas</span>
+                    <span>Canal Seguro</span>
                   </div>
                 </div>
                 <div class="tab-card-arrow">
@@ -865,125 +838,117 @@
             <div class="modules-panel-dock">
               <div class="dock-badge-row">
                 <span class="status-dot-pulse"></span>
-                <span class="dock-title">AUTOBRICK TECHNOLOGIES · BRICKTECH</span>
+                <span class="dock-title">PROTOCOLO ABIERTO SMARTNAV BLE 5.4</span>
               </div>
-              <p class="dock-note">Prácticas Profesionalizantes del Curso 5° 1° — Escuela Merín. Maquinaria industrial de impacto sustentable.</p>
+              <p class="dock-note">Interoperabilidad garantizada con prótesis auditivas, bastón sensorizado y cartografía civil de accesibilidad.</p>
             </div>
           </div>
 
           <!-- Tab Panes -->
           <div class="vision-display-area">
-            <!-- Pane 1: Historia del Proyecto -->
-            <div class="tab-pane active" id="tab-historia">
+            <!-- Pane 1: IA por Voz -->
+            <div class="tab-pane active" id="tab-ai-voice">
               <div>
-                <div class="pane-kicker">GÉNESIS Y EVOLUCIÓN DEL PROYECTO</div>
-                <h3 class="pane-headline">De las primeras propuestas a la compactadora de ladrillos.</h3>
+                <div class="pane-kicker">MÓDULO DE AUDIO INTELIGENTE</div>
+                <h3 class="pane-headline">Reconocimiento contextual y lectura de señales.</h3>
                 <p class="pane-text">
-                  En los inicios del ciclo lectivo de 5° 1°, nuestro equipo exploró alternativas como una "Cuna Inteligente" con mecedora automatizada y una compactadora de reciclaje. Sin embargo, al detectar el alto déficit habitacional y el impacto ecológico de los hornos tradicionales de leña, decidimos unánimemente orientar nuestras capacidades técnicas al diseño de una <strong>Máquina Compactadora de Ladrillos Ecológicos</strong>.
+                  Transductores de conducción ósea en la zona temporal que transmiten descripciones de texto, semáforos peatonales y carteles de transporte público directamente a tu oído interno, dejando tu pabellón auditivo libre para escuchar los sonidos del entorno.
                 </p>
                 <ul class="pane-feature-list">
                   <li class="pane-feature-item">
                     <span class="pane-check-dot"></span>
-                    <span>Reorientación estratégica hacia la construcción sostenible</span>
+                    <span>Lectura OCR de carteles urbanos</span>
                   </li>
                   <li class="pane-feature-item">
                     <span class="pane-check-dot"></span>
-                    <span>Eliminación total de cocción y emisión de gases de efecto invernadero</span>
+                    <span>Detección de semáforos peatonales</span>
                   </li>
                   <li class="pane-feature-item">
                     <span class="pane-check-dot"></span>
-                    <span>Optimización de costos para autoconstrucción comunitaria</span>
+                    <span>Sin auriculares invasivos</span>
                   </li>
                   <li class="pane-feature-item">
                     <span class="pane-check-dot"></span>
-                    <span>Integración de automatización industrial accesible (PLC Siemens)</span>
+                    <span>Privacidad acústica total</span>
                   </li>
                 </ul>
               </div>
               <div class="vision-cta-strip">
-                <span class="beta-disclaimer">Dossier Oficial · Escuela Merín Expo 2026</span>
-                <a href="assets/maquina_ladrillos_isometrico.dwg" download="maquina_ladrillos_isometrico.dwg" class="btn-primary" style="padding: 13px 26px; font-size: 0.9rem;">
-                  <span>Descargar Plano CAD (.DWG)</span>
-                  <svg viewBox="0 0 24 24"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4M7 10l5 5 5-5M12 15V3"/></svg>
-                </a>
-              </div>
-            </div>
-
-            <!-- Pane 2: Ubicación Parque Industrial -->
-            <div class="tab-pane" id="tab-ubicacion">
-              <div>
-                <div class="pane-kicker">LOCALIZACIÓN ESTRATÉGICA</div>
-                <h3 class="pane-headline">Parque Industrial de San Rafael · Cuadro Nacional.</h3>
-                <p class="pane-text">
-                  La sede operativa y productiva de AutoBrick Technologies se sitúa en el Parque Industrial de San Rafael, ubicado en el distrito de Cuadro Nacional, provincia de Mendoza. Esta localización estratégica brinda acceso directo a las rutas provinciales y nacionales, facilitando el suministro de suelo arcilloso, arena seleccionada y la distribución de los bloques compactados a toda la región.
-                </p>
-                <ul class="pane-feature-list">
-                  <li class="pane-feature-item">
-                    <span class="pane-check-dot"></span>
-                    <span>Sede en Parque Industrial San Rafael (Cuadro Nacional)</span>
-                  </li>
-                  <li class="pane-feature-item">
-                    <span class="pane-check-dot"></span>
-                    <span>Conexión logística directa con corredores cuyanos</span>
-                  </li>
-                  <li class="pane-feature-item">
-                    <span class="pane-check-dot"></span>
-                    <span>Cercanía a canteras de suelo y áridos óptimos</span>
-                  </li>
-                  <li class="pane-feature-item">
-                    <span class="pane-check-dot"></span>
-                    <span>Infraestructura trifásica adecuada para maquinaria industrial</span>
-                  </li>
-                </ul>
-              </div>
-              <div class="vision-cta-strip">
-                <span class="beta-disclaimer">Cuadro Nacional · San Rafael · Mendoza</span>
-                <a href="#scene-engineering" class="btn-primary" style="padding: 13px 26px; font-size: 0.9rem;">
-                  <span>Explorar Máquina 3D</span>
+                <span class="beta-disclaimer">En fase de pruebas clínicas · Registro Abierto</span>
+                <a href="https://github.com/Heisenberg-org" target="_blank" rel="noopener noreferrer" class="btn-primary" style="padding: 13px 26px; font-size: 0.9rem;">
+                  <span>Solicitar Acceso Beta</span>
                   <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                 </a>
               </div>
             </div>
 
-            <!-- Pane 3: Organigrama & Integrantes -->
-            <div class="tab-pane" id="tab-equipo">
+            <!-- Pane 2: GPS Háptico -->
+            <div class="tab-pane" id="tab-haptic-gps">
               <div>
-                <div class="pane-kicker">ORGANIGRAMA DEPARTAMENTAL & EQUIPO TÉCNICO</div>
-                <h3 class="pane-headline">6 Departamentos funcionales · Alumnos de 5° 1°.</h3>
+                <div class="pane-kicker">ORIENTACIÓN CARTOGRÁFICA</div>
+                <h3 class="pane-headline">Giro a giro mediante vibración intuitiva.</h3>
                 <p class="pane-text">
-                  Para llevar a cabo el proyecto, conformamos una estructura organizativa profesional de 6 departamentos especializados, garantizando rigurosidad en cada etapa del desarrollo técnico y de gestión:
+                  Conéctate con tu navegador: cuando debas girar a la derecha, la patilla derecha vibra suavemente. Cuando llegues a tu destino, una suave vibración bilateral te confirma el arribo. Cero distracciones auditivas ni comandos que interrumpan tu atención.
                 </p>
                 <ul class="pane-feature-list">
                   <li class="pane-feature-item">
                     <span class="pane-check-dot"></span>
-                    <span><strong>Bruno Ruarte</strong> — Dirección General & Gestión Estratégica</span>
+                    <span>Giro intuitivo izquierda / derecha</span>
                   </li>
                   <li class="pane-feature-item">
                     <span class="pane-check-dot"></span>
-                    <span><strong>Francesco Conthe</strong> — Diseño Mecánico, Chasis & Modelado 3D CAD</span>
+                    <span>Integración con transporte público</span>
                   </li>
                   <li class="pane-feature-item">
                     <span class="pane-check-dot"></span>
-                    <span><strong>Tiago Barroso</strong> — Automatización, Cableado & Programación PLC</span>
+                    <span>Geolocalización submétrica</span>
                   </li>
                   <li class="pane-feature-item">
                     <span class="pane-check-dot"></span>
-                    <span><strong>Adam Abby</strong> — Investigación y Desarrollo (I+D) & Ensayos de Suelo</span>
-                  </li>
-                  <li class="pane-feature-item">
-                    <span class="pane-check-dot"></span>
-                    <span><strong>Bruno Vuanello</strong> — Administración, Finanzas & Presupuesto ($2.02M)</span>
-                  </li>
-                  <li class="pane-feature-item">
-                    <span class="pane-check-dot"></span>
-                    <span><strong>Derli Alossi</strong> — Mantenimiento Electromecánico & Seguridad Operativa</span>
+                    <span>Modo interior para estaciones y centros</span>
                   </li>
                 </ul>
               </div>
               <div class="vision-cta-strip">
-                <span class="beta-disclaimer">Curso 5° 1° · Escuela Merín · Expo 2026</span>
-                <a href="#scene-simulator" class="btn-primary" style="padding: 13px 26px; font-size: 0.9rem;">
-                  <span>Ver Control PLC</span>
+                <span class="beta-disclaimer">Prototipo v2.1 · Compatible con iOS y Android</span>
+                <a href="https://github.com/Heisenberg-org" target="_blank" rel="noopener noreferrer" class="btn-primary" style="padding: 13px 26px; font-size: 0.9rem;">
+                  <span>Ver Especificación Técnica</span>
+                  <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </a>
+              </div>
+            </div>
+
+            <!-- Pane 3: Conectividad App -->
+            <div class="tab-pane" id="tab-app-connect">
+              <div>
+                <div class="pane-kicker">CONTROL TOTAL EN TU BOLSILLO</div>
+                <h3 class="pane-headline">Telemetría de seguridad y detección de caídas.</h3>
+                <p class="pane-text">
+                  La app móvil de SmartNav permite a tus contactos conocer tu ubicación en tiempo real mediante un canal seguro. Además, el acelerómetro de 6 ejes integrado detecta caídas o impactos bruscos y activa una llamada SOS automática a tus contactos de emergencia.
+                </p>
+                <ul class="pane-feature-list">
+                  <li class="pane-feature-item">
+                    <span class="pane-check-dot"></span>
+                    <span>Alerta SOS automática ante caídas</span>
+                  </li>
+                  <li class="pane-feature-item">
+                    <span class="pane-check-dot"></span>
+                    <span>Personalización de intensidad háptica</span>
+                  </li>
+                  <li class="pane-feature-item">
+                    <span class="pane-check-dot"></span>
+                    <span>Historial de trayectos seguros</span>
+                  </li>
+                  <li class="pane-feature-item">
+                    <span class="pane-check-dot"></span>
+                    <span>Actualizaciones de firmware OTA</span>
+                  </li>
+                </ul>
+              </div>
+              <div class="vision-cta-strip">
+                <span class="beta-disclaimer">SmartNav OS v1.4 · Cifrado punto a punto</span>
+                <a href="https://github.com/Heisenberg-org" target="_blank" rel="noopener noreferrer" class="btn-primary" style="padding: 13px 26px; font-size: 0.9rem;">
+                  <span>Descargar App Alpha</span>
                   <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
                 </a>
               </div>
@@ -993,22 +958,22 @@
 
         <!-- Social Media Dock en la última diapositiva (Instagram, X, GitHub) -->
         <footer class="scene-social-dock">
-          <div class="social-dock-label">AutoBrick Technologies · BrickTech · Redes Oficiales</div>
+          <div class="social-dock-label">SmartNav Collective & Redes Oficiales</div>
           <div class="social-dock-links">
             <a href="https://www.instagram.com/joaandress/" target="_blank" rel="noopener noreferrer" class="social-dock-item" aria-label="Instagram de SmartNav">
               <svg viewBox="0 0 24 24"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
               <span>Instagram</span>
-              <span class="dock-handle">@bricktech.merin</span>
+              <span class="dock-handle">@joaandress</span>
             </a>
             <a href="https://x.com/joaandress1" target="_blank" rel="noopener noreferrer" class="social-dock-item" aria-label="X (Twitter) de SmartNav">
               <svg viewBox="0 0 24 24"><path d="M4 4l11.7 16h4.3L8.3 4z"/><path d="M4 20l6.8-7.2L4.5 4"/></svg>
               <span>X (Twitter)</span>
-              <span class="dock-handle">@bricktech_ar</span>
+              <span class="dock-handle">@joandress1</span>
             </a>
             <a href="https://github.com/Heisenberg-org" target="_blank" rel="noopener noreferrer" class="social-dock-item" aria-label="GitHub de Heisenberg Org">
               <svg viewBox="0 0 24 24"><path d="M15 22v-4a4.8 4.8 0 0 0-1-3.5c3 0 6-2 6-5.5.08-1.25-.27-2.48-1-3.5.28-1.15.28-2.35 0-3.5 0 0-1 0-3 1.5-2.64-.5-5.36-.5-8 0C6 2 5 2 5 2c-.3 1.15-.3 2.35 0 3.5A5.403 5.403 0 0 0 4 9c0 3.5 3 5.5 6 5.5-.39.49-.68 1.05-.85 1.65-.17.6-.22 1.23-.15 1.85v4"/><path d="M9 18c-4.51 2-5-2-7-2"/></svg>
               <span>GitHub</span>
-              <span class="dock-handle">@bricktech-merin</span>
+              <span class="dock-handle">@Heisenberg-org</span>
             </a>
           </div>
         </footer>
