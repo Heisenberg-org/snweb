@@ -55,16 +55,16 @@
   --cream: #FAF7F2;
   --charcoal: #2D375B;
 
-  /* Acentos Vivos Refinados: Terracota BrickTech y Verde Sustentable */
-  --accent-terracotta: #D9531E;      /* Naranja Terracota del logo BrickTech */
-  --accent-terracotta-hover: #BF4414;
-  --accent-terracotta-soft: rgba(217, 83, 30, 0.12);
-  --accent-terracotta-glow: rgba(217, 83, 30, 0.35);
+  /* Acentos Vivos Refinados: Terracota y Verde Salvia */
+  --accent-terracotta: #C85A32;
+  --accent-terracotta-hover: #B24823;
+  --accent-terracotta-soft: rgba(200, 90, 50, 0.12);
+  --accent-terracotta-glow: rgba(200, 90, 50, 0.3);
 
-  --accent-sage: #2E7D47;            /* Verde Industrial y Ecológico de la carpeta */
-  --accent-sage-hover: #236838;
-  --accent-sage-soft: rgba(46, 125, 71, 0.14);
-  --accent-sage-glow: rgba(46, 125, 71, 0.3);
+  --accent-sage: #5B7566;
+  --accent-sage-hover: #486153;
+  --accent-sage-soft: rgba(91, 117, 102, 0.14);
+  --accent-sage-glow: rgba(91, 117, 102, 0.28);
 
   /* Luxury Accents */
   --accent-caviar: #212842;
@@ -73,10 +73,10 @@
   --accent-stone: #7A8194;
 
   /* Semantic UI Bindings */
-  --accent-coral: #D9531E;          /* Terracota BrickTech para acentos primarios */
-  --accent-coral-hover: #BF4414;    /* Terracota hover */
-  --accent-coral-glow: rgba(217, 83, 30, 0.35);
-  --accent-coral-soft: rgba(217, 83, 30, 0.12);
+  --accent-coral: #C85A32;          /* Terracota para acentos primarios dinámicos */
+  --accent-coral-hover: #B24823;    /* Terracota hover */
+  --accent-coral-glow: rgba(200, 90, 50, 0.3);
+  --accent-coral-soft: rgba(200, 90, 50, 0.12);
 
   --accent-yellow: #D5C4AD;
   --accent-yellow-glow: rgba(213, 196, 173, 0.6);
@@ -117,7 +117,7 @@
 html, body {
   width: 100%;
   height: 100%;
-  overflow: hidden; /* scenes scroll individually via .slide-scene overflow-y:auto */
+  overflow: hidden;
   background-color: var(--bg-main);
   color: var(--text-primary);
   font-family: var(--font-body);
@@ -139,113 +139,10 @@ html, body {
 }
 
 /* --------------------------------------------------------------------------
-   3. Floating Top Header: BrickTech Brand & Team Badge
+   3. Floating Header (Eliminado por completo para una UI limpia y minimalista)
    -------------------------------------------------------------------------- */
 .smart-header {
   display: none !important;
-}
-
-.bricktech-top-header {
-  position: fixed;
-  top: 22px;
-  right: 32px;
-  z-index: 180;
-  display: flex;
-  align-items: center;
-  gap: 16px;
-  pointer-events: auto;
-}
-
-.header-left-pill {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-  padding: 6px 14px;
-  border-radius: var(--radius-pill);
-  background: rgba(250, 247, 242, 0.94);
-  border: 1px solid var(--border-card);
-  backdrop-filter: blur(16px);
-  box-shadow: 0 4px 16px rgba(29, 61, 111, 0.08);
-}
-
-.header-project-tag {
-  font-family: var(--font-mono);
-  font-size: 0.72rem;
-  font-weight: 700;
-  color: var(--color-navy);
-  letter-spacing: 0.06em;
-}
-
-.header-logo-container {
-  display: flex;
-  align-items: center;
-  gap: 14px;
-  padding: 6px 16px 6px 18px;
-  border-radius: var(--radius-pill);
-  background: rgba(255, 255, 255, 0.94);
-  border: 1.5px solid var(--border-card);
-  backdrop-filter: blur(20px);
-  box-shadow: 0 10px 28px -6px rgba(29, 61, 111, 0.14), 0 0 0 1px rgba(255, 255, 255, 0.8) inset;
-  transition: all 0.3s var(--ease-expo);
-}
-
-.header-logo-container:hover {
-  transform: translateY(-2px);
-  border-color: var(--accent-terracotta);
-  box-shadow: 0 14px 34px -6px rgba(217, 83, 30, 0.25);
-}
-
-.header-org-info {
-  display: flex;
-  flex-direction: column;
-  text-align: right;
-}
-
-.header-company-name {
-  font-family: var(--font-display);
-  font-size: 0.82rem;
-  font-weight: 800;
-  color: var(--color-navy);
-  letter-spacing: -0.01em;
-  line-height: 1.2;
-}
-
-.header-sub-tag {
-  font-family: var(--font-mono);
-  font-size: 0.65rem;
-  color: var(--accent-terracotta);
-  font-weight: 700;
-  letter-spacing: 0.04em;
-}
-
-.header-logo-badge {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.header-logo-img {
-  height: 36px;
-  width: auto;
-  object-fit: contain;
-  filter: drop-shadow(0 2px 6px rgba(217, 83, 30, 0.25));
-}
-
-@media (max-width: 860px) {
-  .bricktech-top-header {
-    top: 14px;
-    right: 14px;
-    gap: 8px;
-  }
-  .header-left-pill {
-    display: none;
-  }
-  .header-logo-container {
-    padding: 4px 12px;
-  }
-  .header-logo-img {
-    height: 28px;
-  }
 }
 
 /* --------------------------------------------------------------------------
@@ -292,17 +189,15 @@ html, body {
   overflow: visible;
 }
 
-.nav-eye-svg,
-.nav-brick-svg {
+.nav-eye-svg {
   width: 58px;
   height: 38px;
   overflow: visible;
   transition: transform 0.35s var(--ease-expo);
 }
 
-/* Ladrillo e indicador en reposo cerrado / salida */
-.nav-eye-btn .eye-closed-group,
-.nav-brick-btn .brick-idle-group {
+/* Ojo en reposo cerrado */
+.nav-eye-btn .eye-closed-group {
   transition: opacity 0.3s ease, transform 0.35s var(--ease-expo);
   transform-origin: 27px 18px;
   opacity: 1;
@@ -314,13 +209,12 @@ html, body {
   stroke-width: 2.8;
 }
 
-/* Ladrillo e indicador activo / entrada */
-.nav-eye-btn .eye-open-group,
-.nav-brick-btn .brick-active-group {
+/* Ojo abierto dinámico */
+.nav-eye-btn .eye-open-group {
   transition: opacity 0.35s ease, transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
   transform-origin: 27px 18px;
   opacity: 0;
-  transform: scaleY(0.7) scaleX(0.7) translateY(4px);
+  transform: scaleY(0.12) scaleX(0.7);
 }
 
 .nav-eye-btn .eye-sclera {
@@ -344,8 +238,7 @@ html, body {
   fill: var(--color-navy-deep);
 }
 
-.nav-eye-btn .eye-num-text,
-.nav-brick-btn .brick-num-text {
+.nav-eye-btn .eye-num-text {
   font-family: var(--font-mono);
   font-size: 10px;
   font-weight: 800;
@@ -355,57 +248,9 @@ html, body {
   letter-spacing: -0.02em;
 }
 
-/* ==========================================================================
-   ANIMACIONES CINEMÁTICAS DE ENTRADA Y SALIDA DEL LADRILLO EN EL SELECTOR
-   ========================================================================== */
-@keyframes brickPopEntrance {
-  0% {
-    transform: translateY(-14px) scale(0.65) rotate(-4deg);
-    opacity: 0;
-    filter: drop-shadow(0 0 0 rgba(200, 90, 50, 0));
-  }
-  65% {
-    transform: translateY(2px) scale(1.15) rotate(1deg);
-    opacity: 1;
-    filter: drop-shadow(0 6px 14px rgba(200, 90, 50, 0.45));
-  }
-  100% {
-    transform: translateY(0) scale(1.08) rotate(0deg);
-    opacity: 1;
-    filter: drop-shadow(0 4px 10px rgba(200, 90, 50, 0.3));
-  }
-}
-
-@keyframes brickPopExit {
-  0% {
-    transform: translateY(0) scale(1.08) rotate(0deg);
-    opacity: 1;
-  }
-  30% {
-    transform: translateY(-4px) scale(1.02);
-  }
-  100% {
-    transform: translateY(12px) scale(0.7) rotate(3deg);
-    opacity: 0;
-  }
-}
-
-/* Clases dinámicas aplicadas durante la navegación */
-.nav-brick-item.anim-entrance .brick-active-group,
-.nav-eye-item.anim-entrance .eye-open-group {
-  animation: brickPopEntrance 0.52s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
-}
-
-.nav-brick-item.anim-exit .brick-active-group,
-.nav-eye-item.anim-exit .eye-open-group {
-  animation: brickPopExit 0.38s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-}
-
-/* HOVER Y ACTIVO: APERTURA Y ENTRADA DEL LADRILLO */
+/* HOVER Y ACTIVO: APERTURA CINEMATOGRÁFICA DEL OJO */
 .nav-eye-btn:hover,
-.nav-eye-item.active .nav-eye-btn,
-.nav-brick-btn:hover,
-.nav-brick-item.active .nav-brick-btn {
+.nav-eye-item.active .nav-eye-btn {
   background: #FFFFFF;
   border-color: var(--color-navy);
   box-shadow: 0 8px 24px rgba(33, 40, 66, 0.16);
@@ -413,64 +258,54 @@ html, body {
 }
 
 .nav-eye-btn:hover .nav-eye-svg,
-.nav-eye-item.active .nav-eye-svg,
-.nav-brick-btn:hover .nav-brick-svg,
-.nav-brick-item.active .nav-brick-svg {
+.nav-eye-item.active .nav-eye-svg {
   transform: scale(1.08);
 }
 
 .nav-eye-btn:hover .eye-closed-group,
-.nav-eye-item.active .eye-closed-group,
-.nav-brick-btn:hover .brick-idle-group,
-.nav-brick-item.active .brick-idle-group {
+.nav-eye-item.active .eye-closed-group {
   opacity: 0;
-  transform: scale(0.65) translateY(-6px);
+  transform: scaleY(0.05);
 }
 
 .nav-eye-btn:hover .eye-open-group,
-.nav-eye-item.active .eye-open-group,
-.nav-brick-btn:hover .brick-active-group,
-.nav-brick-item.active .brick-active-group {
+.nav-eye-item.active .eye-open-group {
   opacity: 1;
-  transform: scale(1.08) translateY(0);
+  transform: scaleY(1) scaleX(1);
 }
 
-/* Resaltado del ladrillo activo */
-.nav-eye-item.active .nav-eye-btn,
-.nav-brick-item.active .nav-brick-btn {
+/* Resaltado del ojo activo */
+.nav-eye-item.active .nav-eye-btn {
   border-color: var(--color-navy);
   box-shadow: 0 10px 28px rgba(33, 40, 66, 0.22), 0 0 0 2px var(--color-navy);
   transform: translateX(10px) scale(1.06);
 }
 
-.nav-eye-item.active::before,
-.nav-brick-item.active::before {
+.nav-eye-item.active::before {
   content: '';
   position: absolute;
   left: -8px;
   top: 50%;
   transform: translateY(-50%);
-  width: 5px;
-  height: 28px;
+  width: 4px;
+  height: 26px;
   border-radius: 4px;
   background: var(--accent-terracotta, #C85A32);
-  box-shadow: 0 0 12px rgba(200, 90, 50, 0.7);
+  box-shadow: 0 0 10px rgba(200, 90, 50, 0.6);
 }
 
 .nav-eye-item.active .nav-eye-btn .eye-iris {
   filter: drop-shadow(0 0 4px rgba(33, 40, 66, 0.35));
 }
 
-.nav-eye-item.active .nav-eye-btn .eye-num-text,
-.nav-brick-item.active .nav-brick-btn .brick-num-text {
+.nav-eye-item.active .nav-eye-btn .eye-num-text {
   fill: #FFFFFF;
   font-size: 10.5px;
   font-weight: 800;
 }
 
 /* Etiqueta tooltip lateral */
-.nav-eye-label,
-.nav-brick-label {
+.nav-eye-label {
   position: absolute;
   left: 88px;
   padding: 8px 18px;
@@ -490,11 +325,9 @@ html, body {
   border: 1px solid rgba(255, 255, 255, 0.12);
 }
 
-.nav-eye-item:hover .nav-eye-label,
-.nav-brick-item:hover .nav-brick-label {
+.nav-eye-item:hover .nav-eye-label {
   opacity: 1;
   transform: translateX(0);
-}
 }
 
 /* --------------------------------------------------------------------------
@@ -574,17 +407,11 @@ html, body {
   margin: 0 auto;
 }
 
-.intro-grand-eye-svg,
-.intro-grand-brick-svg {
+.intro-grand-eye-svg {
   width: 100%;
   height: auto;
   overflow: visible;
-  filter: drop-shadow(0 24px 48px rgba(0, 0, 0, 0.55));
-}
-
-#intro-brick-group {
-  transform-origin: 270px 180px;
-  will-change: transform, opacity;
+  filter: drop-shadow(0 20px 40px rgba(0, 0, 0, 0.45));
 }
 
 .intro-lash-flyer {
@@ -858,29 +685,13 @@ html, body {
   width: 100%;
   height: 100%;
   display: flex;
-  align-items: flex-start;
+  align-items: center;
   justify-content: center;
   padding: 40px 70px 40px 140px;
   visibility: hidden;
   opacity: 0;
   transform: scale(0.96) translateY(24px);
   will-change: transform, opacity, filter;
-  overflow-y: auto;
-  overflow-x: hidden;
-  /* Custom scrollbar subtle */
-  scrollbar-width: thin;
-  scrollbar-color: rgba(217, 83, 30, 0.25) transparent;
-}
-
-.slide-scene::-webkit-scrollbar {
-  width: 4px;
-}
-.slide-scene::-webkit-scrollbar-track {
-  background: transparent;
-}
-.slide-scene::-webkit-scrollbar-thumb {
-  background: rgba(217, 83, 30, 0.3);
-  border-radius: 4px;
 }
 
 .slide-scene.active {
@@ -893,13 +704,11 @@ html, body {
 .scene-inner {
   width: 100%;
   max-width: 1360px;
-  min-height: 100%;
+  height: 100%;
   display: flex;
   flex-direction: column;
   justify-content: center;
   position: relative;
-  padding-top: 20px;
-  padding-bottom: 20px;
 }
 
 /* --------------------------------------------------------------------------
@@ -1631,19 +1440,6 @@ html, body {
   background: var(--caviar-black);
   color: var(--cream);
   border-color: var(--caviar-black);
-  transform: translateY(-2px);
-}
-
-#btn-3d-dwg {
-  background: rgba(200, 90, 50, 0.14);
-  border-color: rgba(200, 90, 50, 0.45);
-  color: var(--accent-terracotta, #C85A32);
-}
-
-#btn-3d-dwg:hover {
-  background: var(--accent-terracotta, #C85A32);
-  color: #FAF7F2;
-  border-color: var(--accent-terracotta, #C85A32);
   transform: translateY(-2px);
 }
 

@@ -18,8 +18,8 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 /* ==========================================================================
-   0. INTRO CINEMATOGRÁFICA EN PANTALLA COMPLETA: LADRILLO ISOMÉTRICO & PRENSA
-   Inspirado en la Máquina Compactadora de Ladrillos y Diseño Editorial
+   0. INTRO CINEMATOGRÁFICA EN PANTALLA COMPLETA: GRAN OJO & PESTAÑAS VOLADORAS
+   Inspirado en A24 (Ravi Klaassens) y Content Architecture
    ========================================================================== */
 function initEyeIntroAnimation() {
   const introCurtain = document.getElementById('intro-eye-curtain');
@@ -34,9 +34,7 @@ function initEyeIntroAnimation() {
   const introStage = document.getElementById('intro-eye-stage');
   const introContainer = document.querySelector('.intro-container');
   const skipBtn = document.getElementById('intro-skip-btn');
-  const lateralEyes = document.querySelectorAll('.nav-eye-item, .nav-brick-item');
-  const brickGroup = document.getElementById('intro-brick-group');
-  const lashFlyers = document.querySelectorAll('.intro-lash-flyer');
+  const lateralEyes = document.querySelectorAll('.nav-eye-item');
 
   let hasEnded = false;
 
@@ -44,7 +42,7 @@ function initEyeIntroAnimation() {
     if (hasEnded) return;
     hasEnded = true;
     if (typeof gsap !== 'undefined') {
-      gsap.killTweensOf(['#intro-eye-curtain', '#intro-upper-lid', '#intro-lower-lid', '#intro-iris', '#intro-pupil', '#intro-iris-zoom-circle', '#intro-eye-stage', '#intro-brick-group', '.intro-container']);
+      gsap.killTweensOf(['#intro-eye-curtain', '#intro-upper-lid', '#intro-lower-lid', '#intro-iris', '#intro-pupil', '#intro-iris-zoom-circle', '#intro-eye-stage', '.intro-container']);
       gsap.to(introCurtain, {
         opacity: 0,
         duration: 0.45,
@@ -85,7 +83,7 @@ function initEyeIntroAnimation() {
     return;
   }
 
-  // Posicionar selectores de ladrillos laterales inicialmente para aparición limpia y sin duplicaciones
+  // Posicionar ojos laterales inicialmente para aparición limpia y sin duplicaciones
   gsap.set(lateralEyes, { opacity: 0, x: -20, scale: 0.9 });
 
   const introTimeline = gsap.timeline({
@@ -99,62 +97,54 @@ function initEyeIntroAnimation() {
     }
   });
 
-  // 1. Entrada de Rayos de Proyección Isométrica y Formación del Ladrillo
-  if (brickGroup) {
-    gsap.set(brickGroup, { scale: 0.8, opacity: 0, transformOrigin: '270px 180px' });
-  }
-
+  // 1. Apertura Cinemática de Párpados
   introTimeline
-    .fromTo(lashFlyers, 
-      { strokeDashoffset: 40, opacity: 0 },
-      { strokeDashoffset: 0, opacity: 0.8, duration: 0.6, stagger: 0.08, ease: 'power2.out' },
-      0.1
+    .to(upperLid, {
+      attr: { d: 'M 20 170 Q 270 20 520 170 L 520 0 L 20 0 Z' },
+      duration: 1.0,
+      ease: 'power3.inOut'
+    }, 0.2)
+    .to(lowerLid, {
+      attr: { d: 'M 20 170 Q 270 320 520 170 L 520 340 L 20 340 Z' },
+      duration: 1.0,
+      ease: 'power3.inOut'
+    }, 0.2)
+    // 2. Pupila e Iris: Enfoque Sensorial Dinámico
+    .fromTo([grandIris, grandPupil], 
+      { scale: 0.88, transformOrigin: '270px 170px' },
+      { scale: 1.08, transformOrigin: '270px 170px', duration: 0.7, ease: 'back.out(1.4)' },
+      0.35
     )
-    // 2. Golpe de Compresión Mecánica: El Ladrillo Isométrico se Materializa y Compacta
-    .to(brickGroup, {
-      scale: 1,
-      opacity: 1,
-      duration: 0.85,
-      ease: 'back.out(2.2)'
-    }, 0.25)
-    // Simulación de prensado y pulso de compactación
-    .to(brickGroup, {
-      scaleY: 0.94,
-      duration: 0.12,
-      ease: 'power2.in',
-      yoyo: true,
-      repeat: 1
-    }, 0.85)
-    // Destello de compactación central
-    .fromTo([grandIris, grandPupilCenter], 
-      { opacity: 0, scale: 0.4 }, 
-      { opacity: 0.8, scale: 1.4, duration: 0.4, ease: 'power2.out' }, 
-      0.88
+    .fromTo(grandPupilCenter, 
+      { opacity: 0, scale: 0 }, 
+      { opacity: 1, scale: 1.3, duration: 0.6, ease: 'power2.out' }, 
+      0.5
     )
-    // 3. TRANSICIÓN CINEMÁTICA: ZOOM SUAVE CREMA (#FAF7F2) QUE REVELA LA PÁGINA
+    // 3. TRANSICIÓN CINEMÁTICA: ZOOM TIPO "IRIS DE OJO" CREMA (#FAF7F2)
+    // El iris se expande exponencialmente desde el centro exacto cubriendo la pantalla con #FAF7F2
     .to(irisZoomCircle, {
       scale: 130,
       duration: 1.15,
       ease: 'power4.inOut'
-    }, 1.05)
+    }, 0.95)
     .to(introStage, {
-      scale: 2.8,
-      opacity: 0.1,
-      transformOrigin: '270px 180px',
+      scale: 3.2,
+      opacity: 0.15,
+      transformOrigin: '270px 170px',
       duration: 0.95,
       ease: 'power3.in'
-    }, 1.05)
+    }, 0.95)
     .to(introContainer, {
       opacity: 0,
       duration: 0.6,
       ease: 'power2.out'
-    }, 1.15)
+    }, 1.1)
     .to(introCurtain, {
       opacity: 0,
       duration: 0.35,
       ease: 'power2.out'
-    }, 1.85)
-    // 4. Entrada elegante del selector de ladrillos lateral
+    }, 1.8)
+    // 4. Entrada suave y elegante de la guía lateral sin duplicados
     .to(lateralEyes, {
       opacity: 1,
       x: 0,
@@ -162,7 +152,7 @@ function initEyeIntroAnimation() {
       duration: 0.6,
       stagger: 0.08,
       ease: 'back.out(1.4)'
-    }, 1.75);
+    }, 1.7);
 }
 
 function triggerHeroReveal() {
@@ -209,61 +199,495 @@ function initTelemetryLiveTicker() {
    1. CONTEXTUAL SLIDE TRANSITION MANAGER
    ========================================================================== */
 let currentSlideIndex = 0;
+let isTransitioning = false;
 
 function initContextualDeck() {
   const scenes = document.querySelectorAll('.slide-scene');
-  const navItems = document.querySelectorAll('.nav-eye-item, .nav-brick-item');
-  const deck = document.getElementById('viewport-deck');
+  const navEyes = document.querySelectorAll('.nav-eye-item, .nav-dot-item');
+  const advanceBtn = document.getElementById('advance-btn');
+  const progressFill = document.getElementById('progress-ring-fill');
+  const advanceCounter = document.getElementById('advance-counter');
+  const advanceIcon = document.getElementById('advance-icon');
 
-  if (!deck || scenes.length === 0) return;
+  if (scenes.length === 0) return;
 
   const totalScenes = scenes.length;
+  const circumference = 2 * Math.PI * 26; // r = 26 in SVG
 
-  // goToSlide: scroll nativo suave a la escena objetivo
+  if (progressFill) {
+    progressFill.style.strokeDasharray = `${circumference}`;
+    progressFill.style.strokeDashoffset = `${circumference}`;
+  }
+
+  // Set initial slide active
+  scenes[0].classList.add('active');
+  if (typeof gsap !== 'undefined') {
+    gsap.set(scenes[0], { opacity: 1, scale: 1, y: 0, filter: 'blur(0px)', visibility: 'visible' });
+  }
+
+  // Router to specific contextual transition
   window.goToSlide = function(targetIndex) {
-    if (targetIndex < 0 || targetIndex >= totalScenes) return;
-    scenes[targetIndex].scrollIntoView({ behavior: 'smooth', block: 'start' });
+    if (isTransitioning || targetIndex === currentSlideIndex || targetIndex < 0 || targetIndex >= totalScenes) {
+      return;
+    }
+
+    isTransitioning = true;
+    const fromIndex = currentSlideIndex;
+    const outgoing = scenes[fromIndex];
+    const incoming = scenes[targetIndex];
+    currentSlideIndex = targetIndex;
+
+    // Update UI Eye Indicators
+    navEyes.forEach((item, idx) => {
+      if (idx === targetIndex) item.classList.add('active');
+      else item.classList.remove('active');
+    });
+
+    if (progressFill) {
+      const progress = targetIndex / (totalScenes - 1);
+      progressFill.style.strokeDashoffset = circumference - progress * circumference;
+    }
+
+    if (advanceCounter) {
+      advanceCounter.textContent = `0${targetIndex + 1} / 0${totalScenes}`;
+    }
+
+    if (advanceIcon) {
+      advanceIcon.style.transform = targetIndex === totalScenes - 1 ? 'rotate(180deg)' : 'rotate(0deg)';
+    }
+
+    // DISPATCH UNIQUE CONTEXTUAL TRANSITION
+    if (fromIndex === 0 && targetIndex === 1) {
+      transitionHeroTo3D(outgoing, incoming);
+    } else if (fromIndex === 1 && targetIndex === 2) {
+      transition3DToSimulator(outgoing, incoming);
+    } else if (fromIndex === 2 && targetIndex === 3) {
+      transitionSimulatorToBento(outgoing, incoming);
+    } else if (fromIndex === 3 && targetIndex === 4) {
+      transitionBentoToVision(outgoing, incoming);
+    } else {
+      // General or Reverse Contextual Fallback Transition
+      transitionGeneral(outgoing, incoming, targetIndex > fromIndex ? 1 : -1);
+    }
   };
 
-  // Actualizar navegación lateral con IntersectionObserver
-  const observer = new IntersectionObserver((entries) => {
-    entries.forEach(entry => {
-      if (entry.isIntersecting && entry.intersectionRatio >= 0.5) {
-        const idx = Array.from(scenes).indexOf(entry.target);
-        if (idx < 0) return;
-        currentSlideIndex = idx;
-        navItems.forEach((item, i) => {
-          item.classList.remove('anim-entrance', 'anim-exit');
-          if (i === idx) {
-            item.classList.add('active');
-            item.classList.add('anim-entrance');
-            setTimeout(() => item.classList.remove('anim-entrance'), 500);
-          } else {
-            item.classList.remove('active');
-          }
-        });
+  /* ------------------------------------------------------------------------
+     TRANSICIÓN 1: De Diapositiva 1 (Hero) a Diapositiva 2 (Render 3D)
+     Onda de radar expansiva que cubre la pantalla y revela el 3D
+     ------------------------------------------------------------------------ */
+  function transitionHeroTo3D(outgoing, incoming) {
+    const layer = document.getElementById('trans-radar-scan');
+    const disc = document.querySelector('.trans-radar-disc');
+    const wave = document.querySelector('.trans-radar-wave-ring');
+
+    if (!layer || typeof gsap === 'undefined') {
+      transitionGeneral(outgoing, incoming, 1);
+      return;
+    }
+
+    const tl = gsap.timeline({
+      onComplete: () => {
+        outgoing.classList.remove('active');
+        incoming.classList.add('active');
+        isTransitioning = false;
       }
     });
-  }, { threshold: 0.5, root: deck });
 
-  scenes.forEach(scene => observer.observe(scene));
+    tl.set(layer, { visibility: 'visible', opacity: 1 })
+      .set(disc, { scale: 0, opacity: 0.95 })
+      .set(wave, { scale: 0, opacity: 1 })
+      // Onda radar expansiva desde el Hero
+      .to(disc, { scale: 1.6, duration: 0.65, ease: 'power2.inOut' }, 0)
+      .to(wave, { scale: 1.9, opacity: 0, duration: 0.8, ease: 'power2.out' }, 0.05)
+      .to(outgoing, { opacity: 0, scale: 0.94, filter: 'blur(12px)', duration: 0.45, ease: 'power2.in' }, 0)
+      // Cambio en el ápice de la onda
+      .add(() => {
+        outgoing.style.visibility = 'hidden';
+        incoming.style.visibility = 'visible';
+      }, 0.5)
+      // Revelado del modelo 3D y especificaciones
+      .fromTo(incoming, {
+        opacity: 0,
+        scale: 1.06,
+        filter: 'blur(14px)'
+      }, {
+        opacity: 1,
+        scale: 1,
+        filter: 'blur(0px)',
+        duration: 0.65,
+        ease: 'power3.out'
+      }, 0.5)
+      // Disolución suave del radar
+      .to(layer, {
+        opacity: 0,
+        duration: 0.35,
+        ease: 'power1.out',
+        onComplete: () => { layer.style.visibility = 'hidden'; }
+      }, 0.65)
+      .from(incoming.querySelectorAll('.spec-card, .viewer-3d-stage, .kicker-pill, .heading-section, .lead-editorial'), {
+        y: 20,
+        opacity: 0,
+        stagger: 0.06,
+        duration: 0.6,
+        ease: 'power2.out'
+      }, 0.6);
+  }
 
-  // Clics en la nav lateral
-  navItems.forEach((item, index) => {
-    item.addEventListener('click', () => window.goToSlide(index));
+  /* ------------------------------------------------------------------------
+     TRANSICIÓN 2: De Diapositiva 2 (Render 3D) a Diapositiva 3 (Simulador)
+     Compresión horizontal en haz de luz y apertura de cortina deslizante
+     ------------------------------------------------------------------------ */
+  function transition3DToSimulator(outgoing, incoming) {
+    const layer = document.getElementById('trans-beam-shutter');
+    const beam = document.querySelector('.trans-light-beam');
+    const curtainL = document.querySelector('.trans-slit-curtain-left');
+    const curtainR = document.querySelector('.trans-slit-curtain-right');
+
+    if (!layer || typeof gsap === 'undefined') {
+      transitionGeneral(outgoing, incoming, 1);
+      return;
+    }
+
+    const tl = gsap.timeline({
+      onComplete: () => {
+        outgoing.classList.remove('active');
+        incoming.classList.add('active');
+        isTransitioning = false;
+      }
+    });
+
+    tl.set(layer, { visibility: 'visible', opacity: 1 })
+      .set(beam, { opacity: 0, scaleY: 0, scaleX: 1 })
+      .set(curtainL, { x: 0 })
+      .set(curtainR, { x: 0 })
+      // 1. El 3D se comprime horizontalmente hacia el centro
+      .to(outgoing, {
+        scaleX: 0.02,
+        opacity: 0.5,
+        filter: 'blur(8px)',
+        duration: 0.45,
+        ease: 'power3.in'
+      }, 0)
+      // 2. Aparece el haz de luz vertical brillante en el centro
+      .to(beam, {
+        opacity: 1,
+        scaleY: 1.2,
+        duration: 0.35,
+        ease: 'expo.out'
+      }, 0.35)
+      // 3. Switch de diapositivas detrás del haz
+      .add(() => {
+        outgoing.style.visibility = 'hidden';
+        incoming.style.visibility = 'visible';
+      }, 0.48)
+      // 4. El haz se ensancha y el telón/persiana se abre hacia los costados
+      .to(beam, {
+        scaleX: 60,
+        opacity: 0,
+        duration: 0.45,
+        ease: 'power2.inOut'
+      }, 0.5)
+      .to(curtainL, { x: '-100%', duration: 0.55, ease: 'power3.inOut' }, 0.5)
+      .to(curtainR, { x: '100%', duration: 0.55, ease: 'power3.inOut' }, 0.5)
+      .fromTo(incoming, {
+        opacity: 0,
+        scale: 0.96
+      }, {
+        opacity: 1,
+        scale: 1,
+        duration: 0.6,
+        ease: 'power2.out'
+      }, 0.52)
+      .to(layer, {
+        opacity: 0,
+        duration: 0.2,
+        onComplete: () => { layer.style.visibility = 'hidden'; }
+      }, 0.9);
+  }
+
+  /* ------------------------------------------------------------------------
+     TRANSICIÓN 3: De Diapositiva 3 (Simulador) a Diapositiva 4 (Bento Grid)
+     El obstáculo amarillo vibra, estalla en partículas y ensambla el Bento Grid
+     ------------------------------------------------------------------------ */
+  function transitionSimulatorToBento(outgoing, incoming) {
+    const burstContainer = document.getElementById('trans-particle-burst');
+    const simCanvas = document.getElementById('canvas-sim-2d');
+
+    if (!burstContainer || typeof gsap === 'undefined') {
+      transitionGeneral(outgoing, incoming, 1);
+      return;
+    }
+
+    // Calcular la posición del obstáculo amarillo en pantalla
+    let originX = window.innerWidth * 0.72;
+    let originY = window.innerHeight * 0.5;
+
+    if (simCanvas) {
+      const rect = simCanvas.getBoundingClientRect();
+      originX = rect.left + 330;
+      originY = rect.top + rect.height / 2;
+    }
+
+    // Crear partículas dinámicas luminosas (Caviar & Cream)
+    burstContainer.innerHTML = '';
+    const particleCount = 32;
+    const particles = [];
+    const luxuryColors = ['#181818', '#DCCFC2', '#A4A09A', '#333333'];
+
+    for (let i = 0; i < particleCount; i++) {
+      const p = document.createElement('div');
+      p.className = 'burst-particle';
+      const size = Math.random() * 12 + 6;
+      p.style.width = `${size}px`;
+      p.style.height = `${size}px`;
+      p.style.left = `${originX}px`;
+      p.style.top = `${originY}px`;
+      const color = luxuryColors[i % luxuryColors.length];
+      p.style.background = color;
+      p.style.boxShadow = `0 0 16px ${color === '#181818' ? 'rgba(24, 24, 24, 0.4)' : 'rgba(220, 207, 194, 0.85)'}`;
+      burstContainer.appendChild(p);
+      particles.push(p);
+    }
+
+    const bentoCards = incoming.querySelectorAll('.bento-card');
+
+    const tl = gsap.timeline({
+      onComplete: () => {
+        outgoing.classList.remove('active');
+        incoming.classList.add('active');
+        burstContainer.innerHTML = '';
+        burstContainer.style.visibility = 'hidden';
+        isTransitioning = false;
+      }
+    });
+
+    tl.set(burstContainer, { visibility: 'visible', opacity: 1 })
+      // 1. El simulador hace flash hacia atrás
+      .to(outgoing, {
+        scale: 0.94,
+        opacity: 0,
+        filter: 'blur(10px)',
+        duration: 0.4,
+        ease: 'power2.in'
+      }, 0)
+      // 2. Las partículas amarillas y terracota explotan hacia las 4 esquinas de la pantalla
+      .to(particles, {
+        x: () => (Math.random() - 0.5) * window.innerWidth * 0.85,
+        y: () => (Math.random() - 0.5) * window.innerHeight * 0.75,
+        scale: () => Math.random() * 2 + 1,
+        duration: 0.55,
+        stagger: 0.01,
+        ease: 'power3.out'
+      }, 0.1)
+      .add(() => {
+        outgoing.style.visibility = 'hidden';
+        incoming.style.visibility = 'visible';
+      }, 0.4)
+      // 3. Las 4 tarjetas del Bento Grid se ordenan y aparecen volando desde las partículas
+      .fromTo(incoming, {
+        opacity: 0
+      }, {
+        opacity: 1,
+        duration: 0.5
+      }, 0.45)
+      .fromTo(bentoCards, {
+        scale: 0.82,
+        y: 40,
+        opacity: 0,
+        filter: 'blur(8px)'
+      }, {
+        scale: 1,
+        y: 0,
+        opacity: 1,
+        filter: 'blur(0px)',
+        stagger: 0.08,
+        duration: 0.65,
+        ease: 'power3.out'
+      }, 0.48)
+      // 4. Las partículas se disuelven suavemente
+      .to(particles, {
+        opacity: 0,
+        scale: 0.2,
+        duration: 0.35,
+        ease: 'power1.out'
+      }, 0.6);
+  }
+
+  /* ------------------------------------------------------------------------
+     TRANSICIÓN 4: De Diapositiva 4 (Bento Grid) a Diapositiva 5 (Visión 2.0)
+     Desenfoque progresivo de profundidad y cortina ascendente verde salvia
+     ------------------------------------------------------------------------ */
+  function transitionBentoToVision(outgoing, incoming) {
+    const layer = document.getElementById('trans-sage-curtain');
+    const sheet = document.querySelector('.sage-curtain-sheet');
+    const bentoCards = outgoing.querySelectorAll('.bento-card');
+
+    if (!layer || typeof gsap === 'undefined') {
+      transitionGeneral(outgoing, incoming, 1);
+      return;
+    }
+
+    const tl = gsap.timeline({
+      onComplete: () => {
+        outgoing.classList.remove('active');
+        incoming.classList.add('active');
+        isTransitioning = false;
+      }
+    });
+
+    tl.set(layer, { visibility: 'visible', opacity: 1 })
+      .set(sheet, { y: '100%' })
+      // 1. Las tarjetas del Bento Grid se deslizan hacia el fondo con desenfoque de profundidad
+      .to(bentoCards, {
+        scale: 0.85,
+        y: -30,
+        opacity: 0,
+        filter: 'blur(14px)',
+        stagger: 0.04,
+        duration: 0.45,
+        ease: 'power2.in'
+      }, 0)
+      .to(outgoing, { opacity: 0, duration: 0.4 }, 0.1)
+      // 2. La cortina verde salvia asciende como un velo luminoso desde abajo
+      .to(sheet, {
+        y: '0%',
+        duration: 0.55,
+        ease: 'power3.inOut'
+      }, 0.15)
+      .add(() => {
+        outgoing.style.visibility = 'hidden';
+        incoming.style.visibility = 'visible';
+      }, 0.5)
+      // 3. La cortina sigue subiendo hacia arriba, revelando Visión 2.0
+      .to(sheet, {
+        y: '-100%',
+        duration: 0.55,
+        ease: 'power3.inOut'
+      }, 0.5)
+      .fromTo(incoming, {
+        opacity: 0,
+        y: 35,
+        filter: 'blur(8px)'
+      }, {
+        opacity: 1,
+        y: 0,
+        filter: 'blur(0px)',
+        duration: 0.6,
+        ease: 'power3.out'
+      }, 0.55)
+      .from(incoming.querySelectorAll('.tab-btn, .vision-display-area'), {
+        y: 20,
+        opacity: 0,
+        stagger: 0.06,
+        duration: 0.5,
+        ease: 'power2.out'
+      }, 0.6)
+      .to(layer, {
+        opacity: 0,
+        duration: 0.2,
+        onComplete: () => { layer.style.visibility = 'hidden'; }
+      }, 0.9);
+  }
+
+  /* ------------------------------------------------------------------------
+     TRANSICIÓN GENERAL / INVERSA CONTEXTUAL
+     ------------------------------------------------------------------------ */
+  function transitionGeneral(outgoing, incoming, direction) {
+    if (typeof gsap !== 'undefined') {
+      const tl = gsap.timeline({
+        onComplete: () => {
+          outgoing.classList.remove('active');
+          incoming.classList.add('active');
+          isTransitioning = false;
+        }
+      });
+
+      tl.to(outgoing, {
+        y: direction > 0 ? -40 : 40,
+        scale: 0.94,
+        opacity: 0,
+        filter: 'blur(12px)',
+        duration: 0.4,
+        ease: 'power2.in'
+      }, 0)
+      .add(() => {
+        outgoing.style.visibility = 'hidden';
+        incoming.style.visibility = 'visible';
+      }, 0.38)
+      .fromTo(incoming, {
+        y: direction > 0 ? 40 : -40,
+        scale: 1.05,
+        opacity: 0,
+        filter: 'blur(12px)'
+      }, {
+        y: 0,
+        scale: 1,
+        opacity: 1,
+        filter: 'blur(0px)',
+        duration: 0.55,
+        ease: 'power3.out'
+      }, 0.38);
+    } else {
+      outgoing.classList.remove('active');
+      outgoing.style.visibility = 'hidden';
+      incoming.classList.add('active');
+      incoming.style.visibility = 'visible';
+      incoming.style.opacity = '1';
+      isTransitioning = false;
+    }
+  }
+
+  // Handle Lateral Eye Navigation Clicks
+  navEyes.forEach((eyeItem, index) => {
+    eyeItem.addEventListener('click', () => {
+      window.goToSlide(index);
+    });
   });
 
-  // Links internos tipo href="#scene-X"
+  // Handle Advance Floating Button Click
+  if (advanceBtn) {
+    advanceBtn.addEventListener('click', () => {
+      const nextIndex = (currentSlideIndex + 1) % totalScenes;
+      window.goToSlide(nextIndex);
+    });
+  }
+
+  // Links in Hero
   document.querySelectorAll('a[href^="#scene-"]').forEach(anchor => {
     anchor.addEventListener('click', (e) => {
       e.preventDefault();
-      const target = document.querySelector(anchor.getAttribute('href'));
-      if (target) target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      const href = anchor.getAttribute('href');
+      let targetIdx = 0;
+      if (href === '#scene-hero') targetIdx = 0;
+      else if (href === '#scene-engineering') targetIdx = 1;
+      else if (href === '#scene-simulator') targetIdx = 2;
+      else if (href === '#scene-architecture') targetIdx = 3;
+      else if (href === '#scene-vision') targetIdx = 4;
+      window.goToSlide(targetIdx);
     });
   });
 
-  // Teclado: flechas y espacio
+  // Mouse Wheel Navigation
+  let wheelCooldown = false;
+  window.addEventListener('wheel', (e) => {
+    if (window.innerWidth <= 860) return;
+    e.preventDefault();
+    if (wheelCooldown || isTransitioning) return;
+    if (Math.abs(e.deltaY) < 25) return;
+
+    wheelCooldown = true;
+    setTimeout(() => { wheelCooldown = false; }, 950);
+
+    if (e.deltaY > 0 && currentSlideIndex < totalScenes - 1) {
+      window.goToSlide(currentSlideIndex + 1);
+    } else if (e.deltaY < 0 && currentSlideIndex > 0) {
+      window.goToSlide(currentSlideIndex - 1);
+    }
+  }, { passive: false });
+
+  // Keyboard Navigation
   window.addEventListener('keydown', (e) => {
+    if (isTransitioning) return;
     if (e.key === 'ArrowDown' || e.key === 'PageDown' || e.key === ' ') {
       e.preventDefault();
       if (currentSlideIndex < totalScenes - 1) window.goToSlide(currentSlideIndex + 1);
@@ -272,11 +696,28 @@ function initContextualDeck() {
       if (currentSlideIndex > 0) window.goToSlide(currentSlideIndex - 1);
     }
   });
+
+  // Touch Swipe
+  let touchStartY = 0;
+  window.addEventListener('touchstart', (e) => {
+    if (e.touches.length === 1) touchStartY = e.touches[0].clientY;
+  }, { passive: true });
+
+  window.addEventListener('touchend', (e) => {
+    if (window.innerWidth <= 860 || isTransitioning) return;
+    const diff = touchStartY - e.changedTouches[0].clientY;
+    if (Math.abs(diff) > 50) {
+      if (diff > 0 && currentSlideIndex < totalScenes - 1) {
+        window.goToSlide(currentSlideIndex + 1);
+      } else if (diff < 0 && currentSlideIndex > 0) {
+        window.goToSlide(currentSlideIndex - 1);
+      }
+    }
+  }, { passive: true });
 }
 
 /* ==========================================================================
-   2. THREE.JS 3D: MÁQUINA COMPACTADORA DE LADRILLOS EN VISTA ISOMÉTRICA
-   Modelo técnico interactivo con chasis de acero, tolva, pistón y ladrillo ecológico
+   2. THREE.JS 3D GLASSES VIEWER (Caviar Black & Soft Beige Titanium)
    ========================================================================== */
 function initThreeJsViewer() {
   const container = document.getElementById('canvas-3d-glasses');
@@ -291,10 +732,10 @@ function initThreeJsViewer() {
   const height = container.clientHeight || 500;
 
   const scene = new THREE.Scene();
-  scene.background = new THREE.Color(0xE6D7C4); // Beige Cálido (#E6D7C4)
+  scene.background = new THREE.Color(0xE6D7C4); // Beige (#E6D7C4)
 
-  const camera = new THREE.PerspectiveCamera(38, width / height, 0.1, 100);
-  camera.position.set(3.2, 2.6, 3.2);
+  const camera = new THREE.PerspectiveCamera(40, width / height, 0.1, 100);
+  camera.position.set(0, 0.35, 4.2);
 
   const renderer = new THREE.WebGLRenderer({ antialias: true, alpha: true });
   renderer.setSize(width, height);
@@ -303,326 +744,155 @@ function initThreeJsViewer() {
   renderer.shadowMap.type = THREE.PCFSoftShadowMap;
   container.appendChild(renderer.domElement);
 
-  // Iluminación de Estudio Industrial (Navy & Warm Beige)
-  const ambientLight = new THREE.AmbientLight(0xFFFFFF, 1.35);
+  // Warm Luxury Studio Lighting (Navy Blue & Beige)
+  const ambientLight = new THREE.AmbientLight(0xFFFFFF, 1.4);
   scene.add(ambientLight);
 
   const dirLight1 = new THREE.DirectionalLight(0xF4ECE1, 1.6);
-  dirLight1.position.set(5, 7, 5);
+  dirLight1.position.set(4, 5, 4);
   dirLight1.castShadow = true;
-  dirLight1.shadow.mapSize.width = 1024;
-  dirLight1.shadow.mapSize.height = 1024;
   scene.add(dirLight1);
 
-  const dirLight2 = new THREE.DirectionalLight(0xD5C4AD, 0.9);
-  dirLight2.position.set(-5, -2, -3);
+  const dirLight2 = new THREE.DirectionalLight(0xD5C4AD, 0.85); // Bounce Warm Beige
+  dirLight2.position.set(-4, -2, -2);
   scene.add(dirLight2);
 
-  const dirLight3 = new THREE.DirectionalLight(0x212842, 0.5);
-  dirLight3.position.set(2, -4, 4);
+  const dirLight3 = new THREE.DirectionalLight(0x212842, 0.45); // Subtle Navy Blue Rim
+  dirLight3.position.set(2, -3, 3);
   scene.add(dirLight3);
 
-  // Grupo Principal de la Máquina Compactadora
-  const machineGroup = new THREE.Group();
-  scene.add(machineGroup);
-  // Alias para mantener compatibilidad total con referencias internas
-  const glassesGroup = machineGroup;
+  // Glasses Main Group
+  const glassesGroup = new THREE.Group();
+  scene.add(glassesGroup);
 
-  // Materiales Industriales PBR (Paleta Navy Blue, Beige Titanio y Terracota)
-  const steelDarkMat = new THREE.MeshStandardMaterial({
-    color: 0x212842, // Acero Industrial Navy Blue
-    roughness: 0.28,
+  // Navy Blue & Beige Luxury Materials
+  const frameMaterial = new THREE.MeshStandardMaterial({
+    color: 0x212842, // Navy Blue Titanium
+    roughness: 0.22,
     metalness: 0.85
   });
 
-  const steelBrightMat = new THREE.MeshStandardMaterial({
-    color: 0xD5C4AD, // Columnas en Beige Titanio
-    roughness: 0.22,
+  const beigeAccentMat = new THREE.MeshStandardMaterial({
+    color: 0xD5C4AD, // Warm Beige Titanium
+    roughness: 0.25,
     metalness: 0.92
   });
 
-  const chromeMat = new THREE.MeshStandardMaterial({
-    color: 0xF5F2EA, // Vástago de pistón cromado espejo
+  const lensMaterial = new THREE.MeshPhysicalMaterial({
+    color: 0x161C2E, // Deep Navy tinted luxury lenses
+    transparent: true,
+    opacity: 0.46,
     roughness: 0.08,
-    metalness: 0.98
+    metalness: 0.2,
+    transmission: 0.68,
+    ior: 1.52
   });
 
-  const terracottaMat = new THREE.MeshStandardMaterial({
-    color: 0xD4622C, // Arcilla de Ladrillo Terracota (Imagen de referencia)
-    roughness: 0.85,
-    metalness: 0.04
+  const sensorMaterial = new THREE.MeshStandardMaterial({
+    color: 0x212842,
+    emissive: 0xE6D7C4,
+    emissiveIntensity: 0.45,
+    roughness: 0.2,
+    metalness: 0.9
   });
 
-  const terracottaHoleMat = new THREE.MeshStandardMaterial({
-    color: 0x9E3B13, // Sombra interior orificios ladrillo
-    roughness: 0.9,
-    metalness: 0.02
-  });
+  // Lenses & Rims
+  const lensRadiusX = 0.54;
+  const lensRadiusY = 0.45;
+  const lensGeo = new THREE.CylinderGeometry(lensRadiusX, lensRadiusX, 0.04, 32);
+  lensGeo.scale(1, 0.1, lensRadiusY / lensRadiusX);
 
-  const brassMat = new THREE.MeshStandardMaterial({
-    color: 0xC88A32, // Manómetro y acoples de bronce
-    roughness: 0.25,
-    metalness: 0.88
-  });
+  const leftLens = new THREE.Mesh(lensGeo, lensMaterial);
+  leftLens.rotation.x = Math.PI / 2;
+  leftLens.position.set(-0.7, 0, 0);
+  glassesGroup.add(leftLens);
 
-  const rubberHoseMat = new THREE.MeshStandardMaterial({
-    color: 0x161C2E,
-    roughness: 0.65,
-    metalness: 0.15
-  });
+  const leftRimGeo = new THREE.TorusGeometry(lensRadiusX, 0.04, 16, 42);
+  leftRimGeo.scale(1, lensRadiusY / lensRadiusX, 1);
+  const leftRim = new THREE.Mesh(leftRimGeo, frameMaterial);
+  leftRim.position.set(-0.7, 0, 0);
+  glassesGroup.add(leftRim);
 
-  /* ------------------------------------------------------------------------
-     1. BASE Y ESTRUCTURA DE ANCLAJE INDUSTRIAL
-     ------------------------------------------------------------------------ */
-  // Placa base estructural
-  const baseGeo = new THREE.BoxGeometry(2.1, 0.12, 1.5);
-  const baseMesh = new THREE.Mesh(baseGeo, steelDarkMat);
-  baseMesh.position.set(0, -1.05, 0);
-  baseMesh.receiveShadow = true;
-  machineGroup.add(baseMesh);
+  const rightLens = new THREE.Mesh(lensGeo, lensMaterial);
+  rightLens.rotation.x = Math.PI / 2;
+  rightLens.position.set(0.7, 0, 0);
+  glassesGroup.add(rightLens);
 
-  // Zapatas y pernos de fijación en las 4 esquinas
-  const footingOffsets = [
-    [-0.92, -0.62], [0.92, -0.62],
-    [-0.92, 0.62], [0.92, 0.62]
-  ];
-  footingOffsets.forEach(([fx, fz]) => {
-    const footGeo = new THREE.BoxGeometry(0.24, 0.06, 0.24);
-    const footMesh = new THREE.Mesh(footGeo, steelBrightMat);
-    footMesh.position.set(fx, -0.96, fz);
-    machineGroup.add(footMesh);
+  const rightRim = new THREE.Mesh(leftRimGeo, frameMaterial);
+  rightRim.position.set(0.7, 0, 0);
+  glassesGroup.add(rightRim);
 
-    const boltGeo = new THREE.CylinderGeometry(0.025, 0.025, 0.06, 12);
-    const boltMesh = new THREE.Mesh(boltGeo, chromeMat);
-    boltMesh.position.set(fx, -0.9, fz);
-    machineGroup.add(boltMesh);
-  });
-
-  /* ------------------------------------------------------------------------
-     2. CUATRO COLUMNAS GUÍA REFORZADAS (Acero Templado Isométrico)
-     ------------------------------------------------------------------------ */
-  const colGeo = new THREE.CylinderGeometry(0.048, 0.048, 2.5, 24);
-  const colOffsets = [
-    [-0.72, -0.44], [0.72, -0.44],
-    [-0.72, 0.44], [0.72, 0.44]
-  ];
-  colOffsets.forEach(([cx, cz]) => {
-    const colMesh = new THREE.Mesh(colGeo, steelBrightMat);
-    colMesh.position.set(cx, 0.2, cz);
-    colMesh.castShadow = true;
-    machineGroup.add(colMesh);
-  });
-
-  /* ------------------------------------------------------------------------
-     3. CORONA SUPERIOR & CHIP DE COMPRESIÓN
-     ------------------------------------------------------------------------ */
-  const topCrownGeo = new THREE.BoxGeometry(1.68, 0.2, 1.12);
-  const topCrownMesh = new THREE.Mesh(topCrownGeo, steelDarkMat);
-  topCrownMesh.position.set(0, 1.45, 0);
-  topCrownMesh.castShadow = true;
-  machineGroup.add(topCrownMesh);
-
-  // Placa central de refuerzo de cilindro
-  const cylMountGeo = new THREE.CylinderGeometry(0.32, 0.32, 0.08, 28);
-  const cylMount = new THREE.Mesh(cylMountGeo, steelBrightMat);
-  cylMount.position.set(0, 1.58, 0);
-  machineGroup.add(cylMount);
-
-  /* ------------------------------------------------------------------------
-     4. CILINDRO HIDRÁULICO DE ALTA PRESIÓN Y PISTÓN DESLIZANTE
-     ------------------------------------------------------------------------ */
-  // Cilindro hidráulico superior
-  const cylBodyGeo = new THREE.CylinderGeometry(0.2, 0.2, 0.75, 32);
-  const cylBody = new THREE.Mesh(cylBodyGeo, steelDarkMat);
-  cylBody.position.set(0, 1.98, 0);
-  cylBody.castShadow = true;
-  machineGroup.add(cylBody);
-
-  // Tapa superior del cilindro con válvula
-  const cylCapGeo = new THREE.CylinderGeometry(0.22, 0.22, 0.08, 32);
-  const cylCap = new THREE.Mesh(cylCapGeo, brassMat);
-  cylCap.position.set(0, 2.38, 0);
-  machineGroup.add(cylCap);
-
-  // Grupo móvil del prensador (se desplaza durante el ciclo de compactación)
-  const presserGroup = new THREE.Group();
-  machineGroup.add(presserGroup);
-
-  // Vástago de pistón cromado
-  const pistonRodGeo = new THREE.CylinderGeometry(0.09, 0.09, 0.95, 28);
-  const pistonRod = new THREE.Mesh(pistonRodGeo, chromeMat);
-  pistonRod.position.set(0, 1.1, 0);
-  presserGroup.add(pistonRod);
-
-  // Plato compactador / estampador superior
-  const ramPlateGeo = new THREE.BoxGeometry(1.15, 0.18, 0.76);
-  const ramPlate = new THREE.Mesh(ramPlateGeo, steelDarkMat);
-  ramPlate.position.set(0, 0.65, 0);
-  ramPlate.castShadow = true;
-  presserGroup.add(ramPlate);
-
-  // Machos superiores de compresión que entran al molde
-  const stampHeadGeo = new THREE.BoxGeometry(1.05, 0.12, 0.68);
-  const stampHead = new THREE.Mesh(stampHeadGeo, steelBrightMat);
-  stampHead.position.set(0, 0.5, 0);
-  presserGroup.add(stampHead);
-
-  // Bujes de guía en las 4 esquinas del plato
-  colOffsets.forEach(([cx, cz]) => {
-    const bushingGeo = new THREE.CylinderGeometry(0.075, 0.075, 0.22, 18);
-    const bushing = new THREE.Mesh(bushingGeo, brassMat);
-    bushing.position.set(cx, 0.65, cz);
-    presserGroup.add(bushing);
-  });
-
-  /* ------------------------------------------------------------------------
-     5. CÁMARA DE MOLDEO / MATRIZ DE LADRILLO MODULAR
-     ------------------------------------------------------------------------ */
-  const moldBoxGeo = new THREE.BoxGeometry(1.28, 0.58, 0.88);
-  const moldBox = new THREE.Mesh(moldBoxGeo, steelDarkMat);
-  moldBox.position.set(0, -0.15, 0);
-  moldBox.castShadow = true;
-  machineGroup.add(moldBox);
-
-  // Marco de la matriz
-  const moldFrameGeo = new THREE.BoxGeometry(1.36, 0.08, 0.96);
-  const moldFrame = new THREE.Mesh(moldFrameGeo, steelBrightMat);
-  moldFrame.position.set(0, 0.14, 0);
-  machineGroup.add(moldFrame);
-
-  // Machos cilíndricos interiores del molde (para agujeros del ladrillo ecológico)
-  const core1Geo = new THREE.CylinderGeometry(0.07, 0.07, 0.52, 20);
-  const core1 = new THREE.Mesh(core1Geo, chromeMat);
-  core1.position.set(-0.22, -0.15, 0);
-  machineGroup.add(core1);
-
-  const core2 = new THREE.Mesh(core1Geo, chromeMat);
-  core2.position.set(0.22, -0.15, 0);
-  machineGroup.add(core2);
-
-  /* ------------------------------------------------------------------------
-     6. TOLVA DE ALIMENTACIÓN SUPERIOR (Hopper de mezcla ecológica)
-     ------------------------------------------------------------------------ */
-  // Tolva troncocónica invertida montada en la parte superior trasera
-  const hopperGeo = new THREE.CylinderGeometry(0.5, 0.26, 0.58, 4);
-  hopperGeo.rotateY(Math.PI / 4);
-  const hopperMesh = new THREE.Mesh(hopperGeo, steelDarkMat);
-  hopperMesh.position.set(0, 0.52, -0.62);
-  hopperMesh.castShadow = true;
-  machineGroup.add(hopperMesh);
-
-  // Borde superior reforzado de la tolva
-  const hopperRimGeo = new THREE.BoxGeometry(0.74, 0.06, 0.74);
-  const hopperRim = new THREE.Mesh(hopperRimGeo, steelBrightMat);
-  hopperRim.position.set(0, 0.82, -0.62);
-  machineGroup.add(hopperRim);
-
-  /* ------------------------------------------------------------------------
-     7. EL LADRILLO ECOLÓGICO COMPACTADO (Inspirado en la imagen de referencia)
-     ------------------------------------------------------------------------ */
-  const brickEntityGroup = new THREE.Group();
-  machineGroup.add(brickEntityGroup);
-
-  // Cuerpo rectangular del ladrillo en terracota
-  const brickBodyGeo = new THREE.BoxGeometry(0.82, 0.28, 0.46);
-  const brickBody = new THREE.Mesh(brickBodyGeo, terracottaMat);
-  brickBody.position.set(0, 0.28, 0.06);
-  brickBody.castShadow = true;
-  brickEntityGroup.add(brickBody);
-
-  // 2 Perforaciones cilíndricas del bloque ecológico
-  const brickHoleGeo = new THREE.CylinderGeometry(0.072, 0.072, 0.29, 20);
-  const brickHole1 = new THREE.Mesh(brickHoleGeo, terracottaHoleMat);
-  brickHole1.position.set(-0.22, 0.28, 0.06);
-  brickEntityGroup.add(brickHole1);
-
-  const brickHole2 = new THREE.Mesh(brickHoleGeo, terracottaHoleMat);
-  brickHole2.position.set(0.22, 0.28, 0.06);
-  brickEntityGroup.add(brickHole2);
-
-  // Bandeja de desmolde / expulsión bajo el ladrillo
-  const ejectTrayGeo = new THREE.BoxGeometry(0.96, 0.06, 0.56);
-  const ejectTray = new THREE.Mesh(ejectTrayGeo, steelBrightMat);
-  ejectTray.position.set(0, 0.12, 0.06);
-  brickEntityGroup.add(ejectTray);
-
-  /* ------------------------------------------------------------------------
-     8. DETALLES INDUSTRIALES: MANÓMETRO, PALANCA Y LÍNEAS HIDRÁULICAS
-     ------------------------------------------------------------------------ */
-  // Manómetro de presión hidráulica (0 a 10 Toneladas)
-  const gaugeHousingGeo = new THREE.CylinderGeometry(0.12, 0.12, 0.08, 24);
-  gaugeHousingGeo.rotateX(Math.PI / 2);
-  const gaugeHousing = new THREE.Mesh(gaugeHousingGeo, brassMat);
-  gaugeHousing.position.set(0.55, 1.1, 0.48);
-  machineGroup.add(gaugeHousing);
-
-  const gaugeDialGeo = new THREE.CircleGeometry(0.1, 24);
-  const gaugeDialMat = new THREE.MeshBasicMaterial({ color: 0xFAF7F2 });
-  const gaugeDial = new THREE.Mesh(gaugeDialGeo, gaugeDialMat);
-  gaugeDial.position.set(0.55, 1.1, 0.525);
-  machineGroup.add(gaugeDial);
-
-  // Aguja del manómetro (animable con la presión)
-  const needleGeo = new THREE.BoxGeometry(0.012, 0.075, 0.01);
-  const needleMat = new THREE.MeshBasicMaterial({ color: 0xC85A32 });
-  const gaugeNeedle = new THREE.Mesh(needleGeo, needleMat);
-  gaugeNeedle.position.set(0.55, 1.12, 0.53);
-  machineGroup.add(gaugeNeedle);
-
-  // Palanca mecánica lateral de accionamiento
-  const leverArmCurve = new THREE.CatmullRomCurve3([
-    new THREE.Vector3(0.68, 0.15, 0.2),
-    new THREE.Vector3(1.05, 0.45, 0.4),
-    new THREE.Vector3(1.35, 0.72, 0.55)
+  // Titanium Arch Bridge
+  const bridgeCurve = new THREE.CatmullRomCurve3([
+    new THREE.Vector3(-0.25, 0.08, 0),
+    new THREE.Vector3(0, 0.17, 0.02),
+    new THREE.Vector3(0.25, 0.08, 0)
   ]);
-  const leverGeo = new THREE.TubeGeometry(leverArmCurve, 18, 0.03, 12, false);
-  const leverMesh = new THREE.Mesh(leverGeo, steelBrightMat);
-  machineGroup.add(leverMesh);
+  const bridgeGeo = new THREE.TubeGeometry(bridgeCurve, 20, 0.034, 12, false);
+  const bridgeMesh = new THREE.Mesh(bridgeGeo, beigeAccentMat);
+  glassesGroup.add(bridgeMesh);
 
-  // Mango ergonómico de la palanca
-  const handleGeo = new THREE.CylinderGeometry(0.045, 0.045, 0.26, 16);
-  handleGeo.rotateZ(Math.PI / 4);
-  const handleMesh = new THREE.Mesh(handleGeo, rubberHoseMat);
-  handleMesh.position.set(1.35, 0.72, 0.55);
-  machineGroup.add(handleMesh);
+  // Ultrasonic Sensors in Bridge
+  const sensorGeo = new THREE.CylinderGeometry(0.048, 0.048, 0.065, 18);
+  sensorGeo.rotateX(Math.PI / 2);
 
-  // Mangueras hidráulicas flexibles
-  const hoseCurve = new THREE.CatmullRomCurve3([
-    new THREE.Vector3(0.2, 2.1, 0),
-    new THREE.Vector3(0.55, 1.8, 0.3),
-    new THREE.Vector3(0.55, 1.25, 0.48)
+  const sensorL = new THREE.Mesh(sensorGeo, sensorMaterial);
+  sensorL.position.set(-0.16, 0.12, 0.04);
+  glassesGroup.add(sensorL);
+
+  const sensorR = new THREE.Mesh(sensorGeo, sensorMaterial);
+  sensorR.position.set(0.16, 0.12, 0.04);
+  glassesGroup.add(sensorR);
+
+  // Temples & Haptic Actuators
+  const templeCurveL = new THREE.CatmullRomCurve3([
+    new THREE.Vector3(-1.25, 0.08, 0),
+    new THREE.Vector3(-1.28, 0.06, -0.6),
+    new THREE.Vector3(-1.26, -0.04, -1.5)
   ]);
-  const hoseGeo = new THREE.TubeGeometry(hoseCurve, 20, 0.024, 10, false);
-  const hoseMesh = new THREE.Mesh(hoseGeo, rubberHoseMat);
-  machineGroup.add(hoseMesh);
+  const templeGeoL = new THREE.TubeGeometry(templeCurveL, 24, 0.036, 12, false);
+  const templeL = new THREE.Mesh(templeGeoL, frameMaterial);
+  glassesGroup.add(templeL);
 
-  // Ondas / pulso de compactación (anillos de eco para compatibilidad total)
+  const hapticGeo = new THREE.BoxGeometry(0.065, 0.085, 0.24);
+  const leftHaptic = new THREE.Mesh(hapticGeo, beigeAccentMat);
+  leftHaptic.position.set(-1.27, 0.02, -0.9);
+  glassesGroup.add(leftHaptic);
+
+  const templeCurveR = new THREE.CatmullRomCurve3([
+    new THREE.Vector3(1.25, 0.08, 0),
+    new THREE.Vector3(1.28, 0.06, -0.6),
+    new THREE.Vector3(1.26, -0.04, -1.5)
+  ]);
+  const templeGeoR = new THREE.TubeGeometry(templeCurveR, 24, 0.036, 12, false);
+  const templeR = new THREE.Mesh(templeGeoR, frameMaterial);
+  glassesGroup.add(templeR);
+
+  const rightHaptic = new THREE.Mesh(hapticGeo, beigeAccentMat);
+  rightHaptic.position.set(1.27, 0.02, -0.9);
+  glassesGroup.add(rightHaptic);
+
+  // Radiant Echo Radar Waves (Soft Beige & Stone)
   const echoWaves = [];
-  for (let i = 0; i < 3; i++) {
-    const ringGeo = new THREE.RingGeometry(0.2 + i * 0.2, 0.24 + i * 0.2, 32);
-    ringGeo.rotateX(Math.PI / 2);
-    const ringMat = new THREE.MeshBasicMaterial({
-      color: 0xC85A32,
+  for (let i = 0; i < 4; i++) {
+    const waveGeo = new THREE.RingGeometry(0.12 + i * 0.26, 0.15 + i * 0.26, 36);
+    const waveMat = new THREE.MeshBasicMaterial({
+      color: 0xDCCFC2, // Soft Beige
       transparent: true,
-      opacity: 0,
+      opacity: 0.8 - i * 0.16,
       side: THREE.DoubleSide
     });
-    const ringMesh = new THREE.Mesh(ringGeo, ringMat);
-    ringMesh.position.set(0, 0.16, 0.06);
-    machineGroup.add(ringMesh);
-    echoWaves.push(ringMesh);
+    const waveMesh = new THREE.Mesh(waveGeo, waveMat);
+    waveMesh.position.set(0, 0.12, 0.22 + i * 0.36);
+    glassesGroup.add(waveMesh);
+    echoWaves.push(waveMesh);
   }
 
-  /* ------------------------------------------------------------------------
-     9. CONTROLES DE RATÓN, ARRASTRE Y PERSPECTIVA ISOMÉTRICA
-     ------------------------------------------------------------------------ */
+  // Mouse Controls
   let isDragging = false;
   let prevMouseX = 0, prevMouseY = 0;
-  // Ángulo isométrico clásico predeterminado
-  let targetRotX = 0.32, targetRotY = -0.65;
-  let autoRotate = true;
-  let isPressingCycle = false;
-  let pressCycleTime = 0;
+  let targetRotX = 0.08, targetRotY = -0.3;
+  let autoRotate = true, echoActive = true;
 
   container.addEventListener('mousedown', (e) => {
     isDragging = true;
@@ -637,108 +907,36 @@ function initThreeJsViewer() {
     if (!isDragging) return;
     targetRotY += (e.clientX - prevMouseX) * 0.008;
     targetRotX += (e.clientY - prevMouseY) * 0.008;
-    targetRotX = Math.max(-0.6, Math.min(0.65, targetRotX));
+    targetRotX = Math.max(-0.6, Math.min(0.6, targetRotX));
     prevMouseX = e.clientX;
     prevMouseY = e.clientY;
   });
 
-  // Soporte táctil en dispositivos móviles
-  container.addEventListener('touchstart', (e) => {
-    if (e.touches.length === 1) {
-      isDragging = true;
-      prevMouseX = e.touches[0].clientX;
-      prevMouseY = e.touches[0].clientY;
-      autoRotate = false;
-    }
-  }, { passive: true });
-
-  window.addEventListener('touchend', () => isDragging = false);
-
-  window.addEventListener('touchmove', (e) => {
-    if (!isDragging || e.touches.length !== 1) return;
-    targetRotY += (e.touches[0].clientX - prevMouseX) * 0.008;
-    targetRotX += (e.touches[0].clientY - prevMouseY) * 0.008;
-    targetRotX = Math.max(-0.6, Math.min(0.65, targetRotX));
-    prevMouseX = e.touches[0].clientX;
-    prevMouseY = e.touches[0].clientY;
-  }, { passive: true });
-
-  /* ------------------------------------------------------------------------
-     10. ACCIONES DE BOTONES HUD
-     ------------------------------------------------------------------------ */
   const btnReset = document.getElementById('btn-3d-reset');
-  const btnPress = document.getElementById('btn-3d-echo');
-  const btnIso = document.getElementById('btn-3d-temples');
+  const btnEcho = document.getElementById('btn-3d-echo');
+  const btnTemples = document.getElementById('btn-3d-temples');
 
   if (btnReset) {
     btnReset.addEventListener('click', () => {
-      autoRotate = !autoRotate;
-      btnReset.textContent = autoRotate ? 'Pausar Giro' : 'Rotar 360°';
+      autoRotate = true; targetRotX = 0.08; targetRotY = -0.3;
     });
   }
 
-  // Animación del Ciclo de Compactación y Prensado
-  function triggerCompactionCycle() {
-    if (isPressingCycle) return;
-    isPressingCycle = true;
-    pressCycleTime = 0;
-    autoRotate = false;
-
-    if (btnPress) btnPress.textContent = 'Prensando... (10 Tn)';
-
-    if (typeof gsap !== 'undefined') {
-      const tl = gsap.timeline({
-        onComplete: () => {
-          isPressingCycle = false;
-          if (btnPress) btnPress.textContent = 'Ciclo de Prensado';
-        }
-      });
-
-      // 1. Descenso potente del pistón hacia el molde
-      tl.to(presserGroup.position, { y: -0.42, duration: 0.65, ease: 'power3.in' })
-        // 2. Pico de compresión: vibración del chasis y aguja de manómetro
-        .to(machineGroup.position, { y: '+=0.03', duration: 0.05, yoyo: true, repeat: 5 })
-        .to(gaugeNeedle.rotation, { z: -Math.PI * 0.7, duration: 0.2 }, '<')
-        // Ondas de choque / presión
-        .call(() => {
-          echoWaves.forEach((w, idx) => {
-            gsap.fromTo(w.scale, { x: 0.8, y: 0.8 }, { x: 2.2 + idx * 0.4, y: 2.2 + idx * 0.4, duration: 0.5 });
-            gsap.fromTo(w.material, { opacity: 0.7 }, { opacity: 0, duration: 0.5 });
-          });
-        })
-        // 3. Elevación del pistón
-        .to(presserGroup.position, { y: 0, duration: 0.75, ease: 'power2.out' }, '+=0.3')
-        .to(gaugeNeedle.rotation, { z: 0, duration: 0.5 }, '<')
-        // 4. Elevación y entrega del ladrillo recién compactado
-        .to(brickEntityGroup.position, { y: 0.18, duration: 0.55, ease: 'back.out(1.8)' }, '-=0.4')
-        // 5. Asentamiento en bandeja de desmolde
-        .to(brickEntityGroup.position, { y: 0, duration: 0.4, ease: 'power2.inOut' }, '+=0.6');
-    } else {
-      setTimeout(() => {
-        isPressingCycle = false;
-        if (btnPress) btnPress.textContent = 'Ciclo de Prensado';
-      }, 1800);
-    }
-  }
-
-  if (btnPress) {
-    btnPress.textContent = 'Ciclo de Prensado';
-    btnPress.addEventListener('click', triggerCompactionCycle);
-  }
-
-  // Vista Isométrica CAD (30°/30°)
-  if (btnIso) {
-    btnIso.textContent = 'Vista Isométrica';
-    btnIso.addEventListener('click', () => {
-      autoRotate = false;
-      targetRotX = 0.38;
-      targetRotY = -Math.PI / 4; // Ángulo isométrico clásico 45°
+  if (btnEcho) {
+    btnEcho.addEventListener('click', () => {
+      echoActive = !echoActive;
+      btnEcho.textContent = echoActive ? 'Ecolocalización ON' : 'Ecolocalización OFF';
+      echoWaves.forEach(w => w.visible = echoActive);
     });
   }
 
-  /* ------------------------------------------------------------------------
-     11. HOTSPOTS FLOTANTES INTERACTIVOS EN LA MÁQUINA
-     ------------------------------------------------------------------------ */
+  if (btnTemples) {
+    btnTemples.addEventListener('click', () => {
+      autoRotate = false; targetRotX = 0.2; targetRotY = Math.PI / 2 - 0.25;
+    });
+  }
+
+  // Dynamic Hotspots Interactivity (Aprovechamiento Espacial 3D)
   const hotspots = document.querySelectorAll('.model-hotspot');
   hotspots.forEach(hotspot => {
     const trigger = hotspot.querySelector('.hotspot-trigger');
@@ -752,45 +950,47 @@ function initThreeJsViewer() {
         if (!wasActive) hotspot.classList.add('active');
 
         autoRotate = false;
-        if (comp === 'tolva' || comp === 'sensors') {
-          targetRotX = 0.42;
-          targetRotY = Math.PI - 0.4; // Vista superior de la tolva
-        } else if (comp === 'cilindro' || comp === 'temple-left') {
-          targetRotX = 0.22;
-          targetRotY = -0.3; // Vista del pistón hidráulico
-        } else if (comp === 'matriz' || comp === 'temple-right') {
-          targetRotX = 0.15;
-          targetRotY = 0.4; // Vista de la cámara de moldeo
-        } else if (comp === 'ladrillo' || comp === 'frame') {
-          targetRotX = 0.35;
-          targetRotY = -Math.PI / 4; // Vista isométrica del ladrillo expulsado
+        if (comp === 'sensors') {
+          targetRotX = 0.04;
+          targetRotY = 0;
+        } else if (comp === 'temple-left') {
+          targetRotX = 0.14;
+          targetRotY = -Math.PI / 2 + 0.3;
+        } else if (comp === 'temple-right') {
+          targetRotX = 0.14;
+          targetRotY = Math.PI / 2 - 0.3;
+        } else if (comp === 'frame') {
+          targetRotX = 0.26;
+          targetRotY = 0.45;
         }
       });
     }
   });
 
-  // Clic exterior oculta tarjetas de hotspots abiertas
+  // Clicking outside dismisses open hotspot card
   container.addEventListener('click', () => {
     hotspots.forEach(h => h.classList.remove('active'));
   });
 
-  /* ------------------------------------------------------------------------
-     12. BUCLE DE RENDERIZADO THREE.JS
-     ------------------------------------------------------------------------ */
+  // Animation Loop
   let clock = new THREE.Clock();
   function animate3D() {
     requestAnimationFrame(animate3D);
     const elapsedTime = clock.getElapsedTime();
 
-    if (autoRotate) {
-      targetRotY += 0.004;
+    if (autoRotate) targetRotY += 0.005;
+    glassesGroup.rotation.y += (targetRotY - glassesGroup.rotation.y) * 0.08;
+    glassesGroup.rotation.x += (targetRotX - glassesGroup.rotation.x) * 0.08;
+    glassesGroup.position.y = Math.sin(elapsedTime * 1.5) * 0.04;
+
+    if (echoActive) {
+      echoWaves.forEach((wave, idx) => {
+        const phase = (elapsedTime * 2.2 + idx * 0.6) % 2.5;
+        wave.scale.set(1 + phase * 0.85, 1 + phase * 0.85, 1);
+        wave.position.z = 0.22 + phase * 0.75;
+        wave.material.opacity = Math.max(0, 0.7 - (phase / 2.5) * 0.7);
+      });
     }
-
-    machineGroup.rotation.y += (targetRotY - machineGroup.rotation.y) * 0.08;
-    machineGroup.rotation.x += (targetRotX - machineGroup.rotation.x) * 0.08;
-
-    // Leve flotación armónica
-    machineGroup.position.y = Math.sin(elapsedTime * 1.4) * 0.025;
 
     renderer.render(scene, camera);
   }
@@ -811,79 +1011,8 @@ function renderCanvas3DFallback(container) {
   container.appendChild(canvas);
   const ctx = canvas.getContext('2d');
   let angle = 0;
-
   function drawFallback() {
     ctx.clearRect(0, 0, canvas.width, canvas.height);
-    const cx = canvas.width / 2;
-    const cy = canvas.height / 2;
-
-    ctx.save();
-    ctx.translate(cx, cy);
-
-    // Dibujo isométrico en Canvas 2D de la Máquina Compactadora de Ladrillos
-    ctx.strokeStyle = '#212842';
-    ctx.lineWidth = 3;
-
-    // Chasis
-    ctx.strokeRect(-120, -140, 240, 280);
-
-    // Cilindro Superior
-    ctx.fillStyle = '#212842';
-    ctx.fillRect(-45, -190, 90, 60);
-
-    // Tolva
-    ctx.beginPath();
-    ctx.moveTo(-70, -110);
-    ctx.lineTo(70, -110);
-    ctx.lineTo(40, -40);
-    ctx.lineTo(-40, -40);
-    ctx.closePath();
-    ctx.fillStyle = '#D5C4AD';
-    ctx.fill();
-    ctx.stroke();
-
-    // Ladrillo Isométrico en Centro
-    ctx.fillStyle = '#E27237';
-    ctx.beginPath();
-    ctx.moveTo(0, 20);
-    ctx.lineTo(80, 50);
-    ctx.lineTo(0, 80);
-    ctx.lineTo(-80, 50);
-    ctx.closePath();
-    ctx.fill();
-    ctx.stroke();
-
-    ctx.fillStyle = '#C45120';
-    ctx.beginPath();
-    ctx.moveTo(-80, 50);
-    ctx.lineTo(0, 80);
-    ctx.lineTo(0, 130);
-    ctx.lineTo(-80, 100);
-    ctx.closePath();
-    ctx.fill();
-    ctx.stroke();
-
-    ctx.fillStyle = '#9E3B13';
-    ctx.beginPath();
-    ctx.moveTo(0, 80);
-    ctx.lineTo(80, 50);
-    ctx.lineTo(80, 100);
-    ctx.lineTo(0, 130);
-    ctx.closePath();
-    ctx.fill();
-    ctx.stroke();
-
-    ctx.font = '700 12px "JetBrains Mono"';
-    ctx.fillStyle = '#212842';
-    ctx.textAlign = 'center';
-    ctx.fillText('MÁQUINA COMPACTADORA DE LADRILLOS (ISOMÉTRICO)', 0, 160);
-
-    ctx.restore();
-    angle += 0.01;
-    requestAnimationFrame(drawFallback);
-  }
-  drawFallback();
-}
     const cx = canvas.width / 2;
     const cy = canvas.height / 2 + Math.sin(angle) * 8;
     ctx.strokeStyle = '#181818'; ctx.lineWidth = 4;
