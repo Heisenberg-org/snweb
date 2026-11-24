@@ -1,0 +1,301 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>SmartNav</title>
+<style>
+  :root {
+    --bg: #0b1220;
+    --panel: #121b2e;
+    --line: #26344f;
+    --text: #e6edf7;
+    --muted: #8a9bb8;
+    --wave: #38bdf8;
+    --c-lejos: #22c55e;
+    --c-medio: #eab308;
+    --c-cerca: #f97316;
+    --c-peligro: #ef4444;
+    --c-off: #64748b;
+  }
+  * { box-sizing: border-box; }
+  html, body { margin: 0; height: 100%; }
+  body {
+    background: var(--bg); color: var(--text);
+    font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    display: flex; flex-direction: column;
+  }
+  header {
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 12px 16px; gap: 12px;
+  }
+  h1 { font-size: 1.25rem; margin: 0; letter-spacing: .5px; }
+  h1 span { color: var(--wave); }
+  .conn { font-size: .85rem; color: var(--muted); display: flex; align-items: center; gap: 6px; }
+  .dot { width: 10px; height: 10px; border-radius: 50%; background: var(--c-off); }
+  .dot.ok { background: var(--c-lejos); }
+  main {
+    flex: 1; min-height: 0; display: grid; gap: 16px; padding: 0 16px 16px;
+    grid-template-columns: minmax(0, 1fr) 320px;
+  }
+  .radar-wrap {
+    background: var(--panel); border: 1px solid var(--line); border-radius: 16px;
+    display: flex; align-items: center; justify-content: center; min-height: 0; padding: 8px;
+  }
+  svg#radar { width: 100%; height: 100%; max-height: 80vh; }
+  aside { display: flex; flex-direction: column; gap: 16px; }
+  .card { background: var(--panel); border: 1px solid var(--line); border-radius: 16px; padding: 16px; }
+  .label { font-size: .75rem; text-transform: uppercase; letter-spacing: 1px; color: var(--muted); }
+  #dist { font-size: 5rem; font-weight: 700; line-height: 1; margin-top: 6px; font-variant-numeric: tabular-nums; transition: color .2s; }
+  #dist small { font-size: 1.5rem; font-weight: 500; color: var(--muted); }
+  #estado {
+    display: inline-block; margin-top: 8px; padding: 8px 14px; border-radius: 999px;
+    font-weight: 600; background: var(--line); transition: background .2s;
+  }
+  .legend { display: grid; gap: 6px; margin-top: 10px; font-size: .9rem; color: var(--muted); }
+  .legend i { display: inline-block; width: 12px; height: 12px; border-radius: 3px; margin-right: 8px; vertical-align: -1px; }
+  details summary { cursor: pointer; font-weight: 600; }
+  .sim { display: grid; gap: 12px; margin-top: 12px; }
+  .sim input[type=range] { width: 100%; }
+  .btns { display: flex; flex-wrap: wrap; gap: 8px; }
+  button {
+    background: var(--line); color: var(--text); border: 0; border-radius: 8px;
+    padding: 8px 12px; font: inherit; cursor: pointer;
+  }
+  button:hover { background: #33466a; }
+  input[type=text] {
+    width: 100%; background: var(--bg); color: var(--text); border: 1px solid var(--line);
+    border-radius: 8px; padding: 8px; font: inherit;
+  }
+  @media (max-width: 820px) {
+    main { grid-template-columns: 1fr; overflow-y: auto; }
+    .radar-wrap { height: 60vh; }
+    #dist { font-size: 4rem; }
+  }
+</style>
+</head>
+<body>
+<header>
+  <h1>Smart<span>Nav</span></h1>
+  <div class="conn"><span class="dot" id="connDot"></span><span id="connText">Sin conexión (simulación)</span></div>
+</header>
+
+<main>
+  <div class="radar-wrap">
+    <svg id="radar" viewBox="0 0 400 440" role="img" aria-label="Radar de SmartNav">
+      <defs>
+        <clipPath id="coneClip"><path d="M200 390 L62 70 A230 230 0 0 1 338 70 Z"/></clipPath>
+        <linearGradient id="coneGrad" x1="0" y1="1" x2="0" y2="0">
+          <stop offset="0" stop-color="#38bdf8" stop-opacity=".30"/>
+          <stop offset="1" stop-color="#38bdf8" stop-opacity=".04"/>
+        </linearGradient>
+      </defs>
+      <g id="rings" fill="none" stroke="#26344f" stroke-width="1"></g>
+      <g id="ringLabels" fill="#8a9bb8" font-size="11" text-anchor="middle"></g>
+      <path id="cone" d="M200 390 L62 70 A230 230 0 0 1 338 70 Z" fill="url(#coneGrad)"/>
+      <g clip-path="url(#coneClip)"><g id="waves" fill="none" stroke="#38bdf8" stroke-width="3"></g></g>
+
+      <!-- objeto -->
+      <g id="obj" style="display:none">
+        <circle id="objHalo" r="26" fill="#ef4444" opacity=".25"/>
+        <circle id="objDot" r="13" fill="#ef4444"/>
+      </g>
+
+      <!-- persona vista desde arriba -->
+      <g id="person">
+        <ellipse cx="200" cy="402" rx="30" ry="14" fill="#94a3b8"/>
+        <circle cx="200" cy="396" r="14" fill="#cbd5e1"/>
+        <rect id="glasses" x="188" y="384" width="24" height="6" rx="3" fill="#38bdf8"/>
+      </g>
+      <text x="200" y="432" fill="#8a9bb8" font-size="12" text-anchor="middle">Usuario con SmartNav</text>
+    </svg>
+  </div>
+
+  <aside>
+    <div class="card">
+      <div class="label">Distancia al objeto</div>
+      <div id="dist">--<small> cm</small></div>
+      <div id="estado">Apagado</div>
+      <div class="legend">
+        <div><i style="background:var(--c-lejos)"></i>Lejos (más de 100 cm)</div>
+        <div><i style="background:var(--c-medio)"></i>Medio (60–100 cm)</div>
+        <div><i style="background:var(--c-cerca)"></i>Cerca (30–60 cm)</div>
+        <div><i style="background:var(--c-peligro)"></i>¡Peligro! (menos de 30 cm)</div>
+      </div>
+    </div>
+
+    <div class="card">
+      <details id="simBox" open>
+        <summary>Modo simulación</summary>
+        <div class="sim">
+          <label>Distancia: <b id="simVal">150</b> cm
+            <input type="range" id="simDist" min="2" max="200" value="150">
+          </label>
+          <div class="btns">
+            <button data-estado="encendido">Encender</button>
+            <button data-estado="silenciado">Silenciar motor</button>
+            <button data-estado="apagado">Apagar</button>
+            <button id="simNone">Sin objeto</button>
+            <button id="simAuto">Aproximación auto</button>
+          </div>
+        </div>
+      </details>
+    </div>
+
+    <div class="card">
+      <details>
+        <summary>Conexión con las gafas</summary>
+        <div class="sim">
+          <input type="text" id="wsUrl" placeholder="ws://192.168.4.1:81">
+          <div class="btns"><button id="wsBtn">Conectar</button></div>
+          <div class="label">Mensaje esperado: {"dist":35,"estado":"encendido"}<br>estado: apagado | encendido | silenciado<br>dist: cm (omitir o null si no hay objeto)</div>
+        </div>
+      </details>
+    </div>
+  </aside>
+</main>
+
+<script>
+(() => {
+  const MAX_CM = 200;              // alcance mostrado en el radar
+  const CX = 200, CY = 390, R = 320; // origen del radar y radio en px para MAX_CM
+  const css = n => getComputedStyle(document.documentElement).getPropertyValue(n).trim();
+  const NS = 'http://www.w3.org/2000/svg';
+  const $ = id => document.getElementById(id);
+
+  // estado de la app
+  const S = { dist: null, estado: 'apagado' };
+
+  // ---- anillos de referencia
+  for (const cm of [50, 100, 150, 200]) {
+    const r = cm / MAX_CM * R;
+    const c = document.createElementNS(NS, 'circle');
+    c.setAttribute('cx', CX); c.setAttribute('cy', CY); c.setAttribute('r', r);
+    $('rings').appendChild(c);
+    const t = document.createElementNS(NS, 'text');
+    t.setAttribute('x', CX); t.setAttribute('y', CY - r - 3); t.textContent = cm + ' cm';
+    $('ringLabels').appendChild(t);
+  }
+
+  // ---- ondas
+  const WAVES = 3;
+  const waveEls = [];
+  for (let i = 0; i < WAVES; i++) {
+    const c = document.createElementNS(NS, 'circle');
+    c.setAttribute('cx', CX); c.setAttribute('cy', CY);
+    $('waves').appendChild(c); waveEls.push(c);
+  }
+  let t0 = performance.now();
+  function animate(now) {
+    const on = S.estado !== 'apagado';
+    // más rápido cuanto más cerca
+    const speed = S.dist != null && on ? 0.35 + (1 - Math.min(S.dist, MAX_CM) / MAX_CM) * 0.9 : 0.35;
+    const color = on ? colorFor(S.dist) : css('--c-off');
+    const t = (now - t0) / 1000 * speed;
+    waveEls.forEach((el, i) => {
+      const p = (t + i / WAVES) % 1;
+      el.setAttribute('r', p * R * 1.05);
+      el.setAttribute('opacity', on ? (1 - p) * 0.9 : 0);
+      el.setAttribute('stroke', on && S.dist != null ? color : css('--wave'));
+    });
+    requestAnimationFrame(animate);
+  }
+  requestAnimationFrame(animate);
+
+  // ---- colores
+  function colorFor(d) {
+    if (d == null) return css('--wave');
+    if (d < 30) return css('--c-peligro');
+    if (d < 60) return css('--c-cerca');
+    if (d < 100) return css('--c-medio');
+    return css('--c-lejos');
+  }
+
+  // ---- render
+  function render() {
+    const on = S.estado !== 'apagado';
+    const has = on && S.dist != null && S.dist <= MAX_CM;
+    const col = has ? colorFor(S.dist) : css('--c-off');
+
+    $('obj').style.display = has ? '' : 'none';
+    if (has) {
+      const y = CY - S.dist / MAX_CM * R;
+      $('obj').setAttribute('transform', `translate(${CX} ${y})`);
+      $('objDot').setAttribute('fill', col);
+      $('objHalo').setAttribute('fill', col);
+    }
+    $('cone').style.opacity = on ? 1 : .2;
+    $('glasses').setAttribute('fill', on ? css('--wave') : css('--c-off'));
+
+    const d = $('dist');
+    d.innerHTML = (has ? Math.round(S.dist) : '--') + '<small> cm</small>';
+    d.style.color = has ? col : css('--muted');
+
+    let txt, bg;
+    if (!on) { txt = 'Apagado'; bg = '#334155'; }
+    else if (S.estado === 'silenciado') { txt = has ? 'Motor silenciado (objeto presente)' : 'Motor silenciado'; bg = '#475569'; }
+    else if (has) { txt = 'Detectando objeto · motores vibrando'; bg = col; }
+    else { txt = 'Encendido · escuchando'; bg = '#0369a1'; }
+    $('estado').textContent = txt;
+    $('estado').style.background = bg;
+  }
+
+  function update(msg) {
+    if ('estado' in msg && ['apagado', 'encendido', 'silenciado'].includes(msg.estado)) S.estado = msg.estado;
+    if ('dist' in msg) S.dist = (msg.dist == null || isNaN(msg.dist)) ? null : Number(msg.dist);
+    render();
+  }
+
+  // ---- WebSocket
+  let ws, reconnectTimer, wsWanted = false;
+  function setConn(ok, text) {
+    $('connDot').classList.toggle('ok', ok);
+    $('connText').textContent = text;
+    if (ok) $('simBox').open = false;
+  }
+  function connect(url) {
+    clearTimeout(reconnectTimer);
+    if (ws) { ws.onclose = null; ws.close(); }
+    wsWanted = true;
+    try { ws = new WebSocket(url); } catch (e) { setConn(false, 'URL inválida'); return; }
+    setConn(false, 'Conectando…');
+    ws.onopen = () => setConn(true, 'Conectado a las gafas');
+    ws.onmessage = e => { try { update(JSON.parse(e.data)); } catch (_) {} };
+    ws.onclose = () => {
+      setConn(false, 'Sin conexión (simulación)');
+      if (wsWanted) reconnectTimer = setTimeout(() => connect(url), 2000);
+    };
+  }
+  const saved = new URLSearchParams(location.search).get('ws') || (() => { try { return localStorage.getItem('smartnav-ws'); } catch (_) { return null; } })();
+  if (saved) { $('wsUrl').value = saved; connect(saved); }
+  $('wsBtn').onclick = () => {
+    const u = $('wsUrl').value.trim(); if (!u) return;
+    try { localStorage.setItem('smartnav-ws', u); } catch (_) {}
+    connect(u);
+  };
+
+  // ---- simulación
+  let auto = null;
+  const stopAuto = () => { if (auto) { clearInterval(auto); auto = null; $('simAuto').textContent = 'Aproximación auto'; } };
+  $('simDist').oninput = e => { stopAuto(); $('simVal').textContent = e.target.value; update({ dist: +e.target.value }); };
+  document.querySelectorAll('[data-estado]').forEach(b => b.onclick = () => update({ estado: b.dataset.estado }));
+  $('simNone').onclick = () => { stopAuto(); update({ dist: null }); };
+  $('simAuto').onclick = () => {
+    if (auto) { stopAuto(); return; }
+    $('simAuto').textContent = 'Detener auto';
+    if (S.estado === 'apagado') update({ estado: 'encendido' });
+    let d = MAX_CM, dir = -1;
+    auto = setInterval(() => {
+      d += dir * 2;
+      if (d <= 8) dir = 1;
+      if (d >= MAX_CM) dir = -1;
+      $('simDist').value = d; $('simVal').textContent = d;
+      update({ dist: d });
+    }, 50);
+  };
+
+  update({ estado: 'apagado', dist: null });
+})();
+</script>
+</body>
+</html>
