@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Conexionado — Gafas Merín</title>
+<style>
+:root{
+  --bg:#f7f5fc; --surface:#ffffff; --border:#cfc4e8; --text:#241a45;
+  --muted:#6c5f96; --warn:#9a6410; --warn-bg:#fdf3df; --accent:#5b3fa8;
+  --wire:#7a7391; --gnd:#3a3550; --pin:#241a45;
+  --w-3v3:#d43d2a; --w-5v:#c2185b; --w-sda:#c9a10a; --w-scl:#2f9e44; --w-touch:#2f6fd4; --w-motor:#e07b12;
+}
+@media (prefers-color-scheme: dark){
+  :root{
+    --bg:#1b1233; --surface:#2a1d4d; --border:#4a3a7a; --text:#f2f0ff;
+    --muted:#b3a8d8; --warn:#efa927; --warn-bg:#332249; --accent:#b39df0;
+    --wire:#9d95bd; --gnd:#e6e2f5; --pin:#f2f0ff;
+    --w-3v3:#ff6b52; --w-5v:#f06292; --w-sda:#f0c419; --w-scl:#51cf66; --w-touch:#63a4ff; --w-motor:#ffa94d;
+  }
+}
+body{font-family:system-ui,sans-serif;background:var(--bg);color:var(--text);margin:0;padding:28px 20px 60px;line-height:1.55}
+main{max-width:1020px;margin:0 auto;display:flex;flex-direction:column;gap:26px}
+header h1{font-size:24px;margin:0}
+header p{margin:4px 0 0;color:var(--muted);font-size:14px}
+.eyebrow{text-transform:uppercase;letter-spacing:.12em;font-size:11px;color:var(--accent);font-weight:600;margin:0 0 6px}
+section h2{font-size:16px;margin:0 0 10px}
+.card{background:var(--surface);border:1px solid var(--border);border-radius:12px;padding:18px}
+.diagram-wrap{overflow-x:auto}
+svg{display:block;min-width:820px;width:100%;height:auto}
+svg text{font-family:ui-monospace,'Cascadia Mono',Menlo,monospace;fill:var(--text)}
+.pcbtxt{fill:#f5f3ff}
+.pcbsub{fill:#cfc6ee;font-size:10.5px}
+.pinlbl{font-size:11.5px;fill:var(--muted)}
+.pinw{font-size:11.5px;fill:#f5f3ff;font-weight:700}
+.raillbl{font-size:12px;font-weight:700}
+.caption{font-size:11px;fill:var(--muted)}
+.wire{fill:none;stroke-width:3;stroke-linecap:round}
+.dot{stroke:none}
+.legend{display:flex;flex-wrap:wrap;gap:14px;margin-top:12px;font-size:13px}
+.legend span{display:inline-flex;align-items:center;gap:6px}
+.sw{width:22px;height:4px;border-radius:2px;display:inline-block}
+table{border-collapse:collapse;width:100%;font-size:14px}
+th,td{text-align:left;padding:7px 10px;border-bottom:1px solid var(--border)}
+th{font-size:11px;text-transform:uppercase;letter-spacing:.08em;color:var(--muted)}
+td code{font-family:ui-monospace,Menlo,monospace;font-size:13px;background:var(--bg);padding:1px 6px;border-radius:5px}
+.grid2{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:16px}
+.warnbox{background:var(--warn-bg);border:1px solid var(--warn);border-radius:12px;padding:16px 18px}
+.warnbox h2{color:var(--warn)}
+.warnbox ul,ol{margin:8px 0 0;padding-left:20px}
+li{margin:4px 0}
+.note{font-size:13px;color:var(--muted);margin-top:10px}
+@media print{ body{background:#fff;color:#000} .card,.warnbox{border-color:#999} }
+</style>
+</head>
+<body>
+<main>
+<header>
+  <p class="eyebrow">Anteojos detectores de obstáculos · Nodo Reynaldo Merín</p>
+  <h1>Diagrama de conexión en protoboard</h1>
+  <p>ESP32-C3 Super Mini · VL53L0X · TTP223 · 2 motores de vibración con BD139 + 1N4007 · alimentación LiPo 300 mAh + TP4056 + MT3608</p>
+</header>
+
+<section class="card diagram-wrap">
+<svg viewBox="0 0 1000 910" role="img" aria-label="Diagrama de conexión con componentes realistas">
+
+  <!-- ============ RIELES ============ -->
+  <line x1="40" y1="70" x2="930" y2="70" class="wire" style="stroke:var(--w-3v3)"/>
+  <text x="40" y="54" class="raillbl" style="fill:var(--w-3v3)">RIEL 3V3 (+)</text>
+  <line x1="40" y1="580" x2="930" y2="580" class="wire" style="stroke:var(--gnd)"/>
+  <text x="40" y="604" class="raillbl" style="fill:var(--gnd)">RIEL GND (−)</text>
+
+  <!-- ============ VL53L0X (PCB violeta) ============ -->
+  <rect x="80" y="160" width="200" height="180" rx="10" fill="#5e35b1" stroke="#3f2482" stroke-width="2"/>
+  <text x="180" y="192" text-anchor="middle" class="pcbtxt" style="font-weight:700;font-size:15px">VL53L0X</text>
+  <text x="180" y="208" text-anchor="middle" class="pcbsub">sensor de distancia ToF</text>
+  <rect x="145" y="230" width="70" height="34" rx="4" fill="#14141a" stroke="#000"/>
+  <rect x="156" y="242" width="12" height="10" rx="2" fill="#3a3a46"/>
+  <rect x="192" y="242" width="12" height="10" rx="2" fill="#3a3a46"/>
+  <circle cx="140" cy="172" r="5" fill="#d4a017"/>
+  <circle cx="140" cy="328" r="5" fill="#d4a017"/>
+  <circle cx="268" cy="240" r="5" fill="#d4a017"/>
+  <circle cx="268" cy="280" r="5" fill="#d4a017"/>
+  <text x="152" y="177" class="pinw">VIN</text>
+  <text x="152" y="333" class="pinw">GND</text>
+  <text x="224" y="244" class="pinw">SDA</text>
+  <text x="224" y="284" class="pinw">SCL</text>
+  <path d="M140 160 V70" class="wire" style="stroke:var(--w-3v3)"/>
+  <path d="M140 340 V580" class="wire" style="stroke:var(--gnd)"/>
+  <path d="M280 240 H350 V260 H420" class="wire" style="stroke:var(--w-sda)"/>
+  <path d="M280 280 H370 V300 H420" class="wire" style="stroke:var(--w-scl)"/>
+
+  <!-- ============ ESP32-C3 Super Mini (PCB negro) ============ -->
+  <rect x="420" y="160" width="160" height="220" rx="10" fill="#16161d" stroke="#000" stroke-width="2"/>
+  <rect x="472" y="152" width="56" height="20" rx="8" fill="#b8bcc4" stroke="#7d838d"/>
+  <text x="500" y="146" text-anchor="middle" class="caption">USB-C</text>
+  <polyline points="432,188 440,180 448,196 456,180 464,196 472,182" fill="none" stroke="#d4a017" stroke-width="2"/>
+  <rect x="466" y="240" width="68" height="56" rx="5" fill="#26262f" stroke="#000"/>
+  <text x="500" y="264" text-anchor="middle" class="pcbtxt" style="font-size:12px;font-weight:700">ESP32-C3</text>
+  <text x="500" y="280" text-anchor="middle" class="pcbsub">Super Mini</text>
+  <circle cx="500" cy="170" r="5" fill="#d4a017"/>
+  <circle cx="570" cy="240" r="5" fill="#d4a017"/>
+  <circle cx="430" cy="260" r="5" fill="#d4a017"/>
+  <circle cx="430" cy="300" r="5" fill="#d4a017"/>
+  <circle cx="570" cy="340" r="5" fill="#d4a017"/>
+  <circle cx="460" cy="370" r="5" fill="#d4a017"/>
+  <circle cx="540" cy="370" r="5" fill="#d4a017"/>
+  <text x="510" y="176" class="pinw">3V3</text>
+  <text x="528" y="230" class="pinw">5V</text>
+  <text x="440" y="264" class="pinw">GPIO4</text>
+  <text x="440" y="304" class="pinw">GPIO5</text>
+  <text x="504" y="344" class="pinw">GPIO10</text>
+  <text x="442" y="360" class="pinw">GND</text>
+  <text x="522" y="360" class="pinw">GPIO3</text>
+  <path d="M500 160 V70" class="wire" style="stroke:var(--w-3v3)"/>
+  <path d="M460 380 V580" class="wire" style="stroke:var(--gnd)"/>
+
+  <!-- ============ TTP223 (PCB azul, pad táctil) ============ -->
+  <rect x="440" y="460" width="160" height="100" rx="10" fill="#1565c0" stroke="#0b3d78" stroke-width="2"/>
+  <circle cx="500" cy="510" r="26" fill="none" stroke="#d4a017" stroke-width="3"/>
+  <text x="500" y="515" text-anchor="middle" class="pcbtxt" style="font-size:10px">TOUCH</text>
+  <text x="558" y="545" text-anchor="middle" class="pcbtxt" style="font-weight:700;font-size:13px">TTP223</text>
+  <circle cx="540" cy="468" r="5" fill="#d4a017"/>
+  <circle cx="592" cy="490" r="5" fill="#d4a017"/>
+  <circle cx="520" cy="552" r="5" fill="#d4a017"/>
+  <text x="548" y="480" class="pinw">I/O</text>
+  <text x="552" y="494" class="pinw">VCC</text>
+  <text x="530" y="548" class="pinw">GND</text>
+  <path d="M540 460 V380" class="wire" style="stroke:var(--w-touch)"/>
+  <path d="M600 490 H610 V70" class="wire" style="stroke:var(--w-3v3)"/>
+  <path d="M520 560 V580" class="wire" style="stroke:var(--gnd)"/>
+
+  <!-- ============ Resistencia 1kΩ (marrón-negro-rojo-dorado) ============ -->
+  <path d="M580 340 H620" class="wire" style="stroke:var(--w-motor)"/>
+  <rect x="620" y="328" width="60" height="24" rx="12" fill="#d9c7a0" stroke="#a08d63" stroke-width="1.5"/>
+  <rect x="630" y="328" width="6" height="24" fill="#6d4c41"/>
+  <rect x="642" y="328" width="6" height="24" fill="#141414"/>
+  <rect x="654" y="328" width="6" height="24" fill="#d32f2f"/>
+  <rect x="668" y="328" width="5" height="24" fill="#d4a017"/>
+  <text x="650" y="318" text-anchor="middle" class="caption">1 kΩ</text>
+
+  <!-- ============ 2 motores en paralelo + diodo 1N4007 ============ -->
+  <text x="790" y="96" text-anchor="middle" class="pinlbl">2× MOTOR de vibración</text>
+  <text x="790" y="110" text-anchor="middle" class="pinlbl">(en paralelo: vibran juntos)</text>
+  <line x1="700" y1="120" x2="880" y2="120" class="wire" style="stroke:var(--w-3v3)"/>
+  <path d="M790 120 V70" class="wire" style="stroke:var(--w-3v3)"/>
+  <line x1="700" y1="228" x2="880" y2="228" class="wire" style="stroke:var(--wire)"/>
+  <text x="886" y="124" class="pinlbl">+</text>
+  <text x="886" y="232" class="pinlbl">−</text>
+  <!-- motor 1 -->
+  <circle cx="735" cy="175" r="34" fill="#c0c4cc" stroke="#8a8f98" stroke-width="2.5"/>
+  <circle cx="735" cy="175" r="11" fill="#9aa0a8" stroke="#7d838d"/>
+  <path d="M735 141 V120" class="wire" style="stroke:var(--w-3v3)"/>
+  <path d="M735 209 V228" class="wire" style="stroke:var(--wire)"/>
+  <!-- motor 2 -->
+  <circle cx="845" cy="175" r="34" fill="#c0c4cc" stroke="#8a8f98" stroke-width="2.5"/>
+  <circle cx="845" cy="175" r="11" fill="#9aa0a8" stroke="#7d838d"/>
+  <path d="M845 141 V120" class="wire" style="stroke:var(--w-3v3)"/>
+  <path d="M845 209 V228" class="wire" style="stroke:var(--wire)"/>
+  <!-- diodo, banda hacia + -->
+  <path d="M700 120 V135" class="wire" style="stroke:var(--w-3v3)"/>
+  <rect x="692" y="135" width="16" height="64" fill="#14141a" stroke="#000" stroke-width="1.5"/>
+  <rect x="692" y="139" width="16" height="9" fill="#b8bcc4"/>
+  <path d="M700 199 V228" class="wire" style="stroke:var(--wire)"/>
+  <text x="694" y="252" text-anchor="middle" class="pinlbl">1N4007</text>
+  <text x="694" y="266" text-anchor="middle" class="pinlbl">banda gris arriba (a +)</text>
+
+  <!-- ============ BD139 (TO-126, cara de las letras al frente) ============ -->
+  <rect x="720" y="295" width="80" height="14" rx="3" fill="#b8bcc4" stroke="#8a8f98"/>
+  <circle cx="760" cy="302" r="4" fill="#6b7078"/>
+  <rect x="720" y="309" width="80" height="61" fill="#1a1a1f" stroke="#000" stroke-width="2"/>
+  <text x="760" y="336" text-anchor="middle" class="pcbtxt" style="font-size:13px;font-weight:700">BD139</text>
+  <text x="760" y="354" text-anchor="middle" class="pcbsub">NPN potencia</text>
+  <line x1="730" y1="370" x2="730" y2="400" stroke="#b8bcc4" stroke-width="4"/>
+  <line x1="760" y1="370" x2="760" y2="400" stroke="#b8bcc4" stroke-width="4"/>
+  <line x1="790" y1="370" x2="790" y2="400" stroke="#b8bcc4" stroke-width="4"/>
+  <text x="718" y="394" text-anchor="end" class="pinlbl">E</text>
+  <text x="748" y="394" text-anchor="end" class="pinlbl">C</text>
+  <text x="802" y="394" class="pinlbl">B</text>
+  <circle cx="730" cy="400" r="5" fill="#d4a017"/>
+  <circle cx="760" cy="400" r="5" fill="#d4a017"/>
+  <circle cx="790" cy="400" r="5" fill="#d4a017"/>
+  <path d="M730 400 V580" class="wire" style="stroke:var(--gnd)"/>
+  <path d="M760 400 V415 H872 V228" class="wire" style="stroke:var(--wire)"/>
+  <path d="M680 340 H700 V430 H790 V400" class="wire" style="stroke:var(--w-motor)"/>
+
+  <!-- ============ ZONA DE ALIMENTACIÓN ============ -->
+  <text x="40" y="660" class="raillbl" style="fill:var(--accent);font-size:14px">ALIMENTACIÓN (para usar sin USB)</text>
+
+  <rect x="60" y="700" width="170" height="110" rx="14" fill="#b0b6c0" stroke="#7d838d" stroke-width="2"/>
+  <line x1="75" y1="712" x2="215" y2="712" stroke="#9aa0a8" stroke-width="1.5"/>
+  <line x1="75" y1="798" x2="215" y2="798" stroke="#9aa0a8" stroke-width="1.5"/>
+  <text x="145" y="748" text-anchor="middle" style="font-size:13px;font-weight:700;fill:#2b2f36">LiPo 3.7 V</text>
+  <text x="145" y="766" text-anchor="middle" style="font-size:12px;fill:#40444c">300 mAh</text>
+  <circle cx="230" cy="730" r="5" fill="#d32f2f"/>
+  <circle cx="230" cy="770" r="5" fill="#14141a"/>
+  <text x="196" y="726" style="font-size:11px;fill:#40444c">+ rojo</text>
+  <text x="188" y="788" style="font-size:11px;fill:#40444c">− negro</text>
+  <path d="M230 730 H330" class="wire" style="stroke:var(--w-3v3)"/>
+  <path d="M230 770 H330" class="wire" style="stroke:var(--gnd)"/>
+
+  <rect x="330" y="690" width="200" height="140" rx="10" fill="#c62828" stroke="#7f1414" stroke-width="2"/>
+  <rect x="402" y="682" width="56" height="20" rx="8" fill="#b8bcc4" stroke="#7d838d"/>
+  <text x="430" y="676" text-anchor="middle" class="caption">USB-C: cargar la batería acá</text>
+  <text x="430" y="762" text-anchor="middle" class="pcbtxt" style="font-weight:700;font-size:14px">TP4056</text>
+  <text x="430" y="778" text-anchor="middle" class="pcbsub">cargador LiPo 1S</text>
+  <rect x="380" y="790" width="30" height="18" rx="3" fill="#14141a"/>
+  <circle cx="440" cy="799" r="4" fill="#ff5252"/>
+  <circle cx="456" cy="799" r="4" fill="#448aff"/>
+  <text x="470" y="803" class="pcbsub">LEDs</text>
+  <circle cx="338" cy="730" r="5" fill="#d4a017"/>
+  <circle cx="338" cy="770" r="5" fill="#d4a017"/>
+  <circle cx="522" cy="730" r="5" fill="#d4a017"/>
+  <circle cx="522" cy="770" r="5" fill="#d4a017"/>
+  <text x="350" y="734" class="pinw">B+</text>
+  <text x="350" y="774" class="pinw">B−</text>
+  <text x="470" y="734" class="pinw">OUT+</text>
+  <text x="470" y="774" class="pinw">OUT−</text>
+  <path d="M530 730 H630" class="wire" style="stroke:var(--w-3v3)"/>
+  <path d="M530 770 H630" class="wire" style="stroke:var(--gnd)"/>
+
+  <rect x="630" y="690" width="200" height="140" rx="10" fill="#1565c0" stroke="#0b3d78" stroke-width="2"/>
+  <circle cx="700" cy="742" r="24" fill="#2b2b33" stroke="#b8bcc4" stroke-width="3"/>
+  <text x="700" y="747" text-anchor="middle" class="pcbtxt" style="font-size:10px">bobina</text>
+  <rect x="756" y="722" width="34" height="34" rx="4" fill="#3949ab" stroke="#1a237e"/>
+  <circle cx="773" cy="739" r="9" fill="#e8e6f0"/>
+  <path d="M767 739 H779 M773 733 V745" stroke="#555" stroke-width="2"/>
+  <text x="773" y="772" text-anchor="middle" class="pcbsub">tornillo de ajuste</text>
+  <text x="730" y="800" text-anchor="middle" class="pcbtxt" style="font-weight:700;font-size:14px">MT3608</text>
+  <text x="730" y="816" text-anchor="middle" class="pcbsub">elevador a 5 V</text>
+  <circle cx="638" cy="730" r="5" fill="#d4a017"/>
+  <circle cx="638" cy="770" r="5" fill="#d4a017"/>
+  <circle cx="822" cy="730" r="5" fill="#d4a017"/>
+  <circle cx="822" cy="770" r="5" fill="#d4a017"/>
+  <text x="650" y="734" class="pinw">VIN+</text>
+  <text x="650" y="774" class="pinw">VIN−</text>
+  <text x="762" y="712" class="pinw">VOUT+</text>
+  <text x="764" y="790" class="pinw">VOUT−</text>
+  <path d="M830 730 H900 V240 H580" class="wire" style="stroke:var(--w-5v)"/>
+  <path d="M830 770 H860 V580" class="wire" style="stroke:var(--gnd)"/>
+
+  <g class="dot" fill="var(--w-3v3)">
+    <circle cx="140" cy="70" r="5"/><circle cx="500" cy="70" r="5"/><circle cx="610" cy="70" r="5"/><circle cx="790" cy="70" r="5"/>
+    <circle cx="700" cy="120" r="5"/><circle cx="735" cy="120" r="5"/><circle cx="845" cy="120" r="5"/><circle cx="790" cy="120" r="5"/>
+  </g>
+  <g class="dot" fill="var(--wire)">
+    <circle cx="700" cy="228" r="5"/><circle cx="735" cy="228" r="5"/><circle cx="845" cy="228" r="5"/><circle cx="872" cy="228" r="5"/>
+  </g>
+  <g class="dot" fill="var(--gnd)">
+    <circle cx="140" cy="580" r="5"/><circle cx="460" cy="580" r="5"/><circle cx="520" cy="580" r="5"/><circle cx="730" cy="580" r="5"/><circle cx="860" cy="580" r="5"/>
+  </g>
+</svg>
+<div class="legend">
+  <span><i class="sw" style="background:var(--w-3v3)"></i>3V3 / positivo batería</span>
+  <span><i class="sw" style="background:var(--w-5v)"></i>5 V (salida MT3608)</span>
+  <span><i class="sw" style="background:var(--gnd)"></i>GND / negativo</span>
+  <span><i class="sw" style="background:var(--w-sda)"></i>SDA (GPIO4)</span>
+  <span><i class="sw" style="background:var(--w-scl)"></i>SCL (GPIO5)</span>
+  <span><i class="sw" style="background:var(--w-touch)"></i>Táctil (GPIO3)</span>
+  <span><i class="sw" style="background:var(--w-motor)"></i>Motor (GPIO10)</span>
+</div>
+<p class="note">Los cruces de cables sin punto no van conectados entre sí. <strong>Los dos motores van en paralelo</strong>: los dos + al mismo nodo (3V3) y los dos − al mismo nodo (colector) — vibran siempre juntos, porque el firmware tiene un solo canal (GPIO10). <strong>BD139:</strong> con la cara de las letras mirándote y las patas para abajo, el orden es <strong>E - C - B</strong> (¡distinto del BC548!). <strong>Diodo 1N4007:</strong> uno solo alcanza para los dos motores, en paralelo con ellos, con la <strong>banda gris hacia el lado +</strong> — al revés hace cortocircuito. Guiate siempre por la serigrafía de cada módulo.</p>
+</section>
+
+<div class="grid2">
+<section class="card">
+<h2>VL53L0X → ESP32-C3</h2>
+<table>
+<tr><th>Pin del módulo</th><th>Va a</th></tr>
+<tr><td><code>VIN</code></td><td><code>3V3</code></td></tr>
+<tr><td><code>GND</code></td><td><code>GND</code></td></tr>
+<tr><td><code>SDA</code></td><td><code>GPIO4</code></td></tr>
+<tr><td><code>SCL</code></td><td><code>GPIO5</code></td></tr>
+<tr><td><code>XSHUT</code> y <code>GPIO1</code></td><td>sin conectar</td></tr>
+</table>
+</section>
+
+<section class="card">
+<h2>TTP223 → ESP32-C3</h2>
+<table>
+<tr><th>Pin del módulo</th><th>Va a</th></tr>
+<tr><td><code>VCC</code></td><td><code>3V3</code></td></tr>
+<tr><td><code>GND</code></td><td><code>GND</code></td></tr>
+<tr><td><code>I/O</code> (señal)</td><td><code>GPIO3</code></td></tr>
+</table>
+</section>
+
+<section class="card">
+<h2>2 motores + BD139 + 1N4007</h2>
+<table>
+<tr><th>Conexión</th><th>Va a</th></tr>
+<tr><td>Los dos motores <code>+</code> (rojo)</td><td><code>3V3</code> (mismo nodo)</td></tr>
+<tr><td>Los dos motores <code>−</code></td><td>Colector del BD139 (pata del centro)</td></tr>
+<tr><td>Base del BD139 (pata derecha)</td><td>Resistencia 1 kΩ → <code>GPIO10</code></td></tr>
+<tr><td>Emisor del BD139 (pata izquierda)</td><td><code>GND</code></td></tr>
+<tr><td>1N4007 banda gris</td><td>nodo <code>+</code> de los motores</td></tr>
+<tr><td>1N4007 sin banda</td><td>nodo <code>−</code> de los motores</td></tr>
+</table>
+</section>
+
+<section class="card">
+<h2>Cadena de alimentación</h2>
+<table>
+<tr><th>Desde</th><th>Hacia</th></tr>
+<tr><td>Batería <code>+</code> (rojo)</td><td>TP4056 <code>B+</code></td></tr>
+<tr><td>Batería <code>−</code> (negro)</td><td>TP4056 <code>B−</code></td></tr>
+<tr><td>TP4056 <code>OUT+</code></td><td>MT3608 <code>VIN+</code></td></tr>
+<tr><td>TP4056 <code>OUT−</code></td><td>MT3608 <code>VIN−</code></td></tr>
+<tr><td>MT3608 <code>VOUT+</code> <em>(ajustado a 5 V)</em></td><td>ESP32 <code>5V</code></td></tr>
+<tr><td>MT3608 <code>VOUT−</code></td><td><code>GND</code></td></tr>
+</table>
+</section>
+</div>
+
+<section class="warnbox">
+<h2>⚠ Cuidados</h2>
+<ul>
+<li><strong>BD139 no es igual al BC548:</strong> el orden de patas es <strong>E-C-B</strong> (letras de frente, patas abajo). Si se conecta con el orden del BC548, el motor no anda o se calienta el transistor.</li>
+<li><strong>La banda gris del 1N4007 va hacia el + de los motores.</strong> Al revés = cortocircuito al activar los motores.</li>
+<li>Dos motores en paralelo consumen el doble (~160 mA). El BD139 lo banca de sobra, pero la autonomía de la batería baja — probar la duración real con los dos vibrando.</li>
+<li><strong>Ajustar el MT3608 ANTES de conectarlo al ESP32:</strong> con la batería puesta y la salida al aire, medir <code>VOUT+</code>/<code>VOUT−</code> con el tester y girar el tornillo hasta leer <strong>5.0 V</strong>. Pueden venir de fábrica en más de 20 V — eso quema la placa. El trimmer es multivuelta: puede necesitar muchas vueltas antihorario.</li>
+<li><strong>No alimentar por batería y USB a la vez:</strong> al programar o usar el monitor serie, desconectar el cable del MT3608 al pin <code>5V</code>.</li>
+<li><strong>NO usar GPIO2, GPIO8 ni GPIO9</strong>: son strapping pins; si quedan ocupados la placa entra en bucle de reinicio.</li>
+<li>Sensores y motores se alimentan del pin <strong>3V3</strong>, nunca de los 5 V.</li>
+<li>Cablear siempre sin alimentación (ni USB ni batería).</li>
+<li>Todos los GND van unidos (riel −).</li>
+<li>La LiPo se carga <strong>solo</strong> por el USB-C del TP4056. No doblar, perforar ni apretar la bolsa de la batería.</li>
+</ul>
+</section>
+
+<section class="card">
+<h2>Cómo verificar que quedó bien</h2>
+<ol>
+<li>Cablear todo sin alimentación.</li>
+<li>Ajustar el MT3608 a 5.0 V con el tester (salida desconectada del ESP32).</li>
+<li>Conectar por USB (batería desconectada del pin 5V): por monitor serie tiene que aparecer <code>[OK] VL53L0X listo</code>. Si sale <code>[ERROR] No se encontró el VL53L0X</code>, revisar SDA/SCL y alimentación — reintenta solo cada 2 s.</li>
+<li>Tocar el táctil 1,5 s → <code># sistema ENCENDIDO</code> y un pulso de los motores.</li>
+<li>Acercar la mano a menos de 200 mm del sensor → los dos motores vibran juntos.</li>
+<li>Doble toque rápido → <code># sistema APAGADO</code> y dos pulsos.</li>
+<li>Recién ahí, desconectar USB y probar con la batería por el MT3608.</li>
+</ol>
+</section>
+</main>
+</body>
+</html>
